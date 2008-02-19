@@ -1,0 +1,139 @@
+/**
+ * @author jp
+ */
+OpenPanel.GUIBuilder.GUIElements.IconBar = {
+	
+	targetDiv : {},
+	openCoreObject : {},
+	itemElements: {},
+	controller: {},
+	
+	build : function(){
+		this.targetDiv.innerHTML = "";
+		this.itemElements = {};
+		if(this.openCoreObject != undefined){
+			var iconBarDiv = document.createElement("div");
+			iconBarDiv.setAttribute("class", "iconBarDiv");
+			var iconHolder = document.createElement("ul");
+			iconHolder.setAttribute("class", "iconHolder");
+			this.targetDiv.appendChild(iconBarDiv);
+			iconBarDiv.appendChild(iconHolder);
+			
+			
+			var sortIndexes = {};
+			var sortIndexesToSort = [];
+			
+			for(var key in this.openCoreObject.children){
+				var childObject = this.openCoreObject.children[key];
+				if (typeof(childObject) == "object") {
+					var sortIndex = childObject.classInfo["class"].sortindex;
+					if (sortIndexes[sortIndex] == undefined) {
+						sortIndexes[sortIndex] = [];
+					}
+					
+					sortIndexes[sortIndex].push(childObject);
+					sortIndexesToSort.push(sortIndex);
+				}
+			}
+			sortIndexesToSort.sort(function(a,b){return a-b;});
+						
+			var sortedChildren = {};
+			
+			for(var i = 0;i<sortIndexesToSort.length;i++){
+				var childObjects = sortIndexes[sortIndexesToSort[i]];
+				for(var j=0;j<childObjects.length;j++){
+					sortedChildren[childObjects[j].name] = childObjects[j];
+				}
+			}
+			
+			for(var key in sortedChildren){
+				var childObject = sortedChildren[key];
+				if (typeof(childObject) == "object") {
+					var iconLi = document.createElement("li");
+					iconLi.setAttribute("id", childObject.description);
+					iconLi.setAttribute("OC:Class", childObject.name);
+					
+					var iconDivLeft = document.createElement("div");
+					iconDivLeft.setAttribute("class", "iconDivLeft");
+					iconLi.appendChild(iconDivLeft);
+					
+					var iconDivMain = document.createElement("span");
+					iconDivMain.setAttribute("class", "iconDivMain");
+					iconDivMain.style.minWidth = "40px";
+					iconLi.appendChild(iconDivMain);
+					
+					var classIcon = document.createElement("div");
+					classIcon.setAttribute("class", "classIcon");
+					iconDivMain.appendChild(classIcon);
+					classIcon.innerHTML = "<img src=\"/images/icons/"+ childObject.classInfo["class"].uuid +".png\"/>";
+					var classDescription = document.createElement("div");
+					classDescription.setAttribute("class", "classDescription");
+					iconDivMain.appendChild(classDescription);
+					var title = childObject.title;
+					
+					
+					classDescription.appendChild(document.createTextNode(title));
+					
+					
+					var iconDivRight = document.createElement("div");
+					iconDivRight.setAttribute("class", "iconDivRight");
+					iconLi.appendChild(iconDivRight);
+					
+					iconHolder.appendChild(iconLi);
+					iconLi.onclick = function(){
+						OpenPanel.GUIBuilder.GUIElements.IconBar.click(this.getAttribute("OC:Class"))
+					}
+					
+					
+					this.itemElements[childObject.name] = iconLi;
+					
+				}
+			}
+			
+			
+		} else {
+			alert("OpenPanel.GUIBuilder.GUIElements.IconBar.build(openCoreObject) : openCoreObject is undefined");
+		}
+	},
+	
+	click: function(className){
+		if (className != undefined) {
+			if (this.itemElements[className] != undefined) {
+				var currentItemElement = this.itemElements[className];
+				this.highliteItem(className);
+				this.controller.action("clickIconBarItem", {
+					className: className
+				});
+			}
+		}
+	},
+	
+	highliteItem: function(className){
+		if(className != undefined && this.itemElements[className]!=undefined){
+			var currentItemElement = this.itemElements[className];
+				
+			for(var key in this.itemElements){
+				if(this.itemElements[key] == currentItemElement){
+					this.itemElements[key].setAttribute("class", "selected")
+				} else {
+					this.itemElements[key].setAttribute("class", "");
+				}
+			}
+		}
+	},
+	
+	setOpenCoreObject : function(openCoreObject){
+		this.openCoreObject = openCoreObject;	
+	},
+	
+	setTargetDivName : function(targetDivName){
+		var targetDiv = document.getElementById(targetDivName);
+		if(targetDiv != undefined){
+			this.targetDiv = targetDiv;
+		} else {
+			alert("div does not exist "+ targetDivName);
+		}
+	}
+	
+}
+

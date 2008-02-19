@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>OpenPanel beta</title>
+	<link rel="stylesheet" type="text/css" href="js/ext-2.0/resources/css/ext-all.css" />
+
+	<link rel="stylesheet" type="text/css"	href="js/ext-2.0/resources/css/xtheme-macx.css" />
+	<link rel="stylesheet" type="text/css"	href="css/openpanel.css" />
+	<script type="text/javascript" src="js/jquery-1.2.2.js"></script>
+	<script type="text/javascript" src="js/json.js"></script>
+	<script type="text/javascript" src="js/ext-2.0/adapter/ext/ext-base.js"></script>
+	<script type="text/javascript" src="js/ext-2.0/ext-all.js"></script>
+	<script type="text/javascript" src="js/trimpath-template-1.0.38/trimpath-template-1.0.38.js"></script>
+	
+	
+	<script type="text/javascript" src="js/OpenPanelBeta/OpenCore.js"></script>
+	<script type="text/javascript" src="js/OpenPanelBeta/OpenCore.RPC.js"></script>
+	<script type="text/javascript" src="js/OpenPanelBeta/OpenCore.DataManager.js"></script>
+	<script type="text/javascript" src="js/OpenPanelBeta/OpenCore.Debug.js"></script>
+	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.js"></script>
+	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.GUIBuilder.js"></script>
+	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.GUIBuilder.GUIElements.IconBar.js"></script>
+	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.GUIBuilder.GUIElements.ItemList.js"></script>
+	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.GUIBuilder.GUIElements.TabBar.js"></script>
+	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.GUIBuilder.GUIElements.FormBuilder.js"></script>
+	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.GUIBuilder.GUIElements.FormFields.js"></script>
+	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.GUIBuilder.GUIElements.FormGrid.js"></script>
+	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.GUIBuilder.GUIElements.FormObject2.js"></script>
+	<script type="text/javascript" src="js/OpenPanelBeta/radiogroup.js"></script>	
+	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.Controller.js"></script>
+
+
+	<script type="text/javascript">
+		var $j = jQuery.noConflict();
+		if(typeof(console) != 'object'){
+			console = { log: function(){}}
+		}
+		$j(document).ready(function(){
+			
+			OpenCore.RPC.RequestHandler.setOpenCoreURL("/fake-opencore-proxy/json");
+			// OpenCore.RPC.RequestHandler.setOpenCoreURL("http://194.60.207.199/json");
+				
+			OpenCore.DataManager.setRPC(OpenCore.RPC);
+			OpenPanel.Controller.setDataManager(OpenCore.DataManager);
+			OpenPanel.Controller.setGuiBuilder(OpenPanel.GUIBuilder);
+			OpenPanel.GUIBuilder.GUIElements.ItemList.setGuiBuilder(OpenPanel.GUIBuilder);
+			OpenPanel.GUIBuilder.GUIElements.ItemList.setController(OpenPanel.Controller);
+			OpenPanel.GUIBuilder.GUIElements.FormObject.setGuiBuilder(OpenPanel.GUIBuilder);
+			OpenPanel.Controller.action("login", {userName: "openadmin", password:"foobar"});
+			}
+		);
+		
+	</script>
+</head>
+<body><center>
+	<br/>
+	<div id="app"></div>
+	<div id="debug">
+		<div>
+			<div id="debugList"/>
+		</div>
+		<div>
+			<div id="controllerDebug"/>
+		</div>
+		<div>
+			<div id="debugFormObjectList"/>
+		</div>
+	</div>
+	</center>
+</body>
+</html>
