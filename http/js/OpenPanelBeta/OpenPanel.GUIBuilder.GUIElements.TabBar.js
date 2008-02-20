@@ -36,7 +36,7 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 			
 			if (this.openCoreObject.canUpdate == true && this.openCoreObject.classInfo["class"].metabase == "") {
 				this.openCoreObjects.push(this.openCoreObject);
-				this.itemElements[this.openCoreObject.name] = this.openCoreObject;
+				//this.itemElements[this.openCoreObject.name] = this.openCoreObject;
 			}
 			
 			
@@ -44,7 +44,10 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 			var sortIndexesToSort = [];
 			
 			for(var key in this.openCoreObject.children){
-				var childObject = this.openCoreObject.children[key];
+				this.openCoreObjects.push(this.openCoreObject.children[key]);
+			}
+			for(var key in this.openCoreObjects){
+				var childObject = this.openCoreObjects[key];
 				if (typeof(childObject) == "object") {
 					var sortIndex = childObject.classInfo["class"].sortindex;
 					if (sortIndexes[sortIndex] == undefined) {
@@ -155,29 +158,36 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 	},
 	
 	highliteItem: function(className){
+		console.log("className " + className);
+		console.log(this.itemElements);
 		if(className != undefined && this.itemElements[className]!=undefined){
 			var currentItemElement = this.itemElements[className];
 			var virgin = true;
 			for(var key in this.itemElements){
 				var someItem = this.itemElements[key];
-				if(virgin == true){
-					virgin = false;
-					if(someItem == currentItemElement){
-						this.tabStart.setAttribute("class", "tabStartSelected");
-					} else {
-						this.tabStart.setAttribute("class", "tabStart");
+				if (typeof(someItem) == "object") {
+				
+				
+					if (virgin == true) {
+						virgin = false;
+						if (someItem == currentItemElement) {
+							this.tabStart.setAttribute("class", "tabStartSelected");
+						} else {
+							this.tabStart.setAttribute("class", "tabStart");
+						}
 					}
-				}
-				
-				if(someItem == currentItemElement){
-					someItem.setAttribute("class", "tabSelected");
 					
-				} else {
-					someItem.setAttribute("class", "tab");
+					if (someItem == currentItemElement) {
+						console.log(someItem);
+						someItem.setAttribute("class", "tabSelected");
+						
+					} else {
+						someItem.setAttribute("class", "tab");
+						
+					}
 					
+					this.setDelimiterClass(someItem, false);
 				}
-				
-				this.setDelimiterClass(someItem, false);
 			}
 			
 			for(var key in this.itemElements){

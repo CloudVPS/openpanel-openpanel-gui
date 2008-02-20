@@ -36,18 +36,18 @@
 		if(typeof(console) != 'object'){
 			console = { log: function(){}}
 		}
-		$j(document).ready(function(){
-			
-			OpenCore.RPC.RequestHandler.setOpenCoreURL("/fake-opencore-proxy/json");
-			// OpenCore.RPC.RequestHandler.setOpenCoreURL("http://194.60.207.199/json");
-				
-			OpenCore.DataManager.setRPC(OpenCore.RPC);
-			OpenPanel.Controller.setDataManager(OpenCore.DataManager);
-			OpenPanel.Controller.setGuiBuilder(OpenPanel.GUIBuilder);
-			OpenPanel.GUIBuilder.GUIElements.ItemList.setGuiBuilder(OpenPanel.GUIBuilder);
-			OpenPanel.GUIBuilder.GUIElements.ItemList.setController(OpenPanel.Controller);
-			OpenPanel.GUIBuilder.GUIElements.FormObject.setGuiBuilder(OpenPanel.GUIBuilder);
-			OpenPanel.Controller.action("login", {userName: "openadmin", password:"foobar"});
+		$j(document).ready(function()
+			{
+				OpenCore.RPC.RequestHandler.setOpenCoreURL("/fake-opencore-proxy/json");
+				// OpenCore.RPC.RequestHandler.setOpenCoreURL("http://194.60.207.199/json");
+					
+				OpenCore.DataManager.setRPC(OpenCore.RPC);
+				OpenPanel.Controller.setDataManager(OpenCore.DataManager);
+				OpenPanel.Controller.setGuiBuilder(OpenPanel.GUIBuilder);
+				OpenPanel.GUIBuilder.GUIElements.ItemList.setGuiBuilder(OpenPanel.GUIBuilder);
+				OpenPanel.GUIBuilder.GUIElements.ItemList.setController(OpenPanel.Controller);
+				OpenPanel.GUIBuilder.GUIElements.FormObject.setGuiBuilder(OpenPanel.GUIBuilder);
+				OpenPanel.Controller.action("login", {userName: "openadmin", password:"foobar"});
 			}
 		);
 		
