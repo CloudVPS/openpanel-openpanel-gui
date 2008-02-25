@@ -3,23 +3,28 @@
  */
 
  OpenPanel.GUIBuilder.GUIElements.FormObject = function(){
+	this.guiBuilder;
+	this.formBuilder;
+	this.controller;
+	this.isBuilt;
+	
+	this.parentFormObject;
+	this.childFormObjects = {};
+	
 	this.openCoreObject;
  	this.parentUUID = "";
 	this.instances = [];
-	this.targetDiv;
-	this.fields;
-	this.fieldsDiv;
-	this.grid;
-	this.gridDiv;
-	this.controller;
-	this.buttonsDiv;
-	this.guiBuilder;
 	this.currentInstance;
 	this.currentMetaInstance;
-	this.childFormObjects = {};
+	
+	this.grid;
+	this.fields;
+
+	this.targetDiv;
+	this.gridDiv;
+	this.fieldsDiv;
+	this.buttonsDiv;
 	this.childFormObjectsDiv;
-	this.parentFormObject;
-	this.isBuilt;
  }
  
 OpenPanel.GUIBuilder.GUIElements.FormObject.setGuiBuilder = function(guiBuilder){
@@ -30,11 +35,39 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.setGuiBuilder = function(guiBuilder)
 OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
   	
 	build: function(){
-	  	this.childFormObjects = {};
-		this.targetDiv.innerHTML = "";
-		this.targetDiv.setAttribute("class", "FormObject");
+		// divs maken
+		if (this.openCoreObject != undefined) {
+			this.init();
+			this.targetDiv.innerHTML = "";
+			this.createDivs();
+			if (this.openCoreObject.classInfo == undefined || (this.openCoreObject.classInfo.info != undefined && this.openCoreObject.classInfo.info.parent == undefined)) {
+				this.createTopLevelForm();
+			} else {
+				this.createSubLevelForm();
+			}
+		}
+		// is toplevel object?
+		// 		ja
+		//			pak dan instance van controller
+		//		nee
+		//			pak dan parentUUID, haal instances
+		//			selecteer juiste instance
+		//			teken formfields
+		//			teken grid
+		//			instantieer nieuwe childobjects met juiste instance
 		
+	  	this.isBuilt = true;
+		console.log(" ");
+	},
+	
+	init : function(){
+		// reset values
+		this.childFormObjects = {};
+	},
+	
+	createDivs : function(){
 		var nameDiv = document.createElement("div");
+		console.log(this);
 		nameDiv.innerHTML = "FormObject " + this.openCoreObject.name;
 		nameDiv.setAttribute("class", "nameDiv");
 		
@@ -52,207 +85,358 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		this.childFormObjectsDiv.setAttribute("id", this.openCoreObject.name + ":childFormObjects");
 		this.childFormObjectsDiv.setAttribute("class", "childFormObjects");
 		this.targetDiv.appendChild(this.childFormObjectsDiv);
+	},
+	
+	createTopLevelForm : function(){
+		console.log("FormObject:createTopLevelForm");
+		// is object
 		
-		//this.currentInstance = undefined;
+		// first tab
+		// do we need a rebuild?
+		this.setCurrentInstance(this.controller.currentRootClassInstance);
 		
-		var msg = "";
-		if(this.openCoreObject != undefined && this.parentUUID != ""){
-			var className = this.openCoreObject.name;
-				
-			if (this.openCoreObject.classInfo.info.parent == undefined) {
-				console.log("first tab " + this.openCoreObject.name);
-				// first tab
-				// do we need a rebuild?
-				
-				if(this.currentInstance == undefined){
-					// no, get it from the controller
-					this.currentInstance = this.controller.currentRootClassInstance;
+		
+		// is there an instance?
+		if (this.currentInstance != undefined) {
+			console.log("there is an instance");
+			if(this.isBuilt == true){
+				var record = this.controller.dataManager.getRecord(this.openCoreObject.name, this.currentInstance.id);
+				this.currentInstance = record[this.openCoreObject.name];
+				this.openCoreObject.instances[this.currentInstance.id] = this.currentInstance;
+			}
+		
+			// UPDATE
+			if (this.openCoreObject.canUpdate == true) {
+				console.log("can update");
+				// alright, now we can display these fields
+				var targetDiv;
+				if (this.openCoreObject.singleton == true && this.openCoreObject.canDelete == true) {
+					console.log("is singleton and can delete");
+					targetDiv = document.createElement("div");
+					targetDiv.setAttribute("style", "border: 1px solid #F00");
+					targetDiv.appendChild(document.createTextNode("delete this object?"));
+					this.fieldsDiv.appendChild(targetDiv);
 				} else {
-					// yes, apparently we have to rebuild
-					console.log('rebuild');
-					
-					var record = this.controller.dataManager.getRecord(this.openCoreObject.name, this.currentInstance.id);
-					this.currentInstance = record[this.openCoreObject.name];
-					this.openCoreObject.instances[this.currentInstance.id] = this.currentInstance;
+					console.log("not singleton or can not delete");
+					targetDiv = this.fieldsDiv;
 				}
 				
-				// is there an instance?
-				if(this.currentInstance!=undefined){
-					console.log("there is an instance");
-					// UPDATE
-					if(this.openCoreObject.canUpdate == true){
-						console.log("can update");
-						// alright, now we can display these fields
-						var targetDiv;
-						if(this.openCoreObject.singleton == true && this.openCoreObject.canDelete == true){
-							console.log("is singleton and can delete");
-							targetDiv = document.createElement("div");
-							targetDiv.setAttribute("style", "border: 1px solid #F00");
-							targetDiv.appendChild(document.createTextNode("delete this object?"));
-							this.fieldsDiv.appendChild(targetDiv);
-						} else {
-							console.log("not singleton or can not delete");
-							targetDiv = this.fieldsDiv;
-						}
-						
-						console.log("create fields for " + this.openCoreObject.name + "  " + this.currentInstance.id);
-						console.log(this.currentInstance);
-						this.createFields(this.openCoreObject, this.currentInstance, "updateRootInstance", targetDiv);
-						
-					} else if(this.openCoreObject.canGetInfo == true) {
-						console.log("can not update");
-						// not updateable yet able to show some info
-						if(this.openCoreObject.singleton == true && this.openCoreObject.canDelete == true){
-							console.log("is singleton and can delete");
-							
-							targetDiv = document.createElement("div");
-							targetDiv.setAttribute("style", "border: 1px solid #F00");
-							targetDiv.appendChild(document.createTextNode("delete this object?"));
-							this.fieldsDiv.appendChild(targetDiv);
-						} else {
-							console.log("not singleton or can not delete");
-							targetDiv = this.fieldsDiv;
-						}
-						
-						this.createFields(this.openCoreObject, this.currentInstance, function(){}, targetDiv);
-						// this.fields.lock();
-					} else {
-						// nothing goes from here, there's nothing here to see
-					}
-					
-					// DELETE
-					if(this.openCoreObject.canDelete == true){
-						// we can delete this, however if it's a singleton it's hard to delete without item list
-						if(this.openCoreObject.singleton == true){
-							// display a delete button
-						}
-					} else {
-						// can't delete this, it's all fine
-					}
-					
-				} else {
-					// CREATE
-					// no instance, can we create one?
-					
-					if(this.openCoreObject.canCreate == true){
-						// we can, how do we create it? in the item list to the left or can there only be one instance?
-						if(this.openCoreObject.singleton == true){
-							// there can be only one instance, no item list involved, let's just display a create button
-						} else {
-							// there can be more than one instance, nonetheless show our create button
-						}
-					} else {
-						// can't create anything
-					}
-				}
-				
-				
-			} else {
-				console.log("not first tab  " + this.openCoreObject.name);
-				this.openCoreObject.setHasFetchedInstances(false);
-				this.instances = this.openCoreObject.getInstancesByParentUUID(this.parentUUID);
-				console.log("this");
-				console.log(this);
-				console.log("this.currentInstance");
+				console.log("create fields for " + this.openCoreObject.name + "  " + this.currentInstance.id);
 				console.log(this.currentInstance);
-				if (this.instances != undefined && typeof(this.openCoreObject.getFirstInstance()) == "object") {
-					// there are instances
-					console.log("this.currentInstance2");
-					console.log(this.currentInstance);
-					if (this.currentInstance == undefined) {
-						console.log("currentInstance undefined");
-						this.currentInstance = this.openCoreObject.getFirstInstance();
-					} else {
-						
-						
-						var metaid = this.currentInstance.metaid;
-						console.log("rebuild metaid " + metaid);
-						console.log(this.instances);
-						if(this.instances[metaid] != undefined){
-							// this means we are running build() again
-							console.log(this.openCoreObject.name + " rebuild");
-							this.currentInstance = this.instances[metaid];
-						} else {
-							this.currentInstance = this.openCoreObject.getFirstInstance();
-						}
-					}
+				this.createFields(this.openCoreObject, this.currentInstance, "", targetDiv);
+				
+			} else if (this.openCoreObject.canGetInfo == true) {
+				console.log("can not update");
+				// not updateable yet able to show some info
+				if (this.openCoreObject.singleton == true && this.openCoreObject.canDelete == true) {
+					console.log("is singleton and can delete");
 					
-					// now we have to figure out if the current opencore object is a meta object
-					
-					console.log("before : " + this.openCoreObject.name);
-					// meta class roundtrip, is this in the right place?
-					var actualOpenCoreObject;
-					var actualInstance;
-
-					// get class name
-					var className = this.currentInstance["class"];
-					if (this.openCoreObject.name != className) {
-						// get encapsulated object
-						actualOpenCoreObject = this.controller.dataManager.getOpenCoreObjectByName(className);
-						// all good, now we have to find its instance
-						var record = this.controller.dataManager.getRecord(actualOpenCoreObject.name, this.currentInstance.id);
-						for(var key in record){
-							this.currentMetaInstance = record[key];
-							break;
-						}
-// scary meta stuff						
-						actualInstance = this.currentMetaInstance;
-					} else {
-						actualOpenCoreObject = this.openCoreObject;
-						actualInstance = this.currentInstance;
-					}
-					
-					console.log("after : " + actualOpenCoreObject.name);
-					console.log("currentInstance");
-					console.log(this.currentInstance);
-					if(actualOpenCoreObject.singleton == true){
-						console.log("singleton");
-						// show fields
-						this.createFields(actualOpenCoreObject, actualInstance, "asdasd", this.fieldsDiv);
-					} else {
-						console.log("not singleton");
-						// not a singleton
-						// the grid should always be displayed with non meta values
-						this.createGrid(this.openCoreObject, this.instances, "callBackCommand", this.gridDiv, {});
-						// here's where we have to check for meta stuff
-						this.createFields(actualOpenCoreObject, actualInstance, "no command", this.fieldsDiv);
-						
-						for(var childOpenCoreObjectName in actualOpenCoreObject.children){
-							
-							var childOpenCoreObject = actualOpenCoreObject.children[childOpenCoreObjectName];
-							if (typeof(childOpenCoreObject) == "object") {
-								
-								console.log(childOpenCoreObject);
-								if (childOpenCoreObject.classInfo["class"].metabase == "") {
-									// non meta stuff
-									var someDiv = document.createElement("div");
-									this.childFormObjectsDiv.appendChild(someDiv);
-									if (typeof(childOpenCoreObject) == "object") {
-										this.createChildFormObject(childOpenCoreObject, actualInstance.uuid, someDiv, this.controller);
-									}
-								}
-							}
-						}
-						//this.createFields(this.openCoreObject, this.controller.currentRootClassInstance, "updateRootInstance", targetDiv);
-					}
+					targetDiv = document.createElement("div");
+					targetDiv.setAttribute("style", "border: 1px solid #F00");
+					targetDiv.appendChild(document.createTextNode("delete this object?"));
+					this.fieldsDiv.appendChild(targetDiv);
+				} else {
+					console.log("not singleton or can not delete");
+					targetDiv = this.fieldsDiv;
 				}
-				else {
-					// no instances, show create new instance
-					console.log("no instances");
-					var msg = "no instances for " + this.openCoreObject.name;
-					if (this.openCoreObject.canCreate == true) {
-						msg+= "create one?"
-					}
-					this.gridDiv.innerHTML = msg;
+				
+				this.createFields(this.openCoreObject, this.currentInstance, "", targetDiv);
+			
+			} else {
+			// nothing goes from here, there's nothing here to see
+			}
+			
+			// DELETE
+			if (this.openCoreObject.canDelete == true) {
+				// we can delete this, however if it's a singleton it's hard to delete without item list
+				if (this.openCoreObject.singleton == true) {
+				// display a delete button
 				}
+			} else {
+			// can't delete this, it's all fine
 			}
 		} else {
-			// no parent id
-			console.log("NO PARENT ID");
+			if (this.openCoreObject.canCreate == true) {
+				this.createCreateOption();
+			}
 		}
 		
-		this.isBuilt = true;
+	},
+	
+	createSubLevelForm : function(){
+		console.log("FormObject:createSubLevelForm");
+		console.log("not first tab  " + this.openCoreObject.name);
 		
+		
+		this.openCoreObject.setHasFetchedInstances(false);
+		this.instances = this.openCoreObject.getInstancesByParentUUID(this.parentUUID);
+		
+		if (this.instances != undefined && typeof(this.openCoreObject.getFirstInstance()) == "object") {
+			// there are instances
+			console.log("this.currentInstance2");
+			
+			
+			var instance = this.getPreviousInstance();
+			if (instance != undefined) {
+				this.setCurrentInstance(instance);
+			} else {
+				this.setCurrentInstance(this.openCoreObject.getFirstInstance());
+			}			
+			// now we have to figure out if the current opencore object is a meta object
+			var actualOpenCoreObject;
+			var actualInstance;
+			console.log("currentInstance " + this.currentInstance);
+			// get class name
+			var className = this.currentInstance["class"];
+			if (this.openCoreObject.name != className) {
+				// get encapsulated object
+				actualOpenCoreObject = this.controller.dataManager.getOpenCoreObjectByName(className);
+				// all good, now we have to find its instance
+				var record = this.controller.dataManager.getRecord(actualOpenCoreObject.name, this.currentInstance.id);
+				for(var key in record){
+					this.currentMetaInstance = record[key];
+					break;
+				}
+// scary meta stuff						
+				actualInstance = this.currentMetaInstance;
+			} else {
+				actualOpenCoreObject = this.openCoreObject;
+				actualInstance = this.currentInstance;
+			}
+			console.log(actualInstance);
+			if(actualOpenCoreObject.singleton == true){
+				console.log("singleton");
+				// show fields
+				this.createFields(actualOpenCoreObject, actualInstance, "", this.fieldsDiv);
+				this.createDeleteOption();
+			} else {
+				console.log("not singleton");
+				// not a singleton
+				// the grid should always be displayed with non meta values
+				this.createGrid(this.openCoreObject, this.instances, "callBackCommand", this.gridDiv, {});
+				// here's where we have to check for meta stuff
+				this.createFields(actualOpenCoreObject, actualInstance, "", this.fieldsDiv);
+				
+				for(var childOpenCoreObjectName in actualOpenCoreObject.children){
+					var childOpenCoreObject = actualOpenCoreObject.children[childOpenCoreObjectName];
+					if (typeof(childOpenCoreObject) == "object") {
+						
+						console.log(childOpenCoreObject);
+						if (childOpenCoreObject.classInfo["class"].metabase == "") {
+							// non meta stuff
+							var someDiv = document.createElement("div");
+							this.childFormObjectsDiv.appendChild(someDiv);
+							if (typeof(childOpenCoreObject) == "object") {
+								this.createChildFormObject(childOpenCoreObject, actualInstance.uuid, someDiv, this.controller);
+							}
+						}
+					}
+				}
+				if(this.openCoreObject.meta == true){
+					// list objects
+					
+					this.createMultiCreateOption();
+				} else {
+					if (this.openCoreObject.canCreate == true) {
+						this.createCreateOption();
+					}
+				}
+				
+				if(this.openCoreObject.meta == true){
+					// list objects
+					this.createDeleteOption();
+				} else {
+					if (this.openCoreObject.canDelete == true) {
+						this.createDeleteOption();
+					}
+				}
+				
+				
+				
+			}
+		}
+		else {
+			// no instances, show create new instance
+			console.log("no instances");
+			var msg = "no instances for " + this.openCoreObject.name;
+			this.gridDiv.appendChild(document.createTextNode(msg));
+			if(this.openCoreObject.meta == true){
+				// list objects
+				this.createMultiCreateOption();
+			} else {
+				if (this.openCoreObject.canCreate == true) {
+					this.createCreateOption();
+				}
+			}
+			
+			
+		}
+		
+		
+		// create buttons
+		
+		
+	},
+	
+	createMultiCreateOption : function(){
+			
+		var metaObjects = this.controller.dataManager.getOpenCoreObjectsByMetaName(this.openCoreObject.name);
+		var available = {};
+		var canAdd = false;
+		console.log(metaObjects);
+		var canAdds = {};
+		
+		for(var i = 0;i<metaObjects.length;i++){
+			var metaObject = metaObjects[i];
+			// get quota, compare, etc
+			canAdds[metaObject.name] = this.controller.dataManager.checkQuotum(metaObject.name);
+			if(this.controller.dataManager.checkQuotum(metaObject.name)){
+				available[metaObject.name] = metaObject;
+				canAdd = true;
+			}
+		}
+		
+		if(canAdd == true){
+			var createOne = document.createElement("span");
+			var hook = this;
+			this.gridDiv.appendChild(createOne);
+			var s = document.createElement("select");
+			var optionElement = document.createElement("option");
+				
+				optionElement.appendChild(document.createTextNode("select..."));
+				
+				s.appendChild(optionElement);
+				
+			s.onchange = function(){
+				console.log(this);
+				for(var i = 0;i<this.options.length;i++){
+					var option = this.options[i];
+					if(option.value == this.value){
+						var openCoreObject = option.openCoreObject;
+					}
+				}
+				
+				if(openCoreObject != undefined){
+					hook.controller.action("showCreateInstanceFromFormObjectMeta",{
+						formObject : hook,
+						openCoreObject:openCoreObject,
+						parentUUID: hook.parentUUID,
+						formObjectHolder : hook.formBuilder.formObjectHolder
+					});
+				}
+			}
+			
+			/*
+			 * 
+	
+			 */
+			for(var key in available){
+				var metaObject = available[key];
+				var optionElement = document.createElement("option");
+				optionElement.value = key;
+				optionElement.appendChild(document.createTextNode(key));
+				optionElement.openCoreObject = metaObject;
+				s.appendChild(optionElement);
+			}
+			
+			// quota debug stuff
+			createOne.appendChild(s);
+			q = document.createElement("ul");
+			createOne.appendChild(q);
+			
+			for(var key in canAdds){
+				var quotum = this.controller.dataManager.getQuotumByClassName(key);
+				if(quotum != undefined){
+					var li = document.createElement("li");
+					li.appendChild(document.createTextNode(">>quotum : " + key + " " + quotum.quota));
+					q.appendChild(li);
+				}
+			}
+		}
+		
+		
+	},
+	
+	createCreateOption : function (){
+		// does not support meta stuff
+		if (this.openCoreObject.meta == true) {
+		
+		} else {
+			if (this.controller.dataManager.checkQuotum(this.openCoreObject.name) == true) {
+				var createOne = document.createElement("span");
+				var createOneText = document.createTextNode("[ + ]");
+				createOne.appendChild(createOneText);
+				var hook = this;
+				createOne.openCoreObject = this.openCoreObject;
+				
+				createOne.onclick = function(){
+					hook.controller.action("showCreateInstanceFromFormObject", {
+						formObject: hook,
+						openCoreObject: hook.openCoreObject,
+						parentUUID: hook.parentUUID,
+						formObjectHolder: hook.formBuilder.formObjectHolder
+					});
+					
+					console.log("create Instance of " + hook.openCoreObject.name + " with parentUUID " + hook.parentUUID);
+					console.log(hook);
+					console.log(hook.formBuilder.formObjectHolder);
+					
+				}
+				
+				// quota debug stuff
+				q = document.createElement("ul");
+				createOne.appendChild(q);
+				
+				var quotum = this.controller.dataManager.getQuotumByClassName(this.openCoreObject.name);
+				if (quotum != undefined) {
+					var li = document.createElement("li");
+					li.appendChild(document.createTextNode(">>quotum : " + this.openCoreObject.name + " " + quotum.quota));
+					q.appendChild(li);
+				}
+				
+				this.gridDiv.appendChild(createOne);
+			}
+		}
+	},
+	
+	
+	
+	createDeleteOption : function (){
+		var deleteOne = document.createElement("span");
+		var deleteOneText = document.createTextNode("[ - ]");
+		deleteOne.appendChild(deleteOneText);
+		var hook = this;
+		deleteOne.openCoreObject = this.openCoreObject;
+		
+		deleteOne.onclick = function(){
+			hook.controller.action("showDeleteInstanceFromFormObject",{
+				formObject : hook,
+				openCoreObject:hook.openCoreObject,
+				parentUUID: hook.parentUUID,
+				formObjectHolder : hook.formBuilder.formObjectHolder
+			});
+			
+			console.log("delete Instance of " + hook.openCoreObject.name + " with parentUUID " + hook.parentUUID);
+			
+			
+		}
+		this.gridDiv.appendChild(deleteOne);
+	},
+	
+	getPreviousInstance : function(){
+		var previousInstanceName = this.formBuilder.getInstance(this.openCoreObject.name);
+		var previousInstance = this.instances[previousInstanceName];
+		if(previousInstance!= undefined){
+			return previousInstance;
+		}
+	},
+	
+	setCurrentInstance : function(instance){
+		if (instance != undefined) {
+			this.currentInstance = instance;
+			this.openCoreObject.currentInstance = instance;
+			this.formBuilder.setCurrentInstance(this.openCoreObject.name, instance.id);
+		}
 	},
 	
 	getData : function(transport){
@@ -290,7 +474,6 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 	},
 	
 	getFormData : function(){
-		
 		if (this.fields != undefined && this.fields.getFormValues != undefined) {
 			
 			var r = this.fields.getFormValues();
@@ -312,8 +495,23 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		this.fields.build();
 	},
 	
-	createGrid : function(openCoreObject, instances, callBackCommand, targetDiv, optionalCallBackObject){
+	createModalFields : function(openCoreObject, instance, callBackCommand, targetDiv, optionalCallBackObject){
 		
+		this.fields = new OpenPanel.GUIBuilder.GUIElements.FormFields();	
+		this.fields.setTargetDiv(targetDiv);
+		this.fields.setOpenCoreObject(openCoreObject);
+		this.fields.setFormObject(this);
+		this.fields.setInstance(instance);
+		this.fields.setZIndex(10000);
+		if(optionalCallBackObject == undefined){
+			optionalCallBackObject = {};
+		}
+		this.fields.setCallBackCommand(callBackCommand, optionalCallBackObject);
+		this.fields.build();
+	},
+	
+	
+	createGrid : function(openCoreObject, instances, callBackCommand, targetDiv, optionalCallBackObject){
 		this.grid = new OpenPanel.GUIBuilder.GUIElements.FormGrid();	
 		this.grid.setTargetDiv(targetDiv);
 		this.grid.setOpenCoreObject(openCoreObject);
@@ -327,35 +525,35 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 	},
 	
 	clickGridItem : function(instance){
-		// fill form
 		console.log("clickGridItem " + instance["class"] + this.openCoreObject.name);
 		var actualInstance;
-		this.currentInstance = instance;
+		this.setCurrentInstance(instance);
+		
+		// this has to go ^^
 		
 		if (this.openCoreObject.meta == true) {
-			console.log("ismeta");
+			console.log(this.openCoreObject.name + " is meta");
 			var record = this.controller.dataManager.getRecord(instance["class"], instance.id);
-			for(var className in record){
-				instance = record[className];
-			}
+			console.log("FormObject:clickGridItem record");
+			console.log(record);
+			instance = record[instance["class"]];
 			if (instance != undefined) {
 				console.log("is not undefined");
 				console.log(instance);
 				this.currentMetaInstance = instance;
-				actualInstance = instance;
+				
 			} else {
 				// errors here
 			}
-		} else {
-			this.currentInstance = instance;
-			actualInstance = instance;
 		}
+		actualInstance = instance;
+		console.log(instance);
 		
 		var openCoreObject = this.controller.dataManager.getOpenCoreObjectByName(actualInstance["class"]);
 		console.log("clickGridItem2 " + openCoreObject.name);
 		
 		
-		this.createFields(openCoreObject, actualInstance, "callBackCommand", this.fieldsDiv, {});
+		this.createFields(openCoreObject, actualInstance, "", this.fieldsDiv);
 		// create childFormObjects
 		this.childFormObjectsDiv.innerHTML = "";
 		for (var childOpenCoreObjectName in openCoreObject.children) {
@@ -368,25 +566,26 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 				this.createChildFormObject(childOpenCoreObject, actualInstance.uuid, someDiv, this.controller);
 			}
 		}
+	
 	},
 	
-	
 	createChildFormObject : function(openCoreObject, parentUUID, targetDiv, controller){
-		
 		childFormObject = new OpenPanel.GUIBuilder.GUIElements.FormObject();
 		childFormObject.setOpenCoreObject(openCoreObject);
 		
 		childFormObject.setParentUUID(parentUUID);
 		childFormObject.setTargetDiv(targetDiv);
 		childFormObject.setController(controller);
+		childFormObject.setFormBuilder(this.formBuilder);
 		childFormObject.build();
 		
 		this.childFormObjects[openCoreObject.name] = childFormObject;
-		
 	},
 	
 	setOpenCoreObject : function(openCoreObject){
 		this.openCoreObject = openCoreObject;
+		console.log("setOpenCoreObject");
+		console.log(openCoreObject);
 	},
 	
 	setParentUUID : function(parentUUID){
@@ -399,6 +598,10 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 	
 	setController : function(controller){
 		this.controller = controller;
+	},
+	
+	setFormBuilder : function(formBuilder){
+		this.formBuilder = formBuilder;	
 	},
 	
 	updateInstance: function(openCoreObject, instance, formData){
@@ -418,10 +621,6 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 	
 	createCreatePopUp : function(targetDiv, callBack){
 		var popUpDiv = this.guiBuilder.createPopUp();
-	},
-	
-	setFormBuilder : function(formBuilder){
-		this.formBuilder = formBuilder;
 	}
 	
   }
