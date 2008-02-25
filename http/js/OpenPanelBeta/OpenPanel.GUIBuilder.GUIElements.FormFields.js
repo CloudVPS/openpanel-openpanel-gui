@@ -10,7 +10,7 @@ OpenPanel.GUIBuilder.GUIElements.FormFields = function(){
 	this.fieldValues = {};
 	this.callBackCommand = "";
 	this.formPanel = {};
-	
+	this.ZIndex = 0;
 }
 
 OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
@@ -259,178 +259,11 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 		console.log(instance);
 		console.log("FormFields:createFields this.openCoreObject.name");
 		console.log(this.openCoreObject.name);
-		this.fieldValues = {};
-		// are there *any* parameters?
-		var hook = this;
-		var items = {};
+		
 		
 		if(this.openCoreObject.classInfo.structure != undefined && this.openCoreObject.classInfo.structure.parameters != undefined){
 			
-			
-			var parameters = this.openCoreObject.classInfo.structure.parameters;
-			var items = [];
-			var itemsLeft = [];
-			var itemsRight = [];
-			var a = 0;
-			
-			console.log("FormFields:createFields parameters");
-			console.log(parameters);
-			for(var key in parameters){
-				console.log("FormFields:createFields key: [" + key + "]" );
-				var parameter = parameters[key];
-				var fieldName = key;
-				var description = parameter.description;
-				var fieldType = parameter.type;
-				var item = this.createItem(key, parameter);
-				
-				if(instance[key]!=undefined){
-					console.log("FormFields:instance [" + key + " " + instance[key] + "]");
-					switch(parameter.type){
-						case "bool":
-							if(instance[key] == "true"){
-								item.checked = true;
-							} else {
-								item.checked = false;
-							}
-						break;
-						
-						case "ref":
-							var referenceObject = this.formObject.controller.dataManager.getOpenCoreObjectByName(parameter.refclass);
-							if(referenceObject != undefined){
-								var referenceInstances = referenceObject.getInstances();
-								for(var metaid in referenceInstances){
-									var referenceInstance = referenceInstances[metaid];
-									if(referenceInstance.uuid == instance[key]){
-										item.value = metaid;
-									}
-									console.log(referenceInstance.uuid + " " + instance[key]);
-								}
-							}
-						break;
-						
-						case "group":
-							// this should happen once the form is drawn. this pretty much sucks
-							
-							var radios = item.radios;
-							
-							
-							for(var i=0;i<radios.length;i++){
-								var radio = radios[i];
-								if(typeof(radio) == "object"){
-									console.log(items[radio.boxLabel]);
-										
-									if (this.instance[radio.boxLabel] != undefined) {
-										radio.checked = true;
-										items[radio.boxLabel].disabled = false;
-									} else {
-										items[radio.boxLabel].disabled = true;
-									}
-								}
-							}
-							console.log(this.instance);
-						
-						break;
-						
-						default:
-							item.value = instance[key];
-						
-						
-					}
-					
-					
-				}
-				
-				items[key] = item;
-				if (a == 0) {
-					itemsLeft.push(item);
-					a++;
-				}
-				else {
-					itemsRight.push(item);
-					a = 0;
-				}
-			}
-			
-			if(itemsRight.length == 0){
-				items = itemsLeft;
-			} else {
-				items = [{
-		            layout:'column',
-					
-					
-		            items:[{
-		                columnWidth:.5,
-		                layout: 'form',
-		                items: itemsLeft
-		            },{
-		                columnWidth:.5,
-		                layout: 'form',
-		                items: itemsRight
-		            }]
-		        }]
-				
-			}
-			// yes, draw a proper form
-			
-			/*
-			 * frame:false,
-			header: false,
-			hideBorders: true,
-			autoScroll: true,
-	        title: 'Simple Form',
-	        bodyStyle:'padding:5px 5px 0',
-	        width: 350,
-	        defaults: {width: 230},
-	        defaultType: 'textfield',
-			baseCls: "div",
-			 */
-			console.log("WTF");
-			var buttons = {};
-			if (this.callBackCommand != "") {
-				buttons = [{
-					text: 'Save',
-					handler: function(){
-						hook.formPanel.submit();
-					},
-					formBind: true
-				}]
-			}
-			
-			this.formPanel = new Ext.FormPanel({
-		        
-		       
-				/**/
-				
-				header: false,
-				frame:false,
-				hideBorders: true,
-				autoScroll: true,
-		        title: 'Simple Form',
-		        bodyStyle:'padding:15px 15px 25px 15px;',
-		        width: 650,
-				
-            	
-		       /* defaults: {width: 640}, */
-		       /*  baseCls: "", */
-				onSubmit: function(arg){ console.log(arg); },
-				submit: function() {
-	           		var obj = this.getForm().getValues();
-					var objectId = hook.openCoreObject.singleton == true? hook.openCoreObject.classInfo["class"].singleton:obj.id;
-					
-					if(hook.callBackCommand != undefined){
-						hook.formObject.controller.action(hook.callBackCommand, 
-							{ 
-								openCoreObject:hook.openCoreObject, 
-								instance: instance, 
-								formValues: hook.parseValues(this),
-								optionalCallBackObject: hook.optionalCallBackObject
-							});
-					}
-					
-		        },
-		        items: items,
-				buttons: buttons
-		    });
+			this.createFormPanel(instance);
 			
 			this.formPanel.render(this.fieldsDiv);
 			if(this.openCoreObject.canUpdate == false){
@@ -444,6 +277,166 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 				// don't draw anything at all (this object can be deleted 
 			}
 		}
+	},
+	
+	createFormPanel : function(instance){
+		var parameters = this.openCoreObject.classInfo.structure.parameters;
+		var items = [];
+		var itemsLeft = [];
+		var itemsRight = [];
+		var a = 0;
+		this.fieldValues = {};
+		
+		var hook = this;
+		var items = {};
+		for(var key in parameters){
+			var parameter = parameters[key];
+			var fieldName = key;
+			var description = parameter.description;
+			var fieldType = parameter.type;
+			var item = this.createItem(key, parameter);
+			
+			if(instance[key]!=undefined){
+				console.log("FormFields:instance [" + key + " " + instance[key] + "]");
+				switch(parameter.type){
+					case "bool":
+						if(instance[key] == "true"){
+							item.checked = true;
+						} else {
+							item.checked = false;
+						}
+					break;
+					
+					case "ref":
+						var referenceObject = this.formObject.controller.dataManager.getOpenCoreObjectByName(parameter.refclass);
+						if(referenceObject != undefined){
+							var referenceInstances = referenceObject.getInstances();
+							for(var metaid in referenceInstances){
+								var referenceInstance = referenceInstances[metaid];
+								if(referenceInstance.uuid == instance[key]){
+									item.value = metaid;
+								}
+								console.log(referenceInstance.uuid + " " + instance[key]);
+							}
+						}
+					break;
+					
+					case "group":
+						// this should happen once the form is drawn. this pretty much sucks
+						
+						var radios = item.radios;
+						
+						
+						for(var i=0;i<radios.length;i++){
+							var radio = radios[i];
+							if(typeof(radio) == "object"){
+								console.log(items[radio.boxLabel]);
+									
+								if (this.instance[radio.boxLabel] != undefined) {
+									radio.checked = true;
+									items[radio.boxLabel].disabled = false;
+								} else {
+									items[radio.boxLabel].disabled = true;
+								}
+							}
+						}
+						console.log(this.instance);
+					
+					break;
+					
+					default:
+						item.value = instance[key];
+					
+					
+				}
+				
+				
+			}
+			if (this.ZIndex != 0) {
+				item["z-index"] = this.ZIndex;
+			}
+			items[key] = item;
+			if (a == 0) {
+				itemsLeft.push(item);
+				a++;
+			}
+			else {
+				itemsRight.push(item);
+				a = 0;
+			}
+		}
+		
+		if(itemsRight.length == 0){
+			items = itemsLeft;
+		} else {
+			items = [{
+	            layout:'column',
+				
+				
+	            items:[{
+	                columnWidth:.5,
+	                layout: 'form',
+	                items: itemsLeft
+	            },{
+	                columnWidth:.5,
+	                layout: 'form',
+	                items: itemsRight
+	            }]
+	        }]
+			
+		}
+		
+		var buttons = {};
+		if (this.callBackCommand != "") {
+			buttons = [{
+				text: 'Save',
+				handler: function(){
+					hook.formPanel.submit();
+				},
+				formBind: true
+			}]
+		}
+		
+		this.formPanel = new Ext.FormPanel({
+	        
+	       
+			/**/
+			
+			header: false,
+			frame:false,
+			hideBorders: true,
+			autoScroll: true,
+	        title: 'Simple Form',
+	        bodyStyle:'padding:15px 15px 25px 15px;',
+	        width: 650,
+			
+        	
+	       /* defaults: {width: 640}, */
+	       /*  baseCls: "", */
+			onSubmit: function(arg){ console.log(arg); },
+			submit: function() {
+           		var obj = this.getForm().getValues();
+				var objectId = hook.openCoreObject.singleton == true? hook.openCoreObject.classInfo["class"].singleton:obj.id;
+				
+				if(hook.callBackCommand != undefined){
+					hook.formObject.controller.action(hook.callBackCommand, 
+						{ 
+							openCoreObject:hook.openCoreObject, 
+							instance: instance, 
+							formValues: hook.parseValues(this),
+							optionalCallBackObject: hook.optionalCallBackObject
+						});
+				}
+				
+	        },
+	        items: items,
+			buttons: buttons
+	    });
+				
+	},
+	
+	setZIndex : function(zIndex){
+		this.ZIndex = zIndex;
 	},
 	
 	getFormValues : function(){

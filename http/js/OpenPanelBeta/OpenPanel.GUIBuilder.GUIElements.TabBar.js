@@ -17,7 +17,7 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 		
 		
 		this.itemElements = {};
-		if(this.openCoreObject != undefined){
+		if(this.openCoreObject != undefined && this.openCoreObject.childCount>0){
 			
 			var tabDiv = document.createElement("div");
 			tabDiv.setAttribute("id", "tabBarDiv");
@@ -29,6 +29,7 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 			tabDiv.appendChild(tabHolder);
 			this.tabStart = document.createElement("li");
 			this.tabStart.setAttribute("id", "tabStart");
+			this.tabStart.setAttribute("class", "tabStart");
 			this.tabStart.innerHTML = "&nbsp;";
 			tabHolder.appendChild(this.tabStart);
 			
@@ -58,8 +59,8 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 					sortIndexesToSort.push(sortIndex);
 				}
 			}
+			
 			sortIndexesToSort.sort(function(a,b){return a-b;});
-						
 			var sortedChildren = {};
 			
 			for(var i = 0;i<sortIndexesToSort.length;i++){
@@ -128,6 +129,7 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 		this.tabEnd = document.createElement("li");
 		this.tabEnd.innerHTML = "&nbsp;";
 		this.tabEnd.setAttribute("id", "tabEnd");
+		this.tabEnd.setAttribute("class", "tabEnd");
 		tabHolder.appendChild(this.tabEnd);
 		
 		var tabDivElement = Ext.get("tabBarDiv");
@@ -158,16 +160,12 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 	},
 	
 	highliteItem: function(className){
-		console.log("className " + className);
-		console.log(this.itemElements);
 		if(className != undefined && this.itemElements[className]!=undefined){
 			var currentItemElement = this.itemElements[className];
 			var virgin = true;
 			for(var key in this.itemElements){
 				var someItem = this.itemElements[key];
 				if (typeof(someItem) == "object") {
-				
-				
 					if (virgin == true) {
 						virgin = false;
 						if (someItem == currentItemElement) {
@@ -205,6 +203,19 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 					
 				}
 			} 
+		}
+	},
+	
+	disable : function(){
+		for(var key in this.itemElements){
+			var tabSpan = this.itemElements[key];
+			if(typeof(tabSpan) == "object"){
+				tabSpan.onclick = {};
+				if(tabSpan.getAttribute("class") == "tab"){
+					tabSpan.setAttribute("class", "tabDisabled");
+				}
+				
+			}
 		}
 	},
 	

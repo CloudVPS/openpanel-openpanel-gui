@@ -495,6 +495,22 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		this.fields.build();
 	},
 	
+	createModalFields : function(openCoreObject, instance, callBackCommand, targetDiv, optionalCallBackObject){
+		
+		this.fields = new OpenPanel.GUIBuilder.GUIElements.FormFields();	
+		this.fields.setTargetDiv(targetDiv);
+		this.fields.setOpenCoreObject(openCoreObject);
+		this.fields.setFormObject(this);
+		this.fields.setInstance(instance);
+		this.fields.setZIndex(10000);
+		if(optionalCallBackObject == undefined){
+			optionalCallBackObject = {};
+		}
+		this.fields.setCallBackCommand(callBackCommand, optionalCallBackObject);
+		this.fields.build();
+	},
+	
+	
 	createGrid : function(openCoreObject, instances, callBackCommand, targetDiv, optionalCallBackObject){
 		this.grid = new OpenPanel.GUIBuilder.GUIElements.FormGrid();	
 		this.grid.setTargetDiv(targetDiv);

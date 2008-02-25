@@ -37,9 +37,11 @@ OpenPanel.GUIBuilder = {
 	},
 	
 	createPopUp : function(){
+		this.enterModalMode();
 		var previousPopUpDiv = document.getElementById("popup");
+		var modalMessageDiv = document.getElementById("modalMessageContent");
 		if(previousPopUpDiv != undefined){
-			this.targetDiv.removeChild(previousPopUpDiv);
+			modalMessageDiv.removeChild(previousPopUpDiv);
 		}
 		var hook = this;
 			var c = new Ext.Container({
@@ -69,20 +71,22 @@ OpenPanel.GUIBuilder = {
         
       // this.win.show(this);
 		
-		
-		
 		var popUpDiv = document.createElement("div");
 		popUpDiv.setAttribute("id", "popup");
 		
-		this.targetDiv.appendChild(popUpDiv);
+		modalMessageDiv.appendChild(popUpDiv);
 		
 		return popUpDiv;
 	},
 	
+	
 	deletePopUp : function(){
+		
+		this.exitModalMode();
+		var modalMessageDiv = document.getElementById("modalMessageContent");
 		var previousPopUpDiv = document.getElementById("popup");
 		if(previousPopUpDiv != undefined){
-			this.targetDiv.removeChild(previousPopUpDiv);
+			modalMessageDiv.removeChild(previousPopUpDiv);
 		}
 		//this.win.close();
 	},
@@ -154,5 +158,50 @@ OpenPanel.GUIBuilder = {
 
     	//simple.setPosition(100,100);
 		
-	}
+	},
+	
+	enterModalMode : function(){
+		var modalDiv = document.getElementById("modal");
+		modalDiv.style.visibility = "visible";
+		
+		var modalMessageDiv = document.getElementById("modalMessageDiv");
+		modalMessageDiv.style.visibility = "visible";
+		
+		OpenPanel.GUIBuilder.onresize();
+		window.onresize = OpenPanel.GUIBuilder.onresize;	
+	},
+	
+	exitModalMode : function(){
+		var modalDiv = document.getElementById("modal");
+		modalDiv.style.visibility = "hidden";
+		
+		var modalMessageDiv = document.getElementById("modalMessageDiv");
+		modalMessageDiv.style.visibility = "hidden";
+		window.onresize = {}	
+	},
+	
+	onresize : function(){ 
+		var modalDiv = document.getElementById("modal");
+		var windowSizes = OpenPanel.GUIBuilder.getWindowSize();
+		modalDiv.style.width = windowSizes.width + "px";
+		modalDiv.style.height = windowSizes.height + "px";
+	},
+	
+	getWindowSize : function () {
+		  var myWidth = 0, myHeight = 0;
+		  if( typeof( window.innerWidth ) == 'number' ) {
+		    //Non-IE
+		    myWidth = window.outerWidth;
+		    myHeight = window.outerHeight;
+		  } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+		    //IE 6+ in 'standards compliant mode'
+		    myWidth = document.documentElement.clientWidth;
+		    myHeight = document.documentElement.clientHeight;
+		  } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+		    //IE 4 compatible
+		    myWidth = document.body.clientWidth;
+		    myHeight = document.body.clientHeight;
+		  }
+		  return { width: myWidth, height: myHeight}
+		}
 }

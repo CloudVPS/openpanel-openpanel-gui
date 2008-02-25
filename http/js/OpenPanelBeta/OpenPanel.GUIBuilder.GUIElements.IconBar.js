@@ -14,6 +14,11 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 		if(this.openCoreObject != undefined){
 			var iconBarDiv = document.createElement("div");
 			iconBarDiv.setAttribute("class", "iconBarDiv");
+			
+			var iconBarTitle = document.createElement("div");
+			iconBarTitle.setAttribute("class", "iconBarTitle");
+			iconBarDiv.appendChild(iconBarTitle);
+			
 			var iconHolder = document.createElement("ul");
 			iconHolder.setAttribute("class", "iconHolder");
 			this.targetDiv.appendChild(iconBarDiv);
@@ -59,15 +64,21 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 					
 					var iconDivMain = document.createElement("span");
 					iconDivMain.setAttribute("class", "iconDivMain");
-					iconDivMain.style.minWidth = "40px";
 					iconLi.appendChild(iconDivMain);
 					
+					
+					var gayAssCenterElement = document.createElement("center");
+					iconDivMain.appendChild(gayAssCenterElement);
+					
 					var classIcon = document.createElement("div");
+					
 					classIcon.setAttribute("class", "classIcon");
-					iconDivMain.appendChild(classIcon);
+					
 					classIcon.innerHTML = "<img src=\"/images/icons/"+ childObject.classInfo["class"].uuid +".png\"/>";
+					iconDivMain.appendChild(classIcon);
 					var classDescription = document.createElement("div");
 					classDescription.setAttribute("class", "classDescription");
+					classDescription.setAttribute("id", "c" + childObject.uuid);
 					iconDivMain.appendChild(classDescription);
 					var title = childObject.title;
 					
@@ -87,6 +98,9 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 					
 					this.itemElements[childObject.name] = iconLi;
 					
+					
+					
+					classIcon.style.width = Ext.get("c" + childObject.uuid).getWidth() + "px";
 				}
 			}
 			
@@ -96,7 +110,14 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 		}
 	},
 	
+	setTitle : function(className){
+		if (className != undefined && this.itemElements[className] != undefined) {
+			
+		}
+	},
+	
 	click: function(className){
+		this.setTitle(className);
 		if (className != undefined) {
 			if (this.itemElements[className] != undefined) {
 				var currentItemElement = this.itemElements[className];

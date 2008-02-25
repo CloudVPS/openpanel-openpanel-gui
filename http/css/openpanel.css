@@ -5,10 +5,86 @@ body {
 	background-repeat: no-repeat;
 }
 
+#modal {
+	position: absolute;
+	width: 990px;
+	height: 1000px;
+	float:left;
+	z-index: 10000;
+	background-color: #000;
+	/* for IE */
+	filter:alpha(opacity=0);
+	/* CSS3 standard */
+	opacity:0.0;
+	visibility: hidden;
+}
+
+#modalMessageDiv {
+	z-index: 10001;
+	padding-top: 99px;
+	width: 990px;
+	height: 400px;
+	background-color: #e0e0e0;
+	position: absolute;
+	left: 50%; 
+	margin-top: 98px;
+	margin-left: -495px; 
+	visibility: hidden;
+	/* for IE */
+	filter:alpha(opacity=80);
+	/* CSS3 standard */
+	opacity:0.8;
+	visibility: hidden;
+}
+
+#modalMessageContent {
+	width: 190px;
+	height: 100px;
+	background-color: #e0e0e0;
+}
+
+addDeleteButtonHolder {
+	padding-top: 20px;
+}
+
+.addButton, .addButtonDisabled {
+	width: 23px;
+	height: 22px;
+	background-repeat: no-repeat;
+	float: left;
+}
+
+.addButton {
+	background-image: url(/images/gui/addButton.png);
+	cursor: pointer;
+}
+
+.addButtonDisabled {
+	background-image: url(/images/gui/addButton.png);
+}
+
+.deleteButton, .deleteButtonDisabled {
+	width: 22px;
+	height: 22px;
+	background-repeat: no-repeat;
+	float: left;
+}
+
+.deleteButton {
+	background-image: url(/images/gui/deleteButton.png);
+	cursor: pointer;
+}
+
+.deleteButtonDisabled {
+	background-image: url(/images/gui/deleteButtonDisabled.png);
+}
+
+
 #app {
 	width: 900px;
 	height: 488px;
 	text-align: left;
+	padding-top: 20px;
 }
 
 #mainBottom {
@@ -47,7 +123,6 @@ body {
 	width: 900px;
 	height: 500px;
 	background-image: url(/images/gui/groupFrameMiddle.png);
-	
 }
 
 #mainAreaLeft {
@@ -55,6 +130,7 @@ body {
 	width: 220px;
 	height: 400px;
 	margin-left: 20px;
+	padding-left: 20px;
 }
 
 #mainAreaRight {
@@ -88,6 +164,11 @@ body {
 .iconBarDiv {
 	clear : both;
 	padding-left: 20px;
+	
+}
+
+.iconBarTitle {
+	
 }
 
 .iconHolder {
@@ -120,6 +201,7 @@ body {
 
 .classDescription, .classIcon {
 	text-align: center;
+	cursor: pointer;
 }
 
 .classDescription{
@@ -132,7 +214,6 @@ body {
 	display: block;
 	height: 34px;
 	padding-top: 28px;
-	
 }
 
 .iconDivLeft, .iconDivRight {
@@ -141,6 +222,7 @@ body {
 
 .iconDivMain {
 	padding: 0px 2px 0px 2px;
+	min-width: 40px;
 }
 
 #tabBar {
@@ -173,15 +255,16 @@ body {
 	
 }
 
-li.tab, li.tabSelected, .tabStart ,.tabStartSelected ,.tabEnd ,.tabEndSelected, .tabDelimiter, .tabDelimiterSelected {
+li.tab, li.tabSelected, .tabStart ,.tabStartSelected ,.tabEnd ,.tabEndSelected, .tabDelimiter, .tabDelimiterSelected, li.tabDisabled {
 	margin:0;
 	padding:0;
 	height:21px;
 	display:inline;
 	line-height:21px;
+	cursor: pointer;
 }
 
-li.tab {
+li.tab, li.tabDisabled  {
 	background-image: url(/images/gui/tab_fill.png);
 	padding-left: 5px;
 	padding-right: 5px;
@@ -193,7 +276,14 @@ li.tabSelected {
 	padding-right: 5px;
 }
 
-.tabStart, .tabStartSelected, .tabEnd, .tabEndSelected {
+li.tabDisabled {
+	cursor: default;
+}
+
+.tabDisabled {
+	color: #808080;
+}
+.tabStart, .tabStartSelected, .tabEnd, .tabEndSelected, .tabDisabled {
 	padding: 3px;
 	background-repeat: repeat-x;
 }
@@ -225,61 +315,3 @@ li.tabSelected {
 	padding-left: 1px;
 	height:21px;
 }
-/*
-#form {
-	width: 450px;
-	height: 200px;
-}
-
-.grid{
-	font-size: 9px;
-	border: solid 1px #000;
-}
-
-
-.input {
-	font-size: 9px;
-}
-
-.inputLabel {
-	font-size: 9px;
-}
-.inputSelect {
-	font-size: 9px;
-}
-
-
-.selected {
-	font-weight: bold;
-	color: #800000;
-}
-
-.debugValue {
-	color: #800000;
-	margin-left: 10px;
-}
-
-
-
-
-
-
-.tab {
-	height: 21px;
-	background-image: url(/images/gui/tab_fill.png);
-	
-}
-
-.tabSelected {
-	height: 21px;
-	background-image: url(/images/gui/tab_hlite.png);
-	
-}
-
-.tabDelimiter {
-	height: 21px;
-	width: 1px;
-	background-image: url(/images/tab_mdelim.png);
-}
-*/
-

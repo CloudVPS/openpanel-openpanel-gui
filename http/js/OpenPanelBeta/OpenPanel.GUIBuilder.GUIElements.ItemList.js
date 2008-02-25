@@ -64,53 +64,63 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 	},
 	
 	renderButtons : function(targetDiv){
-		
-		if (targetDiv.parentNode != undefined) {
+	
+		if (targetDiv!=undefined && targetDiv.parentNode != undefined) {
 			targetDiv.innerHTML = "";
+			
+			var addDeleteButtonHolder = document.createElement("div");
+			addDeleteButtonHolder.setAttribute("class", "addDeleteButtonHolder");
+			targetDiv.appendChild(addDeleteButtonHolder);
 			
 			if (this.openCoreObject.meta == true) {
 			
 			} else {
-			
-				if (this.controller.dataManager.checkQuotum(this.openCoreObject.name) == true) {
-					if (this.openCoreObject.canCreate == true) {
-						// create create button
-						var createButton = document.createElement("div");
-						createButton.appendChild(document.createTextNode("[ + ]"));
-						targetDiv.appendChild(createButton);
-						var hook = this;
-						createButton.onclick = function(){
-							hook.createInstance();
-						}
+				var createButton = document.createElement("div");
+				addDeleteButtonHolder.appendChild(createButton);
+				if (this.controller.dataManager.checkQuotum(this.openCoreObject.name) == true && this.openCoreObject.canCreate == true) {
+					
+					// create create button
+					createButton.setAttribute("class", "addButton");
+					var hook = this;
+					createButton.onclick = function(){
+						hook.createInstance();
 					}
 					
-					if (this.openCoreObject.canDelete == true) {
-						// create delete button
-						var l = 0;
-						for (var key in this.instances) {
-							l = 1;
-							break;
-						}
-						if (l == 1) {
-							var deleteButton = document.createElement("div");
-							deleteButton.appendChild(document.createTextNode("[ - ]"));
-							targetDiv.appendChild(deleteButton);
-							var hook = this;
-							deleteButton.onclick = function(){
-								hook.deleteInstance();
-							}
-						}
-					}
-					
-					var quotum = this.controller.dataManager.getQuotumByClassName(this.openCoreObject.name);
-					if (quotum != undefined) {
-						var q = document.createElement("ul");
-						targetDiv.appendChild(q);
-						var li = document.createElement("li");
-						li.appendChild(document.createTextNode(">>quotum : " + this.openCoreObject.name + " " + quotum.quota));
-						q.appendChild(li);
-					}
+				} else {
+					createButton.setAttribute("class", "addButtonDisabled");
 				}
+				
+				var deleteButton = document.createElement("div");
+				addDeleteButtonHolder.appendChild(deleteButton);
+				var l = 0;
+					for (var key in this.instances) {
+						l = 1;
+						break;
+					}
+				if (this.controller.dataManager.checkQuotum(this.openCoreObject.name) == true && this.openCoreObject.canDelete == true && l==1) {
+					
+					// create delete button
+					
+					
+						deleteButton.setAttribute("class", "deleteButton");
+						var hook = this;
+						deleteButton.onclick = function(){
+							hook.deleteInstance();
+						}
+				} else {
+					deleteButton.setAttribute("class", "deleteButtonDisabled");
+				}
+				
+				/* 
+				var quotum = this.controller.dataManager.getQuotumByClassName(this.openCoreObject.name);
+				if (quotum != undefined) {
+					var q = document.createElement("ul");
+					targetDiv.appendChild(q);
+					var li = document.createElement("li");
+					li.appendChild(document.createTextNode(">>quotum : " + this.openCoreObject.name + " " + quotum.quota));
+					q.appendChild(li);
+				}
+				*/
 			}
 		}
 	},
@@ -119,8 +129,8 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 		this.controller.action("showCreateInstanceFromItemList", {
 			openCoreObject: this.openCoreObject,
 			formObjectHolder : this.formObjectHolder
-			
 		});
+		this.renderButtons();
 	},
 	
 	deleteInstance : function(){

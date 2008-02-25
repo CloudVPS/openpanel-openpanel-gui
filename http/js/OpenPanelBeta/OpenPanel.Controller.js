@@ -19,6 +19,7 @@ OpenPanel.Controller = {
 		//try {
 			this.lastCommand = command;
 			this.lastArgumentObject = obj;
+			console.log(command);
 			switch (command) {
 				
 				case "init":
@@ -36,7 +37,6 @@ OpenPanel.Controller = {
 							rootObject = new OpenCore.DataManager.OpenCoreObject({}, "ROOT");
 							
 							this.guiBuilder.loadTemplate("main.html", "app");
-							
 							OpenPanel.GUIBuilder.GUIElements.IconBar.setTargetDivName("iconBar");
 							OpenPanel.GUIBuilder.GUIElements.ItemList.setTargetDivName("mainAreaLeft");
 							OpenPanel.GUIBuilder.GUIElements.TabBar.setTargetDivName("tabBar");
@@ -286,31 +286,40 @@ OpenPanel.Controller = {
 			}
 			this.guiBuilder.GUIElements.TabBar.highliteItem(firstTabOpenCoreObject.name);
 		} else {
+
 			this.guiBuilder.GUIElements.TabBar.setOpenCoreObject(openCoreObject);
 			this.guiBuilder.GUIElements.TabBar.build();
+			this.guiBuilder.GUIElements.TabBar.disable();
 		}
 	},
 	
 	showCreateInstance : function(openCoreObject, formObjectHolder, finishedAction){
 		// is object updateable?
 		// show popup
+		
 		var popUpDiv = this.guiBuilder.createPopUp();
 		var formObject = new OpenPanel.GUIBuilder.GUIElements.FormObject();
 		formObject.setOpenCoreObject(openCoreObject);
 		formObject.setTargetDiv(formObjectHolder);
 		formObject.setController(this);
-		formObject.createFields(openCoreObject, {}, finishedAction, popUpDiv, {});
+		formObject.createModalFields(openCoreObject, {}, finishedAction, popUpDiv, {});
 		formObject.fields.formPanel.enable();
 	},
 	
 	showCreateInstanceFromFormObject : function(formObject, formObjectHolder, finishedAction){
+		var d = document.createElement("div");
+		
 		var popUpDiv = this.guiBuilder.createPopUp();
 		var popupFormObject = new OpenPanel.GUIBuilder.GUIElements.FormObject();
 		popupFormObject.setOpenCoreObject(formObject.openCoreObject);
 		popupFormObject.setTargetDiv(formObjectHolder);
 		popupFormObject.setController(this);
-		popupFormObject.createFields(formObject.openCoreObject, {}, finishedAction, popUpDiv, formObject);
+		popupFormObject.createModalFields(formObject.openCoreObject, {}, finishedAction, popUpDiv, formObject);
 		popupFormObject.fields.formPanel.enable();
+		// 
+		
+		
+		// popupFormObject.fields.formPanel
 	},
 	
 	showCreateInstanceFromFormObjectMeta : function(formObject, openCoreObject, formObjectHolder, finishedAction){
@@ -320,7 +329,7 @@ OpenPanel.Controller = {
 		popupFormObject.setOpenCoreObject(openCoreObject);
 		popupFormObject.setTargetDiv(formObjectHolder);
 		popupFormObject.setController(this);
-		popupFormObject.createFields(openCoreObject, {}, finishedAction, popUpDiv, formObject);
+		popupFormObject.createModalFields(openCoreObject, {}, finishedAction, popUpDiv, formObject);
 		popupFormObject.fields.formPanel.enable();
 	}
 						

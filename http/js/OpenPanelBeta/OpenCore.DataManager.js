@@ -298,7 +298,7 @@ OpenCore.DataManager.OpenCoreObject = function(parent, name){
 	this.canUpdate = false;
 	this.canGetInfo = false;
 	this.title = "";
-	
+	this.childCount = 0;
 	this.init(parent, name);
 	if(name == "ROOT"){
 		OpenCore.DataManager.rootObject = this;
@@ -361,6 +361,7 @@ OpenCore.DataManager.OpenCoreObject.prototype = {
 			var childrenInfo = this.classInfo.info.children;
 			
 			for(var key in childrenInfo){
+				this.childCount++;
 				var childInfo = childrenInfo[key];
 				var childClassName = childInfo.id;
 				var childClass = new OpenCore.DataManager.OpenCoreObject(this, childClassName);

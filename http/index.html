@@ -13,7 +13,6 @@
 	<script type="text/javascript" src="js/ext-2.0/ext-all.js"></script>
 	<script type="text/javascript" src="js/trimpath-template-1.0.38/trimpath-template-1.0.38.js"></script>
 	
-	
 	<script type="text/javascript" src="js/OpenPanelBeta/OpenCore.js"></script>
 	<script type="text/javascript" src="js/OpenPanelBeta/OpenCore.RPC.js"></script>
 	<script type="text/javascript" src="js/OpenPanelBeta/OpenCore.DataManager.js"></script>
@@ -36,37 +35,48 @@
 		if(typeof(console) != 'object'){
 			console = { log: function(){}}
 		}
-		$j(document).ready(function()
+		$j(document).ready(function(){
+			OpenCore.RPC.RequestHandler.setOpenCoreURL("/fake-opencore-proxy/json");
+			// OpenCore.RPC.RequestHandler.setOpenCoreURL("http://194.60.207.199/json");
+			
+			OpenCore.DataManager.setRPC(OpenCore.RPC);
+			OpenPanel.Controller.setDataManager(OpenCore.DataManager);
+			OpenPanel.Controller.setGuiBuilder(OpenPanel.GUIBuilder);
+			OpenPanel.GUIBuilder.GUIElements.ItemList.setGuiBuilder(OpenPanel.GUIBuilder);
+			OpenPanel.GUIBuilder.GUIElements.ItemList.setController(OpenPanel.Controller);
+			OpenPanel.GUIBuilder.GUIElements.FormObject.setGuiBuilder(OpenPanel.GUIBuilder);
+			OpenPanel.Controller.action("login", 
 			{
-				OpenCore.RPC.RequestHandler.setOpenCoreURL("/fake-opencore-proxy/json");
-				// OpenCore.RPC.RequestHandler.setOpenCoreURL("http://194.60.207.199/json");
-					
-				OpenCore.DataManager.setRPC(OpenCore.RPC);
-				OpenPanel.Controller.setDataManager(OpenCore.DataManager);
-				OpenPanel.Controller.setGuiBuilder(OpenPanel.GUIBuilder);
-				OpenPanel.GUIBuilder.GUIElements.ItemList.setGuiBuilder(OpenPanel.GUIBuilder);
-				OpenPanel.GUIBuilder.GUIElements.ItemList.setController(OpenPanel.Controller);
-				OpenPanel.GUIBuilder.GUIElements.FormObject.setGuiBuilder(OpenPanel.GUIBuilder);
-				OpenPanel.Controller.action("login", {userName: "openadmin", password:"foobar"});
-			}
+				userName: "openadmin",
+				password: "foobar"
+			});
+			//OpenPanel.GUIBuilder.enterModalMode();
+		}
 		);
 		
 	</script>
 </head>
-<body><center>
-	<br/>
-	<div id="app"></div>
-	<div id="debug">
-		<div>
-			<div id="debugList"/>
-		</div>
-		<div>
-			<div id="controllerDebug"/>
-		</div>
-		<div>
-			<div id="debugFormObjectList"/>
+<body>
+	<div id="modalMessageDiv">
+		<div id="modalMessageContent">
+			ohai
 		</div>
 	</div>
+	<div id="modal"></div>
+	<center>
+		
+		<div id="app" style="z-index: -1"></div>
+		<div id="debug">
+			<div>
+				<div id="debugList"></div>
+			</div>
+			<div>
+				<div id="controllerDebug"></div>
+			</div>
+			<div>
+				<div id="debugFormObjectList"></div>
+			</div>
+		</div>
 	</center>
 </body>
 </html>
