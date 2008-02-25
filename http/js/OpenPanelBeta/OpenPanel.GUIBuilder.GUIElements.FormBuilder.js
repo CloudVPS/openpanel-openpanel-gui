@@ -50,7 +50,7 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 	},
 	
 	clean : function(){
-		this.targetDiv.innerHTML = "";
+		this.targetDiv.innerHTML = "";	
 	},
 	getData : function(){
 		var transport = [];

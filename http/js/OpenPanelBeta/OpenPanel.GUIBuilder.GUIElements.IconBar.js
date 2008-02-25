@@ -18,7 +18,7 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 			
 			this.iconBarTitleElement = document.createElement("div");
 			this.iconBarTitleElement.setAttribute("class", "iconBarTitle");
-			this.iconBarTitleElement.appendChild(document.createTextNode("ohai"));
+			this.iconBarTitleElement.appendChild(document.createTextNode(""));
 			iconBarDiv.appendChild(this.iconBarTitleElement);
 			
 			var iconHolder = document.createElement("ul");

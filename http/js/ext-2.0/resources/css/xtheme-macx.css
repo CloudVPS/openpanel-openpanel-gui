@@ -131,7 +131,7 @@ ul.x-tab-strip li.x-tab-edge{float:left;margin:0!important;padding:0!important;b
 
 .x-form-field{margin:0;font:normal 12px verdana, helvetica, arial;}
 .x-form-text,textarea.x-form-field{padding:1px 3px;background:#fff url(../images/macx/form/text-bg.gif) repeat-x 0 0;border:1px solid #b4b4b4;}
-.x-form-text{height:22px;line-height:18px;vertical-align:middle;}
+.x-form-text{height:18px;line-height:14px;vertical-align:middle; font-size: 10px;}
 .ext-ie .x-form-text{margin-top:-1px;margin-bottom:-1px;height:22px;line-height:18px;}
 .ext-strict .x-form-text{height:18px;}
 .ext-safari .x-form-text{height:20px;}
@@ -217,6 +217,7 @@ fieldset.x-panel-collapsed .x-fieldset-bwrap{visibility:hidden;position:absolute
 .x-hide-label .x-form-element{padding-left:0!important;}
 .x-form-item-label {
 	text-align: right;
+	font-size: 10px;
 }
 .x-btn{font:normal 11px tahoma,verdana,helvetica;cursor:pointer;white-space:nowrap;}
 .x-btn button{border:0 none;background:transparent;font:normal 11px tahoma,verdana,helvetica;padding-left:3px;padding-right:3px;cursor:pointer;margin:0;overflow:visible;width:auto;-moz-outline:0 none;outline:0 none;}

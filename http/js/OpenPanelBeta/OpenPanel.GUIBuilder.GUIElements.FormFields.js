@@ -168,7 +168,7 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 			for(var enumName in enums){
 				var enumField = [
                   	
-				   	enums[enumName].description,
+				   	enums[enumName].description + " " + enums[enumName].val,
 					enums[enumName].val
                ];
 				
