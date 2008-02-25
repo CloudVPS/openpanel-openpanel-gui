@@ -13,7 +13,7 @@ OpenPanel.Controller = {
 	
 	currentRootClass: {},
 	currentRootClassInstance: {},
-	
+	currentUser : {},
 	
 	action: function(command, obj){
 		//try {
@@ -35,6 +35,7 @@ OpenPanel.Controller = {
 						
 						if(this.dataManager.login(obj.userName, obj.password)){
 							rootObject = new OpenCore.DataManager.OpenCoreObject({}, "ROOT");
+							this.currentUser = obj.userName;
 							
 							this.guiBuilder.loadTemplate("main.html", "app");
 							OpenPanel.GUIBuilder.GUIElements.IconBar.setTargetDivName("iconBar");

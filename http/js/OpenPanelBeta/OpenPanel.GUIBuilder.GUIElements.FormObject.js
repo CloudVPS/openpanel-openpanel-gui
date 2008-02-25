@@ -502,6 +502,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		this.fields.setOpenCoreObject(openCoreObject);
 		this.fields.setFormObject(this);
 		this.fields.setInstance(instance);
+		this.fields.setIsCreate(true);
 		this.fields.setZIndex(10000);
 		if(optionalCallBackObject == undefined){
 			optionalCallBackObject = {};

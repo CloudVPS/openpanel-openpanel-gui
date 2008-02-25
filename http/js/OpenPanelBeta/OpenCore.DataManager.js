@@ -277,7 +277,7 @@ OpenCore.DataManager = {
 
 OpenCore.DataManager.OpenCoreObject = function(parent, name){
 	this.uuid = "";
-	this.parent = {};
+	this.parent;
 	this.name = "";
 	this.children = [];
 	this.classInfo = undefined;
@@ -297,6 +297,8 @@ OpenCore.DataManager.OpenCoreObject = function(parent, name){
 	this.canCreate = false;
 	this.canUpdate = false;
 	this.canGetInfo = false;
+	
+	this.isRootObject = false;
 	this.title = "";
 	this.childCount = 0;
 	this.init(parent, name);
@@ -337,6 +339,10 @@ OpenCore.DataManager.OpenCoreObject.prototype = {
 			}
 			
 			this.uuid = this.classInfo["class"].uuid;
+			
+			if(this.classInfo.info!= undefined && this.classInfo.info.parent == undefined){
+				this.isRootObject = true;
+			}
 		}
 	},
 	

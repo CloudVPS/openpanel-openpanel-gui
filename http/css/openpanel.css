@@ -65,7 +65,7 @@ addDeleteButtonHolder {
 }
 
 .addButtonDisabled {
-	background-image: url(/images/gui/addButton.png);
+	background-image: url(/images/gui/addButtonDisabled.png);
 }
 
 .deleteButton, .deleteButtonDisabled {
@@ -176,6 +176,7 @@ addDeleteButtonHolder {
 	position: absolute;
 	width: 900px;
 	text-align: center;
+	padding-top: 5px;
 }
 
 .iconHolder {

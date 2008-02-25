@@ -11,6 +11,7 @@ OpenPanel.GUIBuilder.GUIElements.FormFields = function(){
 	this.callBackCommand = "";
 	this.formPanel = {};
 	this.ZIndex = 0;
+	this.isCreate = false;
 }
 
 OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
@@ -168,7 +169,7 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 			for(var enumName in enums){
 				var enumField = [
                   	
-				   	enums[enumName].description + " " + enums[enumName].val,
+				   	enums[enumName].description,
 					enums[enumName].val
                ];
 				
@@ -198,12 +199,50 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 		return comboWithTooltip;
 	},
 	
+	createChildUsersPullDown: function(fieldName){
+		var userOpenCoreObject = this.formObject.controller.dataManager.getOpenCoreObjectByName("User");
+		var instances = userOpenCoreObject.getInstances();
+		
+		var item = {};
+		var userItems = [];
+		if(instances != undefined){
+			
+			for(var userName in instances){
+				var userField = [
+                  	userName,
+					instances[userName].uuid
+               ];
+				
+				userItems.push(userField);
+			}
+		}
+		
+		var store = new Ext.data.SimpleStore({
+		    fields: ['metaid', 'owner'],
+		    data : userItems
+		});
+		
+		var comboWithTooltip = new Ext.form.ComboBox({
+		    store: store,
+		    displayField: 'metaid',
+			fieldLabel: "User",
+		    typeAhead: true,
+		    mode: 'local',
+		    triggerAction: 'all',
+		    emptyText:'Select ...',
+		    selectOnFocus:true,
+			name: fieldName,
+			forceSelection: true
+		});
+
+			
+		return comboWithTooltip;
+	},
+	
 	createReference: function(fieldName, obj){
 		var item = {};
 		var referenceFields = [];
-		//var refClass = obj.refClass;
 		var references = this.formObject.controller.dataManager.getReferences(obj.refclass + "/" + obj.reflabel);
-		console.log(references);
 		if(references!=undefined){
 			for(var referenceName in references){
 				var referenceField = [
@@ -214,9 +253,6 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 			   referenceFields.push(referenceField);
 			}
 		}
-		
-		console.log("referenceFields");
-		console.log(referenceFields);
 		
 		var store = new Ext.data.SimpleStore({
 		    fields: ["description", "metaid"],
@@ -255,11 +291,6 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 		if(instance == undefined){
 			instance = {};
 		}
-		console.log("FormFields:createFields instance");
-		console.log(instance);
-		console.log("FormFields:createFields this.openCoreObject.name");
-		console.log(this.openCoreObject.name);
-		
 		
 		if(this.openCoreObject.classInfo.structure != undefined && this.openCoreObject.classInfo.structure.parameters != undefined){
 			
@@ -349,12 +380,12 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 					
 					
 				}
-				
-				
 			}
+			
 			if (this.ZIndex != 0) {
 				item["z-index"] = this.ZIndex;
 			}
+			
 			items[key] = item;
 			if (a == 0) {
 				itemsLeft.push(item);
@@ -366,6 +397,23 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 			}
 		}
 		
+		// is root object?
+		if(this.isCreate == true && this.openCoreObject.isRootObject){
+			
+			var item = this.createChildUsersPullDown("owner");
+			item.value = this.formObject.controller.currentUser;
+			console.log(this.formObject.controller)
+			items[key] = item;
+			if (a == 0) {
+				itemsLeft.push(item);
+				a++;
+			}
+			else {
+				itemsRight.push(item);
+				a = 0;
+			}
+		}
+			
 		if(itemsRight.length == 0){
 			items = itemsLeft;
 		} else {
@@ -408,12 +456,10 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 			autoScroll: true,
 	        title: 'Simple Form',
 	        bodyStyle:'padding:15px 15px 25px 15px;',
-	        width: 650,
+	        width: 550,
 			
         	
-	       /* defaults: {width: 640}, */
-	       /*  baseCls: "", */
-			onSubmit: function(arg){ console.log(arg); },
+	       onSubmit: function(arg){ console.log(arg); },
 			submit: function() {
            		var obj = this.getForm().getValues();
 				var objectId = hook.openCoreObject.singleton == true? hook.openCoreObject.classInfo["class"].singleton:obj.id;
@@ -440,7 +486,6 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 	},
 	
 	getFormValues : function(){
-		console.log("fields : " + this.openCoreObject.name);
 		return this.parseValues(this.formPanel);
 	},
 	
@@ -505,6 +550,10 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 	setCallBackCommand : function(callBackCommand, optionalCallBackObject){
 		this.callBackCommand = callBackCommand;
 		this.optionalCallBackObject = optionalCallBackObject;
+	},
+	
+	setIsCreate : function(bool){
+		this.isCreate = bool;
 	}
 	
 }

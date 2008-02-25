@@ -43,33 +43,7 @@ OpenPanel.GUIBuilder = {
 		if(previousPopUpDiv != undefined){
 			modalMessageDiv.removeChild(previousPopUpDiv);
 		}
-		var hook = this;
-			var c = new Ext.Container({
-                   
-                });
-            this.win = new Ext.Window({
-                el:previousPopUpDiv,
-                layout:'fit',
-                width:500,
-                height:300,
-                closeAction:'hide',
-                plain: true,
-				modal: true,
-                
-                
-
-                buttons: [{
-                    text:'Submit',
-                    disabled:true
-                },{
-                    text: 'Close',
-                    handler: function(){
-                        hook.deletePopUp();
-                    }
-                }]
-            });
-        
-      // this.win.show(this);
+		
 		
 		var popUpDiv = document.createElement("div");
 		popUpDiv.setAttribute("id", "popup");
