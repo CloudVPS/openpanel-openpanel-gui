@@ -290,6 +290,7 @@ OpenPanel.Controller = {
 			this.guiBuilder.GUIElements.TabBar.setOpenCoreObject(openCoreObject);
 			this.guiBuilder.GUIElements.TabBar.build();
 			this.guiBuilder.GUIElements.TabBar.disable();
+			this.guiBuilder.GUIElements.FormBuilder.clean();
 		}
 	},
 	

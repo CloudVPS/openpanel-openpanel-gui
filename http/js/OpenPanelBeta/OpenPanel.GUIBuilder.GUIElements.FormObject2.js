@@ -40,7 +40,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 			this.init();
 			this.targetDiv.innerHTML = "";
 			this.createDivs();
-			if (this.openCoreObject.classInfo.info == undefined || (this.openCoreObject.classInfo.info != undefined && this.openCoreObject.classInfo.info.parent == undefined)) {
+			if (this.openCoreObject.classInfo == undefined || (this.openCoreObject.classInfo.info != undefined && this.openCoreObject.classInfo.info.parent == undefined)) {
 				this.createTopLevelForm();
 			} else {
 				this.createSubLevelForm();

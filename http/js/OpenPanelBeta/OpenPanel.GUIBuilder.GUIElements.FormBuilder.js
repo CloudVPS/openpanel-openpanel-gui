@@ -49,6 +49,9 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 		this.rootFormObject.build();
 	},
 	
+	clean : function(){
+		this.targetDiv.innerHTML = "";
+	},
 	getData : function(){
 		var transport = [];
 		

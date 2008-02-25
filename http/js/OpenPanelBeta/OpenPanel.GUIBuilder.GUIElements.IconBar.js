@@ -7,6 +7,7 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 	openCoreObject : {},
 	itemElements: {},
 	controller: {},
+	iconBarTitleElement : {},
 	
 	build : function(){
 		this.targetDiv.innerHTML = "";
@@ -15,9 +16,10 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 			var iconBarDiv = document.createElement("div");
 			iconBarDiv.setAttribute("class", "iconBarDiv");
 			
-			var iconBarTitle = document.createElement("div");
-			iconBarTitle.setAttribute("class", "iconBarTitle");
-			iconBarDiv.appendChild(iconBarTitle);
+			this.iconBarTitleElement = document.createElement("div");
+			this.iconBarTitleElement.setAttribute("class", "iconBarTitle");
+			this.iconBarTitleElement.appendChild(document.createTextNode("ohai"));
+			iconBarDiv.appendChild(this.iconBarTitleElement);
 			
 			var iconHolder = document.createElement("ul");
 			iconHolder.setAttribute("class", "iconHolder");
@@ -60,18 +62,14 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 					
 					var iconDivLeft = document.createElement("div");
 					iconDivLeft.setAttribute("class", "iconDivLeft");
+					iconDivLeft.innerHTML = "&nbsp;";
 					iconLi.appendChild(iconDivLeft);
 					
 					var iconDivMain = document.createElement("span");
 					iconDivMain.setAttribute("class", "iconDivMain");
 					iconLi.appendChild(iconDivMain);
 					
-					
-					var gayAssCenterElement = document.createElement("center");
-					iconDivMain.appendChild(gayAssCenterElement);
-					
 					var classIcon = document.createElement("div");
-					
 					classIcon.setAttribute("class", "classIcon");
 					
 					classIcon.innerHTML = "<img src=\"/images/icons/"+ childObject.classInfo["class"].uuid +".png\"/>";
@@ -112,7 +110,8 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 	
 	setTitle : function(className){
 		if (className != undefined && this.itemElements[className] != undefined) {
-			
+			var currentItemElement = this.itemElements[className];
+			this.iconBarTitleElement.innerHTML = this.controller.dataManager.getOpenCoreObjectByName(className).title;
 		}
 	},
 	

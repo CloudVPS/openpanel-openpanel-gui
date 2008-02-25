@@ -17,8 +17,9 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 		
 		
 		this.itemElements = {};
-		if(this.openCoreObject != undefined && this.openCoreObject.childCount>0){
-			
+		
+		if (this.openCoreObject != undefined && this.openCoreObject.childCount > 0) {
+			var tabs = [];
 			var tabDiv = document.createElement("div");
 			tabDiv.setAttribute("id", "tabBarDiv");
 			
@@ -37,17 +38,17 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 			
 			if (this.openCoreObject.canUpdate == true && this.openCoreObject.classInfo["class"].metabase == "") {
 				this.openCoreObjects.push(this.openCoreObject);
-				//this.itemElements[this.openCoreObject.name] = this.openCoreObject;
+			//this.itemElements[this.openCoreObject.name] = this.openCoreObject;
 			}
 			
 			
 			var sortIndexes = {};
 			var sortIndexesToSort = [];
 			
-			for(var key in this.openCoreObject.children){
+			for (var key in this.openCoreObject.children) {
 				this.openCoreObjects.push(this.openCoreObject.children[key]);
 			}
-			for(var key in this.openCoreObjects){
+			for (var key in this.openCoreObjects) {
 				var childObject = this.openCoreObjects[key];
 				if (typeof(childObject) == "object") {
 					var sortIndex = childObject.classInfo["class"].sortindex;
@@ -60,20 +61,22 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 				}
 			}
 			
-			sortIndexesToSort.sort(function(a,b){return a-b;});
+			sortIndexesToSort.sort(function(a, b){
+				return a - b;
+			});
 			var sortedChildren = {};
 			
-			for(var i = 0;i<sortIndexesToSort.length;i++){
+			for (var i = 0; i < sortIndexesToSort.length; i++) {
 				var childObjects = sortIndexes[sortIndexesToSort[i]];
-				for(var j=0;j<childObjects.length;j++){
+				for (var j = 0; j < childObjects.length; j++) {
 					sortedChildren[childObjects[j].name] = childObjects[j];
 				}
 			}
 			
-			for (var i=0;i<this.openCoreObject.children.length;i++) {
+			for (var i = 0; i < this.openCoreObject.children.length; i++) {
 				var someObject = this.openCoreObject.children[i];
 				if (typeof(someObject) == "object") {
-					if(someObject.classInfo["class"].metabase == ""){
+					if (someObject.classInfo["class"].metabase == "") {
 						this.openCoreObjects.push(someObject);
 					}
 				} else {
@@ -82,7 +85,7 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 			}
 			
 			
-			var tabs = [];
+			
 			for (var key in sortedChildren) {
 				var someObject = sortedChildren[key];
 				if (someObject.metaType != "derived") {
@@ -99,45 +102,45 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 					tabSpan.setAttribute("class", "tab");
 				}
 			}
-		}
-		
-		
-		for(var i=0;i<tabs.length;i++){
-			var tabSpan = tabs[i];
-			tabHolder.appendChild(tabSpan);
-			if(i==0){
-				var delimiter = this.createDelimiter();
-				tabSpan.rightDelimiter = delimiter;
-				tabHolder.appendChild(delimiter);
-			} else if(i == tabs.length-1){
-				tabSpan.leftDelimiter = delimiter;
-			} else {
-				tabSpan.leftDelimiter = delimiter;
-				var delimiter = this.createDelimiter();
-				tabSpan.rightDelimiter = delimiter;
-				tabHolder.appendChild(delimiter);
+			
+			
+			
+			for (var i = 0; i < tabs.length; i++) {
+				var tabSpan = tabs[i];
+				tabHolder.appendChild(tabSpan);
+				if (i == 0) {
+					var delimiter = this.createDelimiter();
+					tabSpan.rightDelimiter = delimiter;
+					tabHolder.appendChild(delimiter);
+				} else if (i == tabs.length - 1) {
+					tabSpan.leftDelimiter = delimiter;
+				} else {
+					tabSpan.leftDelimiter = delimiter;
+					var delimiter = this.createDelimiter();
+					tabSpan.rightDelimiter = delimiter;
+					tabHolder.appendChild(delimiter);
+				}
+				
+				var el = Ext.get(tabSpan.getAttribute("id"));
+				this.tabWidth += el.getWidth();
 			}
 			
-			var el = Ext.get(tabSpan.getAttribute("id"));
-			this.tabWidth+=el.getWidth();
+			
+			if (tabs.length > 0) {
+				this.tabWidth += (tabs.length - 1) * 16 + 30;
+			}
+			this.tabEnd = document.createElement("li");
+			this.tabEnd.innerHTML = "&nbsp;";
+			this.tabEnd.setAttribute("id", "tabEnd");
+			this.tabEnd.setAttribute("class", "tabEnd");
+			tabHolder.appendChild(this.tabEnd);
+			
+			var tabDivElement = Ext.get("tabBarDiv");
+			tabDivElement.setWidth(this.tabWidth);
+			tabDivElement.setStyle("marginLeft", Math.round(this.tabWidth / -2) + "px");
+			tabDivElement.setStyle("left", "50%");
+			
 		}
-		
-		
-		if(tabs.length>0){
-			this.tabWidth+=(tabs.length-1)*16 + 30;
-		}
-		this.tabEnd = document.createElement("li");
-		this.tabEnd.innerHTML = "&nbsp;";
-		this.tabEnd.setAttribute("id", "tabEnd");
-		this.tabEnd.setAttribute("class", "tabEnd");
-		tabHolder.appendChild(this.tabEnd);
-		
-		var tabDivElement = Ext.get("tabBarDiv");
-		tabDivElement.setWidth(this.tabWidth);
-		tabDivElement.setStyle("marginLeft", Math.round(this.tabWidth / -2) + "px");
-		tabDivElement.setStyle("left", "50%");
-		
-		
 	},
 	
 	createDelimiter : function(){
