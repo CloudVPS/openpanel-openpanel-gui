@@ -29,8 +29,7 @@ OpenPanel.GUIBuilder = {
 				controller: this.controller 
 			});
 			
-		}
-		else {
+		} else {
 			alert("OpenPanel.GUIBuilder : targetDiv not found");
 		}
 		
@@ -90,7 +89,8 @@ OpenPanel.GUIBuilder = {
 						console.log(name + " " + value + " " + initValue);
 					}
 				}
-				hook.controller.action("login", obj);
+				obj.command = "login";
+				hook.controller.action(obj);
 	        },
 	
 	        frame:true,

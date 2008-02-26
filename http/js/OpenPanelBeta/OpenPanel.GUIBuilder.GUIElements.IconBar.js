@@ -121,8 +121,9 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 			if (this.itemElements[className] != undefined) {
 				var currentItemElement = this.itemElements[className];
 				this.highliteItem(className);
-				this.controller.action("clickIconBarItem", {
-					className: className
+				this.controller.action({
+					command : "clickIconBarItem", 
+					className : className
 				});
 			}
 		}

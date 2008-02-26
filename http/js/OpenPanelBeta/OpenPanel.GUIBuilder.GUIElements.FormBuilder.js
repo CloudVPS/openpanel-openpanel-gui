@@ -30,7 +30,9 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 		
 		var hook = this;
 		this.saveButtonHolder.onclick = function(){
-			hook.getData();
+			var data = hook.getData();
+			data.command = "saveForm";
+			hook.controller.action(data);
 		}
 		
 		this.rebuildButtonHolder.onclick = function(){
@@ -52,12 +54,14 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 	clean : function(){
 		this.targetDiv.innerHTML = "";	
 	},
+	
 	getData : function(){
 		var transport = [];
-		
 		this.rootFormObject.getData(transport);	
 		transport.reverse();
-		console.log("transport");
+		return transport;
+		/*
+		
 		var gotErrors = false;
 		var errorMessages = "";
 		for(var i = 0;i<transport.length;i++){
@@ -72,11 +76,11 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 			}
 		}
 		if(gotErrors == true){
-			alert(errorMessages);
+			throw new Exception(errorMessages);
 		} else{
 			this.rootFormObject.build();
 		}
-		
+		*/
 	},
 	
 	getInstance : function(name){

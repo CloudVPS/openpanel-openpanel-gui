@@ -15,7 +15,7 @@ OpenCore.RPC.RequestHandler = {
 	},
 	
 	synchronizedRequest : function(sendVarsObject){
-		
+		var hook = this;
 		var f = $j.ajax(
 			{ type: "POST",
 			  url: this.openCoreURL,
@@ -26,7 +26,37 @@ OpenCore.RPC.RequestHandler = {
 		).responseText;
 		
 		return f;
+	},
+	
+	asynchronizedRequest : function(sendVarsObject, callback){
+		var hook = this;
+		Ext.Ajax.request({
+			url: hook.openCoreURL,
+			success: hook.asynchronizedRequestReturn,
+			failure: hook.asynchronizedRequestReturn,
+			jsonData: jQuery.toJSON(sendVarsObject),
+			argument : {callback : callback}
+		});
+		
+	},
+	
+	asynchronizedRequestReturn : function(requestResult){
+		console.log(requestResult);
+		if(requestResult.argument != undefined && requestResult.argument.callback != undefined){
+			var callback = requestResult.argument.callback;
+			callback(callbackArgument, callbackOptionalArgument);
+		}
+	},
+	
+	test : function(callback, callbackArgument, callbackOptionalArgument){
+		var r = new OpenCore.RPC.SendVars();
+		r.addHeader("command", "bind");
+		r.addBody("data", {id: "foobar"});
+		r.addBody("classid", "User");
+		r.addBody("id", "openadmin");
+		this.asynchronizedRequest(r, callback, callbackArgument ,callbackOptionalArgument);
 	}
+	
 }
 		 
 OpenCore.RPC.SendVars = function(){

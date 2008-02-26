@@ -15,27 +15,27 @@ OpenPanel.Controller = {
 	currentRootClassInstance: {},
 	currentUser : {},
 	
-	action: function(command, obj){
+	action: function(actionObject){
 		//try {
-			this.lastCommand = command;
-			this.lastArgumentObject = obj;
-			console.log(command);
-			switch (command) {
+			this.lastCommand = actionObject.command;
+			this.lastArgumentObject = actionObject;
+			var actionObject = this.lastArgumentObject;
+			console.log(actionObject.command);
+			switch (actionObject.command) {
 				
 				case "init":
 					// load login screen
 					this.guiBuilder.loadTemplate("login.html", "app");
 					var targetElement = document.getElementById("app");
 					targetElement.innerHTML = "";
-					this.guiBuilder.renderLogin(targetElement, obj);
+					this.guiBuilder.renderLogin(targetElement, actionObject);
 				break;
 				
 				case "login":
-					if(obj.userName != undefined && obj.password!=undefined){
-						
-						if(this.dataManager.login(obj.userName, obj.password)){
+					if(actionObject.userName != undefined && actionObject.password!=undefined){
+						if(this.dataManager.login(actionObject.userName, actionObject.password)){
 							rootObject = new OpenCore.DataManager.OpenCoreObject({}, "ROOT");
-							this.currentUser = obj.userName;
+							this.currentUser = actionObject.userName;
 							
 							this.guiBuilder.loadTemplate("main.html", "app");
 							OpenPanel.GUIBuilder.GUIElements.IconBar.setTargetDivName("iconBar");
@@ -43,16 +43,24 @@ OpenPanel.Controller = {
 							OpenPanel.GUIBuilder.GUIElements.TabBar.setTargetDivName("tabBar");
 							OpenPanel.GUIBuilder.GUIElements.FormBuilder.setTargetDivName("mainAreaForm");
 							this.dataManager.initializeQuotaObject();	
-							this.action("buildIconBar");
+							this.action({command: "buildIconBar"});
 							OpenCore.Debug.createDebugList();
+							
+							//OpenCore.RPC.RequestHandler.test(this.action, { command: "loginDone"});
+							
 						} else {
-							this.action("init", {msg: "login failed"})
+							this.action({ command : "init", msg: "login failed"})
 						}
 					}
 				break;
 				
+				case "loginDone":
+					console.log(actionObject);
+					
+				break;
+					
 				case "buildIconBar":
-					// root objecten
+					// root actionObjectecten
 					// 
 					this.dataManager.rootObject.getChildren();
 					this.guiBuilder.GUIElements.IconBar.setOpenCoreObject(this.dataManager.rootObject);
@@ -63,9 +71,9 @@ OpenPanel.Controller = {
 					// root class
 					// root item
 					
-					var openCoreObject = this.dataManager.getOpenCoreObjectByName(obj.className);
+					var openCoreObject = this.dataManager.getOpenCoreObjectByName(actionObject.className);
 					if(openCoreObject != undefined){
-						
+						openCoreObject.setHasFetchedInstances(false);
 						var instances					= openCoreObject.getInstances();
 						this.currentRootClass 			= openCoreObject;
 						this.currentRootClassInstance 	= openCoreObject.getFirstInstance();
@@ -79,17 +87,17 @@ OpenPanel.Controller = {
 				break;
 				
 				case "clickObjectListItem":
-					var openCoreObject = this.dataManager.getOpenCoreObjectByName(obj.className);
+					var openCoreObject = this.dataManager.getOpenCoreObjectByName(actionObject.className);
 					if (openCoreObject != undefined) {
-						this.currentParentUUID = obj.instanceUUID;
-						this.currentRootClassInstance 	= openCoreObject.getInstanceByUUID(obj.instanceUUID);
+						this.currentParentUUID = actionObject.instanceUUID;
+						this.currentRootClassInstance 	= openCoreObject.getInstanceByUUID(actionObject.instanceUUID);
 						this.guiBuilder.GUIElements.FormBuilder.setOpenCoreParentUUID(this.currentRootClassInstance.uuid);
 						this.guiBuilder.GUIElements.FormBuilder.build();
 					}
 				break;
 	
 				case "clickTabBarItem":
-					var openCoreObject = this.dataManager.getOpenCoreObjectByName(obj.className);
+					var openCoreObject = this.dataManager.getOpenCoreObjectByName(actionObject.className);
 					if(openCoreObject != undefined && this.currentRootClassInstance!=undefined && this.currentRootClassInstance.uuid != undefined){
 						this.currentRootClass 			= openCoreObject;
 						this.guiBuilder.GUIElements.FormBuilder.setOpenCoreObject(openCoreObject);
@@ -99,23 +107,23 @@ OpenPanel.Controller = {
 				break;
 				
 				case "updateRootInstance":
-					if(obj.openCoreObject != undefined && obj.instance != undefined && obj.formValues != undefined){
-						this.currentRootClassInstance = obj.instance;
-						var openCoreObject = obj.openCoreObject;
-						var instance = obj.instance;
-						var formValues = obj.formValues;
+					if(actionObject.openCoreObject != undefined && actionObject.instance != undefined && actionObject.formValues != undefined){
+						this.currentRootClassInstance = actionObject.instance;
+						var openCoreObject = actionObject.openCoreObject;
+						var instance = actionObject.instance;
+						var formValues = actionObject.formValues;
 						
-						var objectId;
+						var actionObjectectId;
 						if(openCoreObject.singleton == true){
-							objectId = openCoreObject.singletonValue;
+							actionObjectectId = openCoreObject.singletonValue;
 						} else {
-							objectId = instance.id;
+							actionObjectectId = instance.id;
 						}
-						var r = this.dataManager.updateInstance(openCoreObject.name, objectId, formValues);
+						var r = this.dataManager.updateInstance(openCoreObject.name, actionObjectectId, formValues);
 						if(this.dataManager.errorId == 0){
-							var i = OpenCore.DataManager.getRecordByObjectId(openCoreObject.name, objectId);
-							openCoreObject.instances[objectId] = i.body.data.object[openCoreObject.name];
-							this.currentRootClassInstance = openCoreObject.instances[objectId];
+							var i = OpenCore.DataManager.getRecordByObjectId(openCoreObject.name, actionObjectectId);
+							openCoreObject.instances[actionObjectectId] = i.body.data.actionObjectect[openCoreObject.name];
+							this.currentRootClassInstance = openCoreObject.instances[actionObjectectId];
 							this.iconBarClick(openCoreObject);
 						} else {
 							alert("error in updateRootInstance");
@@ -124,76 +132,77 @@ OpenPanel.Controller = {
 				break;
 				
 				case "deleteInstance":
-					if(obj.openCoreObject != undefined && obj.instance != undefined){
-						var objectId = obj.instance.uuid;
-						var className = obj.openCoreObject.name;
-						this.dataManager.deleteInstance(className, objectId);
+					if(actionObject.openCoreObject != undefined && actionObject.instance != undefined){
+						var actionObjectectId = actionObject.instance.uuid;
+						var className = actionObject.openCoreObject.name;
+						this.dataManager.deleteInstance(className, actionObjectectId);
 						
-						obj.openCoreObject.fetchedInstances = false;
-						obj.openCoreObject.getInstances();
+						actionObject.openCoreObject.fetchedInstances = false;
+						actionObject.openCoreObject.getInstances();
 						
-						this.currentRootClassInstance 	= obj.openCoreObject.getFirstInstance();
-						this.iconBarClick(obj.openCoreObject);
+						this.currentRootClassInstance 	= actionObject.openCoreObject.getFirstInstance();
+						this.iconBarClick(actionObject.openCoreObject);
 					}
 				break;
 				
 				case "showCreateInstanceFromItemList":
 					this.showCreateInstance(
-						obj.openCoreObject, 
-						obj.formObjectHolder, 
+						actionObject.openCoreObject, 
+						actionObject.formObjectHolder, 
 						"createInstanceFromItemList");
 				break;
 				
 				case "showCreateInstanceFromFormObject":
 					this.showCreateInstanceFromFormObject(
-						obj.formObject, 
-						obj.formObjectHolder, 
+						actionObject.formObject, 
+						actionObject.formObjectHolder, 
 						"createInstanceFromFormObject");
 				break;
 				
 				case "showCreateInstanceFromFormObjectMeta":
-				if (obj.formObject != undefined && obj.openCoreObject != undefined && obj.openCoreObject != undefined) {
+				if (actionObject.formObject != undefined && actionObject.openCoreObject != undefined && actionObject.openCoreObject != undefined) {
 					this.showCreateInstanceFromFormObjectMeta(
-						obj.formObject, 
-						obj.openCoreObject, 
-						obj.formObjectHolder, 
+						actionObject.formObject, 
+						actionObject.openCoreObject, 
+						actionObject.formObjectHolder, 
 						"createInstanceFromFormObject");
 				}
 				break;
 				
 				case "createInstanceFromFormObject":
 					
-					if (obj.openCoreObject != undefined && obj.formValues != undefined) {
-						var className = obj.openCoreObject.name;
-						var objectId = obj.formValues.id;
-						var parentId = obj.optionalCallBackObject.parentUUID;
+					if (actionObject.openCoreObject != undefined && actionObject.formValues != undefined) {
+						var className = actionObject.openCoreObject.name;
+						var actionObjectectId = actionObject.formValues.id;
+						var parentId = actionObject.optionalCallBackObject.parentUUID;
 						
-						var r = this.dataManager.createInstance(className, objectId, parentId, obj.formValues);
+						var r = this.dataManager.createInstance(className, actionObjectectId, parentId, actionObject.formValues);
 						if (this.dataManager.errorId == 0) {
-							obj.optionalCallBackObject.openCoreObject.fetchedInstances = false;
-							obj.optionalCallBackObject.openCoreObject.getInstances();
-							obj.optionalCallBackObject.build();
+							actionObject.optionalCallBackObject.openCoreObject.fetchedInstances = false;
+							actionObject.optionalCallBackObject.openCoreObject.getInstances();
+							actionObject.optionalCallBackObject.build();
 							this.guiBuilder.deletePopUp();
+						} else {
+							alert("error occurred");
 						}
-						console.log("createInstanceFromFormObject " + className + " " + objectId + " " + parentId);
-						console.log(obj);
+					
 					}
 				break;
 				
 				case "createInstanceFromItemList":
-					if(obj.openCoreObject != undefined && obj.formValues != undefined){
+					if(actionObject.openCoreObject != undefined && actionObject.formValues != undefined){
 						
-						var className = obj.openCoreObject.name;
-						var objectId = obj.formValues.id;
-						var parentId = obj.openCoreObject.parent.uuid;
+						var className = actionObject.openCoreObject.name;
+						var actionObjectectId = actionObject.formValues.id;
+						var parentId = actionObject.openCoreObject.parent.uuid;
 						
-						var r = this.dataManager.createInstance(className, objectId, parentId, obj.formValues);
+						var r = this.dataManager.createInstance(className, actionObjectectId, parentId, actionObject.formValues);
 						if (this.dataManager.errorId == 0) {
-							obj.openCoreObject.fetchedInstances = false;
-							obj.openCoreObject.getInstances();
-							this.currentRootClassInstance = obj.openCoreObject.instances[objectId];
-							this.iconBarClick(obj.openCoreObject);
-							//this.guiBuilder.GUIElements.ItemList.setOpenCoreObject(obj.openCoreObject);
+							actionObject.openCoreObject.fetchedInstances = false;
+							actionObject.openCoreObject.getInstances();
+							this.currentRootClassInstance = actionObject.openCoreObject.instances[actionObjectectId];
+							this.iconBarClick(actionObject.openCoreObject);
+							//this.guiBuilder.GUIElements.ItemList.setOpenCoreObject(actionObject.openCoreObject);
 							//this.guiBuilder.GUIElements.ItemList.build();
 							this.guiBuilder.deletePopUp();
 						} else {
@@ -203,13 +212,14 @@ OpenPanel.Controller = {
 				break;
 				
 				case "showDeleteInstanceFromFormObject":
-					this.action("deleteInstanceFromFormObject", obj);
+					actionObject.command = "deleteInstanceFromFormObject"; 
+					this.action(actionObject);
 				break;
 				
 				case "deleteInstanceFromFormObject":
-					if (obj.openCoreObject != undefined && obj.formObject != undefined) {
-						var openCoreObject = obj.openCoreObject;
-						var formObject = obj.formObject;
+					if (actionObject.openCoreObject != undefined && actionObject.formObject != undefined) {
+						var openCoreObject = actionObject.openCoreObject;
+						var formObject = actionObject.formObject;
 						
 						var instance;
 						var className;
@@ -227,8 +237,12 @@ OpenPanel.Controller = {
 						formObject.build();
 						
 					// delete popup
-					// this.showCreateInstanceFromFormObject(obj.formObject, obj.formObjectHolder, "deleteInstanceFromFormObject");
+					// this.showCreateInstanceFromFormObject(actionObject.formObject, actionObject.formObjectHolder, "deleteInstanceFromFormObject");
 					}
+				break;
+				
+				case "saveForm":
+					console.log(actionObject);
 				break;
 			}
 			
@@ -243,7 +257,7 @@ OpenPanel.Controller = {
 				errorMsg = e.message;
 			}
 			if(this.dataManager.getErrorId() == "1"){
-				this.action("init");
+				this.action({ command: "init"});
 			}
 			console.log(errorMsg);
 			alert(errorMsg); 

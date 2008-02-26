@@ -126,15 +126,20 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 	},
 	
 	createInstance : function(){
-		this.controller.action("showCreateInstanceFromItemList", {
-			openCoreObject: this.openCoreObject,
+		this.controller.action({
+			command : "showCreateInstanceFromItemList", 
+			openCoreObject : this.openCoreObject,
 			formObjectHolder : this.formObjectHolder
 		});
 		this.renderButtons();
 	},
 	
 	deleteInstance : function(){
-		OpenPanel.Controller.action("deleteInstance", {openCoreObject : this.openCoreObject, instance: this.currentInstance});
+		OpenPanel.Controller.action({
+			command : "deleteInstance", 
+			openCoreObject : this.openCoreObject, 
+			instance : this.currentInstance
+		});
 	},
 	
 	
@@ -146,9 +151,10 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 			this.currentInstance = instance;
 			for(var key in this.instances){
 				if(this.instances[key].uuid == uuid){
-					OpenPanel.Controller.action("clickObjectListItem", {
-						className: this.openCoreObject.name,
-						instanceUUID: uuid
+					OpenPanel.Controller.action({
+						command : "clickObjectListItem", 
+						className : this.openCoreObject.name,
+						instanceUUID : uuid
 					});
 					this.highliteItem(uuid);
 					break;

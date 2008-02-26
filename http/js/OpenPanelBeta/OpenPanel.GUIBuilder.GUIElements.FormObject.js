@@ -317,7 +317,8 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 				}
 				
 				if(openCoreObject != undefined){
-					hook.controller.action("showCreateInstanceFromFormObjectMeta",{
+					hook.controller.action({
+						command: "showCreateInstanceFromFormObjectMeta",
 						formObject : hook,
 						openCoreObject:openCoreObject,
 						parentUUID: hook.parentUUID,
@@ -370,7 +371,8 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 				createOne.openCoreObject = this.openCoreObject;
 				
 				createOne.onclick = function(){
-					hook.controller.action("showCreateInstanceFromFormObject", {
+					hook.controller.action({
+						command : "showCreateInstanceFromFormObject", 
 						formObject: hook,
 						openCoreObject: hook.openCoreObject,
 						parentUUID: hook.parentUUID,
@@ -409,7 +411,8 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		deleteOne.openCoreObject = this.openCoreObject;
 		
 		deleteOne.onclick = function(){
-			hook.controller.action("showDeleteInstanceFromFormObject",{
+			hook.controller.action({
+				command : "showDeleteInstanceFromFormObject",
 				formObject : hook,
 				openCoreObject:hook.openCoreObject,
 				parentUUID: hook.parentUUID,
@@ -613,7 +616,8 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 	updateRootInstance: function(openCoreObject, instance, formData){
 		console.log(this.openCoreObject.name);
 		console.log(this);
-		this.controller.action("updateRootInstance", {
+		this.controller.action( {
+			command : "updateRootInstance",
 			openCoreObject : openCoreObject,
 			instance : instance,
 			formData : formData

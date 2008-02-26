@@ -465,8 +465,9 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 				var objectId = hook.openCoreObject.singleton == true? hook.openCoreObject.classInfo["class"].singleton:obj.id;
 				
 				if(hook.callBackCommand != undefined){
-					hook.formObject.controller.action(hook.callBackCommand, 
+					hook.formObject.controller.action( 
 						{ 
+							command : hook.callBackCommand,
 							openCoreObject:hook.openCoreObject, 
 							instance: instance, 
 							formValues: hook.parseValues(this),

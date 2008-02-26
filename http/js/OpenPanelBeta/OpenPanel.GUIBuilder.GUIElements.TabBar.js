@@ -155,8 +155,9 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 		if (className != undefined) {
 			if (this.itemElements[className] != undefined) {
 				this.highliteItem(className);
-				OpenPanel.Controller.action("clickTabBarItem", {
-					className: className
+				OpenPanel.Controller.action({
+					command : "clickTabBarItem", 
+					className : className
 				});
 			}
 		}
