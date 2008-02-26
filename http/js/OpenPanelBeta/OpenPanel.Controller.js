@@ -206,7 +206,7 @@ OpenPanel.Controller = {
 							//this.guiBuilder.GUIElements.ItemList.build();
 							this.guiBuilder.deletePopUp();
 						} else {
-							alert("error occurred");
+							throw new Exception(this.dataManager.errorMessage);
 						}
 					}
 				break;
