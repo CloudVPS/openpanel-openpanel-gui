@@ -15,7 +15,6 @@ OpenCore.RPC.RequestHandler = {
 	},
 	
 	synchronizedRequest : function(sendVarsObject){
-		var hook = this;
 		var f = $j.ajax(
 			{ type: "POST",
 			  url: this.openCoreURL,
@@ -76,3 +75,4 @@ OpenCore.RPC.SendVars.prototype = {
 		this.body[bodyName] = bodyValue;
 	}
 }
+
