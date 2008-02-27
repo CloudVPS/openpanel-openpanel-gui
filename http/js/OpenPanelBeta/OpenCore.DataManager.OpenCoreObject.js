@@ -124,6 +124,22 @@ OpenCore.DataManager.OpenCoreObject.prototype = {
 		return this.instances;
 	},
 	
+	getInstancesAsync: function(){
+		if(this.fetchedInstances == false){
+			this.instances = {};
+			this.fetchedInstances = true;
+			var r = OpenCore.DataManager.getRecords(this.name);
+			if(r != undefined ){
+				this.instances = r[this.name];
+			}
+		}
+		return this.instances;
+	},
+	
+	getInstancesAsyncDone : function(){
+		
+	},
+	
 	getInstancesByParentUUID: function(uuid){
 		if(this.fetchedInstances == false){
 			this.instances = {};

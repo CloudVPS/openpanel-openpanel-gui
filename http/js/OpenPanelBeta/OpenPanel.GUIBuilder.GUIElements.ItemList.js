@@ -152,7 +152,7 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 			for(var key in this.instances){
 				if(this.instances[key].uuid == uuid){
 					OpenPanel.Controller.action({
-						command : "clickObjectListItem", 
+						command : "ClickItemListItem", 
 						className : this.openCoreObject.name,
 						instanceUUID : uuid
 					});

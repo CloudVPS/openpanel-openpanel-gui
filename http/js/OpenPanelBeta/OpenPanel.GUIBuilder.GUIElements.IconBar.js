@@ -122,7 +122,7 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 				var currentItemElement = this.itemElements[className];
 				this.highliteItem(className);
 				this.controller.action({
-					command : "clickIconBarItem", 
+					command : "ClickIconBarItem", 
 					className : className
 				});
 			}

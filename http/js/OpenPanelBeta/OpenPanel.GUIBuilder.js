@@ -37,6 +37,7 @@ OpenPanel.GUIBuilder = {
 	
 	createPopUp : function(){
 		this.enterModalMode();
+		this.showModalMessageDiv();
 		var previousPopUpDiv = document.getElementById("popup");
 		var modalMessageDiv = document.getElementById("modalMessageContent");
 		if(previousPopUpDiv != undefined){
@@ -56,6 +57,7 @@ OpenPanel.GUIBuilder = {
 	deletePopUp : function(){
 		
 		this.exitModalMode();
+		this.hideModalMessageDiv();
 		var modalMessageDiv = document.getElementById("modalMessageContent");
 		var previousPopUpDiv = document.getElementById("popup");
 		if(previousPopUpDiv != undefined){
@@ -89,7 +91,7 @@ OpenPanel.GUIBuilder = {
 						console.log(name + " " + value + " " + initValue);
 					}
 				}
-				obj.command = "login";
+				obj.command = "Login";
 				hook.controller.action(obj);
 	        },
 	
@@ -138,8 +140,7 @@ OpenPanel.GUIBuilder = {
 		var modalDiv = document.getElementById("modal");
 		modalDiv.style.visibility = "visible";
 		
-		var modalMessageDiv = document.getElementById("modalMessageDiv");
-		modalMessageDiv.style.visibility = "visible";
+		
 		
 		OpenPanel.GUIBuilder.onresize();
 		window.onresize = OpenPanel.GUIBuilder.onresize;	
@@ -149,9 +150,29 @@ OpenPanel.GUIBuilder = {
 		var modalDiv = document.getElementById("modal");
 		modalDiv.style.visibility = "hidden";
 		
+		
+		window.onresize = {}	
+	},
+	
+	showModalMessageDiv: function(){
+		var modalMessageDiv = document.getElementById("modalMessageDiv");
+		modalMessageDiv.style.visibility = "visible";
+		
+	},
+	
+	hideModalMessageDiv : function(){
 		var modalMessageDiv = document.getElementById("modalMessageDiv");
 		modalMessageDiv.style.visibility = "hidden";
-		window.onresize = {}	
+	},
+	
+	showLoadingDiv : function(){
+		var loadingDiv = document.getElementById("modalLoadingDiv");
+		loadingDiv.style.visibility = "visible";
+	},
+	
+	hideLoadingDiv : function(){
+		var loadingDiv = document.getElementById("modalLoadingDiv");
+		loadingDiv.style.visibility = "hidden";
 	},
 	
 	onresize : function(){ 

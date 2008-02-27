@@ -27,35 +27,117 @@ OpenCore.RPC.RequestHandler = {
 		return f;
 	},
 	
-	asynchronizedRequest : function(sendVarsObject, callback){
+	asynchronizedRequest : function(sendVarsObject, callBack, callBackArguments){
 		var hook = this;
+		console.log("show throbber");
+		OpenPanel.GUIBuilder.showLoadingDiv();
 		Ext.Ajax.request({
 			url: hook.openCoreURL,
 			success: hook.asynchronizedRequestReturn,
 			failure: hook.asynchronizedRequestReturn,
 			jsonData: jQuery.toJSON(sendVarsObject),
-			argument : {callback : callback}
+			argument : {
+				callBack : callBack, 
+				callBackArguments: callBackArguments
+			}
 		});
 		
 	},
 	
 	asynchronizedRequestReturn : function(requestResult){
-		console.log(requestResult);
-		if(requestResult.argument != undefined && requestResult.argument.callback != undefined){
-			var callback = requestResult.argument.callback;
-			callback(callbackArgument, callbackOptionalArgument);
+		//console.log("asynchronizedRequestReturn");
+		//console.log(requestResult);
+		if(requestResult.argument != undefined && requestResult.argument.callBack != undefined){
+			var callBack = requestResult.argument.callBack;
+			var callBackArguments = requestResult.argument.callBackArguments;
+			callBackArguments.data = Ext.util.JSON.decode(requestResult.responseText);
+			if(callBackArguments!=undefined){
+				callBack(callBackArguments);
+			} else {
+				callBack();
+			}
+		}
+		console.log("hide throbber");
+		OpenPanel.GUIBuilder.hideLoadingDiv();
+	},
+	
+	getRequestResultAsync: function(sendVarsObject, callBack, callBackArguments){
+		var callBackWrapper = {
+			callBack : callBack,
+			callBackArguments : callBackArguments
+		}
+		this.asynchronizedRequest(sendVarsObject, this.getRequestResultAsyncDone, callBackWrapper);
+	},
+	
+	getRequestResultAsyncDone : function(callBackWrapper){
+		if(callBackWrapper != undefined){
+			//console.log("callBackWrapper");
+			//console.log(callBackWrapper);
+			var callBack;
+			var callBackArguments;
+			var data;
+			
+			if(callBackWrapper.callBack != undefined){
+				callBack = callBackWrapper.callBack;
+			}
+			
+			if(callBackWrapper.callBackArguments != undefined){
+				callBackArguments = callBackWrapper.callBackArguments;
+			}
+			
+			if(callBackWrapper.data != undefined){
+				data = callBackWrapper.data.body.data;
+			}
+			
+			callBackArguments.data = data;
+			
+			if(callBack!= undefined){
+				callBack(callBackArguments);
+			}
 		}
 	},
 	
-	test : function(callback, callbackArgument, callbackOptionalArgument){
+	getRecordsAsync : function(callBack, callBackArguments){
 		var r = new OpenCore.RPC.SendVars();
-		r.addHeader("command", "bind");
-		r.addBody("data", {id: "foobar"});
+		r.addHeader("command", "getrecords");
+		r.addHeader("session_id", OpenCore.DataManager.sessionId);
 		r.addBody("classid", "User");
-		r.addBody("id", "openadmin");
-		this.asynchronizedRequest(r, callback, callbackArgument ,callbackOptionalArgument);
-	}
+		console.log("getRecordsAsync");
+		console.log(r);
+		
+		console.log(callBackArguments);
+		
+		var callBackWrapper = {
+			callBack : callBack,
+			callBackArguments : callBackArguments
+		}
+		this.getRequestResultAsync(r, this.getRecordsAsyncDone, callBackWrapper);
+	},
 	
+	getRecordsAsyncDone : function(callBackWrapper){
+		
+		var callBack;
+			var callBackArguments;
+			var data;
+			
+			if(callBackWrapper.callBack != undefined){
+				callBack = callBackWrapper.callBack;
+			}
+			
+			if(callBackWrapper.callBackArguments != undefined){
+				callBackArguments = callBackWrapper.callBackArguments;
+			}
+			
+			if(callBackWrapper.data != undefined){
+				data = callBackWrapper.data;
+			}
+			
+			callBackArguments.data = data;
+			
+			if(callBack!= undefined){
+				callBack(callBackArguments);
+			}
+	}
 }
 		 
 OpenCore.RPC.SendVars = function(){

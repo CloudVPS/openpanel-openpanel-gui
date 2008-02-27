@@ -156,13 +156,7 @@ OpenCore.DataManager = {
 		}
 	},
 	
-	getRecordsAsync : function(className, callback){
-		var r = new this.rpc.SendVars();
-		r.addHeader("command", "getrecords");
-		r.addHeader("session_id", this.sessionId);
-		r.addBody("classid", className);
-		this.getRequestResultAsync(r, callback);
-	},
+	
 	
 	getRecord : function(className, objectid){
 		var r = new this.rpc.SendVars();
@@ -240,19 +234,46 @@ OpenCore.DataManager = {
 		}
 	},
 	
-	getRequestResultAsync: function(sendVars){
-		try {
-			var r = jQuery.parseJSON(this.rpc.RequestHandler.asynchronizedRequest(sendVars));
-			
-			if(r.header != undefined && r.header.errorid != undefined && r.header.error !=undefined){
-				this.errorId = r.header.errorid;
-				this.errorMessage = r.header.error;
-				return r;
+	getRequestResultAsync: function(sendVars, callback, callBackArguments){
+		var hook = this;
+		var wrapper = {
+			callback: hook.getRequestResultAsyncDone,
+			callBackWrapper : {
+				callback: callback,
+				callBackArguments : callBackArguments
 			}
-		} catch (e){
-			this.errorId = "666";
-			this.errorMessage = "Could not parse server response. Response is not JSON?";
-		}
+		};
+		this.rpc.RequestHandler.asynchronizedRequest(sendVars, callback, callBackWrapper);
+	},
+	
+	getRequestResultAsyncDone : function(sendVars, callback, callBackArguments){
+		
+	},
+	
+	
+	getRecordsAsync : function(className, callback, callBackArguments){
+		var r = new this.rpc.SendVars();
+		r.addHeader("command", "getrecords");
+		r.addHeader("session_id", this.sessionId);
+		r.addBody("classid", className);
+		
+		var wrapper = {
+			callback: hook.getRequestResultAsyncDone,
+			callbackArguments : {
+				callback: callback,
+				callBackArguments : callBackArguments
+			}
+		};
+		
+		this.getRequestResultAsync(r, this.getRecordsAsyncDone, wrapper);
+	},
+	
+	getRecordsAsyncDone : function(className, callback){
+		var r = new this.rpc.SendVars();
+		r.addHeader("command", "getrecords");
+		r.addHeader("session_id", this.sessionId);
+		r.addBody("classid", className);
+		this.getRequestResultAsync(r, callback);
 	},
 	
 	/*if (requestResult.body != undefined 

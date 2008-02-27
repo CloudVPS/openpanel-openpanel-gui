@@ -29,7 +29,13 @@
 	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.GUIBuilder.GUIElements.FormObject.js"></script>
 	<script type="text/javascript" src="js/OpenPanelBeta/radiogroup.js"></script>	
 	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.Controller.js"></script>
-
+	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.Command.js"></script>
+	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.Command.BuildIconBar.js"></script>
+	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.Command.ClickIconBarItem.js"></script>
+	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.Command.ClickItemListItem.js"></script>
+	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.Command.ClickTabBarItem.js"></script>
+	
+	
 
 	<script type="text/javascript">
 		var $j = jQuery.noConflict();
@@ -46,9 +52,10 @@
 				OpenPanel.GUIBuilder.GUIElements.ItemList.setGuiBuilder(OpenPanel.GUIBuilder);
 				OpenPanel.GUIBuilder.GUIElements.ItemList.setController(OpenPanel.Controller);
 				OpenPanel.GUIBuilder.GUIElements.FormObject.setGuiBuilder(OpenPanel.GUIBuilder);
+				
 				OpenPanel.Controller.action( 
 				{
-					command: "login",
+					command: "Login",
 					userName: "openadmin",
 					password: "foobar"
 				});
@@ -58,12 +65,14 @@
 	</script>
 </head>
 <body>
+	
 	<div id="modalMessageDiv">
 		<div id="modalMessageContent"></div>
 	</div>
 	<div id="modal"></div>
 	<center>
 		<div id="app"></div>
+		<div id="status"><div id="modalLoadingDiv"><img src="/images/gui/ajax-loader.gif"></div></div>
 		<div id="debug">
 			<div>
 				<div id="debugList"></div>

@@ -30,9 +30,15 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 		
 		var hook = this;
 		this.saveButtonHolder.onclick = function(){
-			var data = hook.getData();
-			data.command = "saveForm";
-			hook.controller.action(data);
+			var transport = hook.getData();
+			var actionObject = {
+					command : "saveForm",
+					formBuilder: hook,
+					transport : transport
+					
+			};
+			
+			hook.controller.action(actionObject);
 		}
 		
 		this.rebuildButtonHolder.onclick = function(){
