@@ -18,7 +18,7 @@ OpenPanel.Controller = {
 	action: function(actionObject){
 		console.log(actionObject);
 		
-		//try {
+		try {
 			this.lastCommand = actionObject.command;
 			this.lastArgumentObject = actionObject;
 			var actionObject = this.lastArgumentObject;
@@ -201,7 +201,7 @@ OpenPanel.Controller = {
 			
 				OpenCore.Debug.controllerDebug(this);
 				console.log("---------------------------");
-		/* } catch (e) {
+		} catch (e) {
 			// errors are caught here
 			var errorMsg;
 			if (this.dataManager.getErrorId() != 0) {
@@ -214,7 +214,7 @@ OpenPanel.Controller = {
 			}
 			console.log(errorMsg);
 			alert(errorMsg); 
-		} */
+		}
 	},
 	
 	setDataManager: function(dataManager){

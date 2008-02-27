@@ -18,7 +18,7 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 		
 		this.itemElements = {};
 		
-		if (this.openCoreObject != undefined && this.openCoreObject.childCount > 0) {
+		if (this.openCoreObject != undefined && this.openCoreObject.getChildCount() > 0) {
 			var tabs = [];
 			var tabDiv = document.createElement("div");
 			tabDiv.setAttribute("id", "tabBarDiv");
@@ -108,19 +108,20 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 			for (var i = 0; i < tabs.length; i++) {
 				var tabSpan = tabs[i];
 				tabHolder.appendChild(tabSpan);
-				if (i == 0) {
-					var delimiter = this.createDelimiter();
-					tabSpan.rightDelimiter = delimiter;
-					tabHolder.appendChild(delimiter);
-				} else if (i == tabs.length - 1) {
-					tabSpan.leftDelimiter = delimiter;
-				} else {
-					tabSpan.leftDelimiter = delimiter;
-					var delimiter = this.createDelimiter();
-					tabSpan.rightDelimiter = delimiter;
-					tabHolder.appendChild(delimiter);
+				if (tabs.length > 1) {
+					if (i == 0) {
+						var delimiter = this.createDelimiter();
+						tabSpan.rightDelimiter = delimiter;
+						tabHolder.appendChild(delimiter);
+					} else if (i == tabs.length - 1) {
+						tabSpan.leftDelimiter = delimiter;
+					} else {
+						tabSpan.leftDelimiter = delimiter;
+						var delimiter = this.createDelimiter();
+						tabSpan.rightDelimiter = delimiter;
+						tabHolder.appendChild(delimiter);
+					}
 				}
-				
 				var el = Ext.get(tabSpan.getAttribute("id"));
 				this.tabWidth += el.getWidth();
 			}

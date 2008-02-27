@@ -181,5 +181,11 @@ OpenCore.DataManager.OpenCoreObject.prototype = {
 				child.getOffSpring();
 			}
 		}
+	},
+	
+	getChildCount: function(){
+		return this.childCount;
 	}
+	
+	
 }

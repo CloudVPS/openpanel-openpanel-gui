@@ -72,12 +72,12 @@ addDeleteButtonHolder {
 }
 
 .addButton {
-	background-image: url(/images/gui/addButton.png);
+	background-image: url(/images/gui/addButton.gif);
 	cursor: pointer;
 }
 
 .addButtonDisabled {
-	background-image: url(/images/gui/addButtonDisabled.png);
+	background-image: url(/images/gui/addButtonDisabled.gif);
 }
 
 .deleteButton, .deleteButtonDisabled {
@@ -88,12 +88,12 @@ addDeleteButtonHolder {
 }
 
 .deleteButton {
-	background-image: url(/images/gui/deleteButton.png);
+	background-image: url(/images/gui/deleteButton.gif);
 	cursor: pointer;
 }
 
 .deleteButtonDisabled {
-	background-image: url(/images/gui/deleteButtonDisabled.png);
+	background-image: url(/images/gui/deleteButtonDisabled.gif);
 }
 
 
@@ -111,7 +111,7 @@ addDeleteButtonHolder {
 }
 #mainBottom {
 	height: 26px;
-	background-image: url(/images/gui/groupFrameBottom.png);
+	background-image: url(/images/gui/groupFrameBottom.gif);
 	background-repeat: no-repeat;
 }
 
@@ -144,7 +144,7 @@ addDeleteButtonHolder {
 #mainArea {
 	width: 900px;
 	height: 500px;
-	background-image: url(/images/gui/groupFrameMiddle.png);
+	background-image: url(/images/gui/groupFrameMiddle.gif);
 }
 
 #mainAreaLeft {
@@ -180,7 +180,7 @@ addDeleteButtonHolder {
 	width: 900px;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 10px;
-	background-image: url(/images/gui/iconBarBackground.png);
+	background-image: url(/images/gui/iconBarBackground.gif);
 	background-repeat: no-repeat;
 	
 }
@@ -213,15 +213,15 @@ addDeleteButtonHolder {
 }
 
 .selected .iconDivLeft {
-	background-image: url(/images/gui/iconBarSelectedLeft.png);	
+	background-image: url(/images/gui/iconBarSelectedLeft.gif);	
 }
 
 .selected .iconDivRight {
-	background-image: url(/images/gui/iconBarSelectedRight.png);	
+	background-image: url(/images/gui/iconBarSelectedRight.gif);	
 }
 
 .selected .iconDivMain {
-	background-image: url(/images/gui/iconBarSelectedMiddle.png);
+	background-image: url(/images/gui/iconBarSelectedMiddle.gif);
 }
 
 .classDescription, .classIcon {
@@ -254,7 +254,7 @@ addDeleteButtonHolder {
 	clear: both;
 	height: 37px;
 	width: 900px;
-	background-image: url(/images/gui/groupFrameTop.png);
+	background-image: url(/images/gui/groupFrameTop.gif);
 	background-repeat: no-repeat;
 	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
 	font-size: 0.6em;
@@ -290,13 +290,13 @@ li.tab, li.tabSelected, .tabStart ,.tabStartSelected ,.tabEnd ,.tabEndSelected, 
 }
 
 li.tab, li.tabDisabled  {
-	background-image: url(/images/gui/tab_fill.png);
+	background-image: url(/images/gui/tab_fill.gif);
 	padding-left: 5px;
 	padding-right: 5px;
 }
 
 li.tabSelected {
-	background-image: url(/images/gui/tab_hlite.png);
+	background-image: url(/images/gui/tab_hlite.gif);
 	padding-left: 5px;
 	padding-right: 5px;
 }
@@ -314,29 +314,29 @@ li.tabDisabled {
 }
 
 .tabStart {
-	background-image: url(/images/gui/tab_start.png);
+	background-image: url(/images/gui/tab_start.gif);
 }
 
 .tabStartSelected {
-	background-image: url(/images/gui/tab_start_selected.png);
+	background-image: url(/images/gui/tab_start_selected.gif);
 }
 
 .tabEnd {
-	background-image: url(/images/gui/tab_end.png);
+	background-image: url(/images/gui/tab_end.gif);
 }
 
 .tabEndSelected {
-	background-image: url(/images/gui/tab_end_selected.png);
+	background-image: url(/images/gui/tab_end_selected.gif);
 }
 
 .tabDelimiter {
-	background-image: url(/images/gui/tab_delimiter.png);
+	background-image: url(/images/gui/tab_delimiter.gif);
 	padding-left: 1px;
 	height:21px;
 }
 
 .tabDelimiterSelected {
-	background-image: url(/images/gui/tab_delimiter_selected.png);
+	background-image: url(/images/gui/tab_delimiter_selected.gif);
 	padding-left: 1px;
 	height:21px;
 }

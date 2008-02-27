@@ -226,6 +226,10 @@ OpenCore.DataManager = {
 			if(r.header != undefined && r.header.errorid != undefined && r.header.error !=undefined){
 				this.errorId = r.header.errorid;
 				this.errorMessage = r.header.error;
+				
+				if(this.errorId == "-1"){
+					throw new Error("Unknown session");
+				}
 				return r;
 			}
 		} catch (e){
