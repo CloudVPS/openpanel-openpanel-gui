@@ -227,14 +227,14 @@ OpenCore.DataManager = {
 				this.errorId = r.header.errorid;
 				this.errorMessage = r.header.error;
 				
-				if(this.errorId == "-1"){
+				if(this.errorId == "1"){
 					throw new Error("Unknown session");
 				}
 				return r;
 			}
 		} catch (e){
 			this.errorId = "666";
-			this.errorMessage = "Could not parse server response. Response is not JSON?";
+			this.errorMessage = "Could not parse server response. Response is not JSON? " + e;
 		}
 	},
 	

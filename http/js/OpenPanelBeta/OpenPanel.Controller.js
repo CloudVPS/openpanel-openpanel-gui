@@ -66,13 +66,17 @@ OpenPanel.Controller = {
 						if(actionObject.openCoreObject != undefined && actionObject.instance != undefined){
 							var actionObjectId = actionObject.instance.uuid;
 							var className = actionObject.openCoreObject.name;
-							this.dataManager.deleteInstance(className, actionObjectId);
+							var r = this.dataManager.deleteInstance(className, actionObjectId);
+							if (this.dataManager.errorId == 0) {
+								actionObject.openCoreObject.fetchedInstances = false;
+								actionObject.openCoreObject.getInstances();
+								
+								this.currentRootClassInstance 	= actionObject.openCoreObject.getFirstInstance();
+								this.iconBarClick(actionObject.openCoreObject);
+							} else {
+								throw new Error(this.dataManager.errorMessage);
+							}
 							
-							actionObject.openCoreObject.fetchedInstances = false;
-							actionObject.openCoreObject.getInstances();
-							
-							this.currentRootClassInstance 	= actionObject.openCoreObject.getFirstInstance();
-							this.iconBarClick(actionObject.openCoreObject);
 						}
 					break;
 					

@@ -1,14 +1,68 @@
-
-
 body {
 	background-image: url(/images/gui/nothernlightsbg.jpg);
 	background-repeat: no-repeat;
+	font: 11px Arial, Helvetica, sans-serif;
+	
 }
 
-img, input
-{
+img, input {
 	behavior: url(/js/iepngfix/iepngfix.htc);
 }
+
+.groupHolder {
+	clear: both;
+}
+
+.groupTable {
+	border-collapse: collapse;
+}
+
+.groupTopLeft {
+	background-image : url(/images/gui/groupLevel1TopLeft.gif);
+	width: 5px;
+	height: 5px;
+}
+
+.groupTopCenter {
+	background-image : url(/images/gui/groupLevel1TopCenter.gif);
+	height: 5px;	
+}
+
+.groupTopRight {
+	background-image: url(/images/gui/groupLevel1TopRight.gif);
+	width: 5px;
+	height: 5px;
+}
+
+.groupCenterLeft {
+	background-image : url(/images/gui/groupLevel1CenterLeft.gif);
+}
+
+.groupCenterMiddle {
+	
+}
+
+.groupCenterRight {
+	background-image : url(/images/gui/groupLevel1CenterRight.gif);
+	
+}
+
+.groupBottomLeft {
+	background-image : url(/images/gui/groupLevel1BottomLeft.gif);
+	width: 5px;
+	height: 5px;
+}
+
+.groupBottomMiddle {
+	background-image : url(/images/gui/groupLevel1BottomCenter.gif);
+	height: 5px;	
+}
+
+.groupBottomRight {
+	background-image : url(/images/gui/groupLevel1BottomRight.gif);
+}
+
+
 
 #modal {
 	position: absolute;
@@ -47,11 +101,11 @@ img, input
 	padding-top: 99px;
 	width: 100%;
 	position: absolute;
-	visibility: hidden;
 	text-align: center;
 	padding-top: 200px;
 	padding-bottom: 200px;
 	background-color: #e0e0e0;
+	visibility: hidden;
 }
 
 #modalMessageContent {
@@ -60,7 +114,7 @@ img, input
 	background-color: #e0e0e0;
 }
 
-addDeleteButtonHolder {
+.addDeleteButtonHolder {
 	padding-top: 20px;
 }
 
@@ -96,7 +150,6 @@ addDeleteButtonHolder {
 	background-image: url(/images/gui/deleteButtonDisabled.gif);
 }
 
-
 #app {
 	width: 900px;
 	text-align: left;
@@ -108,7 +161,9 @@ addDeleteButtonHolder {
 	height: 40px;
 	border-top: 1px solid #e1e1e1;
 	background-color : #e6e6e6;
+	visibility: hidden;
 }
+
 #mainBottom {
 	height: 26px;
 	background-image: url(/images/gui/groupFrameBottom.gif);
@@ -118,17 +173,18 @@ addDeleteButtonHolder {
 .FormObject {
 	border: solid 2px #000;
 	padding: 4px;
-	background-color: #e0e0e0;
+	background-color: #e1e1e1;
 }
 
 .childFormObjects {
-	border: solid 2px #000;
-	background-color: #ffe0e0;
+	
 }
 
 .nameDiv {
-	font-weight: bolder;
-	color: #ff0000;
+	margin-bottom: 4px;
+	font-size: small;
+	border-bottom: 1px solid #b1b1b1;
+	padding-right: 10px;
 }
 
 #menu {
@@ -159,9 +215,8 @@ addDeleteButtonHolder {
 #mainAreaRight {
 	width: 610px;
 	height: 500px;
-	border: solid 1px #000;
 	float: left;
-	overflow-y: scroll;
+	overflow-y: auto;
 }
 
 #debug {
@@ -175,14 +230,12 @@ addDeleteButtonHolder {
 	list-style-type: disc;
 }
 
-#iconBar{
+#iconBar {
 	height: 78px;
 	width: 900px;
-	font-family: Arial, Helvetica, sans-serif;
 	font-size: 10px;
 	background-image: url(/images/gui/iconBarBackground.gif);
 	background-repeat: no-repeat;
-	
 }
 
 .iconBarDiv {
@@ -229,7 +282,7 @@ addDeleteButtonHolder {
 	cursor: pointer;
 }
 
-.classDescription{
+.classDescription {
 	display: block;
 	height: 20px;
 	vertical-align: bottom;	
@@ -256,8 +309,6 @@ addDeleteButtonHolder {
 	width: 900px;
 	background-image: url(/images/gui/groupFrameTop.gif);
 	background-repeat: no-repeat;
-	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
-	font-size: 0.6em;
 }
 
 #tabBarDiv {
@@ -271,25 +322,23 @@ addDeleteButtonHolder {
 
 .tabHolder {
 	list-style-type: none;
-	
 }
 
 .tabHolder li {
 	display: inline;
 	float : left;
-	
 }
 
 li.tab, li.tabSelected, .tabStart ,.tabStartSelected ,.tabEnd ,.tabEndSelected, .tabDelimiter, .tabDelimiterSelected, li.tabDisabled {
-	margin:0;
-	padding:0;
-	height:21px;
-	display:inline;
-	line-height:21px;
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+	height: 21px;
+	display: inline;
+	line-height: 21px;
 	cursor: pointer;
 }
 
-li.tab, li.tabDisabled  {
+li.tab, li.tabDisabled {
 	background-image: url(/images/gui/tab_fill.gif);
 	padding-left: 5px;
 	padding-right: 5px;
@@ -308,6 +357,7 @@ li.tabDisabled {
 .tabDisabled {
 	color: #808080;
 }
+
 .tabStart, .tabStartSelected, .tabEnd, .tabEndSelected, .tabDisabled {
 	padding: 3px;
 	background-repeat: repeat-x;
@@ -339,4 +389,12 @@ li.tabDisabled {
 	background-image: url(/images/gui/tab_delimiter_selected.gif);
 	padding-left: 1px;
 	height:21px;
+}
+
+.grid {
+	padding-top: 5px;
+}
+
+.createOneSpan {
+	cursor: pointer;
 }

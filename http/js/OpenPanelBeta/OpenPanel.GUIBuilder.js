@@ -198,5 +198,57 @@ OpenPanel.GUIBuilder = {
 		    myHeight = document.body.clientHeight;
 		  }
 		  return { width: myWidth, height: myHeight}
-		}
+	},
+	
+	drawGroup: function(){
+		
+		var groupHolder = document.createElement("div");
+		groupHolder.setAttribute("class", "groupHolder");
+		var table = document.createElement("table");
+		table.setAttribute("class", "groupTable");
+		groupHolder.appendChild(table);
+		
+		var tBody = document.createElement("tbody");
+		table.appendChild(tBody);
+		
+		var topTr = document.createElement("tr");
+		tBody.appendChild(topTr);
+			var topLeftTd = document.createElement("td");
+			topLeftTd.setAttribute("class", "groupTopLeft");
+			topTr.appendChild(topLeftTd);
+			var topCenterTd = document.createElement("td");
+			topCenterTd.setAttribute("class", "groupTopCenter");
+			
+			topTr.appendChild(topCenterTd);
+			var topRightTd = document.createElement("td");
+			topRightTd.setAttribute("class", "groupTopRight");
+			topTr.appendChild(topRightTd);
+				
+		var centerTr = document.createElement("tr");
+		tBody.appendChild(centerTr);
+			var centerLeftTd = document.createElement("td");
+			centerLeftTd.setAttribute("class", "groupCenterLeft");
+			centerTr.appendChild(centerLeftTd);
+			var centerMiddleTd = document.createElement("td");
+			centerMiddleTd.setAttribute("class", "groupCenterMiddle");
+			centerTr.appendChild(centerMiddleTd);
+			var centerRightTd = document.createElement("td");
+			centerRightTd.setAttribute("class", "groupCenterRight");
+			centerTr.appendChild(centerRightTd);
+		
+		var bottomTr = document.createElement("tr");
+		tBody.appendChild(bottomTr);
+			var bottomLeftTd = document.createElement("td");
+			bottomLeftTd.setAttribute("class", "groupBottomLeft");
+			bottomTr.appendChild(bottomLeftTd);
+			var bottomCenterTd = document.createElement("td");
+			bottomCenterTd.setAttribute("class", "groupBottomMiddle");
+			bottomTr.appendChild(bottomCenterTd);
+			var bottomRightTd = document.createElement("td");
+			bottomRightTd.setAttribute("class", "groupBottomRight");
+			bottomTr.appendChild(bottomRightTd);
+			
+		return { groupHolder : groupHolder, contentDiv : centerMiddleTd}
+		
+	}
 }

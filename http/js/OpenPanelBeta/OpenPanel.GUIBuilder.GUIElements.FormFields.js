@@ -22,11 +22,8 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 			
 			this.fieldsDiv = document.createElement("div");
 			this.fieldsDiv.setAttribute("class", "fields");
-			this.fieldsDiv.appendChild(document.createTextNode("fields: " + this.openCoreObject.name));
 			this.targetDiv.appendChild(this.fieldsDiv);
-			var formElement = document.createElement("form");
-			formElement.setAttribute("id", this.openCoreObject.name + ":form");
-			this.fieldsDiv.appendChild(formElement);
+			
 			this.createFields(this.instance);
 		}
 	},
@@ -295,8 +292,12 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 		if(this.openCoreObject.classInfo.structure != undefined && this.openCoreObject.classInfo.structure.parameters != undefined){
 			
 			this.createFormPanel(instance);
+			var shizne = window.OpenPanel.GUIBuilder.drawGroup();
 			
-			this.formPanel.render(this.fieldsDiv);
+			var groupHolder = shizne.groupHolder;
+			var contentDiv = shizne.contentDiv;
+			this.fieldsDiv.appendChild(groupHolder);
+			this.formPanel.render(contentDiv);
 			if(this.openCoreObject.canUpdate == false){
 				this.formPanel.disable();
 			}
@@ -455,8 +456,8 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 			hideBorders: true,
 			autoScroll: true,
 	        title: 'Simple Form',
-	        bodyStyle:'padding:15px 15px 25px 15px;',
-	        width: 550,
+	        bodyStyle:'padding:5px 5px 5px 5px;',
+	        width: 570,
 			
         	
 	       onSubmit: function(arg){ console.log(arg); },

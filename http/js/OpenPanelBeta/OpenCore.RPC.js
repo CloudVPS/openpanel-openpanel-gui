@@ -26,7 +26,20 @@ OpenCore.RPC.RequestHandler = {
 		
 		return f;
 	},
+	/*
 	
+	async stuff, post beta
+	##
+	usage: 
+	OpenCore.RPC.RequestHandler.getRecordsAsync(
+		this.controller.action, 
+		{
+			command: "LoginDone"
+		}
+	);
+	##
+					
+	 
 	asynchronizedRequest : function(sendVarsObject, callBack, callBackArguments){
 		var hook = this;
 		console.log("show throbber");
@@ -41,12 +54,9 @@ OpenCore.RPC.RequestHandler = {
 				callBackArguments: callBackArguments
 			}
 		});
-		
 	},
 	
 	asynchronizedRequestReturn : function(requestResult){
-		//console.log("asynchronizedRequestReturn");
-		//console.log(requestResult);
 		if(requestResult.argument != undefined && requestResult.argument.callBack != undefined){
 			var callBack = requestResult.argument.callBack;
 			var callBackArguments = requestResult.argument.callBackArguments;
@@ -71,8 +81,6 @@ OpenCore.RPC.RequestHandler = {
 	
 	getRequestResultAsyncDone : function(callBackWrapper){
 		if(callBackWrapper != undefined){
-			//console.log("callBackWrapper");
-			//console.log(callBackWrapper);
 			var callBack;
 			var callBackArguments;
 			var data;
@@ -138,6 +146,7 @@ OpenCore.RPC.RequestHandler = {
 				callBack(callBackArguments);
 			}
 	}
+	*/
 }
 		 
 OpenCore.RPC.SendVars = function(){

@@ -67,19 +67,23 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 	
 	createDivs : function(){
 		var nameDiv = document.createElement("div");
-		console.log(this);
-		nameDiv.innerHTML = "FormObject " + this.openCoreObject.name;
+		
+		nameDiv.innerHTML = this.openCoreObject.title;
 		nameDiv.setAttribute("class", "nameDiv");
 		
 		this.targetDiv.appendChild(nameDiv);
 		
 		this.gridDiv = document.createElement("div");
 		this.gridDiv.setAttribute("id", this.openCoreObject.name + ":grid");
+		this.gridDiv.setAttribute("class", "formGrid");
 		this.targetDiv.appendChild(this.gridDiv);
+		
 		
 		this.fieldsDiv = document.createElement("div");
 		this.fieldsDiv.setAttribute("id", this.openCoreObject.name + ":fields");
+		this.fieldsDiv.setAttribute("id", "formFields");
 		this.targetDiv.appendChild(this.fieldsDiv);
+		
 		
 		this.childFormObjectsDiv = document.createElement("div");
 		this.childFormObjectsDiv.setAttribute("id", this.openCoreObject.name + ":childFormObjects");
@@ -157,7 +161,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 			}
 		} else {
 			if (this.openCoreObject.canCreate == true) {
-				this.createCreateOption();
+				this.createCreateOption(true);
 			}
 		}
 		
@@ -258,14 +262,15 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		else {
 			// no instances, show create new instance
 			console.log("no instances");
-			var msg = "no instances for " + this.openCoreObject.name;
+			var msg = "No instances of " + this.openCoreObject.title + ". ";
+			var pElement = document.createElement("p");
 			this.gridDiv.appendChild(document.createTextNode(msg));
 			if(this.openCoreObject.meta == true){
 				// list objects
-				this.createMultiCreateOption();
+				this.createMultiCreateOption(true);
 			} else {
 				if (this.openCoreObject.canCreate == true) {
-					this.createCreateOption();
+					this.createCreateOption(true);
 				}
 			}
 			
@@ -358,15 +363,22 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		
 	},
 	
-	createCreateOption : function (){
+	createCreateOption : function (textOnly){
 		// does not support meta stuff
 		if (this.openCoreObject.meta == true) {
 		
 		} else {
 			if (this.controller.dataManager.checkQuotum(this.openCoreObject.name) == true) {
 				var createOne = document.createElement("span");
-				var createOneText = document.createTextNode("[ + ]");
-				createOne.appendChild(createOneText);
+				if (textOnly != undefined) {
+					var createOneText = document.createTextNode("Click here to create one.");
+					createOne.setAttribute("class", "createOneSpan");
+					createOne.appendChild(createOneText);
+				} else {
+					var addButton = document.createElement("div");
+					addButton.setAttribute("class", "addButton");
+					createOne.appendChild(addButton);
+				}
 				var hook = this;
 				createOne.openCoreObject = this.openCoreObject;
 				
@@ -388,14 +400,14 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 				// quota debug stuff
 				q = document.createElement("ul");
 				createOne.appendChild(q);
-				
+				/*
 				var quotum = this.controller.dataManager.getQuotumByClassName(this.openCoreObject.name);
 				if (quotum != undefined) {
 					var li = document.createElement("li");
 					li.appendChild(document.createTextNode(">>quotum : " + this.openCoreObject.name + " " + quotum.quota));
 					q.appendChild(li);
 				}
-				
+				*/
 				this.gridDiv.appendChild(createOne);
 			}
 		}
@@ -405,8 +417,10 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 	
 	createDeleteOption : function (){
 		var deleteOne = document.createElement("span");
-		var deleteOneText = document.createTextNode("[ - ]");
-		deleteOne.appendChild(deleteOneText);
+		var deleteButton = document.createElement("div");
+		deleteButton.setAttribute("class", "deleteButton");
+		deleteOne.appendChild(deleteButton);
+		
 		var hook = this;
 		deleteOne.openCoreObject = this.openCoreObject;
 		

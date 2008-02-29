@@ -613,11 +613,11 @@ td.x-date-mp-sep{border-right:1px solid #c5d2df;}
 
 .x-panel{border-style:solid;border-color:#404040;border-width:0;}
 .x-panel-header{overflow:hidden;zoom:1;color:#15428b;font:bold 11px tahoma,arial,verdana,sans-serif;padding:5px 3px 4px 5px;border:1px solid #404040;line-height:15px;background:transparent url(../images/macx/panel/white-top-bottom.gif) repeat-x 0 -1px;}
-.x-panel-body{border:1px solid #404040;border-top:0 none;overflow:hidden;background:url(../images/macx/panel/body.gif);}
+.x-panel-body{border:0px solid #404040;border-top:0 none;overflow:hidden;background:url(../images/macx/panel/body.gif);}
 .x-panel-bbar .x-toolbar{border:1px solid #404040;border-top:0 none;overflow:hidden;padding:2px;}
 .x-panel-tbar .x-toolbar{border:1px solid #404040;border-top:0 none;overflow:hidden;padding:2px;}
 .x-panel-tbar-noheader .x-toolbar,.x-panel-mc .x-panel-tbar .x-toolbar{border-top:1px solid #404040;border-bottom:0 none;}
-.x-panel-body-noheader,.x-panel-mc .x-panel-body{border-top:1px solid #404040;}
+.x-panel-body-noheader,.x-panel-mc .x-panel-body{border-top:0px solid #404040;}
 .x-panel-header{overflow:hidden;zoom:1;}
 .x-panel-tl .x-panel-header{color:#202020;font:bold 11px verdana, helvetica, arial;padding:5px 0 4px 0;border:0 none;background:transparent;}
 .x-panel-tl .x-panel-icon,.x-window-tl .x-panel-icon{padding-left:20px!important;background-repeat:no-repeat;background-position:0 4px;zoom:1;}
