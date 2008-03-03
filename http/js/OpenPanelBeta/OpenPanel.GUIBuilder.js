@@ -63,7 +63,6 @@ OpenPanel.GUIBuilder = {
 		if(previousPopUpDiv != undefined){
 			modalMessageDiv.removeChild(previousPopUpDiv);
 		}
-		//this.win.close();
 	},
 	
 	renderLogin : function(el, params){
@@ -150,7 +149,6 @@ OpenPanel.GUIBuilder = {
 		var modalDiv = document.getElementById("modal");
 		modalDiv.style.visibility = "hidden";
 		
-		
 		window.onresize = {}	
 	},
 	
@@ -166,11 +164,13 @@ OpenPanel.GUIBuilder = {
 	},
 	
 	showLoadingDiv : function(){
+		OpenPanel.GUIBuilder.enterModalMode();
 		var loadingDiv = document.getElementById("modalLoadingDiv");
 		loadingDiv.style.visibility = "visible";
 	},
 	
 	hideLoadingDiv : function(){
+		OpenPanel.GUIBuilder.exitModalMode();
 		var loadingDiv = document.getElementById("modalLoadingDiv");
 		loadingDiv.style.visibility = "hidden";
 	},

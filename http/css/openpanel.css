@@ -72,9 +72,9 @@ img, input {
 	z-index: 10000;
 	background-color: #000;
 	/* for IE */
-	filter:alpha(opacity=0);
+	filter:alpha(opacity=50);
 	/* CSS3 standard */
-	opacity:0.0;
+	opacity:0.5;
 	visibility: hidden;
 }
 
@@ -96,15 +96,8 @@ img, input {
 	visibility: hidden;
 }
 
-#loadingDiv {
-	z-index: 10001;
-	padding-top: 99px;
-	width: 100%;
-	position: absolute;
-	text-align: center;
-	padding-top: 200px;
-	padding-bottom: 200px;
-	background-color: #e0e0e0;
+#modalLoadingDiv {
+	
 	visibility: hidden;
 }
 
@@ -161,7 +154,6 @@ img, input {
 	height: 40px;
 	border-top: 1px solid #e1e1e1;
 	background-color : #e6e6e6;
-	visibility: hidden;
 }
 
 #mainBottom {
