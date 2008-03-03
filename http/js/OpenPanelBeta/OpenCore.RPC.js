@@ -9,6 +9,7 @@ OpenCore.RPC = {
 
 OpenCore.RPC.RequestHandler = {
 	openCoreURL	: "http://localhost:8888/fake-opencore-proxy/json",
+	asynchronizedRequestCount : 0,
 	
 	setOpenCoreURL: function(openCoreURL){
 		this.openCoreURL = openCoreURL;
@@ -29,7 +30,7 @@ OpenCore.RPC.RequestHandler = {
 	/*
 	
 	async stuff, post beta
-	##
+	
 	usage: 
 	OpenCore.RPC.RequestHandler.getRecordsAsync(
 		this.controller.action, 
@@ -37,49 +38,74 @@ OpenCore.RPC.RequestHandler = {
 			command: "LoginDone"
 		}
 	);
-	##
-					
+	
+	*/			
 	 
-	asynchronizedRequest : function(sendVarsObject, callBack, callBackArguments){
+	asynchronizedRequest : function(sendVarsObject, callBackObject, callBackFunction, callBackArguments){
+		this.asynchronizedRequestCount++;
+		OpenCore.RPC.RequestHandler.startLoading();
+		var arg = {
+			callBackObject : callBackObject,
+			callBackFunction : callBackFunction,
+			callBackArguments: callBackArguments
+		}
 		var hook = this;
-		console.log("show throbber");
-		OpenPanel.GUIBuilder.showLoadingDiv();
 		Ext.Ajax.request({
 			url: hook.openCoreURL,
-			success: hook.asynchronizedRequestReturn,
-			failure: hook.asynchronizedRequestReturn,
+			success: this.asynchronizedRequestReturn,
+			failure: this.asynchronizedRequestReturn,
 			jsonData: jQuery.toJSON(sendVarsObject),
-			argument : {
-				callBack : callBack, 
-				callBackArguments: callBackArguments
-			}
+			argument : arg
 		});
 	},
 	
 	asynchronizedRequestReturn : function(requestResult){
-		if(requestResult.argument != undefined && requestResult.argument.callBack != undefined){
-			var callBack = requestResult.argument.callBack;
+		OpenCore.RPC.RequestHandler.asynchronizedRequestCount--;
+		if(requestResult.argument != undefined && requestResult.argument.callBackObject != undefined){
+			var callBackObject = requestResult.argument.callBackObject;
+			var callBackFunction = requestResult.argument.callBackFunction;
 			var callBackArguments = requestResult.argument.callBackArguments;
 			callBackArguments.data = Ext.util.JSON.decode(requestResult.responseText);
-			if(callBackArguments!=undefined){
-				callBack(callBackArguments);
+			for(var key in callBackFunction){
+				console.log(key + " " + callBackFunction[key]);
+			}
+			
+			if (callBackFunction == undefined) {
+				throw Error("callBackFunction does not exist");
+				return;
 			} else {
-				callBack();
+				if (callBackArguments != undefined) {
+					console.log("with arguments");
+					callBackObject[callBackFunction](callBackArguments);
+				} else {
+					console.log("without arguments");
+					callBackObject[callBackFunction]();
+				}
 			}
 		}
-		console.log("hide throbber");
-		OpenPanel.GUIBuilder.hideLoadingDiv();
+		console.log("his.asynchronizedRequestCount " + OpenCore.RPC.RequestHandler.asynchronizedRequestCount);
+		if (OpenCore.RPC.RequestHandler.asynchronizedRequestCount == 0) {
+			OpenCore.RPC.RequestHandler.doneLoading();
+		}
 	},
 	
-	getRequestResultAsync: function(sendVarsObject, callBack, callBackArguments){
+	startLoading : function(){
+		
+	},
+	
+	doneLoading : function(){
+		
+	},
+	/*
+	getRequestResultASync: function(sendVarsObject, callBack, callBackArguments){
 		var callBackWrapper = {
 			callBack : callBack,
 			callBackArguments : callBackArguments
 		}
-		this.asynchronizedRequest(sendVarsObject, this.getRequestResultAsyncDone, callBackWrapper);
+		this.asynchronizedRequest(sendVarsObject, this.getRequestResultASyncDone, callBackWrapper);
 	},
 	
-	getRequestResultAsyncDone : function(callBackWrapper){
+	getRequestResultASyncDone : function(callBackWrapper){
 		if(callBackWrapper != undefined){
 			var callBack;
 			var callBackArguments;
@@ -119,7 +145,7 @@ OpenCore.RPC.RequestHandler = {
 			callBack : callBack,
 			callBackArguments : callBackArguments
 		}
-		this.getRequestResultAsync(r, this.getRecordsAsyncDone, callBackWrapper);
+		this.getRequestResultASync(r, this.getRecordsAsyncDone, callBackWrapper);
 	},
 	
 	getRecordsAsyncDone : function(callBackWrapper){

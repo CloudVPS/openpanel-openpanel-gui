@@ -144,7 +144,6 @@ OpenCore.DataManager.OpenCoreObject.prototype = {
 		if(this.fetchedInstances == false){
 			this.instances = {};
 			this.fetchedInstances = true;
-			console.log("getInstancesByParentUUID " + uuid + " " + this.name);
 			var r = OpenCore.DataManager.getInstancesByParentUUID(this.name, uuid);
 			if(r!=undefined){
 				this.instances = r[this.name];
@@ -152,6 +151,59 @@ OpenCore.DataManager.OpenCoreObject.prototype = {
 			}
 		}
 		return this.instances;
+	},
+	
+	getInstancesByParentUUIDASync: function(uuid, callBackObject, callBackFunction, callBackArguments){
+		if(this.fetchedInstances == false){
+			this.instances = {};
+			this.fetchedInstances = true;
+			var callBackWrapper = {
+				callBackObject : callBackObject,
+				callBackFunction : callBackFunction,
+				callBackArguments : callBackArguments
+			}
+			OpenCore.DataManager.getInstancesByParentUUIDASync(this.name, uuid, this, "getInstancesByParentUUIDASyncDone", callBackWrapper);
+		}
+	},
+	
+	getInstancesByParentUUIDASyncDone : function getInstancesByParentUUIDASyncDone(resultObject, callBackWrapper){
+		if(resultObject != undefined){
+			this.instances = resultObject[this.name];
+			console.log(this);
+			console.log(this.instances);
+			console.log("DONER");
+		}
+		
+		var callBackObject;
+		var callBackFunction;
+		var callBackArguments = {};
+		var data;
+		if (callBackWrapper != undefined) {
+			if (callBackWrapper.callBackObject != undefined) {
+				callBackObject = callBackWrapper.callBackObject;
+			}
+			
+			if (callBackWrapper.callBackFunction != undefined) {
+				callBackFunction = callBackWrapper.callBackFunction;
+			}
+			
+			if (callBackWrapper.callBackArguments != undefined) {
+				callBackArguments = callBackWrapper.callBackArguments;
+			}
+			
+			if (callBackWrapper.data != undefined) {
+				data = callBackWrapper.data;
+				callBackArguments.data = data;
+			}
+			if(callBackFunction == undefined){
+				throw new Error("callBackFunction.name is undefined");
+			} else {
+				callBackObject[callBackFunction](callBackArguments);
+			}
+		} else {
+			
+		}
+		
 	},
 	
 	getInstanceByUUID: function(uuid){

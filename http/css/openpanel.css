@@ -336,6 +336,7 @@ li.tab, li.tabSelected, .tabStart ,.tabStartSelected ,.tabEnd ,.tabEndSelected, 
 	display: inline;
 	line-height: 21px;
 	cursor: pointer;
+	vertical-align: text-bottom;
 }
 
 li.tab, li.tabDisabled {

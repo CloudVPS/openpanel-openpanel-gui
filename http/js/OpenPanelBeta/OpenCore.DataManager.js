@@ -201,6 +201,51 @@ OpenCore.DataManager = {
 		}
 	},
 	
+	getInstancesByParentUUIDASync: function(className, parentid, callBackObject, callBackFunction, callBackArguments){
+		var r = new this.rpc.SendVars();
+		r.addHeader("command", "getrecords");
+		r.addHeader("session_id", this.sessionId);
+		r.addBody("classid", className);
+		r.addBody("parentid", parentid);
+		
+		var callBackWrapper = {
+			callBackObject : callBackObject,
+			callBackFunction : callBackFunction,
+			callBackArguments : callBackArguments
+		}
+		this.getRequestResultASync(r, OpenCore.DataManager, "getInstancesByParentUUIDASyncDone", callBackWrapper);
+	},
+	
+	getInstancesByParentUUIDASyncDone : function getInstancesByParentUUIDASyncDone(callBackWrapper){
+		var callBackObject;
+		var callBackFunction;
+		var callBackArguments = {};
+		var data;
+		
+		if(callBackWrapper.callBackObject != undefined){
+			callBackObject = callBackWrapper.callBackObject;
+		}
+		
+		if(callBackWrapper.callBackFunction != undefined){
+			callBackFunction = callBackWrapper.callBackFunction;
+		}
+		
+		if(callBackWrapper.callBackArguments != undefined){
+			callBackArguments = callBackWrapper.callBackArguments;
+		}
+		
+		if(callBackWrapper.data != undefined){
+			data = callBackWrapper.data;
+			callBackArguments.data = data;
+		}
+		
+		if(callBackFunction == undefined){
+			throw new Error("callBackFunctionis undefined");
+		} else {
+			callBackObject[callBackFunction](data, callBackArguments);
+		}
+	},
+	
 	getRecordByObjectId: function(className, objectId){
 		var r = new this.rpc.SendVars();
 		r.addHeader("command", "getrecord");
@@ -238,53 +283,95 @@ OpenCore.DataManager = {
 		}
 	},
 	
-	getRequestResultAsync: function(sendVars, callback, callBackArguments){
-		var hook = this;
-		var wrapper = {
-			callback: hook.getRequestResultAsyncDone,
-			callBackWrapper : {
-				callback: callback,
-				callBackArguments : callBackArguments
+	getRequestResultASync: function(sendVarsObject, callBackObject, callBackFunction, callBackArguments){
+		var callBackWrapper = {
+			callBackObject : callBackObject,
+			callBackFunction : callBackFunction,
+			callBackArguments : callBackArguments
+		}
+		this.rpc.RequestHandler.asynchronizedRequest(sendVarsObject, OpenCore.DataManager, "getRequestResultASyncDone", callBackWrapper);
+	},
+	
+	getRequestResultASyncDone : function getRequestResultASyncDone(callBackWrapper){
+		if(callBackWrapper != undefined){
+			var callBackObject;
+			var callBackFunction;
+			var callBackArguments = {};
+			var data;
+			
+			if(callBackWrapper.callBackObject != undefined){
+				callBackObject = callBackWrapper.callBackObject;
 			}
-		};
-		this.rpc.RequestHandler.asynchronizedRequest(sendVars, callback, callBackWrapper);
-	},
-	
-	getRequestResultAsyncDone : function(sendVars, callback, callBackArguments){
-		
-	},
-	
-	
-	getRecordsAsync : function(className, callback, callBackArguments){
-		var r = new this.rpc.SendVars();
-		r.addHeader("command", "getrecords");
-		r.addHeader("session_id", this.sessionId);
-		r.addBody("classid", className);
-		
-		var wrapper = {
-			callback: hook.getRequestResultAsyncDone,
-			callbackArguments : {
-				callback: callback,
-				callBackArguments : callBackArguments
+			
+			if(callBackWrapper.callBackFunction != undefined){
+				callBackFunction = callBackWrapper.callBackFunction;
 			}
-		};
+			
+			if(callBackWrapper.callBackArguments != undefined){
+				callBackArguments = callBackWrapper.callBackArguments;
+			}
+			
+			if(callBackWrapper.data != undefined){
+				data = callBackWrapper.data.body.data;
+				callBackArguments.data = data;
+			}
+			
+			
+			if (callBackFunction == "") {
+				throw new Error("callBackFunction is not defined");
+			} else {
+				console.log(callBackObject);
+				callBackObject[callBackFunction](callBackArguments);
+			}
+		} else {
+			console.log("callBackWrapper undefined");
+		}
 		
-		this.getRequestResultAsync(r, this.getRecordsAsyncDone, wrapper);
 	},
 	
-	getRecordsAsyncDone : function(className, callback){
-		var r = new this.rpc.SendVars();
+	getRecordsAsync : function(className, objectId, callBack, callBackArguments){
+		var r = new OpenCore.RPC.SendVars();
 		r.addHeader("command", "getrecords");
-		r.addHeader("session_id", this.sessionId);
+		r.addHeader("session_id", OpenCore.DataManager.sessionId);
 		r.addBody("classid", className);
-		this.getRequestResultAsync(r, callback);
+		r.addBody("objectid", objectId);
+		var callBackWrapper = {
+			callBack : callBack,
+			callBackArguments : callBackArguments
+		}
+		this.getRequestResultASync(r, this.getRecordsAsyncDone, callBackWrapper);
 	},
 	
-	/*if (requestResult.body != undefined 
+	getRecordsAsyncDone : function(callBackWrapper){
+		
+		var callBack;
+		var callBackArguments;
+		var data;
+		
+		if(callBackWrapper.callBack != undefined){
+			callBack = callBackWrapper.callBack;
+		}
+		
+		if(callBackWrapper.callBackArguments != undefined){
+			callBackArguments = callBackWrapper.callBackArguments;
+		}
+		
+		if(callBackWrapper.data != undefined){
+			data = callBackWrapper.data;
+		}
+		
+		callBackArguments.data = data;
+		
+		if(callBack!= undefined){
+			callBack(callBackArguments);
+		}
+		
+		if (requestResult.body != undefined 
 		&& requestResult.body.data != undefined 
 		&& requestResult.body.data[className] != undefined) {
 			return requestResult.body.data;
-		}*/
+		}
+	},
 	
 	getErrorId : function(){
 		

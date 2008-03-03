@@ -42,7 +42,53 @@
 		if(typeof(console) != 'object'){
 			console = { log: function(){}}
 		}
+		/*
+		function blaat(){
+			
+			
+		}
+		
+		console.log(blaat.name);
+		var Foo = function(name){
+				this.name = "";
+				this.init(name);
+			}
+			
+			Foo.prototype = {
+				init : function init(someName){
+					this.name = someName;
+				},
+				
+				doCall : function doCall(){
+					Bar.doCall(this, this.doCallReturn);
+				},
+				
+				doCallReturn : function doCallReturn(){
+					this.name = ""
+					console.log(this);
+				}
+			}
+			
+			var Bar = {
+				doCall : function(obj, arg){
+					for(var key in arg){
+						console.log(key + " " + arg[key]);
+					}
+					console.log(arg.name);
+					obj[arg.name]();
+				}
+			}
+			
+			var f = new Foo("ohai");
+			f.doCall();
+			*/
 		$j(document).ready(function(){
+			
+			
+			
+			
+			
+				
 				OpenCore.RPC.RequestHandler.setOpenCoreURL("/fake-opencore-proxy/json");
 				//OpenCore.RPC.RequestHandler.setOpenCoreURL("http://10.90.90.161/json");
 				
@@ -52,6 +98,8 @@
 				OpenPanel.GUIBuilder.GUIElements.ItemList.setGuiBuilder(OpenPanel.GUIBuilder);
 				OpenPanel.GUIBuilder.GUIElements.ItemList.setController(OpenPanel.Controller);
 				OpenPanel.GUIBuilder.GUIElements.FormObject.setGuiBuilder(OpenPanel.GUIBuilder);
+				OpenCore.RPC.RequestHandler.startLoading = OpenPanel.GUIBuilder.showLoadingDiv;
+				OpenCore.RPC.RequestHandler.doneLoading = OpenPanel.GUIBuilder.hideLoadingDiv;
 				
 				OpenPanel.Controller.action( 
 				{
@@ -59,9 +107,11 @@
 					userName: "openadmin",
 					password: "foobar"
 				});
+			
 			}
+			
 		);
-		
+			
 	</script>
 </head>
 <body>
