@@ -24,7 +24,6 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 			this.gridDiv.appendChild(document.createTextNode("grid: " + this.openCoreObject.name));
 			this.targetDiv.appendChild(this.gridDiv);
 			if (this.openCoreObject.meta == true) {
-				console.log("grid META: " + this.openCoreObject.name);
 				this.createMetaGrid(this.instances);
 			} else {
 				this.createGrid(this.instances);
@@ -91,6 +90,7 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 	},
 	
 	createGrid : function(instances){
+		console.log(instances);
 		var hook = this;
 		
 		var tableElement = document.createElement("table");

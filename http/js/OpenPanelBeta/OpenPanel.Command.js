@@ -29,19 +29,7 @@ OpenPanel.Command.Init  = {
 					OpenPanel.GUIBuilder.GUIElements.FormBuilder.setTargetDivName("mainAreaForm");
 					this.controller.dataManager.initializeQuotaObject();	
 					this.controller.action({command: "BuildIconBar"});
-					OpenCore.Debug.createDebugList();
-					/*
-					rootObject.getInstancesByParentUUIDASync(
-						
-						"2f4bf79c-fae8-4975-6642-a25f42d8650a",
-						this,
-						this.controller.action, 
-						{
-							command: "LoginDone"
-						}
-					);
-					 * 
-					 */
+					// OpenCore.Debug.createDebugList();
 					
 				} else {
 					this.controller.action({ command : "Init", msg: "login failed"})

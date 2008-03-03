@@ -182,252 +182,126 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		
 		switch(state){
 			case undefined:
-				console.log("FormObject:createSubLevelForm");
-				console.log("not first tab  " + this.openCoreObject.name);
 				this.openCoreObject.setHasFetchedInstances(false);
 				this.openCoreObject.getInstancesByParentUUIDASync(
 					this.parentUUID, 
 					this,
 					"createSubLevelFormASync", 
 					{
-						state: "getInstancesByParentUUIDDone", 
-						passThrough :
-							{ 
-								omgloller: 666,
-								owner: this
-							}
-						}
+						state: "getInstancesByParentUUIDDone"
+					}
 					);
 			break;
 			case "getInstancesByParentUUIDDone":
-				console.log("OHAIOHAIOHAIOHAI");
-				console.log(stateObject);
-				console.log(this);
-				
+			this.instances = this.openCoreObject.instances;
 				if (this.instances != undefined && typeof(this.openCoreObject.getFirstInstance()) == "object") {
-			// there are instances
-			console.log("this.currentInstance2");
-			
-			
-			var instance = this.getPreviousInstance();
-			if (instance != undefined) {
-				this.setCurrentInstance(instance);
-			} else {
-				this.setCurrentInstance(this.openCoreObject.getFirstInstance());
-			}			
-			// now we have to figure out if the current opencore object is a meta object
-			var actualOpenCoreObject;
-			var actualInstance;
-			console.log("currentInstance " + this.currentInstance);
-			// get class name
-			var className = this.currentInstance["class"];
-			if (this.openCoreObject.name != className) {
-				// get encapsulated object
-				actualOpenCoreObject = this.controller.dataManager.getOpenCoreObjectByName(className);
-				// all good, now we have to find its instance
-				var record = this.controller.dataManager.getRecord(actualOpenCoreObject.name, this.currentInstance.id);
-				for(var key in record){
-					this.currentMetaInstance = record[key];
-					break;
-				}
-// scary meta stuff						
-				actualInstance = this.currentMetaInstance;
-			} else {
-				actualOpenCoreObject = this.openCoreObject;
-				actualInstance = this.currentInstance;
-			}
-			console.log(actualInstance);
-			if(actualOpenCoreObject.singleton == true){
-				console.log("singleton");
-				// show fields
-				this.createFields(actualOpenCoreObject, actualInstance, "", this.fieldsDiv);
-				this.createDeleteOption();
-			} else {
-				console.log("not singleton");
-				// not a singleton
-				// the grid should always be displayed with non meta values
-				this.createGrid(this.openCoreObject, this.instances, "callBackCommand", this.gridDiv, {});
-				// here's where we have to check for meta stuff
-				this.createFields(actualOpenCoreObject, actualInstance, "", this.fieldsDiv);
+				// there are instances
 				
-				for(var childOpenCoreObjectName in actualOpenCoreObject.children){
-					var childOpenCoreObject = actualOpenCoreObject.children[childOpenCoreObjectName];
-					if (typeof(childOpenCoreObject) == "object") {
-						
-						console.log(childOpenCoreObject);
-						if (childOpenCoreObject.classInfo["class"].metabase == "") {
-							// non meta stuff
-							var someDiv = document.createElement("div");
-							this.childFormObjectsDiv.appendChild(someDiv);
-							if (typeof(childOpenCoreObject) == "object") {
-								this.createChildFormObject(childOpenCoreObject, actualInstance.uuid, someDiv, this.controller);
+				
+				var instance = this.getPreviousInstance();
+				if (instance != undefined) {
+					this.setCurrentInstance(instance);
+				} else {
+					this.setCurrentInstance(this.openCoreObject.getFirstInstance());
+				}			
+				// now we have to figure out if the current opencore object is a meta object
+				var actualOpenCoreObject;
+				var actualInstance;
+				console.log("currentInstance " + this.currentInstance);
+				// get class name
+				var className = this.currentInstance["class"];
+				if (this.openCoreObject.name != className) {
+					// get encapsulated object
+					actualOpenCoreObject = this.controller.dataManager.getOpenCoreObjectByName(className);
+					// all good, now we have to find its instance
+					var record = this.controller.dataManager.getRecord(actualOpenCoreObject.name, this.currentInstance.id);
+					for(var key in record){
+						this.currentMetaInstance = record[key];
+						break;
+					}
+				// scary meta stuff						
+					actualInstance = this.currentMetaInstance;
+				} else {
+					actualOpenCoreObject = this.openCoreObject;
+					actualInstance = this.currentInstance;
+				}
+				console.log(actualInstance);
+				if(actualOpenCoreObject.singleton == true){
+					console.log("singleton");
+					// show fields
+					this.createFields(actualOpenCoreObject, actualInstance, "", this.fieldsDiv);
+					this.createDeleteOption();
+				} else {
+					console.log("not singleton");
+					// not a singleton
+					// the grid should always be displayed with non meta values
+					console.log("create Grid for " + this.openCoreObject.name);
+					console.log(this.instances);
+					this.createGrid(this.openCoreObject, this.instances, "callBackCommand", this.gridDiv, {});
+					// here's where we have to check for meta stuff
+					this.createFields(actualOpenCoreObject, actualInstance, "", this.fieldsDiv);
+					
+					for(var childOpenCoreObjectName in actualOpenCoreObject.children){
+						var childOpenCoreObject = actualOpenCoreObject.children[childOpenCoreObjectName];
+						if (typeof(childOpenCoreObject) == "object") {
+							
+							console.log(childOpenCoreObject);
+							if (childOpenCoreObject.classInfo["class"].metabase == "") {
+								// non meta stuff
+								var someDiv = document.createElement("div");
+								this.childFormObjectsDiv.appendChild(someDiv);
+								if (typeof(childOpenCoreObject) == "object") {
+									this.createChildFormObject(childOpenCoreObject, actualInstance.uuid, someDiv, this.controller);
+								}
 							}
 						}
 					}
+					if(this.openCoreObject.meta == true){
+						// list objects
+						
+						this.createMultiCreateOption();
+					} else {
+						if (this.openCoreObject.canCreate == true) {
+							this.createCreateOption();
+						}
+					}
+					
+					if(this.openCoreObject.meta == true){
+						// list objects
+						this.createDeleteOption();
+					} else {
+						if (this.openCoreObject.canDelete == true) {
+							this.createDeleteOption();
+						}
+					}
+					
+					
+					
 				}
+			} else {
+				// no instances, show create new instance
+				console.log("no instances");
+				var msg = "No instances of " + this.openCoreObject.title + ". ";
+				var pElement = document.createElement("p");
+				this.gridDiv.appendChild(document.createTextNode(msg));
 				if(this.openCoreObject.meta == true){
 					// list objects
-					
-					this.createMultiCreateOption();
+					this.createMultiCreateOption(true);
 				} else {
 					if (this.openCoreObject.canCreate == true) {
-						this.createCreateOption();
-					}
-				}
-				
-				if(this.openCoreObject.meta == true){
-					// list objects
-					this.createDeleteOption();
-				} else {
-					if (this.openCoreObject.canDelete == true) {
-						this.createDeleteOption();
+						this.createCreateOption(true);
 					}
 				}
 				
 				
-				
 			}
-		}
-		else {
-			// no instances, show create new instance
-			console.log("no instances");
-			var msg = "No instances of " + this.openCoreObject.title + ". ";
-			var pElement = document.createElement("p");
-			this.gridDiv.appendChild(document.createTextNode(msg));
-			if(this.openCoreObject.meta == true){
-				// list objects
-				this.createMultiCreateOption(true);
-			} else {
-				if (this.openCoreObject.canCreate == true) {
-					this.createCreateOption(true);
-				}
-			}
-			
-			
-		}
-			break;
+				break;
 			
 			
 		}
 		
 	},
 		
-	createSubLevelForm : function(){
-		console.log("FormObject:createSubLevelForm");
-		console.log("not first tab  " + this.openCoreObject.name);
-		
-		
-		this.openCoreObject.setHasFetchedInstances(false);
-		this.instances = this.openCoreObject.getInstancesByParentUUID(this.parentUUID);
-		
-		if (this.instances != undefined && typeof(this.openCoreObject.getFirstInstance()) == "object") {
-			// there are instances
-			console.log("this.currentInstance2");
-			
-			
-			var instance = this.getPreviousInstance();
-			if (instance != undefined) {
-				this.setCurrentInstance(instance);
-			} else {
-				this.setCurrentInstance(this.openCoreObject.getFirstInstance());
-			}			
-			// now we have to figure out if the current opencore object is a meta object
-			var actualOpenCoreObject;
-			var actualInstance;
-			console.log("currentInstance " + this.currentInstance);
-			// get class name
-			var className = this.currentInstance["class"];
-			if (this.openCoreObject.name != className) {
-				// get encapsulated object
-				actualOpenCoreObject = this.controller.dataManager.getOpenCoreObjectByName(className);
-				// all good, now we have to find its instance
-				var record = this.controller.dataManager.getRecord(actualOpenCoreObject.name, this.currentInstance.id);
-				for(var key in record){
-					this.currentMetaInstance = record[key];
-					break;
-				}
-// scary meta stuff						
-				actualInstance = this.currentMetaInstance;
-			} else {
-				actualOpenCoreObject = this.openCoreObject;
-				actualInstance = this.currentInstance;
-			}
-			console.log(actualInstance);
-			if(actualOpenCoreObject.singleton == true){
-				console.log("singleton");
-				// show fields
-				this.createFields(actualOpenCoreObject, actualInstance, "", this.fieldsDiv);
-				this.createDeleteOption();
-			} else {
-				console.log("not singleton");
-				// not a singleton
-				// the grid should always be displayed with non meta values
-				this.createGrid(this.openCoreObject, this.instances, "callBackCommand", this.gridDiv, {});
-				// here's where we have to check for meta stuff
-				this.createFields(actualOpenCoreObject, actualInstance, "", this.fieldsDiv);
-				
-				for(var childOpenCoreObjectName in actualOpenCoreObject.children){
-					var childOpenCoreObject = actualOpenCoreObject.children[childOpenCoreObjectName];
-					if (typeof(childOpenCoreObject) == "object") {
-						
-						console.log(childOpenCoreObject);
-						if (childOpenCoreObject.classInfo["class"].metabase == "") {
-							// non meta stuff
-							var someDiv = document.createElement("div");
-							this.childFormObjectsDiv.appendChild(someDiv);
-							if (typeof(childOpenCoreObject) == "object") {
-								this.createChildFormObject(childOpenCoreObject, actualInstance.uuid, someDiv, this.controller);
-							}
-						}
-					}
-				}
-				if(this.openCoreObject.meta == true){
-					// list objects
-					
-					this.createMultiCreateOption();
-				} else {
-					if (this.openCoreObject.canCreate == true) {
-						this.createCreateOption();
-					}
-				}
-				
-				if(this.openCoreObject.meta == true){
-					// list objects
-					this.createDeleteOption();
-				} else {
-					if (this.openCoreObject.canDelete == true) {
-						this.createDeleteOption();
-					}
-				}
-				
-				
-				
-			}
-		}
-		else {
-			// no instances, show create new instance
-			console.log("no instances");
-			var msg = "No instances of " + this.openCoreObject.title + ". ";
-			var pElement = document.createElement("p");
-			this.gridDiv.appendChild(document.createTextNode(msg));
-			if(this.openCoreObject.meta == true){
-				// list objects
-				this.createMultiCreateOption(true);
-			} else {
-				if (this.openCoreObject.canCreate == true) {
-					this.createCreateOption(true);
-				}
-			}
-			
-			
-		}
-		
-		
-		// create buttons
-		
-		
-	},
-	
 	createMultiCreateOption : function(){
 			
 		var metaObjects = this.controller.dataManager.getOpenCoreObjectsByMetaName(this.openCoreObject.name);

@@ -173,6 +173,21 @@ OpenCore.DataManager = {
 		}
 		
 	},
+	
+	
+	getRecordASync : function(className, objectId, callBackObject, callBackFunction, callBackArguments){
+		var r = new OpenCore.RPC.SendVars();
+		r.addHeader("command", "getrecords");
+		r.addHeader("session_id", OpenCore.DataManager.sessionId);
+		r.addBody("classid", className);
+		r.addBody("objectid", objectId);
+		var callBackWrapper = {
+			callBackObject : callBackObject,
+			callBackFunction : callBackFunction,
+			callBackArguments : callBackArguments
+		}
+		this.getRequestResultASync(r, this, "getRecordsAsyncDone", callBackWrapper);
+	},
 		
 	getReferences: function(refString){
 		var r = new this.rpc.SendVars();
@@ -320,7 +335,6 @@ OpenCore.DataManager = {
 			if (callBackFunction == "") {
 				throw new Error("callBackFunction is not defined");
 			} else {
-				console.log(callBackObject);
 				callBackObject[callBackFunction](callBackArguments);
 			}
 		} else {
@@ -344,12 +358,17 @@ OpenCore.DataManager = {
 	
 	getRecordsAsyncDone : function(callBackWrapper){
 		
-		var callBack;
+		var callBackObject;
+		var callBackFunction;
 		var callBackArguments;
 		var data;
 		
-		if(callBackWrapper.callBack != undefined){
-			callBack = callBackWrapper.callBack;
+		if(callBackWrapper.callBackObject != undefined){
+			callBackObject = callBackWrapper.callBackObject;
+		}
+		
+		if(callBackWrapper.callBackFunction != undefined){
+			callBackFunction = callBackWrapper.callBackFunction;
 		}
 		
 		if(callBackWrapper.callBackArguments != undefined){
@@ -362,15 +381,11 @@ OpenCore.DataManager = {
 		
 		callBackArguments.data = data;
 		
-		if(callBack!= undefined){
-			callBack(callBackArguments);
+		if(callBackObject!= undefined){
+			callBackObject[callBackFunction](callBackArguments);
 		}
 		
-		if (requestResult.body != undefined 
-		&& requestResult.body.data != undefined 
-		&& requestResult.body.data[className] != undefined) {
-			return requestResult.body.data;
-		}
+		
 	},
 	
 	getErrorId : function(){

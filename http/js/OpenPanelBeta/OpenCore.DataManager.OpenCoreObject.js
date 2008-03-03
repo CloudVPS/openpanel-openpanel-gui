@@ -168,6 +168,7 @@ OpenCore.DataManager.OpenCoreObject.prototype = {
 	
 	getInstancesByParentUUIDASyncDone : function getInstancesByParentUUIDASyncDone(resultObject, callBackWrapper){
 		if(resultObject != undefined){
+			console.log(resultObject);
 			this.instances = resultObject[this.name];
 			console.log(this);
 			console.log(this.instances);

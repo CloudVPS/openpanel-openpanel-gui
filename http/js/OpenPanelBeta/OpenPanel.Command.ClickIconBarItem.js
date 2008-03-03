@@ -4,7 +4,7 @@ OpenPanel.Command.ClickIconBarItem  = {
 		var openCoreObject = this.controller.dataManager.getOpenCoreObjectByName(actionObject.className);
 		if(openCoreObject != undefined){
 			openCoreObject.setHasFetchedInstances(false);
-			var instances					= openCoreObject.getInstances();
+			var instances								= openCoreObject.getInstances();
 			this.controller.currentRootClass 			= openCoreObject;
 			this.controller.currentRootClassInstance 	= openCoreObject.getFirstInstance();
 			this.controller.iconBarClick(openCoreObject);
