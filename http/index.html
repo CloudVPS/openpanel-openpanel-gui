@@ -42,46 +42,7 @@
 		if(typeof(console) != 'object'){
 			console = { log: function(){}}
 		}
-		/*
-		function blaat(){
-			
-			
-		}
 		
-		console.log(blaat.name);
-		var Foo = function(name){
-				this.name = "";
-				this.init(name);
-			}
-			
-			Foo.prototype = {
-				init : function init(someName){
-					this.name = someName;
-				},
-				
-				doCall : function doCall(){
-					Bar.doCall(this, this.doCallReturn);
-				},
-				
-				doCallReturn : function doCallReturn(){
-					this.name = ""
-					console.log(this);
-				}
-			}
-			
-			var Bar = {
-				doCall : function(obj, arg){
-					for(var key in arg){
-						console.log(key + " " + arg[key]);
-					}
-					console.log(arg.name);
-					obj[arg.name]();
-				}
-			}
-			
-			var f = new Foo("ohai");
-			f.doCall();
-			*/
 		$j(document).ready(function(){
 			
 				OpenCore.RPC.RequestHandler.setOpenCoreURL("/fake-opencore-proxy/json");
@@ -116,7 +77,7 @@
 	<div id="modal"></div>
 	<center>
 		<div id="app"></div>
-		<div id="status"><div id="modalLoadingDiv"><img src="/images/gui/ajax-loader.gif"></div></div>
+		
 		<div id="debug">
 			<div>
 				<div id="debugList"></div>

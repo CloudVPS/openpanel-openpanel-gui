@@ -90,6 +90,47 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 	},
 	
 	createGrid : function(instances){
+		    // create the data store
+			
+			var f;
+			var aa = new Array();
+			for(var key in instances){
+				var instance = instances[key];
+				if(typeof(instance) == "object"){
+					var a = new Array();
+					a.push(key);
+					
+					aa.push(a);
+				}
+			}
+	    var store = new Ext.data.SimpleStore({
+	        fields: [
+	           {name: 'uuid'},
+	           {name: 'className'},
+			   {name: 'id'},
+	          
+	        ]
+	    });
+    	store.loadData(aa);
+		this.grid = new Ext.grid.GridPanel({
+	        store: store,
+	        columns: [
+	            {id:'uuid',header: "Uuid"},
+	            {header: "id", width: 190, sortable: true, dataIndex: 'id', hideable:false},
+	            {header: "className", width: 0, sortable: true, dataIndex: 'className', hidden: false, hideable:false}
+			],
+	        stripeRows: false,
+	        autoExpandColumn: 'uuid',
+	        height:150,
+	        width:575,
+	        title:'Array Grid',
+			header: false
+			
+	    });
+		
+   	 	this.grid.render(this.targetDiv);
+		
+		
 		console.log(instances);
 		var hook = this;
 		
