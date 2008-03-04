@@ -92,33 +92,51 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 	createGrid : function(instances){
 		    // create the data store
 			
-			var f;
-			var aa = new Array();
-			for(var key in instances){
-				var instance = instances[key];
-				if(typeof(instance) == "object"){
-					var a = new Array();
-					a.push(key);
-					
-					aa.push(a);
+		var f;
+		var storeData = new Array();
+		var instanceKeys = new Array();
+		var firstPass = true;
+		
+		for(var key in instances){
+			var instance = instances[key];
+			if(typeof(instance) == "object"){
+				
+				var storeDataEntry = new Array();
+				for(var instanceKey in instance){
+					if(firstPass == true){
+						instanceKeys.push(instanceKey);
+					}
 				}
+				firstPass = false;
+				storeDataEntry.push(key);
+				
+				storeData.push(storeDataEntry);
+				
 			}
+		}
+		var fields = [];
+		var columns = [];
+		
+		for(var i = 0;i<instanceKeys.length;i++){
+			var obj = new Object();
+			obj.name = instanceKeys[i];
+			fields.push({name : instanceKeys[i]});
+			columns.push({id : instanceKeys[i], header: instanceKeys[i], dataIndex: instanceKeys[i], sortable: true});
+		}
+		
 	    var store = new Ext.data.SimpleStore({
-	        fields: [
-	           {name: 'uuid'},
-	           {name: 'className'},
-			   {name: 'id'},
-	          
-	        ]
+	        fields:  fields
 	    });
-    	store.loadData(aa);
+    	store.loadData(storeData);
+		
 		this.grid = new Ext.grid.GridPanel({
 	        store: store,
-	        columns: [
+	        columns: columns,
+			/*[
 	            {id:'uuid',header: "Uuid"},
 	            {header: "id", width: 190, sortable: true, dataIndex: 'id', hideable:false},
 	            {header: "className", width: 0, sortable: true, dataIndex: 'className', hidden: false, hideable:false}
-			],
+			],*/
 	        stripeRows: false,
 	        autoExpandColumn: 'uuid',
 	        height:150,
