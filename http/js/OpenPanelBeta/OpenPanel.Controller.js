@@ -287,14 +287,18 @@ OpenPanel.Controller = {
 	},
 	
 	tabBarClick : function(openCoreObject){
+		console.log("tabBarClick");
 		if (openCoreObject.getFirstInstance() != undefined) {
 			this.guiBuilder.GUIElements.TabBar.setOpenCoreObject(openCoreObject);
 			this.guiBuilder.GUIElements.TabBar.build();
 			
+			
 			var firstTabOpenCoreObject = this.guiBuilder.GUIElements.TabBar.getFirstTabItem();
+			console.log("XXXXX firstTabOpenCoreObject");
+			console.log(firstTabOpenCoreObject);
 			
 			this.guiBuilder.GUIElements.FormBuilder.setOpenCoreObject(firstTabOpenCoreObject);
-			this.guiBuilder.GUIElements.FormBuilder.setOpenCoreParentUUID("ROOT");
+			this.guiBuilder.GUIElements.FormBuilder.setOpenCoreParentUUID(this.currentRootClassInstance.uuid);
 			this.guiBuilder.GUIElements.FormBuilder.build();
 			if (this.currentRootClassInstance != undefined) {
 				this.guiBuilder.GUIElements.ItemList.highliteItem(this.currentRootClassInstance.uuid);
