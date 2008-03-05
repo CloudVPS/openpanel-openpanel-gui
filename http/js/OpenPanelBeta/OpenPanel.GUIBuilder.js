@@ -44,12 +44,9 @@ OpenPanel.GUIBuilder = {
 			modalMessageDiv.removeChild(previousPopUpDiv);
 		}
 		
-		
 		var popUpDiv = document.createElement("div");
 		popUpDiv.setAttribute("id", "popup");
-		
 		modalMessageDiv.appendChild(popUpDiv);
-		
 		return popUpDiv;
 	},
 	

@@ -30,7 +30,7 @@ OpenPanel.Command.Init  = {
 					this.controller.dataManager.initializeQuotaObject();	
 					this.controller.action({command: "BuildIconBar"});
 					// OpenCore.Debug.createDebugList();
-					
+					OpenPanel.Controller.initializePing();
 				} else {
 					this.controller.action({ command : "Init", msg: "login failed"})
 				}

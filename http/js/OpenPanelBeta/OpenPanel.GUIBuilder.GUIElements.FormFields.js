@@ -66,8 +66,6 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 				item.allowBlank = false;
 			}
 			
-			
-			
 			if(obj.regexp != undefined && obj.regexp!=""){
 				//item.regex = new RegEx(obj.regexp);
 			}
@@ -403,7 +401,6 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 			
 			var item = this.createChildUsersPullDown("owner");
 			item.value = this.formObject.controller.currentUser;
-			console.log(this.formObject.controller)
 			items[key] = item;
 			if (a == 0) {
 				itemsLeft.push(item);
@@ -442,8 +439,18 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 				handler: function(){
 					hook.formPanel.submit();
 				},
+				formBind: true,
+				align: "right"
+			},
+			{
+				text: 'Cancel',
+				handler: function(){
+					hook = {};
+					OpenPanel.GUIBuilder.deletePopUp();
+				},
 				formBind: true
-			}]
+			}
+			]
 		}
 		
 		this.formPanel = new Ext.FormPanel({
@@ -457,10 +464,10 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 			autoScroll: true,
 	        title: 'Simple Form',
 	        bodyStyle:'padding:5px 5px 5px 5px;',
-	        width: 570,
-			
+	        width: 600,
+			buttonAlign : "right",
         	
-	       onSubmit: function(arg){ console.log(arg); },
+	       	onSubmit: function(arg){ console.log(arg); },
 			submit: function() {
            		var obj = this.getForm().getValues();
 				var objectId = hook.openCoreObject.singleton == true? hook.openCoreObject.classInfo["class"].singleton:obj.id;

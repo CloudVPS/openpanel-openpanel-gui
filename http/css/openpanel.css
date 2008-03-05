@@ -80,35 +80,40 @@ img, input {
 
 #modalMessageDiv {
 	z-index: 10001;
-	padding-top: 99px;
-	width: 610px;
-	height: 400px;
-	background-color: #e0e0e0;
+	width: 600px;
+	padding-top: 20px;
+	background-color: #e8e8e8;
 	position: absolute;
 	left: 50%; 
 	margin-top: 98px;
-	margin-left: -310px; 
+	margin-left: -310px;
 	visibility: hidden;
 	/* for IE */
-	filter:alpha(opacity=80);
+	/* filter:alpha(opacity=80); */
 	/* CSS3 standard */
-	opacity:0.8;
+	/*opacity:0.8;*/
 	visibility: hidden;
+	vertical-align:top;
 }
 
 #modalLoadingDiv {
-	
 	visibility: hidden;
 }
 
 #modalMessageContent {
-	width: 190px;
-	height: 100px;
-	background-color: #e0e0e0;
+	background-color: #e8e8e8;
+	vertical-align: top;
+	margin-left : 10px;
+	margin-bottom : 10px;
+	width: 590px;
 }
 
+.formFieldsButton {
+	position: absolute;
+	margin-bottom:-20px;
+}
 .addDeleteButtonHolder {
-	padding-top: 20px;
+	padding-top: 5px;
 }
 
 .addButton, .addButtonDisabled {
@@ -177,6 +182,7 @@ img, input {
 	font-size: small;
 	border-bottom: 1px solid #b1b1b1;
 	padding-right: 10px;
+	width: 600px;
 }
 
 #menu {
@@ -205,7 +211,7 @@ img, input {
 }
 
 #mainAreaRight {
-	width: 610px;
+	width: 630px;
 	height: 500px;
 	float: left;
 	overflow-y: auto;
@@ -278,6 +284,7 @@ img, input {
 	display: block;
 	height: 20px;
 	vertical-align: bottom;	
+	text-align: center;
 }
 
 .classIcon {

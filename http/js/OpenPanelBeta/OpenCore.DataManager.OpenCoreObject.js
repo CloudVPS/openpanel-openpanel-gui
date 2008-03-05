@@ -101,7 +101,6 @@ OpenCore.DataManager.OpenCoreObject.prototype = {
 	},
 	
 	getCurrentInstance: function(uuid){
-		// keeper?
 		this.currentInstance = OpenCore.DataManager.getRecordByUUID(this.name, uuid);
 		if (this.currentInstance != undefined) {
 			return this.currentInstance;

@@ -164,10 +164,6 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 	},
 	
 	highliteItem: function(uuid){
-		//var index = this.grid.store.find("uuid", uuid);
-		//var record = this.grid.store.getAt(index);
-		// cellclick ( Grid this, Number rowIndex, Number columnIndex, Ext.EventObject e )
-		//this.grid.fireEvent("cellclick", {grid: this.grid, rowIndex: index, columnIndex: 0, e: {}});
 		this.renderButtons(this.buttonsDiv);
 	},
 	
@@ -185,12 +181,7 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 	},
 	
 	renderGrid: function(targetDiv, data){
-		// example of custom renderer function
-		
-	  
-	 
-	
-	    // create the data store
+		// create the data store
 	    var store = new Ext.data.SimpleStore({
 	        fields: [
 	           {name: 'uuid'},
@@ -211,7 +202,7 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 			],
 	        stripeRows: false,
 	        autoExpandColumn: 'uuid',
-	        height:250,
+	        height:472,
 	        width:200,
 	        title:'Array Grid',
 			header: false

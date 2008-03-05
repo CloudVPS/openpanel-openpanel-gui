@@ -96,9 +96,13 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 					
 					this.itemElements[childObject.name] = iconLi;
 					
+					var someWidth = Ext.get("c" + childObject.uuid).getWidth();
+					someWidth = someWidth<40?40:someWidth;
 					
+						// this is ugly and it stinks.
+						classIcon.style.width = someWidth + "px";
+						classDescription.style.width = someWidth + "px";
 					
-					classIcon.style.width = Ext.get("c" + childObject.uuid).getWidth() + "px";
 				}
 			}
 			

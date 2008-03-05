@@ -314,26 +314,32 @@ OpenPanel.Controller = {
 			} else {
 				OpenPanel.Controller.initializePing();
 			}
-			
 		} catch (e){
 			this.handleErrors(e);
 		}
 	},
 	
 	handleErrors : function(e){	
-	clearTimeout(this.pingTimeoutHandler);
-	
+		
 		switch(e.name){
 			case "RPCError":
 				alert(e.name + ": " + e.message+ " : " + e.status);
 			break;
 			
 			case "OpenCoreError":
-				alert(e.name + ": " + e.message);
+				alert(e);
+				if(this.dataManager.getErrorId() == "12288"){
+					this.action({ command: "Init"});
+				} else {
+					console.log(OpenCore.DataManager.getErrorId(), errorMsg);
+					//alert(errorMsg); 
+				}
 			break;
 			
 			default:
 				alert(e.name + ": " + e.message);
+				clearTimeout(this.pingTimeoutHandler);
+			
 			break;
 		}
 		if (1) {
@@ -347,12 +353,7 @@ OpenPanel.Controller = {
 				errorMsg = e.message;
 			}
 			
-			if(this.dataManager.getErrorId() == "12288"){
-				this.action({ command: "Init"});
-			} else {
-				console.log(OpenCore.DataManager.getErrorId(), errorMsg);
-				//alert(errorMsg); 
-			}
+			
 		}
 		
 		for(var key in e){
