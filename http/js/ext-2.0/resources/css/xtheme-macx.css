@@ -28,7 +28,7 @@ q:before,q:after{content:'';}
 .x-layer{visibility:hidden;}
 .x-unselectable,.x-unselectable *{-moz-user-select:none;-khtml-user-select:none;}
 .x-repaint{zoom:1;background-color:transparent;-moz-outline:none;}
-.x-item-disabled{color:gray;cursor:default;opacity:.6;-moz-opacity:.6;filter:alpha(opacity=60);}
+.x-item-disabled{color:gray;cursor:default;opacity:.3;-moz-opacity:.3;filter:alpha(opacity=30);}
 .x-item-disabled *{color:gray!important;cursor:default!important;}
 .x-splitbar-proxy{position:absolute;visibility:hidden;z-index:20001;background:#aaa;zoom:1;line-height:1px;font-size:1px;overflow:hidden;}
 .x-splitbar-h,.x-splitbar-proxy-h{cursor:e-resize;cursor:col-resize;}

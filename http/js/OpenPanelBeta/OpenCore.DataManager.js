@@ -14,6 +14,7 @@ OpenCore.DataManager = {
 	quotaObject : {},
 	quotaByClassName : {},
 	
+	
 	setGuiBuilder: function(guiBuilder){
 		this.guiBuilder = guiBuilder;
 	},
@@ -23,6 +24,7 @@ OpenCore.DataManager = {
 	setRPC: function(rpc){
 		this.rpc = rpc;
 	},
+	
 	
 	login: function(userName, password){
 		var r = new this.rpc.SendVars();
@@ -280,22 +282,22 @@ OpenCore.DataManager = {
 	},
 	
 	getRequestResult: function(sendVars){
-		try {
+		
 			var r = jQuery.parseJSON(this.rpc.RequestHandler.synchronizedRequest(sendVars));
 			
 			if(r.header != undefined && r.header.errorid != undefined && r.header.error !=undefined){
 				this.errorId = r.header.errorid;
 				this.errorMessage = r.header.error;
 				
-				if(this.errorId == "1"){
-					throw new Error("Unknown session");
+				if(this.errorId!=0){
+					throw new OpenCoreError(r.header.error, r.header.errorid);
+					return;
 				}
 				return r;
+			} else {
+				throw new RPCError("No response");
 			}
-		} catch (e){
-			this.errorId = "666";
-			this.errorMessage = "Could not parse server response. Response is not JSON? " + e;
-		}
+		
 	},
 	
 	getRequestResultASync: function(sendVarsObject, callBackObject, callBackFunction, callBackArguments){

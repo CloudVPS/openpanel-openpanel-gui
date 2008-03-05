@@ -16,16 +16,20 @@ OpenCore.RPC.RequestHandler = {
 	},
 	
 	synchronizedRequest : function(sendVarsObject){
-		var f = $j.ajax(
+		var response = $j.ajax(
 			{ type: "POST",
 			  url: this.openCoreURL,
 			  async: false,
 			  dataType: "json",
 			  data: jQuery.toJSON(sendVarsObject)
 			}
-		).responseText;
-		
-		return f;
+		);
+		var responseText = response.responseText;
+		if(response.status != 200){
+			throw RPCError(response.statusText, response.status);
+			
+		}
+		return responseText;
 	},
 	/*
 	

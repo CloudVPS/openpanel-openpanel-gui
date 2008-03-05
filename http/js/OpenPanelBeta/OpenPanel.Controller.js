@@ -9,6 +9,7 @@ OpenPanel.Controller = {
 	guiBuilder: {},
 	selectedRootInstance: "",
 	selectedTabObject: "",
+	pingTimeoutHandler : {},
 	
 	
 	currentRootClass: {},
@@ -18,7 +19,7 @@ OpenPanel.Controller = {
 	action: function(actionObject){
 		console.log(actionObject);
 		
-		//try {
+		try {
 			this.lastCommand = actionObject.command;
 			this.lastArgumentObject = actionObject;
 			var actionObject = this.lastArgumentObject;
@@ -34,9 +35,8 @@ OpenPanel.Controller = {
 					case "LoginDone":
 						console.log("controller");
 						console.log(actionObject);
-						
-					
 					break;
+					
 					case "updateRootInstance":
 						if(actionObject.openCoreObject != undefined && actionObject.instance != undefined && actionObject.formValues != undefined){
 							this.currentRootClassInstance = actionObject.instance;
@@ -76,7 +76,6 @@ OpenPanel.Controller = {
 							} else {
 								throw new Error(this.dataManager.errorMessage);
 							}
-							
 						}
 					break;
 					
@@ -171,8 +170,6 @@ OpenPanel.Controller = {
 							openCoreObject.getInstances();
 							formObject.build();
 							
-						// delete popup
-						// this.showCreateInstanceFromFormObject(actionObject.formObject, actionObject.formObjectHolder, "deleteInstanceFromFormObject");
 						}
 					break;
 					
@@ -191,34 +188,22 @@ OpenPanel.Controller = {
 							var r = this.dataManager.updateInstance(openCoreObject.name, instance.uuid, formData);
 							if(this.dataManager.getErrorId() != 0){
 								gotErrors = true;
-								errorMessages+= "error: " + openCoreObject.name + " : " + this.dataManager.getErrorMessage() + "\n";
 							}
 						}
-						if(gotErrors == true){
-							throw new Error(errorMessages);
-						} else{
-							formBuilder.rootFormObject.build();
-						}
+						
+						formBuilder.rootFormObject.build();
+						
 					break;
 				}
 			}
 			
 				OpenCore.Debug.controllerDebug(this);
 				console.log("---------------------------");
-		/*} catch (e) {
+		} catch (e) {
 			// errors are caught here
-			var errorMsg;
-			if (this.dataManager.getErrorId() != 0) {
-				errorMsg = this.dataManager.getErrorMessage();
-			} else {
-				errorMsg = e.message;
-			}
-			if(this.dataManager.getErrorId() == "1"){
-				this.action({ command: "init"});
-			}
-			console.log(errorMsg);
-			alert(errorMsg); 
-		} */
+			this.handleErrors(e);
+			
+		}
 	},
 	
 	setDataManager: function(dataManager){
@@ -311,5 +296,69 @@ OpenPanel.Controller = {
 			this.guiBuilder.GUIElements.TabBar.disable();
 			this.guiBuilder.GUIElements.FormBuilder.clean();
 		}
+	},
+	
+	initializePing : function(){
+		this.pingTimeoutHandler = setTimeout("OpenPanel.Controller.ping()", 5000);
+	},
+	
+	ping : function(){
+		try {
+			console.log("ping");
+			this.dataManager.getRecords("ping");
+			var errorMsg;
+			if (OpenCore.DataManager.getErrorId() != 0) {
+				errorMsg = OpenCore.DataManager.getErrorMessage();
+				clearTimeout(this.pingTimeoutHandler);
+				throw new Error(errorMsg);
+			} else {
+				OpenPanel.Controller.initializePing();
+			}
+			
+		} catch (e){
+			this.handleErrors(e);
+		}
+	},
+	
+	handleErrors : function(e){	
+	clearTimeout(this.pingTimeoutHandler);
+	
+		switch(e.name){
+			case "RPCError":
+				alert(e.name + ": " + e.message+ " : " + e.status);
+			break;
+			
+			case "OpenCoreError":
+				alert(e.name + ": " + e.message);
+			break;
+			
+			default:
+				alert(e.name + ": " + e.message);
+			break;
+		}
+		if (1) {
+	        
+	   
+	    } else {
+			var errorMsg;
+			if (this.dataManager.getErrorId() != 0) {
+				errorMsg = OpenCore.DataManager.getErrorMessage();
+			} else {
+				errorMsg = e.message;
+			}
+			
+			if(this.dataManager.getErrorId() == "12288"){
+				this.action({ command: "Init"});
+			} else {
+				console.log(OpenCore.DataManager.getErrorId(), errorMsg);
+				//alert(errorMsg); 
+			}
+		}
+		
+		for(var key in e){
+			console.log(key, e[key]);
+		}
+		
+		
 	}
 }

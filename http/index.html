@@ -34,7 +34,7 @@
 	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.Command.ClickIconBarItem.js"></script>
 	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.Command.ClickItemListItem.js"></script>
 	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.Command.ClickTabBarItem.js"></script>
-	
+	<script type="text/javascript" src="js/OpenPanelBeta/Errors.js"></script>
 	
 
 	<script type="text/javascript">
@@ -43,6 +43,10 @@
 			console = { log: function(){}}
 		}
 		
+		
+		
+		
+		
 		$j(document).ready(function(){
 			
 				OpenCore.RPC.RequestHandler.setOpenCoreURL("/fake-opencore-proxy/json");
@@ -50,6 +54,7 @@
 				OpenCore.DataManager.setRPC(OpenCore.RPC);
 				OpenPanel.Controller.setDataManager(OpenCore.DataManager);
 				OpenPanel.Controller.setGuiBuilder(OpenPanel.GUIBuilder);
+				OpenPanel.Controller.initializePing();
 				OpenPanel.GUIBuilder.GUIElements.ItemList.setGuiBuilder(OpenPanel.GUIBuilder);
 				OpenPanel.GUIBuilder.GUIElements.ItemList.setController(OpenPanel.Controller);
 				OpenPanel.GUIBuilder.GUIElements.FormObject.setGuiBuilder(OpenPanel.GUIBuilder);
