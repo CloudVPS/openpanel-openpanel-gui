@@ -90,71 +90,84 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 	},
 	
 	createGrid : function(instances){
-		    // create the data store
+		// create the data store
 			
-		var f;
 		var storeData = new Array();
 		var instanceKeys = new Array();
-		var firstPass = true;
 		
 		for(var key in instances){
 			var instance = instances[key];
 			if(typeof(instance) == "object"){
-				
+				var className = instance["class"];
+				var classInfo = this.formObject.controller.dataManager.getClassInfo(className);
+				var params = classInfo.structure.parameters;
 				var storeDataEntry = new Array();
-				for(var instanceKey in instance){
-					if(firstPass == true){
-						instanceKeys.push(instanceKey);
-					}
+				
+				for(var paramKey in params){
+					var param = params[paramKey];
+					storeDataEntry.push(instance[paramKey]);
 				}
-				firstPass = false;
-				storeDataEntry.push(key);
 				
 				storeData.push(storeDataEntry);
-				
 			}
 		}
+		
+		
 		var fields = [];
-		var columns = [];
+		var columns = new Array();
+		var className = this.openCoreObject.name;
+		var classInfo = this.formObject.controller.dataManager.getClassInfo(className);
+		var params = classInfo.structure.parameters;
 		
-		for(var i = 0;i<instanceKeys.length;i++){
-			var obj = new Object();
-			obj.name = instanceKeys[i];
-			fields.push({name : instanceKeys[i]});
-			columns.push({id : instanceKeys[i], header: instanceKeys[i], dataIndex: instanceKeys[i], sortable: true});
+		for(var paramName in params){
+			var param = params[paramName];
+			fields.push({name : paramName});
+			
+			var obj = {
+				id: paramName,
+				header: paramName,
+				width: 100
+			};
+			if(first == undefined){
+				var first = true;
+				obj.sortable = true;
+			}
+			if(param.visible == "false"){
+				obj.visible = false;
+			}
+			columns.push(obj);
 		}
-		
-	    var store = new Ext.data.SimpleStore({
-	        fields:  fields
+	
+		var store = new Ext.data.SimpleStore({
+	        fields: fields
 	    });
-    	store.loadData(storeData);
 		
+		store.loadData(storeData);
+	
 		this.grid = new Ext.grid.GridPanel({
 	        store: store,
-	        columns: columns,
-			/*[
-	            {id:'uuid',header: "Uuid"},
-	            {header: "id", width: 190, sortable: true, dataIndex: 'id', hideable:false},
-	            {header: "className", width: 0, sortable: true, dataIndex: 'className', hidden: false, hideable:false}
-			],*/
-	        stripeRows: false,
-	        autoExpandColumn: 'uuid',
+	        columns: columns, /*,*/
+	        stripeRows: true,
+	        autoExpandColumn: 'id',
 	        height:150,
 	        width:575,
-	        title:'Array Grid',
+	        title: this.openCoreObject.title,
 			header: false
 			
 	    });
 		
    	 	this.grid.render(this.targetDiv);
 		
+		var hook = this;
+		this.grid.on("cellclick", function(grid, rowIndex, columnIndex, e) {
+	        hook.cellClick(hook.grid, rowIndex, columnIndex, e);
 		
-		console.log(instances);
+	    }); 
+		/*
 		var hook = this;
 		
 		var tableElement = document.createElement("table");
 		this.gridDiv.appendChild(tableElement);
-		
 		
 		var headers;
 		for(var id in instances){
@@ -201,6 +214,20 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 				}
 			}
 		}
+		*/
+	},
+	
+	cellClick : function(grid, rowIndex, columnIndex, e) {
+		/*
+		[undefined, 0, 0, Object browserEvent=Event click button=0 type=click]
+		Object id=1003 data=Object json=[3] store=Object fields=[3], undefined, undefined
+		 */
+		console.log(arguments);
+        var record = this.grid.getStore().getAt(rowIndex);  // Get the Record
+        var fieldName = this.grid.getColumnModel().getDataIndex(columnIndex); // Get field name
+        var id = record.get("id");
+		console.log(record, fieldName, id);
+		this.clickGridItem(id);
 	},
 	
 	clickGridItem : function(id){
