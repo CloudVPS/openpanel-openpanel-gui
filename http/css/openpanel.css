@@ -102,6 +102,7 @@ img, input {
 }
 
 #modalLoadingDiv {
+	z-index: 1000000;
 	padding-top: 200px;
 	width: 100%;
 	text-align: center;
