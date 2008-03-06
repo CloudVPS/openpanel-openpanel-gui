@@ -366,7 +366,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 			
 			// quota debug stuff
 			createOne.appendChild(s);
-			q = document.createElement("ul");
+			var q = document.createElement("ul");
 			createOne.appendChild(q);
 			
 			for(var key in canAdds){
@@ -607,7 +607,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 	},
 	
 	createChildFormObject : function(openCoreObject, parentUUID, targetDiv, controller){
-		childFormObject = new OpenPanel.GUIBuilder.GUIElements.FormObject();
+		var childFormObject = new OpenPanel.GUIBuilder.GUIElements.FormObject();
 		childFormObject.setOpenCoreObject(openCoreObject);
 		
 		childFormObject.setParentUUID(parentUUID);

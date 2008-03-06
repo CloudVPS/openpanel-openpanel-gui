@@ -2,13 +2,17 @@ body {
 	background-image: url(/images/gui/nothernlightsbg.jpg);
 	background-repeat: no-repeat;
 	font: 11px Arial, Helvetica, sans-serif;
-	
 }
 
 img, input {
 	behavior: url(/js/iepngfix/iepngfix.htc);
 }
 
+.throbber {
+	background-repeat: no-repeat;
+	height: 50px;
+	width: 50px;
+}
 .groupHolder {
 	clear: both;
 }
@@ -72,9 +76,9 @@ img, input {
 	z-index: 10000;
 	background-color: #000;
 	/* for IE */
-	filter:alpha(opacity=50);
+	filter:alpha(opacity=0);
 	/* CSS3 standard */
-	opacity:0.5;
+	opacity:0;
 	visibility: hidden;
 }
 
@@ -98,7 +102,11 @@ img, input {
 }
 
 #modalLoadingDiv {
+	padding-top: 200px;
+	width: 100%;
+	text-align: center;
 	visibility: hidden;
+	position: absolute;
 }
 
 #modalMessageContent {

@@ -19,7 +19,7 @@ OpenPanel.Command.Init  = {
 				if(this.controller.dataManager.login(actionObject.userName, actionObject.password)){
 					// get user info
 					
-					rootObject = new OpenCore.DataManager.OpenCoreObject({}, "ROOT");
+					var rootObject = new OpenCore.DataManager.OpenCoreObject({}, "ROOT");
 					this.controller.currentUser = actionObject.userName;
 					
 					this.controller.guiBuilder.loadTemplate("main.html", "app");

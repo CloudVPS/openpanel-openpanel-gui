@@ -158,11 +158,14 @@ OpenPanel.GUIBuilder = {
 	hideModalMessageDiv : function(){
 		var modalMessageDiv = document.getElementById("modalMessageDiv");
 		modalMessageDiv.style.visibility = "hidden";
+		Throbber.stop();
 	},
 	
 	showLoadingDiv : function(){
 		OpenPanel.GUIBuilder.enterModalMode();
 		var loadingDiv = document.getElementById("modalLoadingDiv");
+		Throbber.setTargetDiv(loadingDiv);
+		Throbber.start();
 		loadingDiv.style.visibility = "visible";
 	},
 	
