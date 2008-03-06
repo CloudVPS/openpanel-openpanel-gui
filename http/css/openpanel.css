@@ -197,7 +197,7 @@ img, input {
 
 #mainArea {
 	width: 900px;
-	height: 500px;
+	height: 400px;
 	background-image: url(/images/gui/groupFrameMiddle.gif);
 }
 
@@ -212,7 +212,7 @@ img, input {
 
 #mainAreaRight {
 	width: 630px;
-	height: 500px;
+	height: 400px;
 	float: left;
 	overflow-y: auto;
 }

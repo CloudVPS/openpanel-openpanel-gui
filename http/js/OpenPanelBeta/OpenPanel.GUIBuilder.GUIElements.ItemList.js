@@ -202,7 +202,7 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 			],
 	        stripeRows: false,
 	        autoExpandColumn: 'uuid',
-	        height:472,
+	        height:372,
 	        width:200,
 	        title:'Array Grid',
 			header: false

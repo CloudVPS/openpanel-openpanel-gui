@@ -45,9 +45,11 @@ OpenCore.RPC.RequestHandler = {
 	
 	*/			
 	 
-	asynchronizedRequest : function(sendVarsObject, callBackObject, callBackFunction, callBackArguments){
+	asynchronizedRequest : function(sendVarsObject, callBackObject, callBackFunction, callBackArguments, background){
 		this.asynchronizedRequestCount++;
-		OpenCore.RPC.RequestHandler.startLoading();
+		if (background == undefined) {
+			OpenCore.RPC.RequestHandler.startLoading();
+		}
 		var arg = {
 			callBackObject : callBackObject,
 			callBackFunction : callBackFunction,

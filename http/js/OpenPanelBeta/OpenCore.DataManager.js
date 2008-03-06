@@ -177,7 +177,7 @@ OpenCore.DataManager = {
 	},
 	
 	
-	getRecordASync : function(className, objectId, callBackObject, callBackFunction, callBackArguments){
+	getRecordASync : function(className, objectId, callBackObject, callBackFunction, callBackArguments, background){
 		var r = new OpenCore.RPC.SendVars();
 		r.addHeader("command", "getrecords");
 		r.addHeader("session_id", OpenCore.DataManager.sessionId);
@@ -188,7 +188,7 @@ OpenCore.DataManager = {
 			callBackFunction : callBackFunction,
 			callBackArguments : callBackArguments
 		}
-		this.getRequestResultASync(r, this, "getRecordsAsyncDone", callBackWrapper);
+		this.getRequestResultASync(r, this, "getRecordsAsyncDone", callBackWrapper, background);
 	},
 		
 	getReferences: function(refString){
@@ -300,13 +300,13 @@ OpenCore.DataManager = {
 		
 	},
 	
-	getRequestResultASync: function(sendVarsObject, callBackObject, callBackFunction, callBackArguments){
+	getRequestResultASync: function(sendVarsObject, callBackObject, callBackFunction, callBackArguments, background){
 		var callBackWrapper = {
 			callBackObject : callBackObject,
 			callBackFunction : callBackFunction,
 			callBackArguments : callBackArguments
 		}
-		this.rpc.RequestHandler.asynchronizedRequest(sendVarsObject, OpenCore.DataManager, "getRequestResultASyncDone", callBackWrapper);
+		this.rpc.RequestHandler.asynchronizedRequest(sendVarsObject, OpenCore.DataManager, "getRequestResultASyncDone", callBackWrapper, background);
 	},
 	
 	getRequestResultASyncDone : function getRequestResultASyncDone(callBackWrapper){
@@ -345,18 +345,22 @@ OpenCore.DataManager = {
 		
 	},
 	
-	getRecordsAsync : function(className, objectId, callBack, callBackArguments){
-		var r = new OpenCore.RPC.SendVars();
+	getRecordsAsync: function(className, objectId, callBackObject, callBackFunction, callBackArguments, background){
+		var r = new this.rpc.SendVars();
 		r.addHeader("command", "getrecords");
-		r.addHeader("session_id", OpenCore.DataManager.sessionId);
+		r.addHeader("session_id", this.sessionId);
 		r.addBody("classid", className);
-		r.addBody("objectid", objectId);
+		if (objectId != undefined) {
+			r.addBody("objectid", objectId);
+		}
 		var callBackWrapper = {
-			callBack : callBack,
+			callBackObject : callBackObject,
+			callBackFunction : callBackFunction,
 			callBackArguments : callBackArguments
 		}
-		this.getRequestResultASync(r, this.getRecordsAsyncDone, callBackWrapper);
+		this.getRequestResultASync(r, OpenCore.DataManager, "getRecordsAsyncDone", callBackWrapper, background);
 	},
+	
 	
 	getRecordsAsyncDone : function(callBackWrapper){
 		
