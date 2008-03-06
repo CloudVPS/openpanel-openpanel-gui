@@ -123,19 +123,61 @@ OpenCore.DataManager.OpenCoreObject.prototype = {
 		return this.instances;
 	},
 	
-	getInstancesAsync: function(){
+	getInstancesASync: function(callBackObject, callBackFunction, callBackArguments){
 		if(this.fetchedInstances == false){
-			this.instances = {};
-			this.fetchedInstances = true;
-			var r = OpenCore.DataManager.getRecords(this.name);
-			if(r != undefined ){
-				this.instances = r[this.name];
+			var callBackWrapper = {
+				callBackObject : callBackObject,
+				callBackFunction : callBackFunction,
+				callBackArguments : callBackArguments
 			}
+			
+			OpenCore.DataManager.getRecordsASync(this.name, undefined, this, "getInstancesAsyncDone", callBackWrapper);
+			// function(className, objectId, callBackObject, callBackFunction, callBackArguments, background)
+			
 		}
 		return this.instances;
 	},
 	
-	getInstancesAsyncDone : function(){
+	getInstancesAsyncDone : function(callBackWrapper){
+		console.log("getInstancesAsyncDone");
+		console.log(callBackWrapper);
+		console.log(this.name);
+		if(callBackWrapper != undefined && callBackWrapper.data != undefined){
+			this.instances = {};
+			this.fetchedInstances = true;
+			this.instances = callBackWrapper.data[this.name];
+		}
+		var callBackObject;
+		var callBackFunction;
+		var callBackArguments = {};
+		var data;
+		console.log(this.instances);
+		if(callBackWrapper.callBackObject != undefined){
+			callBackObject = callBackWrapper.callBackObject;
+		}
+		
+		if(callBackWrapper.callBackFunction != undefined){
+			callBackFunction = callBackWrapper.callBackFunction;
+		}
+		
+		if(callBackWrapper.callBackArguments != undefined){
+			callBackArguments = callBackWrapper.callBackArguments;
+		}
+		
+		if(callBackWrapper.data != undefined){
+			console.log("asdads", callBackWrapper);
+				
+			data = callBackWrapper.data;
+			callBackArguments.data = data;
+		}
+		
+		
+		if (callBackFunction == "") {
+			throw new Error("callBackFunction is not defined");
+		} else {
+			callBackObject[callBackFunction](callBackArguments);
+		}
+		
 		
 	},
 	

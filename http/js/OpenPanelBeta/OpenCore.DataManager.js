@@ -178,6 +178,7 @@ OpenCore.DataManager = {
 	
 	
 	getRecordASync : function(className, objectId, callBackObject, callBackFunction, callBackArguments, background){
+		
 		var r = new OpenCore.RPC.SendVars();
 		r.addHeader("command", "getrecords");
 		r.addHeader("session_id", OpenCore.DataManager.sessionId);
@@ -345,7 +346,7 @@ OpenCore.DataManager = {
 		
 	},
 	
-	getRecordsAsync: function(className, objectId, callBackObject, callBackFunction, callBackArguments, background){
+	getRecordsASync: function(className, objectId, callBackObject, callBackFunction, callBackArguments, background){
 		var r = new this.rpc.SendVars();
 		r.addHeader("command", "getrecords");
 		r.addHeader("session_id", this.sessionId);
@@ -363,7 +364,8 @@ OpenCore.DataManager = {
 	
 	
 	getRecordsAsyncDone : function(callBackWrapper){
-		
+		console.log("getRecordsAsyncDone");
+		console.log(callBackWrapper);
 		var callBackObject;
 		var callBackFunction;
 		var callBackArguments;
