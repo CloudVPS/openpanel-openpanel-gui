@@ -123,7 +123,7 @@ OpenCore.DataManager.OpenCoreObject.prototype = {
 		return this.instances;
 	},
 	
-	getInstancesASync: function(callBackObject, callBackFunction, callBackArguments){
+	getInstancesAsync: function(callBackObject, callBackFunction, callBackArguments){
 		if(this.fetchedInstances == false){
 			var callBackWrapper = {
 				callBackObject : callBackObject,
@@ -131,7 +131,7 @@ OpenCore.DataManager.OpenCoreObject.prototype = {
 				callBackArguments : callBackArguments
 			}
 			
-			OpenCore.DataManager.getRecordsASync(this.name, undefined, this, "getInstancesAsyncDone", callBackWrapper);
+			OpenCore.DataManager.getRecordsAsync(this.name, undefined, this, "getInstancesAsyncDone", callBackWrapper);
 			// function(className, objectId, callBackObject, callBackFunction, callBackArguments, background)
 			
 		}
@@ -194,7 +194,7 @@ OpenCore.DataManager.OpenCoreObject.prototype = {
 		return this.instances;
 	},
 	
-	getInstancesByParentUUIDASync: function(uuid, callBackObject, callBackFunction, callBackArguments){
+	getInstancesByParentUUIDAsync: function(uuid, callBackObject, callBackFunction, callBackArguments){
 		if(this.fetchedInstances == false){
 			this.instances = {};
 			this.fetchedInstances = true;
@@ -203,11 +203,11 @@ OpenCore.DataManager.OpenCoreObject.prototype = {
 				callBackFunction : callBackFunction,
 				callBackArguments : callBackArguments
 			}
-			OpenCore.DataManager.getInstancesByParentUUIDASync(this.name, uuid, this, "getInstancesByParentUUIDASyncDone", callBackWrapper);
+			OpenCore.DataManager.getInstancesByParentUUIDAsync(this.name, uuid, this, "getInstancesByParentUUIDAsyncDone", callBackWrapper);
 		}
 	},
 	
-	getInstancesByParentUUIDASyncDone : function getInstancesByParentUUIDASyncDone(resultObject, callBackWrapper){
+	getInstancesByParentUUIDAsyncDone : function getInstancesByParentUUIDAsyncDone(resultObject, callBackWrapper){
 		if(resultObject != undefined){
 			console.log(resultObject);
 			this.instances = resultObject[this.name];

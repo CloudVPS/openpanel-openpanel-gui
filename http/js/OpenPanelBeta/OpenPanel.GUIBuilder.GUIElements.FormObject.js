@@ -43,7 +43,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 			if (this.openCoreObject.classInfo == undefined || (this.openCoreObject.classInfo.info != undefined && this.openCoreObject.classInfo.info.parent == undefined)) {
 				this.createTopLevelForm();
 			} else {
-				this.createSubLevelFormASync();
+				this.createSubLevelFormAsync();
 			}
 		}
 		// is toplevel object?
@@ -167,7 +167,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		
 	},
 	
-	createSubLevelFormASync : function createSubLevelFormASync(stateObject){
+	createSubLevelFormAsync : function createSubLevelFormAsync(stateObject){
 		var state;
 		var passThrough;
 		
@@ -183,10 +183,10 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		switch(state){
 			case undefined:
 				this.openCoreObject.setHasFetchedInstances(false);
-				this.openCoreObject.getInstancesByParentUUIDASync(
+				this.openCoreObject.getInstancesByParentUUIDAsync(
 					this.parentUUID, 
 					this,
-					"createSubLevelFormASync", 
+					"createSubLevelFormAsync", 
 					{
 						state: "getInstancesByParentUUIDDone"
 					}

@@ -5,7 +5,7 @@ OpenPanel.Command.ClickIconBarItem  = {
 		if(openCoreObject != undefined){
 			openCoreObject.setHasFetchedInstances(false);
 			//var instances								= openCoreObject.getInstances();
-			openCoreObject.getInstancesASync(OpenPanel.Command.ClickIconBarItem, "getInstancesDone", openCoreObject);
+			openCoreObject.getInstancesAsync(OpenPanel.Command.ClickIconBarItem, "getInstancesDone", openCoreObject);
 		} else {
 			// errors here
 			throw new Error ("openCoreObject is undefined")

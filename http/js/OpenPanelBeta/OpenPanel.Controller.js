@@ -304,7 +304,7 @@ OpenPanel.Controller = {
 	
 	ping : function(){
 		console.log("ping");
-		this.dataManager.getRecordsASync("ping", undefined, OpenPanel.Controller, "pingDone", {}, true);
+		this.dataManager.getRecordsAsync("ping", undefined, OpenPanel.Controller, "pingDone", {}, true);
 	},
 	
 	pingDone : function(callBackArguments){
