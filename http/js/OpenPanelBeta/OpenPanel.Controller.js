@@ -299,27 +299,33 @@ OpenPanel.Controller = {
 	},
 	
 	initializePing : function(){
-		this.pingTimeoutHandler = setTimeout("OpenPanel.Controller.ping()", 50000);
+		this.pingTimeoutHandler = setTimeout("OpenPanel.Controller.ping()", 5000);
 	},
 	
 	ping : function(){
 		console.log("ping");
 		this.dataManager.getRecordsAsync("ping", undefined, OpenPanel.Controller, "pingDone", {}, true);
-			
 	},
 	
-	pingDone : function(asd){
+	pingDone : function(callBackArguments){
+		
 		try {
-			if(OpenCore.DataManager.errorId == 0){
-				OpenPanel.Controller.initializePing();
-			} else if(OpenCore.DataManager.errorId == 12288){
-				OpenPanel.Controller.action("Init");
+			if(callBackArguments.data == undefined){
+				throw new Error("no data");
 			} else {
-				errorMsg = OpenCore.DataManager.getErrorMessage();
-				clearTimeout(this.pingTimeoutHandler);
-				throw new Error(errorMsg);
+				
+				if(OpenCore.DataManager.errorId == 0){
+					OpenPanel.Controller.initializePing();
+				} else if(OpenCore.DataManager.errorId == 12288){
+					OpenPanel.Controller.action("Init");
+				} else {
+					errorMsg = OpenCore.DataManager.getErrorMessage();
+					clearTimeout(this.pingTimeoutHandler);
+					throw new Error(errorMsg);
+				}
 			}
 		} catch (e) {
+			console.log("OMGERS");
 			this.handleErrors(e);
 		}
 	},

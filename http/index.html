@@ -43,8 +43,11 @@
 			console = { log: function(){}}
 		}
 		
-		
-		
+		try {
+			throw new Error("OMG");
+		} catch (e) {
+			console.log(e);
+		}
 		
 		
 		$j(document).ready(function(){

@@ -66,26 +66,33 @@ OpenCore.RPC.RequestHandler = {
 	},
 	
 	asynchronizedRequestReturn : function(requestResult){
-		OpenCore.RPC.RequestHandler.asynchronizedRequestCount--;
-		if(requestResult.argument != undefined && requestResult.argument.callBackObject != undefined){
-			var callBackObject = requestResult.argument.callBackObject;
-			var callBackFunction = requestResult.argument.callBackFunction;
-			var callBackArguments = requestResult.argument.callBackArguments;
-			callBackArguments.data = Ext.util.JSON.decode(requestResult.responseText);
-			
-			if (callBackFunction == undefined) {
-				throw Error("callBackFunction does not exist");
-				return;
-			} else {
-				if (callBackArguments != undefined) {
-					callBackObject[callBackFunction](callBackArguments);
+		try {
+			if(requestResult.status != 200){
+				throw RPCError(requestResult.statusText, requestResult.status);
+			}
+			OpenCore.RPC.RequestHandler.asynchronizedRequestCount--;
+			if(requestResult.argument != undefined && requestResult.argument.callBackObject != undefined){
+				var callBackObject = requestResult.argument.callBackObject;
+				var callBackFunction = requestResult.argument.callBackFunction;
+				var callBackArguments = requestResult.argument.callBackArguments;
+				callBackArguments.data = Ext.util.JSON.decode(requestResult.responseText);
+				
+				if (callBackFunction == undefined) {
+					throw Error("callBackFunction does not exist");
+					return;
 				} else {
-					callBackObject[callBackFunction]();
+					if (callBackArguments != undefined) {
+						callBackObject[callBackFunction](callBackArguments);
+					} else {
+						callBackObject[callBackFunction]();
+					}
 				}
 			}
-		}
-		if (OpenCore.RPC.RequestHandler.asynchronizedRequestCount == 0) {
-			OpenCore.RPC.RequestHandler.doneLoading();
+			if (OpenCore.RPC.RequestHandler.asynchronizedRequestCount == 0) {
+				OpenCore.RPC.RequestHandler.doneLoading();
+			}
+		} catch (e){
+			OpenPanel.Controller.handleErrors(e);
 		}
 	},
 	

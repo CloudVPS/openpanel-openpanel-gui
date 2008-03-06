@@ -80,7 +80,7 @@ img, input {
 
 #modalMessageDiv {
 	z-index: 10001;
-	width: 600px;
+	width: 630px;
 	padding-top: 20px;
 	background-color: #e8e8e8;
 	position: absolute;
@@ -105,7 +105,7 @@ img, input {
 	vertical-align: top;
 	margin-left : 10px;
 	margin-bottom : 10px;
-	width: 590px;
+	width: 600px;
 }
 
 .formFieldsButton {
