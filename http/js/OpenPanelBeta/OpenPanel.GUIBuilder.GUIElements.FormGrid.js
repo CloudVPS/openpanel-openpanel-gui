@@ -7,7 +7,7 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid = function(){
 	this.openCoreInstance = {};
 	this.controller= {};
 	this.callBackCommand = "";
-	
+	this.store = {};
 	
 }
 
@@ -73,7 +73,7 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 				sortable : true
 			};
 			
-			if(param.visible == "false"){
+			if(param.visible == false){
 		 		obj.visible = false;
 			} else {
 				
@@ -81,14 +81,14 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 			columns.push(obj);
 		}
 	
-		var store = new Ext.data.SimpleStore({
+		this.store = new Ext.data.SimpleStore({
 	        fields: fields
 	    });
 		console.log("stuff", fields, columns);
-		store.loadData(storeData);
+		this.store.loadData(storeData);
 	
 		this.grid = new Ext.grid.GridPanel({
-	        store: store,
+	        store: this.store,
 	        columns: columns, /*,*/
 	        stripeRows: false,
 	        autoExpandColumn: 'id',
@@ -194,26 +194,27 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 				header: paramName,
 				sortable : true
 			};
-			
-			if(param.visible == "false"){
+			console.log("PARAM VISIBLE ", param);
+			if(param.visible == false){
 		 		obj.visible = false;
+				console.log("HIDE IT");
 			} else {
 				
 			}
 			columns.push(obj);
 		}
-	
-		var store = new Ext.data.SimpleStore({
+		
+		this.store = new Ext.data.SimpleStore({
 	        fields: fields
 	    });
 		console.log("stuff", fields, columns);
-		store.loadData(storeData);
+		this.store.loadData(storeData);
 	
 		this.grid = new Ext.grid.GridPanel({
-	        store: store,
+	        store: this.store,
 	        columns: columns, /*,*/
 	        stripeRows: false,
-	        autoExpandColumn: 'id',
+	        autoExpandColumn: fields[0].name,
 	        height:150,
 	        width:575,
 	        title: this.openCoreObject.title,
@@ -286,16 +287,23 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 		[undefined, 0, 0, Object browserEvent=Event click button=0 type=click]
 		Object id=1003 data=Object json=[3] store=Object fields=[3], undefined, undefined
 		 */
-		console.log(arguments);
-        var record = this.grid.getStore().getAt(rowIndex);  // Get the Record
+		console.log(rowIndex);
+		console.log(this.grid);
+		console.log(this.store);
+		//var store = this.grid.getStore();
+		var record = this.store.getAt(rowIndex);
+        //var record = this.grid.getStore().getAt(rowIndex);  // Get the Record
         var fieldName = this.grid.getColumnModel().getDataIndex(columnIndex); // Get field name
-        var id = record.get("id");
-		console.log(record, fieldName, id);
+       	var id = record.get("id");
+		console.log(typeof(id), id);
 		this.clickGridItem(id);
 	},
 	
 	clickGridItem : function(id){
-		console.log(id);
+		console.log("clickGridItem id " + id);
+		console.log(this);
+		console.log("clickGridItem " ,this.instances);
+		console.log("clickGridItem " ,this.instances[id]);
 		this.formObject.clickGridItem(this.instances[id]);
 	},
 	
