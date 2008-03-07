@@ -80,9 +80,7 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 					iconDivMain.appendChild(classDescription);
 					var title = childObject.title;
 					
-					
 					classDescription.appendChild(document.createTextNode(title));
-					
 					
 					var iconDivRight = document.createElement("div");
 					iconDivRight.setAttribute("class", "iconDivRight");
@@ -93,15 +91,14 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 						OpenPanel.GUIBuilder.GUIElements.IconBar.click(this.getAttribute("OC:Class"))
 					}
 					
-					
 					this.itemElements[childObject.name] = iconLi;
 					
 					var someWidth = Ext.get("c" + childObject.uuid).getWidth();
 					someWidth = someWidth<40?40:someWidth;
-					
-						// this is ugly and it stinks.
-						classIcon.style.width = someWidth + "px";
-						classDescription.style.width = someWidth + "px";
+						
+					// this is ugly and it stinks.
+					classIcon.style.width = someWidth + "px";
+					classDescription.style.width = someWidth + "px";
 					
 				}
 			}

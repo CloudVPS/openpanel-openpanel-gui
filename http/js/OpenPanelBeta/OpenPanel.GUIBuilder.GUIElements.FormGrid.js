@@ -35,13 +35,79 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 		// create headers
 		
 		// create data
-		console.log("createMetaGrid");
-		console.log(instances);
 		var hook = this;
+		var storeData = new Array();
+		var instanceKeys = new Array();
+		
+		for(var key in instances){
+			var instance = instances[key];
+			if(typeof(instance) == "object"){
+				var className = instance["class"];
+				var classInfo = this.formObject.controller.dataManager.getClassInfo(this.openCoreObject.name);
+				var params = classInfo.structure.parameters;
+				var storeDataEntry = new Array();
+				
+				for(var paramKey in params){
+					var param = params[paramKey];
+					storeDataEntry.push(instance[paramKey]);
+				}
+				
+				storeData.push(storeDataEntry);
+			}
+		}
+		
+		
+		var fields = [];
+		var columns = new Array();
+		var className = this.openCoreObject.name;
+		var classInfo = this.formObject.controller.dataManager.getClassInfo(className);
+		var params = classInfo.structure.parameters;
+		
+		for(var paramName in params){
+			var param = params[paramName];
+			fields.push({name : paramName});
+			
+			var obj = {
+				id: paramName,
+				header: paramName,
+				sortable : true
+			};
+			
+			if(param.visible == "false"){
+		 		obj.visible = false;
+			} else {
+				
+			}
+			columns.push(obj);
+		}
+	
+		var store = new Ext.data.SimpleStore({
+	        fields: fields
+	    });
+		console.log("stuff", fields, columns);
+		store.loadData(storeData);
+	
+		this.grid = new Ext.grid.GridPanel({
+	        store: store,
+	        columns: columns, /*,*/
+	        stripeRows: false,
+	        autoExpandColumn: 'id',
+	        height:150,
+	        width:575,
+	        title: this.openCoreObject.title,
+			header: false
+		});
+		
+   	 	this.grid.render(this.targetDiv);
+		
+		var hook = this;
+		this.grid.on("cellclick", function(grid, rowIndex, columnIndex, e) {
+	        hook.cellClick(hook.grid, rowIndex, columnIndex, e);
+		});
+		
 		
 		var tableElement = document.createElement("table");
 		this.gridDiv.appendChild(tableElement);
-		
 		
 		var headers;
 		for(var id in instances){
@@ -126,14 +192,13 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 			var obj = {
 				id: paramName,
 				header: paramName,
-				width: 100
+				sortable : true
 			};
-			if(first == undefined){
-				var first = true;
-				obj.sortable = true;
-			}
+			
 			if(param.visible == "false"){
-				obj.visible = false;
+		 		obj.visible = false;
+			} else {
+				
 			}
 			columns.push(obj);
 		}
@@ -141,28 +206,27 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 		var store = new Ext.data.SimpleStore({
 	        fields: fields
 	    });
-		
+		console.log("stuff", fields, columns);
 		store.loadData(storeData);
 	
 		this.grid = new Ext.grid.GridPanel({
 	        store: store,
 	        columns: columns, /*,*/
-	        stripeRows: true,
+	        stripeRows: false,
 	        autoExpandColumn: 'id',
 	        height:150,
 	        width:575,
 	        title: this.openCoreObject.title,
 			header: false
-			
-	    });
+		});
 		
    	 	this.grid.render(this.targetDiv);
 		
 		var hook = this;
 		this.grid.on("cellclick", function(grid, rowIndex, columnIndex, e) {
 	        hook.cellClick(hook.grid, rowIndex, columnIndex, e);
+		});
 		
-	    }); 
 		/*
 		var hook = this;
 		

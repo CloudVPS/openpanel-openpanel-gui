@@ -12,26 +12,31 @@ OpenPanel.GUIBuilder = {
 	
 	loadTemplate : function(templateName, targetDivName){
 		
+		var targetDiv = document.getElementById(targetDivName);
+		if (targetDiv != undefined) {
+			OpenPanel.GUIBuilder.loadTemplateIntoDiv(templateName, targetDiv);	
+		} else {
+			alert("OpenPanel.GUIBuilder : targetDiv not found");
+		}		
+		
+		
+	},
+	
+	loadTemplateIntoDiv : function(templateName, targetDiv){
 		var f = $j.ajax(
 			{ type: "POST",
 			  url: "templates/" + templateName,
 			  async: false,
 			  dataType: "text"
 			}).responseText;
-			
-				
+		
 		var o = TrimPath.parseTemplate(f);
 		
-		var appDivElement = document.getElementById(targetDivName);
-		if (appDivElement != undefined) {
-			this.targetDiv = appDivElement;
-			this.targetDiv.innerHTML = o.process({ 
-				controller: this.controller 
-			});
+		this.targetDiv = targetDiv;
+		this.targetDiv.innerHTML = o.process({ 
+			controller: this.controller 
+		});
 			
-		} else {
-			alert("OpenPanel.GUIBuilder : targetDiv not found");
-		}
 		
 	},
 	
@@ -78,19 +83,17 @@ OpenPanel.GUIBuilder = {
 				for(var key in this.items.items){
 					var item = this.items.items[key];
 					if(typeof(item) == "object"){
-					
-						console.log(item);
 						var name = item.getName();
 						var value = item.getValue();
 						var initValue = item.initValue();
 						obj[name] = value;
-						console.log(name + " " + value + " " + initValue);
 					}
 				}
 				obj.command = "Login";
 				hook.controller.action(obj);
 	        },
 	
+			
 	        frame:true,
 	        title: 'Log in',
 	        bodyStyle:'padding:5px 5px 0',
@@ -116,7 +119,6 @@ OpenPanel.GUIBuilder = {
 					value: params.password!=undefined?params.password:""
 	            }
 	        ],
-	
 	        buttons: [{
 	            text: 'Ok',
 				handler: function(){
@@ -127,16 +129,15 @@ OpenPanel.GUIBuilder = {
     	});
 
     	simple.render(el);
-
-    	//simple.setPosition(100,100);
+		// var windowSize = OpenPanel.GUIBuilder.getWindowSize();
+		// why does this not work?
+    	simple.setPosition(100, 10);
 		
 	},
 	
 	enterModalMode : function(){
 		var modalDiv = document.getElementById("modal");
 		modalDiv.style.visibility = "visible";
-		
-		
 		
 		OpenPanel.GUIBuilder.onresize();
 		window.onresize = OpenPanel.GUIBuilder.onresize;	
@@ -156,9 +157,10 @@ OpenPanel.GUIBuilder = {
 	},
 	
 	hideModalMessageDiv : function(){
+		console.log("hideModalMessageDiv");
 		var modalMessageDiv = document.getElementById("modalMessageDiv");
 		modalMessageDiv.style.visibility = "hidden";
-		Throbber.stop();
+		
 	},
 	
 	showLoadingDiv : function(){
@@ -173,6 +175,7 @@ OpenPanel.GUIBuilder = {
 		OpenPanel.GUIBuilder.exitModalMode();
 		var loadingDiv = document.getElementById("modalLoadingDiv");
 		loadingDiv.style.visibility = "hidden";
+		Throbber.stop();
 	},
 	
 	onresize : function(){ 
@@ -250,5 +253,10 @@ OpenPanel.GUIBuilder = {
 			
 		return { groupHolder : groupHolder, contentDiv : centerMiddleTd}
 		
+	},
+	
+	goToAnchor : function (sAnchor) {
+		// let's not do this yet
+		// window.location.hash = sAnchor;
 	}
 }

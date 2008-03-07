@@ -9,7 +9,7 @@ OpenPanel.Controller = {
 	guiBuilder: {},
 	selectedRootInstance: "",
 	selectedTabObject: "",
-	pingTimeoutHandler : {},
+	
 	
 	
 	currentRootClass: {},
@@ -299,7 +299,16 @@ OpenPanel.Controller = {
 	},
 	
 	initializePing : function(){
-		this.pingTimeoutHandler = setTimeout("OpenPanel.Controller.ping()", 120000);
+		if (this.pingTimeoutHandler == undefined) {
+			this.pingTimeoutHandler = setTimeout("OpenPanel.Controller.ping()", 120000);
+		}
+	},
+	
+	destroyPingTimeoutHandler : function(){
+		if (this.pingTimeoutHandler != undefined) {
+			clearTimeout(this.pingTimeoutHandler);
+			this.pingTimeoutHandler = undefined;
+		}
 	},
 	
 	ping : function(){
@@ -320,9 +329,7 @@ OpenPanel.Controller = {
 					OpenPanel.Controller.action("Init");
 				} else {
 					errorMsg = OpenCore.DataManager.getErrorMessage();
-					if (this.pingTimeoutHandler != undefined) {
-						clearTimeout(this.pingTimeoutHandler);
-					}
+					OpenPanel.Controller.destroyPingTimeoutHandler();
 					throw new Error(errorMsg);
 				}
 			}
@@ -332,46 +339,57 @@ OpenPanel.Controller = {
 	},
 	
 	handleErrors : function(e){	
-		
+		OpenPanel.GUIBuilder.hideLoadingDiv();
+		clearTimeout(this.pingTimeoutHandler);
 		switch(e.name){
 			case "RPCError":
 				alert(e.name + ": " + e.message+ " : " + e.status);
+				
 			break;
 			
 			case "OpenCoreError":
-				alert(e);
-				if(this.dataManager.getErrorId() == 12288){
-					this.action({ command: "Init"});
-				} else {
-					console.log(OpenCore.DataManager.getErrorId(), errorMsg);
-					//alert(errorMsg); 
+				
+				switch(this.dataManager.getErrorId()){
+					
+					case 12288:
+					case 8193:
+						
+						alert(e);
+						this.action({ command : "Init", msg: e.message})
+						OpenPanel.Controller.proceedAfterError();
+					break;
+					default:
+						alert(e);
+					break;
+					
+					
 				}
+				
 			break;
 			
 			default:
-				alert(e.name + ": " + e.message);
-				clearTimeout(this.pingTimeoutHandler);
-			
+				//alert(e.name + ": " + e.message);
+				console.log(typeof(this.pingTimeoutHandler));
+					
+				
+				var targetDiv = OpenPanel.GUIBuilder.createPopUp();
+				this.error = new Array();
+				for(var errorKey in e){
+					this.error.push([errorKey, e[errorKey]]);
+				}
+				
+				OpenPanel.GUIBuilder.loadTemplateIntoDiv("fatalError.html", targetDiv);
+				
+				
 			break;
 		}
-		if (1) {
-	        
-	   
-	    } else {
-			var errorMsg;
-			if (this.dataManager.getErrorId() != 0) {
-				errorMsg = OpenCore.DataManager.getErrorMessage();
-			} else {
-				errorMsg = e.message;
-			}
-			
-			
-		}
-		
 		for(var key in e){
-			console.log(key, e[key]);
+			console.log(key +  ": " + e[key]);
 		}
-		
-		
+	},
+	
+	proceedAfterError : function(){
+		OpenPanel.GUIBuilder.hideModalMessageDiv();
+		OpenPanel.Controller.initializePing();
 	}
 }

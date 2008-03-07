@@ -32,7 +32,8 @@ OpenPanel.Command.Init  = {
 					// OpenCore.Debug.createDebugList();
 					OpenPanel.Controller.initializePing();
 				} else {
-					this.controller.action({ command : "Init", msg: "login failed"})
+					
+					//this.controller.action({ command : "Init", msg: "login failed"})
 				}
 			}
 		}

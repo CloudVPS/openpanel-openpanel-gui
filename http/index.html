@@ -35,6 +35,8 @@
 	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.Command.ClickItemListItem.js"></script>
 	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.Command.ClickTabBarItem.js"></script>
 	<script type="text/javascript" src="js/OpenPanelBeta/Errors.js"></script>
+	<script type="text/javascript" src="js/OpenPanelBeta/HTTPStatus.js"></script>
+	<script type="text/javascript" src="js/OpenPanelBeta/Throbber.js"></script>
 	
 
 	<script type="text/javascript">
@@ -43,50 +45,9 @@
 			console = { log: function(){}}
 		}
 		
-		var Throbber = {
-			maxFrames : 12,
-			i : 1,
-			timeout : 100,
-			targetDiv : {},
-			throbberTimeout : {},
-			
-			start : function(){
-				
-				this.throbberTimeout = setTimeout("Throbber.f()",400);
-			},
-			
-			stop : function(){
-				clearTimeout(this.throbberTimeout);
-			},
-			
-			f : function(){
-				if(this.i < this.maxFrames){
-					this.i++;
-				} else {
-					this.i = 1;
-				}
-				this.animate();
-				this.start();
-			},
-			
-			setTargetDiv : function(targetDiv){
-				this.targetDiv = targetDiv;
-				this.targetDiv.setAttribute("class", "throbber");
-				console.log(this.targetDiv);
-			},
-			
-			animate : function(){
-				var pic = new Image(50,50); 
-				var imageUrl = "/images/gui/zoomspin/zoom-spin-" + this.i+ ".png";
-				pic.src = imageUrl;
-				this.targetDiv.innerHTML = "<img src=\""+imageUrl+"\"/>";
-			}
-		}
 		
 		
 		$j(document).ready(function(){
-				
-				
 				OpenCore.RPC.RequestHandler.setOpenCoreURL("/fake-opencore-proxy/json");
 				
 				OpenCore.DataManager.setRPC(OpenCore.RPC);
@@ -100,11 +61,11 @@
 				
 				OpenPanel.Controller.action( 
 				{
-					command: "Login",
+					command: "Init",
 					userName: "openadmin",
 					password: "foobar"
 				});
-				//OpenPanel.GUIBuilder.hideLoadingDiv();
+				
 			}
 			
 		);

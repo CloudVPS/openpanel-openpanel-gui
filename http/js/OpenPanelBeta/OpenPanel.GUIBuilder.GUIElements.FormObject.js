@@ -38,7 +38,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		// divs maken
 		if (this.openCoreObject != undefined) {
 			this.init();
-			this.targetDiv.innerHTML = "";
+			this.targetDiv.innerHTML = "<a name=\"" + this.openCoreObject.name + "\"/>";
 			this.createDivs();
 			if (this.openCoreObject.classInfo == undefined || (this.openCoreObject.classInfo.info != undefined && this.openCoreObject.classInfo.info.parent == undefined)) {
 				this.createTopLevelForm();
@@ -578,7 +578,6 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 				console.log("is not undefined");
 				console.log(instance);
 				this.currentMetaInstance = instance;
-				
 			} else {
 				// errors here
 			}
@@ -593,17 +592,20 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		this.createFields(openCoreObject, actualInstance, "", this.fieldsDiv);
 		// create childFormObjects
 		this.childFormObjectsDiv.innerHTML = "";
+		var first;
 		for (var childOpenCoreObjectName in openCoreObject.children) {
 		
 			var childOpenCoreObject = openCoreObject.children[childOpenCoreObjectName];
-			
+			if(first == undefined){
+				first = childOpenCoreObject;
+			}
 			var someDiv = document.createElement("div");
 			this.childFormObjectsDiv.appendChild(someDiv);
 			if (typeof(childOpenCoreObject) == "object" && childOpenCoreObject.classInfo["class"].metabase == "") {
 				this.createChildFormObject(childOpenCoreObject, actualInstance.uuid, someDiv, this.controller);
 			}
 		}
-	
+		OpenPanel.GUIBuilder.goToAnchor(first.name);
 	},
 	
 	createChildFormObject : function(openCoreObject, parentUUID, targetDiv, controller){

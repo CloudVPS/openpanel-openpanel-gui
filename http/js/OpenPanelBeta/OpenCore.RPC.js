@@ -26,7 +26,7 @@ OpenCore.RPC.RequestHandler = {
 		);
 		var responseText = response.responseText;
 		if(response.status != 200){
-			throw RPCError(response.statusText, response.status);
+			throw RPCError(HTTPStatus.getStatus(response.status), response.status);
 			
 		}
 		return responseText;
@@ -68,7 +68,7 @@ OpenCore.RPC.RequestHandler = {
 	asynchronizedRequestReturn : function(requestResult){
 		try {
 			if(requestResult.status != 200){
-				throw RPCError(requestResult.statusText, requestResult.status);
+				throw RPCError(HTTPStatus.getStatus(requestResult.status), requestResult.status);
 			}
 			OpenCore.RPC.RequestHandler.asynchronizedRequestCount--;
 			if(requestResult.argument != undefined && requestResult.argument.callBackObject != undefined){
