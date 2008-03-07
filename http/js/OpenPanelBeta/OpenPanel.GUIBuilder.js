@@ -257,6 +257,7 @@ OpenPanel.GUIBuilder = {
 	
 	goToAnchor : function (sAnchor) {
 		// let's not do this yet
-		// window.location.hash = sAnchor;
+		console.log("XXXX goToAnchor", sAnchor);
+		window.location.hash = sAnchor;
 	}
 }

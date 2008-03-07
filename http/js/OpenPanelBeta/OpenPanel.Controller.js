@@ -23,7 +23,6 @@ OpenPanel.Controller = {
 			this.lastCommand = actionObject.command;
 			this.lastArgumentObject = actionObject;
 			var actionObject = this.lastArgumentObject;
-			console.log(actionObject.command);
 			var commandObject = OpenPanel.Command[actionObject.command];
 			
 			if(commandObject != undefined){
@@ -32,11 +31,6 @@ OpenPanel.Controller = {
 			} else {
 				
 				switch (actionObject.command) {
-					case "LoginDone":
-						console.log("controller");
-						console.log(actionObject);
-					break;
-					
 					case "updateRootInstance":
 						if(actionObject.openCoreObject != undefined && actionObject.instance != undefined && actionObject.formValues != undefined){
 							this.currentRootClassInstance = actionObject.instance;

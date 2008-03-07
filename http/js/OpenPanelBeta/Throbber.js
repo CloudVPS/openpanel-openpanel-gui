@@ -23,11 +23,8 @@ var Throbber = {
 					this.i = 1;
 				}
 				this.animate();
-				if (this.needToStop == true) {
-					this.needToStop = false;
-				} else {
-					this.start();
-				}
+				this.start();
+				
 			},
 			
 			setTargetDiv : function(targetDiv){

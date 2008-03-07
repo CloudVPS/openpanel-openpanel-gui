@@ -25,7 +25,7 @@
 	this.fieldsDiv;
 	this.buttonsDiv;
 	this.childFormObjectsDiv;
- }
+}
  
 OpenPanel.GUIBuilder.GUIElements.FormObject.setGuiBuilder = function(guiBuilder){
 	this.guiBuilder = guiBuilder;
@@ -164,7 +164,6 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 				this.createCreateOption(true);
 			}
 		}
-		
 	},
 	
 	createSubLevelFormAsync : function createSubLevelFormAsync(stateObject){
@@ -274,9 +273,6 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 							this.createDeleteOption();
 						}
 					}
-					
-					
-					
 				}
 			} else {
 				// no instances, show create new instance
@@ -292,12 +288,8 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 						this.createCreateOption(true);
 					}
 				}
-				
-				
 			}
 				break;
-			
-			
 		}
 		
 	},
@@ -562,50 +554,11 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 	},
 	
 	clickGridItem : function(instance){
-		console.log("clickGridItem " + instance["class"] + this.openCoreObject.name);
-		var actualInstance;
-		this.setCurrentInstance(instance);
-		
-		// this has to go ^^
-		
-		if (this.openCoreObject.meta == true) {
-			console.log(this.openCoreObject.name + " is meta");
-			var record = this.controller.dataManager.getRecord(instance["class"], instance.id);
-			console.log("FormObject:clickGridItem record");
-			console.log(record);
-			instance = record[instance["class"]];
-			if (instance != undefined) {
-				console.log("is not undefined");
-				console.log(instance);
-				this.currentMetaInstance = instance;
-			} else {
-				// errors here
-			}
-		}
-		actualInstance = instance;
-		console.log(instance);
-		
-		var openCoreObject = this.controller.dataManager.getOpenCoreObjectByName(actualInstance["class"]);
-		console.log("clickGridItem2 " + openCoreObject.name);
-		
-		
-		this.createFields(openCoreObject, actualInstance, "", this.fieldsDiv);
-		// create childFormObjects
-		this.childFormObjectsDiv.innerHTML = "";
-		var first;
-		for (var childOpenCoreObjectName in openCoreObject.children) {
-		
-			var childOpenCoreObject = openCoreObject.children[childOpenCoreObjectName];
-			if(first == undefined){
-				first = childOpenCoreObject;
-			}
-			var someDiv = document.createElement("div");
-			this.childFormObjectsDiv.appendChild(someDiv);
-			if (typeof(childOpenCoreObject) == "object" && childOpenCoreObject.classInfo["class"].metabase == "") {
-				this.createChildFormObject(childOpenCoreObject, actualInstance.uuid, someDiv, this.controller);
-			}
-		}
-		OpenPanel.GUIBuilder.goToAnchor(first.name);
+		this.controller.action({
+			command : "ClickGridItem",
+			formObject : this,
+			instance : instance	
+		})
 	},
 	
 	createChildFormObject : function(openCoreObject, parentUUID, targetDiv, controller){
@@ -662,7 +615,6 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 	createCreatePopUp : function(targetDiv, callBack){
 		var popUpDiv = this.guiBuilder.createPopUp();
 	}
-	
   }
  
  
