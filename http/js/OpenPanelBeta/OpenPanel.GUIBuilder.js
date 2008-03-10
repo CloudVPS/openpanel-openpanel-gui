@@ -76,8 +76,7 @@ OpenPanel.GUIBuilder = {
 		
 		var simple = new Ext.FormPanel({
 	        labelWidth: 75, // label settings here cascade unless overridden
-	        onSubmit: function(arg){ console.log(arg); },
-			submit: function() {
+	        submit: function() {
 	           
 				var obj = {};
 				for(var key in this.items.items){
@@ -257,7 +256,6 @@ OpenPanel.GUIBuilder = {
 	
 	goToAnchor : function (sAnchor) {
 		// let's not do this yet
-		console.log("XXXX goToAnchor", sAnchor);
 		window.location.hash = sAnchor;
 	}
 }

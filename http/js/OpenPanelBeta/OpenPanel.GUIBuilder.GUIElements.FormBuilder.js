@@ -46,10 +46,8 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 		}
 		
 		this.rootFormObject = new  OpenPanel.GUIBuilder.GUIElements.FormObject();
-		console.log("--");
 		this.rootFormObject.setOpenCoreObject(this.openCoreObject);
-		console.log("--");
-
+		
 		this.rootFormObject.setParentUUID(this.parentUUID);
 		this.rootFormObject.setTargetDiv(this.formObjectHolder);
 		this.rootFormObject.setController(this.controller);

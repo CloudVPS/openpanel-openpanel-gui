@@ -314,7 +314,11 @@ OpenPanel.Controller = {
 		
 		try {
 			if(callBackArguments.data == undefined){
-				throw new Error("no data");
+				var d = "";
+				for(var key in callBackArguments){
+					d+=key + " " + callBackArguments[key] + "\n";
+				}
+				throw new Error("Reply is very erroneous: " + d);
 			} else {
 				
 				if(OpenCore.DataManager.errorId == 0){

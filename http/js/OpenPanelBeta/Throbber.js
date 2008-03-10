@@ -30,7 +30,6 @@ var Throbber = {
 			setTargetDiv : function(targetDiv){
 				this.targetDiv = targetDiv;
 				this.targetDiv.setAttribute("class", "throbber");
-				console.log(this.targetDiv);
 			},
 			
 			animate : function(){

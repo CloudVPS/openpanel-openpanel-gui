@@ -12,6 +12,8 @@ OpenPanel.GUIBuilder.GUIElements.FormFields = function(){
 	this.formPanel = {};
 	this.ZIndex = 0;
 	this.isCreate = false;
+	this.formItems = {};
+	this.items = [];
 }
 
 OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
@@ -56,21 +58,32 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 				case "ref":
 					item = this.createReference(fieldName, obj);
 				break;
+				
+				default:
+					item = undefined;
+				break;
 			}
 			
-			if(obj.group != undefined){
-				item.disabled = true;
-			}
 			
-			if(obj.required == true){
-				item.allowBlank = false;
-			}
-			
-			if(obj.regexp != undefined && obj.regexp!=""){
+			if (item != undefined) {
+				if (obj.group != undefined) {
+					if(this.instance[fieldName]!=undefined){
+						item.disabled = false;
+					} else {
+						item.disabled = true;
+					}
+				}
+				
+				if (obj.required == true) {
+					item.allowBlank = false;
+				}
+				
+				if (obj.regexp != undefined && obj.regexp != "") {
 				//item.regex = new RegEx(obj.regexp);
+				}
+				
+				return item;
 			}
-			
-			return item;
 		}
 	},
 	
@@ -78,44 +91,41 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 		// get grouped parameters
 		var hook = this;
 		var grouped = {};
-		
 		for(var paramName in this.openCoreObject.classInfo.structure.parameters){
-			
 			var parameter = this.openCoreObject.classInfo.structure.parameters[paramName];
-			if(parameter.group != undefined){
+			if(parameter.group == fieldName){
 				grouped[paramName] = parameter;
 			}
 		}
-		
 		var radios = [];
 		
 		for(var paramName in grouped){
+			if(this.instance[paramName]!=undefined){
+				checked = true;
+			} else {
+				checked = false;
+			}
+			
 			var radio = {
+				checked : checked,
 				value:1,
 				boxLabel:paramName,
 				listeners:{
 					'check':function(r,c){
-						console.log(r.boxLabel+": "+(c?"checked":"unchecked") + " " + this.boxLabel);
-						console.log(hook.formPanel);
 						
 						var foundStuff = hook.formPanel.find("name", this.boxLabel);
 						
 						if (c == true) {
 							for(var i = 0;i< foundStuff.length;i++){
-								console.log("found to enable : " + i);
-								console.log(foundStuff[i]);
 								foundStuff[i].enable();
 								foundStuff[i].setVisible(true);
 							}
 						} else {
 							for(var i = 0;i< foundStuff.length;i++){
-								console.log("found to disable : " + i);
-								console.log(foundStuff[i]);
 								foundStuff[i].disable();
 								foundStuff[i].setVisible(true);
 							}
 						}
-						
 					}
 				}
 			}
@@ -295,7 +305,10 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 			var groupHolder = shizne.groupHolder;
 			var contentDiv = shizne.contentDiv;
 			this.fieldsDiv.appendChild(groupHolder);
+			
+			
 			this.formPanel.render(contentDiv);
+			
 			if(this.openCoreObject.canUpdate == false){
 				this.formPanel.disable();
 			}
@@ -311,88 +324,66 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 	
 	createFormPanel : function(instance){
 		var parameters = this.openCoreObject.classInfo.structure.parameters;
-		var items = [];
+		
 		var itemsLeft = [];
 		var itemsRight = [];
 		var a = 0;
 		this.fieldValues = {};
 		
 		var hook = this;
-		var items = {};
+		this.items = {};
+		
 		for(var key in parameters){
 			var parameter = parameters[key];
 			var fieldName = key;
 			var description = parameter.description;
 			var fieldType = parameter.type;
-			var item = this.createItem(key, parameter);
-			
-			if(instance[key]!=undefined){
-				console.log("FormFields:instance [" + key + " " + instance[key] + "]");
-				switch(parameter.type){
-					case "bool":
-						if(instance[key] == "true"){
-							item.checked = true;
-						} else {
-							item.checked = false;
-						}
-					break;
-					
-					case "ref":
-						var referenceObject = this.formObject.controller.dataManager.getOpenCoreObjectByName(parameter.refclass);
-						if(referenceObject != undefined){
-							var referenceInstances = referenceObject.getInstances();
-							for(var metaid in referenceInstances){
-								var referenceInstance = referenceInstances[metaid];
-								if(referenceInstance.uuid == instance[key]){
-									item.value = metaid;
-								}
-								console.log(referenceInstance.uuid + " " + instance[key]);
+			var item = this.createItem(fieldName, parameter);
+			if (item != undefined) {
+				if (instance[fieldName] != undefined) {
+					switch (parameter.type) {
+						case "bool":
+							if (instance[fieldName] == "true") {
+								item.checked = true;
+							} else {
+								item.checked = false;
 							}
-						}
-					break;
-					
-					case "group":
-						// this should happen once the form is drawn. this pretty much sucks
-						
-						var radios = item.radios;
-						
-						
-						for(var i=0;i<radios.length;i++){
-							var radio = radios[i];
-							if(typeof(radio) == "object"){
-								console.log(items[radio.boxLabel]);
-									
-								if (this.instance[radio.boxLabel] != undefined) {
-									radio.checked = true;
-									items[radio.boxLabel].disabled = false;
-								} else {
-									items[radio.boxLabel].disabled = true;
+							break;
+							
+						case "ref":
+							var referenceObject = this.formObject.controller.dataManager.getOpenCoreObjectByName(parameter.refclass);
+							if (referenceObject != undefined) {
+								var referenceInstances = referenceObject.getInstances();
+								for (var metaid in referenceInstances) {
+									var referenceInstance = referenceInstances[metaid];
+									if (referenceInstance.uuid == instance[fieldName]) {
+										item.value = metaid;
+									}
 								}
 							}
-						}
-						console.log(this.instance);
-					
-					break;
-					
-					default:
-						item.value = instance[key];
-					
+							break;
+							
+						
+						default:
+							item.value = instance[fieldName];
+							break;	
+					}
 					
 				}
-			}
-			
-			if (this.ZIndex != 0) {
-				item["z-index"] = this.ZIndex;
-			}
-			
-			items[key] = item;
-			if (a == 0) {
-				itemsLeft.push(item);
-				a++;
-			}
-			else {
-				itemsRight.push(item);
-				a = 0;
+				
+				
+				if (this.ZIndex != 0) {
+					item["z-index"] = this.ZIndex;
+				}
+				
+				this.items[fieldName] = item;
+				if (a == 0) {
+					itemsLeft.push(item);
+					a++;
+				} else {
+					itemsRight.push(item);
+					a = 0;
+				}
 			}
 		}
 		
@@ -401,7 +392,7 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 			
 			var item = this.createChildUsersPullDown("owner");
 			item.value = this.formObject.controller.currentUser;
-			items[key] = item;
+			this.items[fieldName] = item;
 			if (a == 0) {
 				itemsLeft.push(item);
 				a++;
@@ -411,15 +402,16 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 				a = 0;
 			}
 		}
+		
+		var formItems;
 			
 		if(itemsRight.length == 0){
-			items = itemsLeft;
+			formItems = itemsLeft;
 		} else {
-			items = [{
+			formItems = [{
 	            layout:'column',
 				
-				
-	            items:[{
+				items:[{
 	                columnWidth:.5,
 	                layout: 'form',
 	                items: itemsLeft
@@ -455,10 +447,7 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 		
 		this.formPanel = new Ext.FormPanel({
 	        
-	       
-			/**/
-			
-			header: false,
+	       	header: false,
 			frame:false,
 			hideBorders: true,
 			autoScroll: true,
@@ -467,7 +456,7 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 	        width: 600,
 			buttonAlign : "right",
         	
-	       	onSubmit: function(arg){ console.log(arg); },
+	       	// uhuh onSubmit: function(arg){ console.log(arg); },
 			submit: function() {
            		var obj = this.getForm().getValues();
 				var objectId = hook.openCoreObject.singleton == true? hook.openCoreObject.classInfo["class"].singleton:obj.id;
@@ -484,10 +473,10 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 				}
 				
 	        },
-	        items: items,
+	        items: formItems,
 			buttons: buttons
 	    });
-				
+		
 	},
 	
 	setZIndex : function(zIndex){

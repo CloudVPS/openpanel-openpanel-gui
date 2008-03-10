@@ -181,12 +181,9 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 					}
 					
 					if (someItem == currentItemElement) {
-						console.log(someItem);
 						someItem.setAttribute("class", "tabSelected");
-						
 					} else {
 						someItem.setAttribute("class", "tab");
-						
 					}
 					
 					this.setDelimiterClass(someItem, false);
@@ -225,8 +222,6 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 	},
 	
 	setDelimiterClass : function(tabElement, isSelected){
-		console.log("tabElement");
-		console.log(tabElement);
 		if(tabElement.leftDelimiter != undefined){
 			tabElement.leftDelimiter.setAttribute("class", isSelected==true?"tabDelimiterSelected":"tabDelimiter");
 		} 

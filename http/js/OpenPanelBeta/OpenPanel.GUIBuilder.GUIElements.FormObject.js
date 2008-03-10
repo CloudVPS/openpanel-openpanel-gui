@@ -57,7 +57,6 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		//			instantieer nieuwe childobjects met juiste instance
 		
 	  	this.isBuilt = true;
-		console.log(" ");
 	},
 	
 	init : function(){
@@ -359,7 +358,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 			// quota debug stuff
 			createOne.appendChild(s);
 			var q = document.createElement("ul");
-			createOne.appendChild(q);
+			//createOne.appendChild(q);
 			
 			for(var key in canAdds){
 				var quotum = this.controller.dataManager.getQuotumByClassName(key);

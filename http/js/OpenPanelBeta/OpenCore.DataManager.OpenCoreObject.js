@@ -211,9 +211,6 @@ OpenCore.DataManager.OpenCoreObject.prototype = {
 		if(resultObject != undefined){
 			console.log(resultObject);
 			this.instances = resultObject[this.name];
-			console.log(this);
-			console.log(this.instances);
-			console.log("DONER");
 		}
 		
 		var callBackObject;

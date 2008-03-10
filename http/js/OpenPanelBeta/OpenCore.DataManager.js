@@ -51,8 +51,6 @@ OpenCore.DataManager = {
 	},
 	
 	checkQuotum : function(className){
-		console.log("quota " + className);
-		console.log(className);
 		var quotum = this.quotaByClassName[className];
 		if(quotum!=undefined){
 			return true;
@@ -72,7 +70,7 @@ OpenCore.DataManager = {
 	
 	getClassInfo: function(className){
 		
-		if(this.classInfos == undefined){
+		if(this.classInfos == undefined || className == "ROOT"){
 			var g = this.getWorld();
 			try {
 				if(g.body != undefined && g.body.data != undefined && g.body.data.body!=undefined && g.body.data.body.classes != undefined){
@@ -166,7 +164,6 @@ OpenCore.DataManager = {
 		r.addHeader("session_id", this.sessionId);
 		r.addBody("classid", className);
 		r.addBody("objectid", objectid);
-		console.log(r);
 		var requestResult = this.getRequestResult(r);
 		if (requestResult.body != undefined 
 		&& requestResult.body.data != undefined 
@@ -329,7 +326,7 @@ OpenCore.DataManager = {
 				callBackArguments = callBackWrapper.callBackArguments;
 			}
 			
-			if(callBackWrapper.data != undefined){
+			if(callBackWrapper.data != undefined && callBackWrapper.data.body!=undefined && callBackWrapper.data.body.data !=undefined){
 				data = callBackWrapper.data.body.data;
 				callBackArguments.data = data;
 			}
@@ -364,8 +361,6 @@ OpenCore.DataManager = {
 	
 	
 	getRecordsAsyncDone : function(callBackWrapper){
-		console.log("getRecordsAsyncDone");
-		console.log(callBackWrapper);
 		var callBackObject;
 		var callBackFunction;
 		var callBackArguments;
@@ -428,7 +423,6 @@ OpenCore.DataManager = {
 		var r = [];
 		for(var className in this.openCoreObjects){
 			var openCoreObject = this.openCoreObjects[className];
-			console.log(className);
 			if(openCoreObject.classInfo!=undefined && 
 				openCoreObject.classInfo["class"]!=undefined && 
 				openCoreObject.classInfo["class"].metabase == metaName){

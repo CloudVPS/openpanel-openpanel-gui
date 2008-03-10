@@ -14,8 +14,6 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid = function(){
 OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 		
 	build : function(){
-		console.log("grid : " + this.openCoreObject.name);
-		
 		if(this.targetDiv!=undefined){
 			this.targetDiv.innerHTML = "";
 			
@@ -84,7 +82,6 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 		this.store = new Ext.data.SimpleStore({
 	        fields: fields
 	    });
-		console.log("stuff", fields, columns);
 		this.store.loadData(storeData);
 	
 		this.grid = new Ext.grid.GridPanel({
@@ -105,7 +102,7 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 	        hook.cellClick(hook.grid, rowIndex, columnIndex, e);
 		});
 		
-		
+		/*
 		var tableElement = document.createElement("table");
 		this.gridDiv.appendChild(tableElement);
 		
@@ -153,6 +150,7 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 				}
 			}
 		}
+		*/
 	},
 	
 	createGrid : function(instances){
@@ -194,11 +192,8 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 				header: paramName,
 				sortable : true
 			};
-			console.log("PARAM VISIBLE ", param);
 			if(param.visible == false){
 		 		obj.visible = false;
-				console.log("HIDE IT");
-			} else {
 				
 			}
 			columns.push(obj);
@@ -207,7 +202,6 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 		this.store = new Ext.data.SimpleStore({
 	        fields: fields
 	    });
-		console.log("stuff", fields, columns);
 		this.store.loadData(storeData);
 	
 		this.grid = new Ext.grid.GridPanel({
@@ -287,23 +281,15 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 		[undefined, 0, 0, Object browserEvent=Event click button=0 type=click]
 		Object id=1003 data=Object json=[3] store=Object fields=[3], undefined, undefined
 		 */
-		console.log(rowIndex);
-		console.log(this.grid);
-		console.log(this.store);
 		//var store = this.grid.getStore();
 		var record = this.store.getAt(rowIndex);
         //var record = this.grid.getStore().getAt(rowIndex);  // Get the Record
         var fieldName = this.grid.getColumnModel().getDataIndex(columnIndex); // Get field name
        	var id = record.get("id");
-		console.log(typeof(id), id);
 		this.clickGridItem(id);
 	},
 	
 	clickGridItem : function(id){
-		console.log("clickGridItem id " + id);
-		console.log(this);
-		console.log("clickGridItem " ,this.instances);
-		console.log("clickGridItem " ,this.instances[id]);
 		this.formObject.clickGridItem(this.instances[id]);
 	},
 	

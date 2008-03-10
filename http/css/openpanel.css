@@ -76,9 +76,9 @@ img, input {
 	z-index: 10000;
 	background-color: #000;
 	/* for IE */
-	filter:alpha(opacity=40);
+	filter:alpha(opacity=0);
 	/* CSS3 standard */
-	opacity:0.4;
+	opacity:0.0;
 	visibility: hidden;
 }
 
