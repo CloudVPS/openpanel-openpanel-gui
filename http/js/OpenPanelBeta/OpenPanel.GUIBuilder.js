@@ -180,6 +180,7 @@ OpenPanel.GUIBuilder = {
 	onresize : function(){ 
 		var modalDiv = document.getElementById("modal");
 		var windowSizes = OpenPanel.GUIBuilder.getWindowSize();
+		console.log("windowSizes", windowSizes);
 		modalDiv.style.width = windowSizes.width + "px";
 		modalDiv.style.height = windowSizes.height + "px";
 	},
@@ -189,7 +190,7 @@ OpenPanel.GUIBuilder = {
 		  if( typeof( window.innerWidth ) == 'number' ) {
 		    //Non-IE
 		    myWidth = window.outerWidth;
-		    myHeight = window.outerHeight;
+		    myHeight = window.innerHeight;
 		  } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
 		    //IE 6+ in 'standards compliant mode'
 		    myWidth = document.documentElement.clientWidth;
@@ -199,7 +200,7 @@ OpenPanel.GUIBuilder = {
 		    myWidth = document.body.clientWidth;
 		    myHeight = document.body.clientHeight;
 		  }
-		  return { width: myWidth, height: myHeight}
+		  return { width: myWidth - 4, height: myHeight - 8}
 	},
 	
 	drawGroup: function(){
@@ -256,6 +257,7 @@ OpenPanel.GUIBuilder = {
 	
 	goToAnchor : function (sAnchor) {
 		// let's not do this yet
+		console.log("sAnchor", sAnchor);
 		window.location.hash = sAnchor;
 	}
 }

@@ -1,3 +1,4 @@
+
 body {
 	background-image: url(/images/gui/nothernlightsbg.jpg);
 	background-repeat: no-repeat;
@@ -66,12 +67,9 @@ img, input {
 	background-image : url(/images/gui/groupLevel1BottomRight.gif);
 }
 
-
-
 #modal {
 	position: absolute;
 	width: 650px;
-	height: 1000px;
 	float:left;
 	z-index: 10000;
 	background-color: #000;
@@ -103,11 +101,12 @@ img, input {
 
 #modalLoadingDiv {
 	z-index: 1000000;
-	padding-top: 200px;
-	width: 100%;
+	margin-top: 200px;
+	width: 99%;
 	text-align: center;
 	visibility: hidden;
 	position: absolute;
+	height: 0px;
 }
 
 #modalMessageContent {

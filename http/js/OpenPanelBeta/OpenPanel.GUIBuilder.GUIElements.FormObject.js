@@ -38,7 +38,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		// divs maken
 		if (this.openCoreObject != undefined) {
 			this.init();
-			this.targetDiv.innerHTML = "<a name=\"" + this.openCoreObject.name + "\"/>";
+			this.targetDiv.innerHTML = "";
 			this.createDivs();
 			if (this.openCoreObject.classInfo == undefined || (this.openCoreObject.classInfo.info != undefined && this.openCoreObject.classInfo.info.parent == undefined)) {
 				this.createTopLevelForm();
@@ -83,6 +83,9 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		this.fieldsDiv.setAttribute("id", "formFields");
 		this.targetDiv.appendChild(this.fieldsDiv);
 		
+		var anchorDiv = document.createElement("a");
+		anchorDiv.setAttribute("name", this.openCoreObject.name);
+		this.targetDiv.appendChild(anchorDiv);
 		
 		this.childFormObjectsDiv = document.createElement("div");
 		this.childFormObjectsDiv.setAttribute("id", this.openCoreObject.name + ":childFormObjects");

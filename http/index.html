@@ -45,10 +45,19 @@
 		if(typeof(console) != 'object'){
 			console = { log: function(){}}
 		}
-		
-		
+		function findPos(obj) {
+			var curleft = curtop = 0;
+			if (obj.offsetParent) {
+				do {
+					curleft += obj.offsetLeft;
+					curtop += obj.offsetTop;
+				} while (obj = obj.offsetParent);
+			}
+			return [curleft,curtop];
+		}
 		
 		$j(document).ready(function(){
+				
 				OpenCore.RPC.RequestHandler.setOpenCoreURL("/fake-opencore-proxy/json");
 				
 				OpenCore.DataManager.setRPC(OpenCore.RPC);
@@ -73,25 +82,16 @@
 			
 	</script>
 </head>
-<body><div id="modalLoadingDiv"></div>
+<body>
+	
+	
+	<div id="modalLoadingDiv"></div>
 	<div id="modalMessageDiv">
 		<div id="modalMessageContent"></div>
 	</div>
 	<div id="modal"></div>
 	<center>
 		<div id="app"></div>
-		
-		<div id="debug">
-			<div>
-				<div id="debugList"></div>
-			</div>
-			<div>
-				<div id="controllerDebug"></div>
-			</div>
-			<div>
-				<div id="debugFormObjectList"></div>
-			</div>
-		</div>
 	</center>
 </body>
 </html>

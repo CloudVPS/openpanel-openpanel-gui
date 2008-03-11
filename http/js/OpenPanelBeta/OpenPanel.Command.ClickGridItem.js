@@ -27,7 +27,7 @@ OpenPanel.Command.ClickGridItem  = {
 		
 		
 		formObject.createFields(openCoreObject, actualInstance, "", formObject.fieldsDiv);
-		// OpenPanel.GUIBuilder.goToAnchor(openCoreObject.name);
+		
 		// create childFormObjects
 		formObject.childFormObjectsDiv.innerHTML = "";
 		var first = true;
@@ -44,6 +44,8 @@ OpenPanel.Command.ClickGridItem  = {
 				}
 			}
 		}
+		
+		OpenPanel.GUIBuilder.goToAnchor(formObject.openCoreObject.name);
 		
 	}
 }

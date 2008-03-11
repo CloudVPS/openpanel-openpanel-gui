@@ -191,7 +191,7 @@ OpenPanel.Controller = {
 				}
 			}
 			
-				OpenCore.Debug.controllerDebug(this);
+				//OpenCore.Debug.controllerDebug(this);
 				console.log("---------------------------");
 		} catch (e) {
 			// errors are caught here
