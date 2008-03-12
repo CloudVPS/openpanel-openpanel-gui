@@ -69,6 +69,14 @@ OpenCore.DataManager.OpenCoreObject.prototype = {
 		}
 	},
 	
+	getParameterCount : function(){
+		var i=0;
+		for(var key in this.classInfo.structure.parameters){
+			i++;
+		}	
+		
+		return i;
+	},
 	getObjectByName:function(name){
 		if(OpenCore.DataManager.OpenCoreObject.openCoreObjects[name]!=undefined){
 			return OpenCore.DataManager.OpenCoreObject.openCoreObjects[name];

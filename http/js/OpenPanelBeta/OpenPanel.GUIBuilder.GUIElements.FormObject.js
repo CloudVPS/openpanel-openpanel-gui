@@ -131,7 +131,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 				console.log(this.currentInstance);
 				this.createFields(this.openCoreObject, this.currentInstance, "", targetDiv);
 				
-			} else if (this.openCoreObject.canGetInfo == true) {
+			} else { //if (this.openCoreObject.canGetInfo == true) {
 				console.log("can not update");
 				// not updateable yet able to show some info
 				if (this.openCoreObject.singleton == true && this.openCoreObject.canDelete == true) {
@@ -148,8 +148,6 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 				
 				this.createFields(this.openCoreObject, this.currentInstance, "", targetDiv);
 			
-			} else {
-			// nothing goes from here, there's nothing here to see
 			}
 			
 			// DELETE
@@ -195,10 +193,10 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 			break;
 			case "getInstancesByParentUUIDDone":
 			this.instances = this.openCoreObject.instances;
-				if (this.instances != undefined && typeof(this.openCoreObject.getFirstInstance()) == "object") {
-				// there are instances
-				
-				
+			if (this.instances != undefined && typeof(this.openCoreObject.getFirstInstance()) == "object") {
+			// there are instances
+			
+			
 				var instance = this.getPreviousInstance();
 				if (instance != undefined) {
 					this.setCurrentInstance(instance);
@@ -238,7 +236,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 					// the grid should always be displayed with non meta values
 					console.log("create Grid for " + this.openCoreObject.name);
 					console.log(this.instances);
-					this.createGrid(this.openCoreObject, this.instances, "callBackCommand", this.gridDiv, {});
+					this.createGrid(this.openCoreObject, this.instances, "callBackCommand", this.gridDiv, {}, this.currentInstance);
 					// here's where we have to check for meta stuff
 					this.createFields(actualOpenCoreObject, actualInstance, "", this.fieldsDiv);
 					
@@ -274,6 +272,11 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 						if (this.openCoreObject.canDelete == true) {
 							this.createDeleteOption();
 						}
+					}
+					
+					
+					if(OpenPanel.GUIBuilder.getLastAnchor() == this.openCoreObject.name){
+						OpenPanel.GUIBuilder.goToLastAnchor();
 					}
 				}
 			} else {
@@ -542,12 +545,13 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 	},
 	
 	
-	createGrid : function(openCoreObject, instances, callBackCommand, targetDiv, optionalCallBackObject){
+	createGrid : function(openCoreObject, instances, callBackCommand, targetDiv, optionalCallBackObject, instance){
 		this.grid = new OpenPanel.GUIBuilder.GUIElements.FormGrid();	
 		this.grid.setTargetDiv(targetDiv);
 		this.grid.setOpenCoreObject(openCoreObject);
 		this.grid.setFormObject(this);
 		this.grid.setInstances(instances);
+		this.grid.setInstance(instance);
 		if(optionalCallBackObject == undefined){
 			optionalCallBackObject = {};
 		}
@@ -556,6 +560,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 	},
 	
 	clickGridItem : function(instance){
+		console.log("FormObject.clickGridItem", instance);
 		this.controller.action({
 			command : "ClickGridItem",
 			formObject : this,

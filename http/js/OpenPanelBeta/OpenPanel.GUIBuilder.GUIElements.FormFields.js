@@ -36,12 +36,15 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 			var item = {};
 			switch(fieldType){
 				
-				case "password":
+				
 				case "integer":
 				case "string":
 					item = this.createTextField(fieldName, obj);
 				break;
-				
+				case "password":
+					item = this.createTextField(fieldName, obj);
+					item.inputType = "password";
+				break;
 									
 				case "enum":
 					item = this.createEnum(fieldName, obj);
@@ -75,11 +78,17 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 				}
 				
 				if (obj.required == true) {
-					item.allowBlank = false;
+					if(fieldType == "password"){
+						if(this.isCreate == true){
+							item.allowBlank = false;
+						}
+					} else {
+						item.allowBlank = false;
+					}
 				}
 				
 				if (obj.regexp != undefined && obj.regexp != "") {
-				//item.regex = new RegEx(obj.regexp);
+					//item.regex = new RegEx(obj.regexp);
 				}
 				
 				return item;
@@ -166,6 +175,7 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 	
 	
 	createEnum: function(fieldName, obj){
+		console.log("createEnum", obj);
 		var item = {};
 		var enumItems = [];
 		if(this.openCoreObject.classInfo.enums[fieldName] != undefined){
@@ -173,9 +183,7 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 			var enums = this.openCoreObject.classInfo.enums[fieldName];
 			for(var enumName in enums){
 				var enumField = [
-                  	
-				   	enums[enumName].description,
-					enums[enumName].val
+                  	enumName,enums[enumName].description
                ];
 				
 				enumItems.push(enumField);
@@ -183,13 +191,15 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 		}
 		
 		var store = new Ext.data.SimpleStore({
-		    fields: ['state', 'description'],
+		    fields: ['value', 'description'],
 		    data : enumItems
 			
 		});
 		var comboWithTooltip = new Ext.form.ComboBox({
 		    store: store,
-		    displayField: 'description',
+		    displayField: "description",
+			valueField: "value",
+			hiddenName: fieldName,
 			fieldLabel: obj.description,
 		    typeAhead: true,
 		    mode: 'local',
@@ -306,9 +316,7 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 			var contentDiv = shizne.contentDiv;
 			this.fieldsDiv.appendChild(groupHolder);
 			
-			
 			this.formPanel.render(contentDiv);
-			
 			if(this.openCoreObject.canUpdate == false){
 				this.formPanel.disable();
 			}
@@ -477,6 +485,7 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 			buttons: buttons
 	    });
 		
+	
 	},
 	
 	setZIndex : function(zIndex){
@@ -484,6 +493,7 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 	},
 	
 	getFormValues : function(){
+		
 		return this.parseValues(this.formPanel);
 	},
 	
@@ -504,6 +514,8 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 					}
 				}
 			}
+			
+			console.log("r", r);
 			return r;
 		}
 	},

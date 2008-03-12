@@ -4,7 +4,7 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid = function(){
 	this.formObject = {};
 	this.instances = {};
 	this.openCoreObject = {};
-	this.openCoreInstance = {};
+	this.instance = {};
 	this.controller= {};
 	this.callBackCommand = "";
 	this.store = {};
@@ -26,6 +26,23 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 			} else {
 				this.createGrid(this.instances);
 			}
+			
+			this.grid.render(this.targetDiv);
+			
+			// select current item
+			if(this.instance.uuid != undefined){
+				var uuid = this.instance.uuid;
+				var record = this.store.getAt(this.store.find("uuid", uuid));
+				this.grid.getSelectionModel().selectRecords([record]);
+				console.log("record", record);
+			}
+			
+			
+			
+			var hook = this;
+			this.grid.on("cellclick", function(grid, rowIndex, columnIndex, e) {
+		        hook.cellClick(hook.grid, rowIndex, columnIndex, e);
+			});
 		}
 	},
 	
@@ -44,7 +61,7 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 				var classInfo = this.formObject.controller.dataManager.getClassInfo(this.openCoreObject.name);
 				var params = classInfo.structure.parameters;
 				var storeDataEntry = new Array();
-				
+				storeDataEntry.push(instance.uuid);
 				for(var paramKey in params){
 					var param = params[paramKey];
 					storeDataEntry.push(instance[paramKey]);
@@ -55,8 +72,16 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 		}
 		
 		
-		var fields = [];
+		var fields = [{name : "uuid"}];
+		var obj = {
+			id: "uuid",
+			header: "uuid",
+			sortable : true
+		};
+			
 		var columns = new Array();
+		columns.push(obj);
+		
 		var className = this.openCoreObject.name;
 		var classInfo = this.formObject.controller.dataManager.getClassInfo(className);
 		var params = classInfo.structure.parameters;
@@ -92,15 +117,12 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 	        height:150,
 	        width:575,
 	        title: this.openCoreObject.title,
-			header: false
+			header: false,
+			sm : new Ext.grid.RowSelectionModel({singleSelect:true})
 		});
 		
-   	 	this.grid.render(this.targetDiv);
+   	 	
 		
-		var hook = this;
-		this.grid.on("cellclick", function(grid, rowIndex, columnIndex, e) {
-	        hook.cellClick(hook.grid, rowIndex, columnIndex, e);
-		});
 		
 		/*
 		var tableElement = document.createElement("table");
@@ -165,7 +187,7 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 				var className = instance["class"];
 				var classInfo = this.formObject.controller.dataManager.getClassInfo(className);
 				var params = classInfo.structure.parameters;
-				var storeDataEntry = new Array();
+				var storeDataEntry = [instance.uuid];
 				
 				for(var paramKey in params){
 					var param = params[paramKey];
@@ -177,8 +199,14 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 		}
 		
 		
-		var fields = [];
-		var columns = new Array();
+		var fields = [{name: "uuid"}];
+		
+		
+		var columns = [{
+			id: "uuid",
+			header: "uuid",
+			sortable : true
+		}];
 		var className = this.openCoreObject.name;
 		var classInfo = this.formObject.controller.dataManager.getClassInfo(className);
 		var params = classInfo.structure.parameters;
@@ -203,7 +231,7 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 	        fields: fields
 	    });
 		this.store.loadData(storeData);
-	
+		
 		this.grid = new Ext.grid.GridPanel({
 	        store: this.store,
 	        columns: columns, /*,*/
@@ -215,13 +243,7 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 			header: false
 		});
 		
-   	 	this.grid.render(this.targetDiv);
-		
-		var hook = this;
-		this.grid.on("cellclick", function(grid, rowIndex, columnIndex, e) {
-	        hook.cellClick(hook.grid, rowIndex, columnIndex, e);
-		});
-		
+   	 	
 		/*
 		var hook = this;
 		
@@ -277,19 +299,14 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 	},
 	
 	cellClick : function(grid, rowIndex, columnIndex, e) {
-		/*
-		[undefined, 0, 0, Object browserEvent=Event click button=0 type=click]
-		Object id=1003 data=Object json=[3] store=Object fields=[3], undefined, undefined
-		 */
-		//var store = this.grid.getStore();
 		var record = this.store.getAt(rowIndex);
-        //var record = this.grid.getStore().getAt(rowIndex);  // Get the Record
-        var fieldName = this.grid.getColumnModel().getDataIndex(columnIndex); // Get field name
-       	var id = record.get("id");
+		var fieldName = this.grid.getColumnModel().getDataIndex(columnIndex); // Get field name
+        var id = record.get("id");
 		this.clickGridItem(id);
 	},
 	
 	clickGridItem : function(id){
+		console.log("clickGridItem", id, this.instances);
 		this.formObject.clickGridItem(this.instances[id]);
 	},
 	
@@ -301,8 +318,8 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 		this.openCoreObject = openCoreObject;	
 	},
 	
-	setOpenCoreInstance: function(openCoreInstance){
-		this.openCoreInstance = openCoreInstance;
+	setInstance: function(instance){
+		this.instance = instance;
 	},
 	
 	setTargetDivName : function(targetDivName){

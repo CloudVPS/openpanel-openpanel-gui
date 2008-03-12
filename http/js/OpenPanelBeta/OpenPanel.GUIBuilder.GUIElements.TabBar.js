@@ -36,9 +36,13 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 			
 			this.openCoreObjects = [];
 			
-			if (this.openCoreObject.canUpdate == true && this.openCoreObject.classInfo["class"].metabase == "") {
-				this.openCoreObjects.push(this.openCoreObject);
-			//this.itemElements[this.openCoreObject.name] = this.openCoreObject;
+			
+			if (this.openCoreObject.classInfo["class"].metabase == "") {
+				if(this.openCoreObject.canUpdate == true || (this.openCoreObject.canUpdate == false && this.openCoreObject.getParameterCount() > 1)){
+					this.openCoreObjects.push(this.openCoreObject);
+				} 
+				
+				//this.itemElements[this.openCoreObject.name] = this.openCoreObject;
 			}
 			
 			

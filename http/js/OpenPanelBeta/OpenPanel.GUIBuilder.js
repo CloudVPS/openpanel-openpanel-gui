@@ -5,6 +5,7 @@ OpenPanel.GUIBuilder = {
 	selectedTab: "",
 	popUpDiv : {},
 	targetDiv : {},
+	lastAnchor : "",
 	
 	setController: function(controller){
 		this.controller = controller;
@@ -255,9 +256,19 @@ OpenPanel.GUIBuilder = {
 		
 	},
 	
-	goToAnchor : function (sAnchor) {
+	goToAnchor : function (anchor) {
 		// let's not do this yet
-		console.log("sAnchor", sAnchor);
-		window.location.hash = sAnchor;
+		this.lastAnchor = anchor;
+		console.log("anchor", anchor);
+		if(anchor != undefined && anchor!=""){
+			window.location.hash = anchor;
+		}
+	},
+	
+	getLastAnchor : function(){
+		return this.lastAnchor;
+	},
+	goToLastAnchor : function(){
+		this.goToAnchor(this.lastAnchor);
 	}
 }

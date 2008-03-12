@@ -53,6 +53,9 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 		this.rootFormObject.setController(this.controller);
 		this.rootFormObject.setFormBuilder(this);
 		this.rootFormObject.build();
+		var testElement = new Ext.get('saveButtonHolder');
+		
+		
 	},
 	
 	clean : function(){

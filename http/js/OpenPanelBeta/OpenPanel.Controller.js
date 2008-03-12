@@ -340,10 +340,6 @@ OpenPanel.Controller = {
 		OpenPanel.GUIBuilder.hideLoadingDiv();
 		clearTimeout(this.pingTimeoutHandler);
 		switch(e.name){
-			case "RPCError":
-				alert(e.name + ": " + e.message+ " : " + e.status);
-				
-			break;
 			
 			case "OpenCoreError":
 				
@@ -365,11 +361,10 @@ OpenPanel.Controller = {
 				
 			break;
 			
+			case "RPCError":
 			default:
 				//alert(e.name + ": " + e.message);
 				console.log(typeof(this.pingTimeoutHandler));
-					
-				
 				var targetDiv = OpenPanel.GUIBuilder.createPopUp();
 				this.error = new Array();
 				for(var errorKey in e){

@@ -10,7 +10,16 @@
 	<script type="text/javascript" src="js/jquery-1.2.2.js"></script>
 	<script type="text/javascript" src="js/json.js"></script>
 	<script type="text/javascript" src="js/ext-2.0/adapter/ext/ext-base.js"></script>
+	
 	<script type="text/javascript" src="js/ext-2.0/ext-all.js"></script>
+	<script type="text/javascript" src="js/ext-2.0/build/util/KeyMap-min.js"></script>
+	<script type="text/javascript">
+		for(var key in Ext){
+			if(key == "KeyMap"){
+				console.log(key,Ext[key]);	
+			}
+		}
+	</script>
 	<script type="text/javascript" src="js/trimpath-template-1.0.38/trimpath-template-1.0.38.js"></script>
 	
 	<script type="text/javascript" src="js/OpenPanelBeta/OpenCore.js"></script>
@@ -39,25 +48,22 @@
 	<script type="text/javascript" src="js/OpenPanelBeta/HTTPStatus.js"></script>
 	<script type="text/javascript" src="js/OpenPanelBeta/Throbber.js"></script>
 	
-
 	<script type="text/javascript">
 		var $j = jQuery.noConflict();
 		if(typeof(console) != 'object'){
 			console = { log: function(){}}
 		}
-		function findPos(obj) {
-			var curleft = curtop = 0;
-			if (obj.offsetParent) {
-				do {
-					curleft += obj.offsetLeft;
-					curtop += obj.offsetTop;
-				} while (obj = obj.offsetParent);
-			}
-			return [curleft,curtop];
-		}
+		
 		
 		$j(document).ready(function(){
-				
+				/*var globalKeyMap = new Ext.KeyMap(document); 
+				globalKeyMap.accessKey = function(key, handler, scope) { 
+				    var h = function(n, e) { 
+				        e.preventDefault(); 
+				        handler.call(scope || this, n, e); 
+				    }; 
+				    this.on(key, h, scope); 
+				};*/
 				OpenCore.RPC.RequestHandler.setOpenCoreURL("/fake-opencore-proxy/json");
 				
 				OpenCore.DataManager.setRPC(OpenCore.RPC);
