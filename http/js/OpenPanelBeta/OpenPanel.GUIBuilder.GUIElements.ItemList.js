@@ -15,6 +15,7 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 	formObject : {},
 	currentInstance : {},
 	controller : {},
+	userObject : {},
 	
 	build : function(){
 		
@@ -22,6 +23,9 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 		this.itemListElements = {};
 		this.instances = {};
 		this.currentInstance = undefined;
+		this.userObject = OpenCore.DataManager.getOpenCoreObjectByName("User");
+		console.log("this.userObject", this.userObject);
+		this.userObject.getInstances();
 		
 		if(this.openCoreObject != undefined){
 			if (this.openCoreObject.singleton == false) {
@@ -34,7 +38,10 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 						this.currentInstance = instance;
 					}
 					if (typeof(instance) == "object") {
-						var item = [instance.uuid, this.openCoreObject.name, metaid];
+						var userInstance = this.userObject.getInstanceByUUID(instance.ownerid);
+						console.log("OHAI", userInstance);
+						var ownerName = userInstance!=undefined?userInstance.name_customer:"";
+						var item = [instance.uuid, this.openCoreObject.name, metaid, ownerName];
 					}
 					items.push(item);
 				}
@@ -187,6 +194,7 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 	           {name: 'uuid'},
 	           {name: 'className'},
 			   {name: 'id'},
+			   {name: 'ownerid'}
 	          
 	        ]
 	    });
@@ -198,14 +206,16 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 	        columns: [
 	            {id:'uuid',header: "Uuid", width: 0, sortable: true, dataIndex: 'uuid', hidden: true, hideable:false, fixed: true},
 	            {header: "id", width: 190, sortable: true, dataIndex: 'id', hideable:false},
-	            {header: "className", width: 0, sortable: true, dataIndex: 'className', hidden: true, hideable:false}
+	            {header: "className", width: 0, sortable: true, dataIndex: 'className', hidden: true, hideable:false},
+				{header: "ownerid", width: 0, sortable: true, dataIndex: 'ownerid', hidden: true, hideable:true}
 			],
 	        stripeRows: false,
 	        autoExpandColumn: 'uuid',
 	        height:372,
 	        width:200,
-	        title:'Array Grid',
-			header: false
+	        title:this.openCoreObject.description,
+			header: false,
+			forceFit: true
 			
 	    });
 		

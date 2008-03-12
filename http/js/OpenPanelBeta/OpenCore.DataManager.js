@@ -52,7 +52,8 @@ OpenCore.DataManager = {
 	
 	checkQuotum : function(className){
 		var quotum = this.quotaByClassName[className];
-		if(quotum!=undefined){
+		console.log(quotum);
+		if(quotum==undefined){
 			return true;
 		} else {
 			if(quotum.usage < quotum.quota || quotum.quota == -1){
@@ -66,6 +67,19 @@ OpenCore.DataManager = {
 	getQuotumByClassName : function(className){
 		var quotum = this.quotaByClassName[className];
 		return quotum;
+	},
+	
+	logOut : function(){
+		var r = new this.rpc.SendVars();
+		r.addHeader("command", "logout");
+		r.addHeader("session_id", this.sessionId);
+		
+		var requestResult = this.getRequestResult(r);
+		if (requestResult.body != undefined 
+		&& requestResult.body.data != undefined 
+		&& requestResult.body.data[className] != undefined) {
+			return requestResult.body.data;
+		}
 	},
 	
 	getClassInfo: function(className){

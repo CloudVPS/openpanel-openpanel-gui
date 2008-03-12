@@ -13,7 +13,7 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 	
 	build : function(){
 		this.targetDiv.innerHTML = "";
-		
+		//if(this.openCoreObject.getCurrentInstance().owner)
 		this.formObjectHolder = document.createElement("div");
 		this.formObjectHolder.setAttribute("id", "formObjectHolder");
 		this.targetDiv.appendChild(this.formObjectHolder);

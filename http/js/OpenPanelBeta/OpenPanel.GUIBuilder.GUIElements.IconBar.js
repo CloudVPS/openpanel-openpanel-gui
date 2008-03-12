@@ -44,6 +44,7 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 			}
 			sortIndexesToSort.sort(function(a,b){return a-b;});
 						
+			
 			var sortedChildren = {};
 			
 			for(var i = 0;i<sortIndexesToSort.length;i++){
@@ -52,6 +53,26 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 					sortedChildren[childObjects[j].name] = childObjects[j];
 				}
 			}
+			
+			// add exit button
+			var hook = this;
+			
+			sortedChildren["exit"] = {
+					description: "Exit",
+					classInfo: {
+						"class": {
+							uuid: "Exit"
+						}
+					},
+					title : "Exit",
+					name : "name",
+					onclick : function()
+					{
+						hook.controller.action({command: "Logout"});
+					}
+					
+			};
+			
 			
 			for(var key in sortedChildren){
 				var childObject = sortedChildren[key];
@@ -87,9 +108,15 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 					iconLi.appendChild(iconDivRight);
 					
 					iconHolder.appendChild(iconLi);
-					iconLi.onclick = function(){
-						OpenPanel.GUIBuilder.GUIElements.IconBar.click(this.getAttribute("OC:Class"))
+					
+					if(childObject.onclick == undefined){
+						iconLi.onclick = function(){
+							OpenPanel.GUIBuilder.GUIElements.IconBar.click(this.getAttribute("OC:Class"))
+						}
+					} else {
+						iconLi.onclick = childObject.onclick;
 					}
+					
 					
 					this.itemElements[childObject.name] = iconLi;
 					

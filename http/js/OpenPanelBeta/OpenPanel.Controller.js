@@ -294,7 +294,7 @@ OpenPanel.Controller = {
 	
 	initializePing : function(){
 		if (this.pingTimeoutHandler == undefined) {
-			this.pingTimeoutHandler = setTimeout("OpenPanel.Controller.ping()", 120000);
+			this.pingTimeoutHandler = setTimeout("OpenPanel.Controller.ping()", 60000);
 		}
 	},
 	
@@ -321,7 +321,8 @@ OpenPanel.Controller = {
 				throw new Error("Reply is very erroneous: " + d);
 			} else {
 				
-				if(OpenCore.DataManager.errorId == 0){
+				if(OpenCore.DataManager.getErrorId() == 0){
+					OpenPanel.Controller.destroyPingTimeoutHandler();
 					OpenPanel.Controller.initializePing();
 				} else if(OpenCore.DataManager.errorId == 12288){
 					OpenPanel.Controller.action("Init");

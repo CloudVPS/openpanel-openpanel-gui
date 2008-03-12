@@ -202,6 +202,21 @@ OpenCore.DataManager.OpenCoreObject.prototype = {
 		return this.instances;
 	},
 	
+	getInstanceByUUID: function(uuid){
+		if(this.fetchedInstances == false){
+			this.getInstances();
+			console.log("this.instances", this.instances);
+			for(var metaId in this.instances){
+				var instance = this.instances[metaId];
+				console.log("instance", instance);
+				if(instance.uuid == uuid){
+					return instance;
+				}
+			}
+		}
+		
+	},
+	
 	getInstancesByParentUUIDAsync: function(uuid, callBackObject, callBackFunction, callBackArguments){
 		if(this.fetchedInstances == false){
 			this.instances = {};
