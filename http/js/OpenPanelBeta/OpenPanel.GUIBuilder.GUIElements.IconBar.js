@@ -61,7 +61,7 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 					description: "Exit",
 					classInfo: {
 						"class": {
-							uuid: "Exit"
+							uuid: "exit"
 						}
 					},
 					title : "Exit",
