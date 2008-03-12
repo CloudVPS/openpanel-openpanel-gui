@@ -42,7 +42,8 @@ OpenPanel.Command.Login  = {
 OpenPanel.Command.Logout  = {
 	controller : {},
 	execute : function(actionObject){
-		var r = this.controller.dataManager.logOut();
+		this.controller.dataManager.logOut();
+		this.controller.destroyPingTimeoutHandler();
 		this.controller.action({command: "Init"});
 	}
 }
