@@ -27,6 +27,7 @@ OpenPanel.Command.Login  = {
 				OpenPanel.GUIBuilder.GUIElements.ItemList.setTargetDivName("mainAreaLeft");
 				OpenPanel.GUIBuilder.GUIElements.TabBar.setTargetDivName("tabBar");
 				OpenPanel.GUIBuilder.GUIElements.FormBuilder.setTargetDivName("mainAreaForm");
+				
 				this.controller.dataManager.initializeQuotaObject();	
 				this.controller.action({command: "BuildIconBar"});
 				// OpenCore.Debug.createDebugList();

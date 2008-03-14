@@ -248,9 +248,13 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 	},
 	
 	getFirstTabItem : function(){
-		if(this.openCoreObjects[0] != undefined){
-			return this.openCoreObjects[0];
+		
+		for(var i=0;i<this.openCoreObjects.length;i++){
+			if(this.openCoreObjects[i].name != undefined){
+				return this.openCoreObjects[i];
+			}
 		}
+		
 	}
 	
 	

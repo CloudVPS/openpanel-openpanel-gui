@@ -18,10 +18,9 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 		this.formObjectHolder.setAttribute("id", "formObjectHolder");
 		this.targetDiv.appendChild(this.formObjectHolder);
 		
-		this.saveButtonHolder = document.createElement("div");
-		this.saveButtonHolder.setAttribute("id", "saveButtonHolder");
-		this.saveButtonHolder.appendChild(document.createTextNode("save"));
-		this.targetDiv.appendChild(this.saveButtonHolder);
+		//this.saveButtonHolder = document.createElement("div");
+		//this.saveButtonHolder.setAttribute("id", "saveButtonHolder");
+		//this.targetDiv.appendChild(this.saveButtonHolder);
 		
 		this.rebuildButtonHolder = document.createElement("div");
 		this.rebuildButtonHolder.setAttribute("id", "rebuildButtonHolder");
@@ -29,7 +28,7 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 		this.targetDiv.appendChild(this.rebuildButtonHolder);
 		
 		var hook = this;
-		this.saveButtonHolder.onclick = function(){
+		/*this.saveButtonHolder.onclick = function(){
 			var transport = hook.getData();
 			var actionObject = {
 					command : "saveForm",
@@ -40,7 +39,7 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 			
 			hook.controller.action(actionObject);
 		}
-		
+		*/
 		this.rebuildButtonHolder.onclick = function(){
 			hook.rootFormObject.build();
 		}

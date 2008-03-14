@@ -212,6 +212,10 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 				if (this.openCoreObject.name != className) {
 					// get encapsulated object
 					actualOpenCoreObject = this.controller.dataManager.getOpenCoreObjectByName(className);
+					
+					
+		
+		
 					// all good, now we have to find its instance
 					var record = this.controller.dataManager.getRecord(actualOpenCoreObject.name, this.currentInstance.id);
 					for(var key in record){

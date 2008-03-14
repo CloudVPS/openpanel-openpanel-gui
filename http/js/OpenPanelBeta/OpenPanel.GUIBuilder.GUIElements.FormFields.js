@@ -69,6 +69,7 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 			
 			
 			if (item != undefined) {
+				
 				if (obj.group != undefined) {
 					if(this.instance[fieldName]!=undefined){
 						item.disabled = false;
@@ -77,6 +78,10 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 					}
 				}
 				
+				
+				if(obj.visible == false){
+					item.type = "hidden";
+				}
 				if (obj.required == true) {
 					if(fieldType == "password"){
 						if(this.isCreate == true){
@@ -100,6 +105,7 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 		// get grouped parameters
 		var hook = this;
 		var grouped = {};
+		
 		for(var paramName in this.openCoreObject.classInfo.structure.parameters){
 			var parameter = this.openCoreObject.classInfo.structure.parameters[paramName];
 			if(parameter.group == fieldName){
@@ -307,7 +313,8 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 			instance = {};
 		}
 		
-		if(this.openCoreObject.classInfo.structure != undefined && this.openCoreObject.classInfo.structure.parameters != undefined){
+		
+		if(this.openCoreObject != undefined && this.openCoreObject.classInfo != undefined && this.openCoreObject.classInfo.structure != undefined && this.openCoreObject.classInfo.structure.parameters != undefined){
 			
 			this.createFormPanel(instance);
 			var shizne = window.OpenPanel.GUIBuilder.drawGroup();
@@ -319,6 +326,21 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 			this.formPanel.render(contentDiv);
 			if(this.openCoreObject.canUpdate == false){
 				this.formPanel.disable();
+			}
+			
+			var parameters = this.openCoreObject.classInfo.structure.parameters;
+			for (var key in parameters) {
+				var parameter = parameters[key];
+				if(parameter.visible == false){
+					this.formPanel.items.each(function(item){
+						console.log("ITEM", item);
+					});
+					
+					//var item = this.formPanel.items.find("uuid", parameter.uuid)[0];
+					//console.log(item);
+					//item.hide();asd
+					
+				}
 			}
 		} else {
 			// no, is it a singleton?

@@ -70,6 +70,7 @@ OpenCore.RPC.RequestHandler = {
 			if(requestResult.status != 200){
 				throw RPCError(HTTPStatus.getStatus(requestResult.status), requestResult.status);
 			}
+			
 			OpenCore.RPC.RequestHandler.asynchronizedRequestCount--;
 			if(requestResult.argument != undefined && requestResult.argument.callBackObject != undefined){
 				var callBackObject = requestResult.argument.callBackObject;
@@ -98,7 +99,7 @@ OpenCore.RPC.RequestHandler = {
 	
 	startLoading : function(){ },
 	
-	doneLoading : function(){ },
+	doneLoading : function(){ }
 	
 }
 		 

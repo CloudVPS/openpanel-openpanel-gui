@@ -9,6 +9,19 @@ img, input {
 	behavior: url(/js/iepngfix/iepngfix.htc);
 }
 
+#saveButtonHolder {
+	width: 900px;
+	height: 35px;
+	text-align: right;
+	background-color : #eeeeee;
+	border: 1px solid #000;
+}
+#cokcs {
+	margin: 0 0 0 auto; 
+	padding-right: 20px;
+	padding-top: 2px;
+}
+
 .throbber {
 	background-repeat: no-repeat;
 	height: 50px;
@@ -163,17 +176,12 @@ img, input {
 	padding-top: 20px;
 }
 
-#status {
-	width: 900px;
-	height: 40px;
-	border-top: 1px solid #e1e1e1;
-	background-color : #e6e6e6;
-}
-
 #mainBottom {
-	height: 26px;
+	height: 12px;
 	background-image: url(/images/gui/groupFrameBottom.gif);
 	background-repeat: no-repeat;
+	text-align: right;
+	padding-right: 20px;
 }
 
 .FormObject {
@@ -257,58 +265,47 @@ img, input {
 }
 
 .iconHolder {
-	padding-left: 10px;
+	padding-left: 7px;
+	padding-right: 7px;
 }
 
-.iconHolder li {
-	display: inline;
-	float : left;
-}
-
-.iconDivLeft, .iconDivRight, .iconDivMain {
-	float: left;
-	display: block;
+.tableElement {
 	height: 78px;
-	background-repeat: repeat-x;
+	padding-left: 5px;
 }
 
-.selected .iconDivLeft {
+.iconTdLeft, .iconTdRight {
+	background-repeat: repeat-x;
+	height: 78px;
+	width: 4px;
+}
+.iconTdMain {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.selected .iconTdLeft {
 	background-image: url(/images/gui/iconBarSelectedLeft.gif);	
 }
 
-.selected .iconDivRight {
+.selected .iconTdRight {
 	background-image: url(/images/gui/iconBarSelectedRight.gif);	
 }
 
-.selected .iconDivMain {
+.selected .iconTdMain {
 	background-image: url(/images/gui/iconBarSelectedMiddle.gif);
 }
-
+.classIcon {
+	padding-top: 17px;
+}
 .classDescription, .classIcon {
-	text-align: center;
 	cursor: pointer;
+	text-align: center;
 }
 
 .classDescription {
-	display: block;
-	height: 20px;
-	vertical-align: bottom;	
-	text-align: center;
-}
-
-.classIcon {
-	display: block;
-	height: 34px;
-	padding-top: 28px;
-}
-
-.iconDivLeft, .iconDivRight {
-	width: 3px;
-}
-
-.iconDivMain {
-	padding: 0px 2px 0px 2px;
-	min-width: 40px;
+	padding-top: 2px;
+	height: 22px;
 }
 
 #tabBar {

@@ -10,7 +10,11 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 	iconBarTitleElement : {},
 	
 	build : function(){
+		//this.targetDiv.innerHTML = '<div id="iconBarDiv"><ul class="iconHolder"><li>asd</li><li>asd</li><li>asd</li><li>asd</li><li>asd</li></ul></div>';
 		this.targetDiv.innerHTML = "";
+	
+	
+	
 		this.itemElements = {};
 		if(this.openCoreObject != undefined){
 			var iconBarDiv = document.createElement("div");
@@ -21,10 +25,19 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 			this.iconBarTitleElement.appendChild(document.createTextNode(""));
 			iconBarDiv.appendChild(this.iconBarTitleElement);
 			
-			var iconHolder = document.createElement("ul");
+			var iconHolderTable = document.createElement("table");
+			iconHolderTable.setAttribute("cellpadding", "0");
+			iconHolderTable.setAttribute("cellspacing", "0");
+			iconHolderTable.setAttribute("class", "iconHolder");
+			
+			iconBarDiv.appendChild(iconHolderTable);
+			var iconHolderTBody = document.createElement("tbody");
+			iconHolderTable.appendChild(iconHolderTBody);
+			
+			var iconHolder = document.createElement("tr");
 			iconHolder.setAttribute("class", "iconHolder");
 			this.targetDiv.appendChild(iconBarDiv);
-			iconBarDiv.appendChild(iconHolder);
+			iconHolderTBody.appendChild(iconHolder);
 			
 			
 			var sortIndexes = {};
@@ -57,6 +70,8 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 			// add exit button
 			var hook = this;
 			
+			sortedChildren["spacer"] = { };
+			
 			sortedChildren["exit"] = {
 					description: "Exit",
 					classInfo: {
@@ -77,59 +92,93 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 			for(var key in sortedChildren){
 				var childObject = sortedChildren[key];
 				if (typeof(childObject) == "object") {
-					var iconLi = document.createElement("li");
-					iconLi.setAttribute("id", childObject.description);
-					iconLi.setAttribute("OC:Class", childObject.name);
-					
-					var iconDivLeft = document.createElement("div");
-					iconDivLeft.setAttribute("class", "iconDivLeft");
-					iconDivLeft.innerHTML = "&nbsp;";
-					iconLi.appendChild(iconDivLeft);
-					
-					var iconDivMain = document.createElement("span");
-					iconDivMain.setAttribute("class", "iconDivMain");
-					iconLi.appendChild(iconDivMain);
-					
-					var classIcon = document.createElement("div");
-					classIcon.setAttribute("class", "classIcon");
-					
-					classIcon.innerHTML = "<img src=\"/images/icons/"+ childObject.classInfo["class"].uuid +".png\"/>";
-					iconDivMain.appendChild(classIcon);
-					var classDescription = document.createElement("div");
-					classDescription.setAttribute("class", "classDescription");
-					classDescription.setAttribute("id", "c" + childObject.uuid);
-					iconDivMain.appendChild(classDescription);
-					var title = childObject.title;
-					
-					classDescription.appendChild(document.createTextNode(title));
-					
-					var iconDivRight = document.createElement("div");
-					iconDivRight.setAttribute("class", "iconDivRight");
-					iconLi.appendChild(iconDivRight);
-					
-					iconHolder.appendChild(iconLi);
-					
-					if(childObject.onclick == undefined){
-						iconLi.onclick = function(){
-							OpenPanel.GUIBuilder.GUIElements.IconBar.click(this.getAttribute("OC:Class"))
-						}
-					} else {
-						iconLi.onclick = childObject.onclick;
-					}
+					if (key != "spacer") {
 					
 					
-					this.itemElements[childObject.name] = iconLi;
-					
-					var someWidth = Ext.get("c" + childObject.uuid).getWidth();
-					someWidth = someWidth<40?40:someWidth;
+						var iconLi = document.createElement("td");
+						iconHolder.appendChild(iconLi);
+						iconLi.setAttribute("id", childObject.description);
 						
-					// this is ugly and it stinks.
-					classIcon.style.width = someWidth + "px";
-					classDescription.style.width = someWidth + "px";
-					
+						
+						var tableElement = document.createElement("table");
+						tableElement.setAttribute("cellpadding", "0");
+						tableElement.setAttribute("cellspacing", "0");
+						tableElement.setAttribute("class", "iconTable");
+						iconLi.appendChild(tableElement);
+						
+						var tbodyElement = document.createElement("tbody");
+						tableElement.appendChild(tbodyElement);
+						
+						var trElement = document.createElement("tr");
+						tbodyElement.appendChild(trElement);
+						
+						var iconTdLeft = document.createElement("td");
+						iconTdLeft.setAttribute("class", "iconTdLeft");
+						iconTdLeft.innerHTML = "&nbsp;";
+						trElement.appendChild(iconTdLeft);
+						
+						var tdMain = document.createElement("td");
+						tdMain.setAttribute("class", "iconTdMain");
+						trElement.appendChild(tdMain);
+						var centreTable = document.createElement("table");
+						
+						centreTable.setAttribute("cellpadding", "0");
+						centreTable.setAttribute("cellspacing", "0");
+						
+						tdMain.appendChild(centreTable);
+						var centreTbody = document.createElement("tbody");
+						centreTable.appendChild(centreTbody);
+						var centreTr = document.createElement("tr");
+						centreTbody.appendChild(centreTr);
+						var centreTrBottom = document.createElement("tr");
+						centreTbody.appendChild(centreTrBottom);
+						
+						
+						
+						var classIcon = document.createElement("td");
+						classIcon.setAttribute("class", "classIcon");
+						var imgElement = document.createElement("img");
+						imgElement.setAttribute("src", "/images/icons/" + childObject.classInfo["class"].uuid + ".png");
+						classIcon.innerHTML = "<img src=\"/images/icons/" + childObject.classInfo["class"].uuid + ".png\"/>";
+						centreTr.appendChild(classIcon);
+						
+						var classDescription = document.createElement("td");
+						classDescription.setAttribute("class", "classDescription");
+						classDescription.setAttribute("valign", "top");
+						centreTrBottom.appendChild(classDescription);
+						
+						
+						var title = childObject.title;
+						
+						classDescription.appendChild(document.createTextNode(title));
+						
+						
+						var iconTdRight = document.createElement("td");
+						iconTdRight.setAttribute("class", "iconTdRight");
+						iconTdRight.innerHTML = "&nbsp;";
+						trElement.appendChild(iconTdRight);
+						
+						
+						
+						if (childObject.onclick == undefined) {
+							iconLi.childObject = childObject;
+							iconLi.onclick = function(){
+								OpenPanel.GUIBuilder.GUIElements.IconBar.click(this.childObject);
+							}
+						} else {
+							iconLi.onclick = childObject.onclick;
+						}
+						
+						this.itemElements[childObject.name] = iconLi;
+					} else {
+						var iconLi = document.createElement("td");
+						iconLi.setAttribute("width", "100%");
+						iconHolder.appendChild(iconLi);
+					}
 				}
 			}
 			
+			//this.targetDiv.innerHTML = this.targetDiv.innerHTML;
 			
 		} else {
 			alert("OpenPanel.GUIBuilder.GUIElements.IconBar.build(openCoreObject) : openCoreObject is undefined");
@@ -143,15 +192,16 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 		}
 	},
 	
-	click: function(className){
-		this.setTitle(className);
-		if (className != undefined) {
-			if (this.itemElements[className] != undefined) {
-				var currentItemElement = this.itemElements[className];
-				this.highliteItem(className);
+	click: function(childObject){
+		
+		this.setTitle(childObject.name);
+		if (childObject.name != undefined) {
+			if (this.itemElements[childObject.name] != undefined) {
+				var currentItemElement = this.itemElements[childObject.name];
+				this.highliteItem(childObject.name);
 				this.controller.action({
 					command : "ClickIconBarItem", 
-					className : className
+					className : childObject.name
 				});
 			}
 		}
