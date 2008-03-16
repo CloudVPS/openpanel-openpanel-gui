@@ -414,6 +414,8 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 					var createOneText = document.createTextNode("Click here to create one.");
 					createOne.setAttribute("class", "createOneSpan");
 					createOne.appendChild(createOneText);
+					
+					
 				} else {
 					var addButton = document.createElement("div");
 					var addButtonClass = displayOnly==true?"addButtonDisabled":"addButton";
@@ -451,6 +453,16 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 				}
 				*/
 				this.gridDiv.appendChild(createOne);
+				
+				if(textOnly == true){
+					if(this.openCoreObject.classInfo["class"].explanation != undefined){
+						var explanationElement = document.createElement("div");
+						createOne.appendChild(explanationElement);
+						explanationElement.innerHTML = "<br>"+this.openCoreObject.classInfo["class"].explanation;
+						this.gridDiv.appendChild(explanationElement);
+					}	
+				}
+				
 			}
 		}
 	},
