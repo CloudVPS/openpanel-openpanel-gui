@@ -9,6 +9,7 @@ OpenPanel.Command.Init  = {
 		//var targetElement = document.getElementById("app");
 		//targetElement.innerHTML = "";
 		this.controller.guiBuilder.renderLogin(document.getElementById("loginDiv"), actionObject);
+		
 	}
 }
 
@@ -45,6 +46,8 @@ OpenPanel.Command.Login  = {
 			this.controller.action({command: "BuildIconBar"});
 			// OpenCore.Debug.createDebugList();
 			OpenPanel.Controller.initializePing();
+			
+			
 		} else {
 			
 		}
