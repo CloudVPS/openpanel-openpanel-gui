@@ -41,6 +41,55 @@ OpenCore.DataManager = {
 		return false;
 	},
 	
+	loginAsync: function(userName, password, callBackObject, callBackFunction, callBackArguments){
+		var r = new this.rpc.SendVars();
+		r.addHeader("command", "bind");
+		r.addBody("data", {id: password});
+		r.addBody("classid", "User");
+		r.addBody("id", userName);
+		var callBackWrapper = {
+			callBackObject : callBackObject,
+			callBackFunction : callBackFunction,
+			callBackArguments : callBackArguments
+		}
+		this.getRequestResultAsync(r, OpenCore.DataManager, "loginAsyncDone", callBackWrapper);
+	},
+	
+	loginAsyncDone : function getInstancesByParentUUIDAsyncDone(callBackWrapper){
+		var callBackObject;
+		var callBackFunction;
+		var callBackArguments = {};
+		var data;
+		
+		if(callBackWrapper.callBackObject != undefined){
+			callBackObject = callBackWrapper.callBackObject;
+		}
+		
+		if(callBackWrapper.callBackFunction != undefined){
+			callBackFunction = callBackWrapper.callBackFunction;
+		}
+		
+		if(callBackWrapper.callBackArguments != undefined){
+			callBackArguments = callBackWrapper.callBackArguments;
+		}
+		
+		if(callBackWrapper.data != undefined){
+			data = callBackWrapper.data;
+			callBackArguments.data = data;
+		}
+		
+		var header = callBackWrapper.header;
+		if(header.errorid == 0){
+			this.sessionId = callBackWrapper.header.session_id;
+		}
+		
+		if(callBackFunction == undefined){
+			throw new Error("callBackFunction is undefined");
+		} else {
+			callBackObject[callBackFunction](data, callBackWrapper);
+		}
+		
+	},
 	initializeQuotaObject : function(){
 		new OpenCore.DataManager.OpenCoreObject("ROOT", "User");
 		this.quotaObject =  new OpenCore.DataManager.OpenCoreObject("User", "OpenCORE:Quota")
@@ -345,6 +394,7 @@ OpenCore.DataManager = {
 				callBackArguments.data = data;
 			}
 			
+			callBackArguments.header = callBackWrapper.data.header;
 			
 			if (callBackFunction == "") {
 				throw new Error("callBackFunction is not defined");

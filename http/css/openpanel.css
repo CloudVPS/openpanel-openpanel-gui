@@ -11,15 +11,16 @@ img, input {
 
 #saveButtonHolder {
 	width: 900px;
-	height: 35px;
-	text-align: right;
 	background-color : #eeeeee;
-	border: 1px solid #000;
+	clear: both;
+	text-align: right;
+	height: 30px;
+	float: right;
 }
-#cokcs {
-	margin: 0 0 0 auto; 
-	padding-right: 20px;
-	padding-top: 2px;
+
+#saveButton {
+	padding-right: 10px;
+	float: right;
 }
 
 .throbber {
@@ -191,7 +192,7 @@ img, input {
 }
 
 .childFormObjects {
-	
+	padding-top: 10px;
 }
 
 .nameDiv {

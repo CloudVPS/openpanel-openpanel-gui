@@ -25,6 +25,8 @@
 	this.fieldsDiv;
 	this.buttonsDiv;
 	this.childFormObjectsDiv;
+	this.isUpdateable = false;
+	this.childFormObjects = [];
 }
  
 OpenPanel.GUIBuilder.GUIElements.FormObject.setGuiBuilder = function(guiBuilder){
@@ -113,6 +115,8 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 			
 			// UPDATE
 			if (this.openCoreObject.canUpdate == true) {
+					
+				this.setIsUpdateable(true);
 				console.log("can update");
 				// alright, now we can display these fields
 				var targetDiv;
@@ -164,6 +168,9 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 				this.createCreateOption(true);
 			}
 		}
+		
+		this.formBuilder.setIsUpdateable(false);
+		this.formBuilder.finishLayout(this);
 	},
 	
 	createSubLevelFormAsync : function createSubLevelFormAsync(stateObject){
@@ -195,8 +202,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 			this.instances = this.openCoreObject.instances;
 			if (this.instances != undefined && typeof(this.openCoreObject.getFirstInstance()) == "object") {
 			// there are instances
-			
-			
+				
 				var instance = this.getPreviousInstance();
 				if (instance != undefined) {
 					this.setCurrentInstance(instance);
@@ -212,10 +218,6 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 				if (this.openCoreObject.name != className) {
 					// get encapsulated object
 					actualOpenCoreObject = this.controller.dataManager.getOpenCoreObjectByName(className);
-					
-					
-		
-		
 					// all good, now we have to find its instance
 					var record = this.controller.dataManager.getRecord(actualOpenCoreObject.name, this.currentInstance.id);
 					for(var key in record){
@@ -228,11 +230,16 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 					actualOpenCoreObject = this.openCoreObject;
 					actualInstance = this.currentInstance;
 				}
-				console.log(actualInstance);
+				
+				if (actualOpenCoreObject.canUpdate == true) {
+					this.setIsUpdateable(true);
+				}
+				console.log("actualOpenCoreObject", actualOpenCoreObject.name);
 				if(actualOpenCoreObject.singleton == true){
 					console.log("singleton");
 					// show fields
 					this.createFields(actualOpenCoreObject, actualInstance, "", this.fieldsDiv);
+					this.createCreateOption(false, true);
 					this.createDeleteOption();
 				} else {
 					console.log("not singleton");
@@ -244,6 +251,8 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 					// here's where we have to check for meta stuff
 					this.createFields(actualOpenCoreObject, actualInstance, "", this.fieldsDiv);
 					
+					
+					this.childFormObjects = [];
 					for(var childOpenCoreObjectName in actualOpenCoreObject.children){
 						var childOpenCoreObject = actualOpenCoreObject.children[childOpenCoreObjectName];
 						if (typeof(childOpenCoreObject) == "object") {
@@ -265,7 +274,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 						this.createMultiCreateOption();
 					} else {
 						if (this.openCoreObject.canCreate == true) {
-							this.createCreateOption();
+							this.createCreateOption(false);
 						}
 					}
 					
@@ -298,11 +307,21 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 					}
 				}
 			}
+			
+			this.formBuilder.setIsUpdateable(false);
+			this.formBuilder.finishLayout(this);
 				break;
 		}
 		
 	},
-		
+	
+	setIsUpdateable : function(isUpdateable){
+		this.isUpdateable = isUpdateable;
+		console.log("setIsUpdateable", this.isUpdateable, this.openCoreObject.name);
+	},
+	
+	
+	
 	createMultiCreateOption : function(){
 			
 		var metaObjects = this.controller.dataManager.getOpenCoreObjectsByMetaName(this.openCoreObject.name);
@@ -383,40 +402,43 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		
 	},
 	
-	createCreateOption : function (textOnly){
+	createCreateOption : function (textOnly, displayOnly){
 		// does not support meta stuff
 		if (this.openCoreObject.meta == true) {
 		
 		} else {
 			if (this.controller.dataManager.checkQuotum(this.openCoreObject.name) == true) {
+				
 				var createOne = document.createElement("span");
-				if (textOnly != undefined) {
+				if (textOnly == true) {
 					var createOneText = document.createTextNode("Click here to create one.");
 					createOne.setAttribute("class", "createOneSpan");
 					createOne.appendChild(createOneText);
 				} else {
 					var addButton = document.createElement("div");
-					addButton.setAttribute("class", "addButton");
+					var addButtonClass = displayOnly==true?"addButtonDisabled":"addButton";
+					addButton.setAttribute("class", addButtonClass);
+					
 					createOne.appendChild(addButton);
 				}
 				var hook = this;
 				createOne.openCoreObject = this.openCoreObject;
-				
-				createOne.onclick = function(){
-					hook.controller.action({
-						command : "showCreateInstanceFromFormObject", 
-						formObject: hook,
-						openCoreObject: hook.openCoreObject,
-						parentUUID: hook.parentUUID,
-						formObjectHolder: hook.formBuilder.formObjectHolder
-					});
-					
-					console.log("create Instance of " + hook.openCoreObject.name + " with parentUUID " + hook.parentUUID);
-					console.log(hook);
-					console.log(hook.formBuilder.formObjectHolder);
-					
+				if (displayOnly == undefined || displayOnly == false) {
+					createOne.onclick = function(){
+						hook.controller.action({
+							command: "showCreateInstanceFromFormObject",
+							formObject: hook,
+							openCoreObject: hook.openCoreObject,
+							parentUUID: hook.parentUUID,
+							formObjectHolder: hook.formBuilder.formObjectHolder
+						});
+						
+						console.log("create Instance of " + hook.openCoreObject.name + " with parentUUID " + hook.parentUUID);
+						console.log(hook);
+						console.log(hook.formBuilder.formObjectHolder);
+						
+					}
 				}
-				
 				// quota debug stuff
 				q = document.createElement("ul");
 				createOne.appendChild(q);
@@ -454,8 +476,6 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 			});
 			
 			console.log("delete Instance of " + hook.openCoreObject.name + " with parentUUID " + hook.parentUUID);
-			
-			
 		}
 		this.gridDiv.appendChild(deleteOne);
 	},
@@ -574,7 +594,9 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 	
 	createChildFormObject : function(openCoreObject, parentUUID, targetDiv, controller){
 		var childFormObject = new OpenPanel.GUIBuilder.GUIElements.FormObject();
+		this.childFormObjects.push(childFormObject);
 		childFormObject.setOpenCoreObject(openCoreObject);
+		childFormObject.setParentFormObject(this);
 		
 		childFormObject.setParentUUID(parentUUID);
 		childFormObject.setTargetDiv(targetDiv);
@@ -605,6 +627,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 	
 	setFormBuilder : function(formBuilder){
 		this.formBuilder = formBuilder;	
+		this.formBuilder.setLastCreatedFormObject(this);
 	},
 	
 	updateInstance: function(openCoreObject, instance, formData){
@@ -625,7 +648,13 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 	
 	createCreatePopUp : function(targetDiv, callBack){
 		var popUpDiv = this.guiBuilder.createPopUp();
+	},
+	
+	setParentFormObject : function(formObject){
+		this.parentFormObject = formObject;
+		
 	}
+	
   }
  
  

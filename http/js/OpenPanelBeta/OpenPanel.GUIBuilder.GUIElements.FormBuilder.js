@@ -10,51 +10,54 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 	controller: {},
 	currentRootClassInstance: {},
 	currentInstances : {},
+	isUpdateable : false,
+	lastCreatedFormObject : {},
 	
 	build : function(){
 		this.targetDiv.innerHTML = "";
-		//if(this.openCoreObject.getCurrentInstance().owner)
+		this.isUpdateable = false;
+		
 		this.formObjectHolder = document.createElement("div");
 		this.formObjectHolder.setAttribute("id", "formObjectHolder");
 		this.targetDiv.appendChild(this.formObjectHolder);
 		
-		//this.saveButtonHolder = document.createElement("div");
-		//this.saveButtonHolder.setAttribute("id", "saveButtonHolder");
-		//this.targetDiv.appendChild(this.saveButtonHolder);
 		
-		this.rebuildButtonHolder = document.createElement("div");
-		this.rebuildButtonHolder.setAttribute("id", "rebuildButtonHolder");
-		this.rebuildButtonHolder.appendChild(document.createTextNode("rebuild"));
-		this.targetDiv.appendChild(this.rebuildButtonHolder);
+		this.setSaveButtonVisibility(false);
 		
-		var hook = this;
-		/*this.saveButtonHolder.onclick = function(){
-			var transport = hook.getData();
-			var actionObject = {
-					command : "saveForm",
-					formBuilder: hook,
-					transport : transport
-					
-			};
-			
-			hook.controller.action(actionObject);
-		}
-		*/
-		this.rebuildButtonHolder.onclick = function(){
-			hook.rootFormObject.build();
-		}
-		
-		this.rootFormObject = new  OpenPanel.GUIBuilder.GUIElements.FormObject();
+		this.rootFormObject = new OpenPanel.GUIBuilder.GUIElements.FormObject();
 		this.rootFormObject.setOpenCoreObject(this.openCoreObject);
 		
 		this.rootFormObject.setParentUUID(this.parentUUID);
 		this.rootFormObject.setTargetDiv(this.formObjectHolder);
 		this.rootFormObject.setController(this.controller);
 		this.rootFormObject.setFormBuilder(this);
+		
 		this.rootFormObject.build();
-		var testElement = new Ext.get('saveButtonHolder');
+	},
+	
+	setSaveButtonVisibility : function(isVisible){
+		var saveButtonElement = document.getElementById("saveButton");
+		saveButtonElement.setAttribute("style", "visibility: " + (isVisible==true?"visible":"hidden") +";");
+	},
+	finishLayout : function(formObject){
+		if(formObject!=undefined){
+			
+			console.log("foo", formObject, formObject.isUpdateable);
+			if(formObject.isUpdateable!= undefined && formObject.isUpdateable == true){
+				this.isUpdateable = true;
+				this.setSaveButtonVisibility(true);
+			}
+			
+			if(formObject.parentFormObject!=undefined){
+					this.finishLayout(formObject.parentFormObject);
+				
+			}
+		}
 		
-		
+	},	
+	
+	setIsUpdateable : function(isUpdateable){
+		this.isUpdateable = isUpdateable;
 	},
 	
 	clean : function(){
@@ -66,27 +69,6 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 		this.rootFormObject.getData(transport);	
 		transport.reverse();
 		return transport;
-		/*
-		
-		var gotErrors = false;
-		var errorMessages = "";
-		for(var i = 0;i<transport.length;i++){
-			var openCoreObject = transport[i].openCoreObject;
-			console.log(openCoreObject);
-			var formData = transport[i].formData;
-			var instance = transport[i].instance;	
-			var r = this.controller.dataManager.updateInstance(openCoreObject.name, instance.uuid, formData);
-			if(this.controller.dataManager.getErrorId() != 0){
-				gotErrors = true;
-				errorMessages+= "error: " + openCoreObject.name + " : " + this.controller.dataManager.getErrorMessage() + "\n";
-			}
-		}
-		if(gotErrors == true){
-			throw new Exception(errorMessages);
-		} else{
-			this.rootFormObject.build();
-		}
-		*/
 	},
 	
 	getInstance : function(name){
@@ -118,7 +100,10 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 	
 	setCurrentRootClassInstance: function(currentRootClassInstance){
 		this.currentRootClassInstance = currentRootClassInstance;
-	}
+	},
 	
+	setLastCreatedFormObject : function(formObject){
+		this.lastCreatedFormObject = formObject;
+	}
 }
 

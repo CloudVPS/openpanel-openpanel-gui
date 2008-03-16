@@ -19,7 +19,6 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 			
 			this.gridDiv = document.createElement("div");
 			this.gridDiv.setAttribute("class", "grid");
-			this.gridDiv.appendChild(document.createTextNode("grid: " + this.openCoreObject.name));
 			this.targetDiv.appendChild(this.gridDiv);
 			if (this.openCoreObject.meta == true) {
 				this.createMetaGrid(this.instances);
