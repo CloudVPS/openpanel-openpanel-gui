@@ -8,7 +8,7 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid = function(){
 	this.controller= {};
 	this.callBackCommand = "";
 	this.store = {};
-	
+	this.gridWidth = 575;
 }
 
 OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
@@ -99,6 +99,10 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 			if (param.visible == false || paramName == "uuid") {
 				obj.hidden = true;
 			}
+			
+			if(param.gridwidth != undefined){
+				obj.width = (this.gridWidth - 10)* param.gridwidth/100;
+			}
 			columns.push(obj);
 		}
 	
@@ -113,7 +117,7 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 	        stripeRows: false,
 	        autoExpandColumn: 'id',
 	        height:150,
-	        width:575,
+	        width: this.gridWidth,
 	        title: this.openCoreObject.title,
 			header: false,
 			sm : new Ext.grid.RowSelectionModel({singleSelect:true})
@@ -229,6 +233,12 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 				if (param.visible == false) {
 					obj.hidden = true;
 				}
+				
+				if(param.gridwidth != undefined){
+					obj.width = (this.gridWidth - 10)* param.gridwidth/100;
+					
+				}
+			
 				columns.push(obj);
 			}
 		}
@@ -244,7 +254,7 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 	        stripeRows: false,
 	        autoExpandColumn: fields[0].name,
 	        height:150,
-	        width:575,
+	        width: this.gridWidth,
 	        title: this.openCoreObject.title,
 			header: false
 		});
