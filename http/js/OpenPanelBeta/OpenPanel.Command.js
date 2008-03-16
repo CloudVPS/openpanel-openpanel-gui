@@ -30,7 +30,6 @@ OpenPanel.Command.Login  = {
 	},
 	
 	loginDone : function(data, callBackArguments){
-		console.log(data, callBackArguments);
 		var actionObject = callBackArguments;
 		if(callBackArguments.header.errorid == 0){
 			var rootObject = new OpenCore.DataManager.OpenCoreObject({}, "ROOT");

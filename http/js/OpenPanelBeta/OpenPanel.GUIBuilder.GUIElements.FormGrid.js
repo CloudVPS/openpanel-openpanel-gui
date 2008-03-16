@@ -75,7 +75,8 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 		var obj = {
 			id: "uuid",
 			header: "uuid",
-			sortable : true
+			sortable : true,
+			hidden : true
 		};
 			
 		var columns = new Array();
@@ -95,10 +96,8 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 				sortable : true
 			};
 			
-			if(param.visible == false){
-		 		obj.visible = false;
-			} else {
-				
+			if (param.visible == false || paramName == "uuid") {
+				obj.hidden = true;
 			}
 			columns.push(obj);
 		}
@@ -190,7 +189,10 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 				
 				for(var paramKey in params){
 					var param = params[paramKey];
-					storeDataEntry.push(instance[paramKey]);
+					if(param.gridhide == undefined){
+						storeDataEntry.push(instance[paramKey]);
+					}
+					
 				}
 				
 				storeData.push(storeDataEntry);
@@ -204,7 +206,8 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 		var columns = [{
 			id: "uuid",
 			header: "uuid",
-			sortable : true
+			sortable : true,
+			hidden : true
 		}];
 		var className = this.openCoreObject.name;
 		var classInfo = this.formObject.controller.dataManager.getClassInfo(className);
@@ -212,18 +215,22 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 		
 		for(var paramName in params){
 			var param = params[paramName];
-			fields.push({name : paramName});
-			
-			var obj = {
-				id: paramName,
-				header: paramName,
-				sortable : true
-			};
-			if(param.visible == false){
-		 		obj.visible = false;
+			if (param.gridhide == undefined) {
+				fields.push({
+					name: paramName
+				});
 				
+				var obj = {
+					id: paramName,
+					header: paramName,
+					sortable: true
+				};
+				
+				if (param.visible == false) {
+					obj.hidden = true;
+				}
+				columns.push(obj);
 			}
-			columns.push(obj);
 		}
 		
 		this.store = new Ext.data.SimpleStore({
