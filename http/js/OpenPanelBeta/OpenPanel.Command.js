@@ -5,6 +5,7 @@ OpenPanel.Command = {
 OpenPanel.Command.Init  = {
 	controller : {},
 	execute : function(actionObject){
+		this.controller.guiBuilder.hideModalMessageDiv();
 		this.controller.guiBuilder.loadTemplate("login.html", "app");
 		//var targetElement = document.getElementById("app");
 		//targetElement.innerHTML = "";
@@ -20,8 +21,6 @@ OpenPanel.Command.Login  = {
 			this.controller.dataManager.loginAsync(actionObject.userName, actionObject.password, this, "loginDone", actionObject);
 			/*if(this.controller.dataManager.login(actionObject.userName, actionObject.password)){
 				// get user info
-				
-				
 			} else {
 				
 				//this.controller.action({ command : "Init", msg: "login failed"})
@@ -42,7 +41,7 @@ OpenPanel.Command.Login  = {
 			OpenPanel.GUIBuilder.GUIElements.TabBar.setTargetDivName("tabBar");
 			OpenPanel.GUIBuilder.GUIElements.FormBuilder.setTargetDivName("mainAreaForm");
 			
-			this.controller.dataManager.initializeQuotaObject();	
+			//this.controller.dataManager.initializeQuotaObject();	
 			this.controller.action({command: "BuildIconBar"});
 			// OpenCore.Debug.createDebugList();
 			OpenPanel.Controller.initializePing();

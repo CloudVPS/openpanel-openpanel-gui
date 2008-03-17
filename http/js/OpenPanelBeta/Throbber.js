@@ -6,14 +6,18 @@ var Throbber = {
 			
 			
 			start : function(){
-				if (this.throbberTimeout == undefined) {
-					this.throbberTimeout = setTimeout("Throbber.f()", this.timeout);
+				if(Throbber.throbberTimeout != undefined){
+					this.stop();
+				}
+				
+				if (Throbber.throbberTimeout == undefined) {
+					Throbber.throbberTimeout = setTimeout("Throbber.f()", this.timeout);
 				}
 			},
 			
 			stop : function(){
-				clearTimeout(this.throbberTimeout);
-				this.throbberTimeout = undefined;
+				clearTimeout(Throbber.throbberTimeout);
+				Throbber.throbberTimeout = undefined;
 			},
 			
 			f : function(){
