@@ -24,7 +24,10 @@ img, input {
 	
 }
 
-
+#welcomeDivHolder {
+	margin-left: 25px;
+	margin-right: 25px;
+}
 
 .throbber {
 	background-repeat: no-repeat;

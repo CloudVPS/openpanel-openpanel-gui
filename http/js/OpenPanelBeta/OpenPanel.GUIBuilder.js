@@ -24,7 +24,7 @@ OpenPanel.GUIBuilder = {
 	loadTemplateIntoDiv : function(templateName, targetDiv){
 		var f = $j.ajax(
 			{ type: "POST",
-			  url: "templates/" + templateName,
+			  url: templateName,
 			  async: false,
 			  dataType: "text"
 			}).responseText;

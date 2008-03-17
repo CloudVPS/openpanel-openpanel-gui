@@ -59,7 +59,20 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 						
 			
 			var sortedChildren = {};
-			
+			sortedChildren["welcome"] = {
+					description: "Welcome",
+					classInfo: {
+						"class": {
+							uuid: "crow"
+						}
+					},
+					title : "Welcome",
+					name : "name",
+					onclick : function()
+					{
+						hook.controller.action({command: "Welcome"});
+					}
+			};
 			for(var i = 0;i<sortIndexesToSort.length;i++){
 				var childObjects = sortIndexes[sortIndexesToSort[i]];
 				for(var j=0;j<childObjects.length;j++){
@@ -85,7 +98,6 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 					{
 						hook.controller.action({command: "Logout"});
 					}
-					
 			};
 			
 			

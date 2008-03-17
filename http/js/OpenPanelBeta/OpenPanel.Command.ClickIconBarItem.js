@@ -14,7 +14,7 @@ OpenPanel.Command.ClickIconBarItem  = {
 	},
 	
 	getInstancesDone : function(openCoreObject){
-		
+		OpenPanel.Command.Login.buildStuff();
 		this.controller.currentRootClass 			= openCoreObject;
 		this.controller.currentRootClassInstance 	= openCoreObject.getFirstInstance();
 		this.controller.iconBarClick(openCoreObject);

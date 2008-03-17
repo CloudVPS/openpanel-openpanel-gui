@@ -6,7 +6,7 @@ OpenPanel.Command.Init  = {
 	controller : {},
 	execute : function(actionObject){
 		this.controller.guiBuilder.hideModalMessageDiv();
-		this.controller.guiBuilder.loadTemplate("login.html", "app");
+		this.controller.guiBuilder.loadTemplate("templates/login.html", "app");
 		//var targetElement = document.getElementById("app");
 		//targetElement.innerHTML = "";
 		this.controller.guiBuilder.renderLogin(document.getElementById("loginDiv"), actionObject);
@@ -33,8 +33,18 @@ OpenPanel.Command.Login  = {
 		if(callBackArguments.header.errorid == 0){
 			var rootObject = new OpenCore.DataManager.OpenCoreObject({}, "ROOT");
 			this.controller.currentUser = actionObject.userName;
+			this.buildStuff();
+			// OpenCore.Debug.createDebugList();
+			OpenPanel.Controller.initializePing();
 			
-			this.controller.guiBuilder.loadTemplate("main.html", "app");
+			
+		} else {
+			
+		}
+	},
+	
+	buildStuff : function(){
+		this.controller.guiBuilder.loadTemplate("templates/main.html", "app");
 			this.controller.guiBuilder.GUIElements.FormBuilder.setSaveButtonVisibility(false);
 			OpenPanel.GUIBuilder.GUIElements.IconBar.setTargetDivName("iconBar");
 			OpenPanel.GUIBuilder.GUIElements.ItemList.setTargetDivName("mainAreaLeft");
@@ -43,13 +53,6 @@ OpenPanel.Command.Login  = {
 			
 			//this.controller.dataManager.initializeQuotaObject();	
 			this.controller.action({command: "BuildIconBar"});
-			// OpenCore.Debug.createDebugList();
-			OpenPanel.Controller.initializePing();
-			
-			
-		} else {
-			
-		}
 	}
 }
 
@@ -59,5 +62,21 @@ OpenPanel.Command.Logout  = {
 		this.controller.dataManager.logOut();
 		this.controller.destroyPingTimeoutHandler();
 		this.controller.action({command: "Init"});
+	}
+}
+
+OpenPanel.Command.Welcome = {
+	controller : {},
+	execute : function(actionObject){
+		var tabBarDiv = document.getElementById("tabBar");
+		if(tabBarDiv != undefined){
+			tabBarDiv.innerHTML = "";
+		}
+		var mainAreaDiv = document.getElementById("mainArea");
+		mainAreaDiv.innerHTML = "";
+		var welcomeDivHolder = document.createElement("div");
+		welcomeDivHolder.setAttribute("id", "welcomeDivHolder");
+		mainAreaDiv.appendChild(welcomeDivHolder);
+		this.controller.guiBuilder.loadTemplate("dynamic/index.html", "welcomeDivHolder");
 	}
 }

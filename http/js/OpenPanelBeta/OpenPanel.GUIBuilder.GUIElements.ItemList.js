@@ -24,7 +24,6 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 		this.instances = {};
 		this.currentInstance = undefined;
 		this.userObject = OpenCore.DataManager.getOpenCoreObjectByName("User");
-		console.log("this.userObject", this.userObject);
 		this.userObject.getInstances();
 		
 		if(this.openCoreObject != undefined){
@@ -39,7 +38,6 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 					}
 					if (typeof(instance) == "object") {
 						var userInstance = this.userObject.getInstanceByUUID(instance.ownerid);
-						console.log("OHAI", userInstance);
 						var ownerName = userInstance!=undefined?userInstance.name_customer:"";
 						var item = [instance.uuid, this.openCoreObject.name, metaid, ownerName];
 					}
