@@ -411,9 +411,9 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 				
 				var createOne = document.createElement("span");
 				if (textOnly == true) {
-					var createOneText = document.createTextNode("Click here to create one.");
+					createOne.innerHTML = "<b>Click here to create one.</b>";
 					createOne.setAttribute("class", "createOneSpan");
-					createOne.appendChild(createOneText);
+					//createOne.appendChild(createOneText);
 					
 					
 				} else {
