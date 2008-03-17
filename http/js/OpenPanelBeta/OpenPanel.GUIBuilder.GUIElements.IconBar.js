@@ -67,7 +67,7 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 						}
 					},
 					title : "Welcome",
-					name : "name",
+					name : "Welcome",
 					onclick : function()
 					{
 						hook.controller.action({command: "Welcome"});

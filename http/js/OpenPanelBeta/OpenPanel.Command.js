@@ -33,24 +33,23 @@ OpenPanel.Command.Login  = {
 		if(callBackArguments.header.errorid == 0){
 			var rootObject = new OpenCore.DataManager.OpenCoreObject({}, "ROOT");
 			this.controller.currentUser = actionObject.userName;
-			this.buildStuff();
+			this.buildMainArea();
 			// OpenCore.Debug.createDebugList();
 			OpenPanel.Controller.initializePing();
-			
+			this.controller.action({command: "Welcome"});
 			
 		} else {
 			
 		}
 	},
 	
-	buildStuff : function(){
+	buildMainArea : function(){
 		this.controller.guiBuilder.loadTemplate("templates/main.html", "app");
 			this.controller.guiBuilder.GUIElements.FormBuilder.setSaveButtonVisibility(false);
 			OpenPanel.GUIBuilder.GUIElements.IconBar.setTargetDivName("iconBar");
 			OpenPanel.GUIBuilder.GUIElements.ItemList.setTargetDivName("mainAreaLeft");
 			OpenPanel.GUIBuilder.GUIElements.TabBar.setTargetDivName("tabBar");
 			OpenPanel.GUIBuilder.GUIElements.FormBuilder.setTargetDivName("mainAreaForm");
-			
 			//this.controller.dataManager.initializeQuotaObject();	
 			this.controller.action({command: "BuildIconBar"});
 	}
@@ -78,5 +77,7 @@ OpenPanel.Command.Welcome = {
 		welcomeDivHolder.setAttribute("id", "welcomeDivHolder");
 		mainAreaDiv.appendChild(welcomeDivHolder);
 		this.controller.guiBuilder.loadTemplate("dynamic/", "welcomeDivHolder");
+		this.controller.guiBuilder.GUIElements.IconBar.highliteItem("Welcome");
+		this.controller.guiBuilder.GUIElements.FormBuilder.setSaveButtonVisibility(false);
 	}
 }

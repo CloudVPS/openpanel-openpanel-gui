@@ -457,7 +457,7 @@ OpenPanel.Controller = {
 					this.error.push([errorKey, e[errorKey]]);
 				}
 				
-				OpenPanel.GUIBuilder.loadTemplateIntoDiv("fatalError.html", targetDiv);
+				OpenPanel.GUIBuilder.loadTemplateIntoDiv("templates/fatalError.html", targetDiv);
 				
 				
 			break;
