@@ -5,8 +5,11 @@ OpenPanel.Command.ClickIconBarItem  = {
 	execute : function(actionObject){
 		var openCoreObject = this.controller.dataManager.getOpenCoreObjectByName(actionObject.className);
 		if(openCoreObject != undefined){
-			OpenPanel.Command.Login.buildMainArea();
-			this.controller.guiBuilder.GUIElements.IconBar.highliteItem(openCoreObject.name);
+			var test = document.getElementById("mainAreaLeft");
+			if (test == undefined) {
+				OpenPanel.Command.Login.buildMainArea();
+				this.controller.guiBuilder.GUIElements.IconBar.highliteItem(openCoreObject.name);
+			}
 			openCoreObject.setHasFetchedInstances(false);
 			//var instances								= openCoreObject.getInstances();
 			openCoreObject.getInstancesAsync(OpenPanel.Command.ClickIconBarItem, "getInstancesDone", openCoreObject);
