@@ -36,6 +36,7 @@ OpenPanel.Command.Login  = {
 			this.controller.currentUser = actionObject.userName;
 			
 			this.controller.guiBuilder.loadTemplate("main.html", "app");
+			this.controller.guiBuilder.GUIElements.FormBuilder.setSaveButtonVisibility(false);
 			OpenPanel.GUIBuilder.GUIElements.IconBar.setTargetDivName("iconBar");
 			OpenPanel.GUIBuilder.GUIElements.ItemList.setTargetDivName("mainAreaLeft");
 			OpenPanel.GUIBuilder.GUIElements.TabBar.setTargetDivName("tabBar");

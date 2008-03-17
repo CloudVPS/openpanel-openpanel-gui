@@ -10,14 +10,12 @@ OpenPanel.Controller = {
 	selectedRootInstance: "",
 	selectedTabObject: "",
 	
-	
-	
 	currentRootClass: {},
 	currentRootClassInstance: {},
 	currentUser : {},
 	
 	action: function(actionObject){
-		console.log(actionObject);
+		console.log("controller actionObject", actionObject);
 		
 		try {
 			this.lastCommand = actionObject.command;
@@ -167,10 +165,68 @@ OpenPanel.Controller = {
 						}
 					break;
 					
+						// 
 					case "saveForm":
-						console.log(actionObject);
+						var newActionObject = {};
+						var transport =  actionObject.transport;
+						
+						newActionObject.numberOfChildObjects = transport.length;
+						newActionObject.done = 0;
+						newActionObject.errors = [];
+						newActionObject.failed = false;
+						
+						newActionObject.command = "saveFormDone";
+						for(var i = 0;i<transport.length;i++){
+							var openCoreObject = transport[i].openCoreObject;
+							var formData = transport[i].formData;
+							var instance = transport[i].instance;
+							newActionObject.openCoreObject = openCoreObject;
+							this.dataManager.updateInstanceAsync(openCoreObject.name, instance.uuid, formData, this, "action", newActionObject);
+						}
+						console.log(actionObject.transport);
+					break;
+					
+					case "saveFormDone":
+						console.log(actionObject.header.errorid);
+						var errorId = actionObject.header.errorid;
+						actionObject.done++;
+						if(errorId != 0){
+							var error = actionObject.header.error;
+							actionObject.failed = true;
+							actionObject.errors.push({
+								error: error,
+								errorId: errorId
+							}
+							);
+						}
+						
+						if(actionObject.done == actionObject.numberOfChildObjects){
+							try {
+								if(actionObject.failed == true){
+									var errorString = "";
+									for(var i = 0;i<actionObject.errors.length;i++){
+										errorString += actionObject.errors[i] + "<br/>";
+									}
+										
+									var e = new OpenCoreError(errorString);
+									e.threaded = true;
+									e.errors = actionObject.errors;
+									throw e;
+								}
+								
+								OpenPanel.GUIBuilder.GUIElements.FormBuilder.rootFormObject.build();
+							} catch (e){
+								this.handleErrors(e);
+							}
+							
+							
+						}
+					break;
+					
+					case "FOO":
 						var formBuilder = OpenPanel.GUIBuilder.GUIElements.FormBuilder;
 						var transport = actionObject.transport;
+						console.log("transport", transport);
 						
 						var gotErrors = false;
 						var errorMessages = "";
@@ -178,8 +234,9 @@ OpenPanel.Controller = {
 							var openCoreObject = transport[i].openCoreObject;
 							
 							var formData = transport[i].formData;
-							var instance = transport[i].instance;	
+							var instance = transport[i].instance;
 							var r = this.dataManager.updateInstance(openCoreObject.name, instance.uuid, formData);
+							
 							if(this.dataManager.getErrorId() != 0){
 								gotErrors = true;
 							}
@@ -277,8 +334,6 @@ OpenPanel.Controller = {
 			
 			var firstTabOpenCoreObject = this.guiBuilder.GUIElements.TabBar.getFirstTabItem();
 			
-			
-			console.log("XXXXX firstTabOpenCoreObject");
 			console.log(firstTabOpenCoreObject);
 			
 			this.guiBuilder.GUIElements.FormBuilder.setOpenCoreObject(firstTabOpenCoreObject);
@@ -309,6 +364,7 @@ OpenPanel.Controller = {
 			this.pingTimeoutHandler = undefined;
 		}
 	},
+	
 	
 	ping : function(){
 		console.log("ping");
@@ -346,25 +402,49 @@ OpenPanel.Controller = {
 		OpenPanel.GUIBuilder.hideLoadingDiv();
 		clearTimeout(this.pingTimeoutHandler);
 		switch(e.name){
-			
 			case "OpenCoreError":
-				
-				switch(this.dataManager.getErrorId()){
+				if (e.threaded == true) {
+					var errors = e.errors;
 					
-					case 12288:
-					case 8193:
-						
-						alert(e);
-						this.action({ command : "Init", msg: e.message})
+					var errorString = "";
+					var goToInit = false;
+					for(var i = 0;i<errors.length;i++){
+						var error = errors[i];
+						if (typeof(error) == "object") {
+							errorString += error.errorId + " : " + error.error + "\n";
+							if (error.errorId == 12288 || error.errorId == 8193) {
+								goToInit = true;
+							}
+						}
+					}
+					
+					alert(errorString);
+					if(goToInit == true){
+						this.action({
+							command: "Init",
+							msg: e.message
+						})
 						OpenPanel.Controller.proceedAfterError();
-					break;
-					default:
-						alert(e);
-					break;
+					}
 					
+				} else {
+					switch (this.dataManager.getErrorId()) {
 					
+						case 12288:
+						case 8193:
+							
+							alert(e);
+							this.action({
+								command: "Init",
+								msg: e.message
+							})
+							OpenPanel.Controller.proceedAfterError();
+							break;
+						default:
+							alert(e);
+							break;
+					}
 				}
-				
 			break;
 			
 			case "RPCError":

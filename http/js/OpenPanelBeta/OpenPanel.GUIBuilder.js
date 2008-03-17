@@ -19,8 +19,6 @@ OpenPanel.GUIBuilder = {
 		} else {
 			alert("OpenPanel.GUIBuilder : targetDiv not found");
 		}		
-		
-		
 	},
 	
 	loadTemplateIntoDiv : function(templateName, targetDiv){
@@ -37,8 +35,6 @@ OpenPanel.GUIBuilder = {
 		this.targetDiv.innerHTML = o.process({ 
 			controller: this.controller 
 		});
-			
-		
 	},
 	
 	createPopUp : function(){

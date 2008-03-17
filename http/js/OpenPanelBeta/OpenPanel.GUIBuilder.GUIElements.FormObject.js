@@ -111,6 +111,8 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 				var record = this.controller.dataManager.getRecord(this.openCoreObject.name, this.currentInstance.id);
 				this.currentInstance = record[this.openCoreObject.name];
 				this.openCoreObject.instances[this.currentInstance.id] = this.currentInstance;
+				this.controller.currentRootClassInstance = this.currentInstance;
+				console.log("asdasd",record,this.currentInstance, this.openCoreObject.instances);
 			}
 			
 			// UPDATE
@@ -537,8 +539,11 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		
 		for(var key in this.childFormObjects){
 			var childFormObject = this.childFormObjects[key];
-			console.log("child: " + childFormObject.openCoreObject.name);
-			childFormObject.getData(transport);
+			if (typeof(childFormObject) == "object") {
+				console.log("childFormObject", childFormObject);
+				console.log("child: " + childFormObject.openCoreObject.name);
+				childFormObject.getData(transport);
+			}
 		}
 	},
 	

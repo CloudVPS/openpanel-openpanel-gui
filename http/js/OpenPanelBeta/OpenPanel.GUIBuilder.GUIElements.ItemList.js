@@ -63,7 +63,7 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 				
 				
 			} else {
-				this.targetDiv.appendChild(document.createTextNode("fancy picture"));
+				this.targetDiv.innerHTML = "<center><img src=\"/images/emblems/"+this.openCoreObject.uuid+".png\"/></center>";
 			}
 		} else {
 			alert("OpenPanel.GUIBuilder.GUIElements.ItemList.build(openCoreObject) : openCoreObject is undefined");

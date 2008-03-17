@@ -24,6 +24,19 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 		
 		this.setSaveButtonVisibility(false);
 		
+		
+		var saveButtonHolder = document.getElementById("saveButtonHolder");
+		var hook = this;
+		saveButtonHolder.onclick = function(){
+			var transport = hook.getData();
+			var actionObject = {
+				command : "saveForm",
+				formBuilder: hook,
+				transport : transport
+			};
+			hook.controller.action(actionObject);
+		}
+		
 		this.rootFormObject = new OpenPanel.GUIBuilder.GUIElements.FormObject();
 		this.rootFormObject.setOpenCoreObject(this.openCoreObject);
 		
@@ -31,14 +44,15 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 		this.rootFormObject.setTargetDiv(this.formObjectHolder);
 		this.rootFormObject.setController(this.controller);
 		this.rootFormObject.setFormBuilder(this);
-		
 		this.rootFormObject.build();
 	},
 	
 	setSaveButtonVisibility : function(isVisible){
+		
 		var saveButtonElement = document.getElementById("saveButton");
-		saveButtonElement.setAttribute("style", "visibility: " + (isVisible==true?"visible":"hidden") +";");
+		saveButtonElement.style.visibility = isVisible==true?"visible":"hidden";
 	},
+	
 	finishLayout : function(formObject){
 		if(formObject!=undefined){
 			
@@ -50,10 +64,8 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 			
 			if(formObject.parentFormObject!=undefined){
 					this.finishLayout(formObject.parentFormObject);
-				
 			}
 		}
-		
 	},	
 	
 	setIsUpdateable : function(isUpdateable){

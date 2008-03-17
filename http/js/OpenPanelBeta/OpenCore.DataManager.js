@@ -172,8 +172,6 @@ OpenCore.DataManager = {
 		return this.classInfos[className];
 	},
 	
-	
-	
 	updateInstance: function(className, objectId, data){
 		var r = new this.rpc.SendVars();
 		r.addHeader("command", "update");
@@ -187,6 +185,54 @@ OpenCore.DataManager = {
 		&& requestResult.body.data != undefined 
 		&& requestResult.body.data[className] != undefined) {
 			return requestResult.body.data;
+		}
+	},
+	
+	updateInstanceAsync: function(className, objectId, data, callBackObject, callBackFunction, callBackArguments){
+		var r = new this.rpc.SendVars();
+		r.addHeader("command", "update");
+		r.addHeader("session_id", this.sessionId);
+		r.addBody("classid", className);
+		r.addBody("objectid", objectId);	
+		r.addBody("data", data);
+		
+		var callBackWrapper = {
+			callBackObject : callBackObject,
+			callBackFunction : callBackFunction,
+			callBackArguments : callBackArguments
+		}
+		
+		this.getRequestResultAsync(r, OpenCore.DataManager, "updateInstanceAsyncDone", callBackWrapper);
+	},
+	
+	updateInstanceAsyncDone : function(callBackWrapper){
+		console.log("callBackWrapper", callBackWrapper);
+		var callBackObject;
+		var callBackFunction;
+		var callBackArguments;
+		var data;
+		
+		if(callBackWrapper.callBackObject != undefined){
+			callBackObject = callBackWrapper.callBackObject;
+		}
+		
+		if(callBackWrapper.callBackFunction != undefined){
+			callBackFunction = callBackWrapper.callBackFunction;
+		}
+		
+		if(callBackWrapper.callBackArguments != undefined){
+			callBackArguments = callBackWrapper.callBackArguments;
+		}
+		
+		if(callBackWrapper.data != undefined){
+			data = callBackWrapper.data;
+		}
+		
+		callBackArguments.data = data;
+		callBackArguments.header = callBackWrapper.header;
+		
+		if(callBackObject!= undefined){
+			callBackObject[callBackFunction](callBackArguments);
 		}
 	},
 	

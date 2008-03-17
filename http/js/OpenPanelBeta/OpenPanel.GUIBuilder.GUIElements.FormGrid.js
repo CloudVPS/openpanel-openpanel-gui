@@ -25,7 +25,6 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 			} else {
 				this.createGrid(this.instances);
 			}
-			
 			this.grid.render(this.targetDiv);
 			
 			// select current item
@@ -63,7 +62,9 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 				storeDataEntry.push(instance.uuid);
 				for(var paramKey in params){
 					var param = params[paramKey];
-					storeDataEntry.push(instance[paramKey]);
+					if (param.gridhide == undefined) {
+						storeDataEntry.push(instance[paramKey]);
+					}
 				}
 				
 				storeData.push(storeDataEntry);
@@ -88,22 +89,26 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 		
 		for(var paramName in params){
 			var param = params[paramName];
-			fields.push({name : paramName});
-			
-			var obj = {
-				id: paramName,
-				header: paramName,
-				sortable : true
-			};
-			
-			if (param.visible == false || paramName == "uuid") {
-				obj.hidden = true;
+			if (param.gridhide == undefined) {
+				fields.push({
+					name: paramName
+				});
+				
+				var obj = {
+					id: paramName,
+					header: paramName,
+					sortable: true
+				};
+				
+				if (param.visible == false || paramName == "uuid") {
+					obj.hidden = true;
+				}
+				
+				if (param.gridwidth != undefined) {
+					obj.width = (this.gridWidth - 10) * param.gridwidth / 100;
+				}
+				columns.push(obj);
 			}
-			
-			if(param.gridwidth != undefined){
-				obj.width = (this.gridWidth - 10)* param.gridwidth/100;
-			}
-			columns.push(obj);
 		}
 	
 		this.store = new Ext.data.SimpleStore({
