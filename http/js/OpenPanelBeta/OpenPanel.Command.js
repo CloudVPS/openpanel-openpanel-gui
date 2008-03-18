@@ -39,6 +39,7 @@ OpenPanel.Command.Login  = {
 			this.controller.action({command: "Welcome"});
 			
 		} else {
+			throw new OpenCoreError(callBackArguments.header.error, callBackArguments.header.errorid);
 			
 		}
 	},

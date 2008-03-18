@@ -399,10 +399,12 @@ OpenPanel.Controller = {
 	},
 	
 	handleErrors : function(e){	
+		console.log("ERRROR", e);
 		OpenPanel.GUIBuilder.hideLoadingDiv();
 		clearTimeout(this.pingTimeoutHandler);
 		switch(e.name){
 			case "OpenCoreError":
+			
 				if (e.threaded == true) {
 					var errors = e.errors;
 					
@@ -428,7 +430,7 @@ OpenPanel.Controller = {
 					}
 					
 				} else {
-					switch (this.dataManager.getErrorId()) {
+					switch (e.errorCode) {
 					
 						case 12288:
 						case 8193:
@@ -439,18 +441,16 @@ OpenPanel.Controller = {
 								msg: e.message
 							})
 							OpenPanel.Controller.proceedAfterError();
-							break;
+						break;
 						default:
 							alert(e);
-							break;
+						break;
 					}
 				}
 			break;
 			
 			case "RPCError":
 			default:
-				//alert(e.name + ": " + e.message);
-				console.log(typeof(this.pingTimeoutHandler));
 				var targetDiv = OpenPanel.GUIBuilder.createPopUp();
 				this.error = new Array();
 				for(var errorKey in e){
@@ -458,8 +458,6 @@ OpenPanel.Controller = {
 				}
 				
 				OpenPanel.GUIBuilder.loadTemplateIntoDiv("templates/fatalError.html", targetDiv);
-				
-				
 			break;
 		}
 		for(var key in e){
