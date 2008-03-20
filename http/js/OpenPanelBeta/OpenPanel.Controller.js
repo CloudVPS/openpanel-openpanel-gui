@@ -379,7 +379,7 @@ OpenPanel.Controller = {
 				for(var key in callBackArguments){
 					d+=key + " " + callBackArguments[key] + "\n";
 				}
-				throw new Error("Reply is very erroneous: " + d);
+				throw new Error("Unexpected server reply (opencore gone?): " + d);
 			} else {
 				
 				if(OpenCore.DataManager.getErrorId() == 0){
