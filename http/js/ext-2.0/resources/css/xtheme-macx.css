@@ -28,8 +28,8 @@ q:before,q:after{content:'';}
 .x-layer{visibility:hidden;}
 .x-unselectable,.x-unselectable *{-moz-user-select:none;-khtml-user-select:none;}
 .x-repaint{zoom:1;background-color:transparent;-moz-outline:none;}
-.x-item-disabled{color:gray;cursor:default;}
-.x-item-disabled *{color:gray!important;cursor:default!important;}
+.x-item-disabled{color:black;cursor:default;}
+.x-item-disabled *{color:black!important;cursor:default!important;}
 .x-splitbar-proxy{position:absolute;visibility:hidden;z-index:20001;background:#aaa;zoom:1;line-height:1px;font-size:1px;overflow:hidden;}
 .x-splitbar-h,.x-splitbar-proxy-h{cursor:e-resize;cursor:col-resize;}
 .x-splitbar-v,.x-splitbar-proxy-v{cursor:s-resize;cursor:row-resize;}
