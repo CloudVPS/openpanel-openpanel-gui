@@ -297,7 +297,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 			} else {
 				// no instances, show create new instance
 				console.log("no instances");
-				var msg = "No instances of " + this.openCoreObject.title + ". ";
+				var msg = "No configured " + this.openCoreObject.title + " objects found. ";
 				var pElement = document.createElement("p");
 				this.gridDiv.appendChild(document.createTextNode(msg));
 				if(this.openCoreObject.meta == true){
