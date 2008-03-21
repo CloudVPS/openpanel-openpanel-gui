@@ -9,6 +9,7 @@ OpenPanel.Command.ClickIconBarItem  = {
 			if (test == undefined) {
 				OpenPanel.Command.Login.buildMainArea();
 				this.controller.guiBuilder.GUIElements.IconBar.highliteItem(openCoreObject.name);
+				this.controller.guiBuilder.GUIElements.IconBar.setTitle(openCoreObject.title);
 			}
 			openCoreObject.setHasFetchedInstances(false);
 			//var instances								= openCoreObject.getInstances();

@@ -109,7 +109,9 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 			console.log("there is an instance");
 			if(this.isBuilt == true){
 				var record = this.controller.dataManager.getRecord(this.openCoreObject.name, this.currentInstance.id);
+				console.log('record', record);
 				this.currentInstance = record[this.openCoreObject.name];
+				
 				this.openCoreObject.instances[this.currentInstance.id] = this.currentInstance;
 				this.controller.currentRootClassInstance = this.currentInstance;
 				console.log("asdasd",record,this.currentInstance, this.openCoreObject.instances);
@@ -464,7 +466,6 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 						this.gridDiv.appendChild(explanationElement);
 					}	
 				}
-				
 			}
 		}
 	},

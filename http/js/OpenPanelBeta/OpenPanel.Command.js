@@ -79,6 +79,7 @@ OpenPanel.Command.Welcome = {
 		mainAreaDiv.appendChild(welcomeDivHolder);
 		this.controller.guiBuilder.loadTemplate("dynamic/", "welcomeDivHolder");
 		this.controller.guiBuilder.GUIElements.IconBar.highliteItem("Welcome");
+		this.controller.guiBuilder.GUIElements.IconBar.setTitle("Welcome");
 		this.controller.guiBuilder.GUIElements.FormBuilder.setSaveButtonVisibility(false);
 	}
 }

@@ -119,15 +119,22 @@ OpenPanel.Controller = {
 						if(actionObject.openCoreObject != undefined && actionObject.formValues != undefined){
 							
 							var className = actionObject.openCoreObject.name;
+							var openCoreObject = this.dataManager.getOpenCoreObjectByName(className);
+							
 							var actionObjectId = actionObject.formValues.id;
 							var parentId = actionObject.openCoreObject.parent.uuid;
 							
 							var r = this.dataManager.createInstance(className, actionObjectId, parentId, actionObject.formValues);
 							if (this.dataManager.errorId == 0) {
-								actionObject.openCoreObject.fetchedInstances = false;
-								actionObject.openCoreObject.getInstances();
-								this.currentRootClassInstance = actionObject.openCoreObject.instances[actionObjectId];
-								this.iconBarClick(actionObject.openCoreObject);
+								openCoreObject.fetchedInstances = false;
+								var instances = openCoreObject.getInstances();
+								for(var key in instances){
+									console.log(key, instances[key]);
+								}
+								this.currentRootClassInstance = openCoreObject.instances[actionObjectId];
+								console.log("this.currentRootClassInstance", this.currentRootClassInstance);
+								
+								this.iconBarClick(openCoreObject);
 								//this.guiBuilder.GUIElements.ItemList.setOpenCoreObject(actionObject.openCoreObject);
 								//this.guiBuilder.GUIElements.ItemList.build();
 								this.guiBuilder.deletePopUp();
@@ -276,9 +283,6 @@ OpenPanel.Controller = {
 	
 	
 	showCreateInstance : function(openCoreObject, formObjectHolder, finishedAction){
-		// is object updateable?
-		// show popup
-		
 		var popUpDiv = this.guiBuilder.createPopUp();
 		var formObject = new OpenPanel.GUIBuilder.GUIElements.FormObject();
 		formObject.setOpenCoreObject(openCoreObject);
@@ -298,10 +302,6 @@ OpenPanel.Controller = {
 		popupFormObject.setController(this);
 		popupFormObject.createModalFields(formObject.openCoreObject, {}, finishedAction, popUpDiv, formObject);
 		popupFormObject.fields.formPanel.enable();
-		// 
-		
-		
-		// popupFormObject.fields.formPanel
 	},
 	
 	showCreateInstanceFromFormObjectMeta : function(formObject, openCoreObject, formObjectHolder, finishedAction){

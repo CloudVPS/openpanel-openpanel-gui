@@ -197,16 +197,13 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 		}
 	},
 	
-	setTitle : function(className){
-		if (className != undefined && this.itemElements[className] != undefined) {
-			var currentItemElement = this.itemElements[className];
-			this.iconBarTitleElement.innerHTML = this.controller.dataManager.getOpenCoreObjectByName(className).title;
-		}
+	setTitle : function(title){
+		this.iconBarTitleElement.innerHTML = title;
 	},
 	
 	click: function(childObject){
 		
-		this.setTitle(childObject.name);
+		this.setTitle(childObject.title);
 		if (childObject.name != undefined) {
 			if (this.itemElements[childObject.name] != undefined) {
 				var currentItemElement = this.itemElements[childObject.name];

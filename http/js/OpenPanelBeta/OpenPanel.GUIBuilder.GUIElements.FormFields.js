@@ -222,10 +222,11 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 	
 	createChildUsersPullDown: function(fieldName){
 		var userOpenCoreObject = this.formObject.controller.dataManager.getOpenCoreObjectByName("User");
+		userOpenCoreObject.setHasFetchedInstances(false);
 		var instances = userOpenCoreObject.getInstances();
-		
 		var item = {};
 		var userItems = [];
+		
 		if(instances != undefined){
 			
 			for(var userName in instances){
@@ -253,7 +254,8 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 		    emptyText:'Select ...',
 		    selectOnFocus:true,
 			name: fieldName,
-			forceSelection: true
+			forceSelection: true,
+			value : this.formObject.controller.currentUser
 		});
 
 			
