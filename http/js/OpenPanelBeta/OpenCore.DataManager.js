@@ -497,9 +497,57 @@ OpenCore.DataManager = {
 		if(callBackObject!= undefined){
 			callBackObject[callBackFunction](callBackArguments);
 		}
+	},
+	
+	invokeMethodAsync: function(method, className, callBackObject, callBackFunction, callBackArguments){
+		var r = new this.rpc.SendVars();
+		r.addHeader("command", "callmethod");
+		r.addHeader("session_id", this.sessionId);
+		r.addBody("method", method);
+		r.addBody("classid", className);
+		
+		var callBackWrapper = {
+			callBackObject : callBackObject,
+			callBackFunction : callBackFunction,
+			callBackArguments : callBackArguments
+		}
+		this.getRequestResultAsync(r, OpenCore.DataManager, "invokeMethodAsyncDone", callBackWrapper);
+	},
+	
+	
+	invokeMethodAsyncDone : function(callBackWrapper){
+		var callBackObject;
+		var callBackFunction;
+		var callBackArguments;
+		var data;
+		console.log(callBackWrapper);
+		
+		if(callBackWrapper.callBackObject != undefined){
+			callBackObject = callBackWrapper.callBackObject;
+		}
+		
+		if(callBackWrapper.callBackFunction != undefined){
+			callBackFunction = callBackWrapper.callBackFunction;
+		}
+		
+		if(callBackWrapper.callBackArguments != undefined){
+			callBackArguments = callBackWrapper.callBackArguments;
+		}
+		
+		if(callBackWrapper.data != undefined){
+			data = callBackWrapper.data;
+		}
+		
+		callBackArguments.data = data;
+		
+		if(callBackObject!= undefined){
+			callBackObject[callBackFunction](callBackArguments);
+		}
 		
 		
 	},
+	
+	
 	
 	getErrorId : function(){
 		

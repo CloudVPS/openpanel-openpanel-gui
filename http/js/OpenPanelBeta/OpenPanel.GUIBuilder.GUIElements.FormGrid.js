@@ -35,8 +35,6 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 				console.log("record", record);
 			}
 			
-			
-			
 			var hook = this;
 			this.grid.on("cellclick", function(grid, rowIndex, columnIndex, e) {
 		        hook.cellClick(hook.grid, rowIndex, columnIndex, e);

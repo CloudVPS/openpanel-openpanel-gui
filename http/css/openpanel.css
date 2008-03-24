@@ -11,7 +11,6 @@ img, input {
 .disabledField {
 	border: 1px solid #e7e7e7; 
 	background: #e7e7e7;
-	
 }
 
 #saveButtonHolder {
@@ -412,8 +411,8 @@ li.tabDisabled {
 	height:21px;
 }
 
-.grid {
-	padding-top: 5px;
+.grid, .fields {
+	padding-top: 8px;
 }
 
 .createOneSpan {

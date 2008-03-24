@@ -23,6 +23,7 @@
 	this.targetDiv;
 	this.gridDiv;
 	this.fieldsDiv;
+	this.methodsDiv;
 	this.buttonsDiv;
 	this.childFormObjectsDiv;
 	this.isUpdateable = false;
@@ -85,6 +86,8 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		this.fieldsDiv.setAttribute("id", "formFields");
 		this.targetDiv.appendChild(this.fieldsDiv);
 		
+		
+		
 		var anchorDiv = document.createElement("a");
 		anchorDiv.setAttribute("name", this.openCoreObject.name);
 		this.targetDiv.appendChild(anchorDiv);
@@ -137,7 +140,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 				
 				console.log("create fields for " + this.openCoreObject.name + "  " + this.currentInstance.id);
 				console.log(this.currentInstance);
-				this.createFields(this.openCoreObject, this.currentInstance, "", targetDiv);
+				
 				
 			} else { //if (this.openCoreObject.canGetInfo == true) {
 				console.log("can not update");
@@ -153,11 +156,11 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 					console.log("not singleton or can not delete");
 					targetDiv = this.fieldsDiv;
 				}
-				
-				this.createFields(this.openCoreObject, this.currentInstance, "", targetDiv);
-			
 			}
 			
+			this.createFields(this.openCoreObject, this.currentInstance, "", targetDiv);
+			this.createMethods(this.openCoreObject);
+				
 			// DELETE
 			if (this.openCoreObject.canDelete == true) {
 				// we can delete this, however if it's a singleton it's hard to delete without item list
@@ -239,10 +242,14 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 					this.setIsUpdateable(true);
 				}
 				console.log("actualOpenCoreObject", actualOpenCoreObject.name);
+				this.createFields(actualOpenCoreObject, actualInstance, "", this.fieldsDiv);
+				this.createMethods(actualOpenCoreObject);
+					
+					
 				if(actualOpenCoreObject.singleton == true){
 					console.log("singleton");
 					// show fields
-					this.createFields(actualOpenCoreObject, actualInstance, "", this.fieldsDiv);
+					
 					this.createCreateOption(false, true);
 					this.createDeleteOption();
 				} else {
@@ -253,7 +260,6 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 					console.log(this.instances);
 					this.createGrid(this.openCoreObject, this.instances, "callBackCommand", this.gridDiv, {}, this.currentInstance);
 					// here's where we have to check for meta stuff
-					this.createFields(actualOpenCoreObject, actualInstance, "", this.fieldsDiv);
 					
 					
 					this.childFormObjects = [];
@@ -570,6 +576,75 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		this.fields.build();
 	},
 	
+	createMethods : function(openCoreObject){
+		// for now creation of this stuff stays here
+		// iterate list
+		// create buttons
+		// have buttons call same method
+		
+		// something different happening here: divs are *not* create beforehand
+		if (openCoreObject.classInfo.structure.methods != "") {
+			this.methodsDiv = document.createElement("div");
+			this.methodsDiv.setAttribute("id", this.openCoreObject.name + ":methods");
+			this.methodsDiv.setAttribute("id", "methods");
+			this.targetDiv.appendChild(this.methodsDiv);
+			var fieldContainerGroup = window.OpenPanel.GUIBuilder.drawGroup();
+			
+			var groupHolder = fieldContainerGroup.groupHolder;
+			var contentDiv = fieldContainerGroup.contentDiv;
+			this.methodsDiv.appendChild(groupHolder);
+			
+			var methods = openCoreObject.classInfo.structure.methods;
+			var items = [];
+			var hook = this;
+			for(var key in methods){
+				var method = methods[key];
+				if(typeof(method) == "object"){
+					var item = {
+						html : method.description+method.description,
+						style : "width: 100%;"
+						
+					};
+					
+					var button  = {
+						xtype : "button",
+						text : "Ok",
+						style : "width: 100%;",
+						foo : 100,
+						handler: function(){
+								hook.controller.action( 
+						{ 
+							command : "InvokeMethod",
+							openCoreObject : openCoreObject,
+							methodName : key
+						});
+
+
+						}
+					}
+					
+					items.push(item);
+					items.push(button);
+				}
+			}
+			
+			var table = new Ext.Panel({
+			    layout:'table',
+				style : "width: 600px;",
+			    defaults: {
+			        // applied to each contained panel
+			        bodyStyle:'padding-right:20px; margin-top: 10px;margin-bottom: 10px'
+			    },
+			    layoutConfig: {
+			        // The total column count must be specified here
+			        columns: 2
+			    },
+				
+				items :  items
+			});
+			table.render(contentDiv);
+		}
+	},
 	createModalFields : function(openCoreObject, instance, callBackCommand, targetDiv, optionalCallBackObject){
 		
 		this.fields = new OpenPanel.GUIBuilder.GUIElements.FormFields();	

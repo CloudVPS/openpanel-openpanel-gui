@@ -316,14 +316,13 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 			instance = {};
 		}
 		
-		
 		if(this.openCoreObject != undefined && this.openCoreObject.classInfo != undefined && this.openCoreObject.classInfo.structure != undefined && this.openCoreObject.classInfo.structure.parameters != undefined){
 			
 			this.createFormPanel(instance);
-			var shizne = window.OpenPanel.GUIBuilder.drawGroup();
+			var fieldContainerGroup = window.OpenPanel.GUIBuilder.drawGroup();
 			
-			var groupHolder = shizne.groupHolder;
-			var contentDiv = shizne.contentDiv;
+			var groupHolder = fieldContainerGroup.groupHolder;
+			var contentDiv = fieldContainerGroup.contentDiv;
 			this.fieldsDiv.appendChild(groupHolder);
 			
 			this.formPanel.render(contentDiv);
@@ -338,11 +337,6 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 					this.formPanel.items.each(function(item){
 						console.log("ITEM", item);
 					});
-					
-					//var item = this.formPanel.items.find("uuid", parameter.uuid)[0];
-					//console.log(item);
-					//item.hide();asd
-					
 				}
 			}
 		} else {
