@@ -14,11 +14,13 @@ OpenPanel.GUIBuilder.GUIElements.FormFields = function(){
 	this.isCreate = false;
 	this.formItems = {};
 	this.items = [];
+	this.itemCount = 0;
 }
 
 OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 		
 	build : function(){
+		this.itemCount = 0;
 		if(this.targetDiv!=undefined){
 			this.targetDiv.innerHTML = "";
 			
@@ -370,6 +372,8 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 			var description = parameter.description;
 			var fieldType = parameter.type;
 			var item = this.createItem(fieldName, parameter);
+			
+			
 			if (item != undefined) {
 				if (instance[fieldName] != undefined) {
 					switch (parameter.type) {
@@ -405,24 +409,30 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 				if (this.ZIndex != 0) {
 					item["z-index"] = this.ZIndex;
 				}
+				this.itemCount++;
 				
 				this.items[fieldName] = item;
 				if (a == 0) {
-					itemsLeft.push(item);
+					//itemsLeft.push(item);
 					a++;
 				} else {
-					itemsRight.push(item);
+					//itemsRight.push(item);
 					a = 0;
 				}
 			}
 		}
+		
+		
+		
 		
 		// is root object?
 		if(this.isCreate == true && this.openCoreObject.isRootObject){
 			
 			var item = this.createChildUsersPullDown("owner");
 			item.value = this.formObject.controller.currentUser;
+			
 			this.items[fieldName] = item;
+			
 			if (a == 0) {
 				itemsLeft.push(item);
 				a++;
@@ -431,6 +441,16 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 				itemsRight.push(item);
 				a = 0;
 			}
+		}
+		var m = Math.ceil(this.itemCount/2);
+		var i = 0;
+		for(var key in this.items){
+			if(i<m){
+				itemsLeft.push(this.items[key]);
+			} else {
+				itemsRight.push(this.items[key]);
+			}
+			i++;
 		}
 		
 		var formItems;
