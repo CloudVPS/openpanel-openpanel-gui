@@ -399,7 +399,6 @@ OpenPanel.Controller = {
 	},
 	
 	handleErrors : function(e){	
-		console.log("ERRROR", e);
 		OpenPanel.GUIBuilder.hideLoadingDiv();
 		clearTimeout(this.pingTimeoutHandler);
 		switch(e.name){
@@ -451,6 +450,7 @@ OpenPanel.Controller = {
 			
 			case "RPCError":
 			default:
+				
 				var targetDiv = OpenPanel.GUIBuilder.createPopUp();
 				this.error = new Array();
 				for(var errorKey in e){
@@ -460,6 +460,7 @@ OpenPanel.Controller = {
 				OpenPanel.GUIBuilder.loadTemplateIntoDiv("templates/fatalError.html", targetDiv);
 			break;
 		}
+		
 		for(var key in e){
 			console.log(key +  ": " + e[key]);
 		}

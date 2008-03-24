@@ -95,7 +95,6 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 				if (obj.regexp != undefined && obj.regexp != "") {
 					//item.regex = new RegEx(obj.regexp);
 				}
-				
 				return item;
 			}
 		}
@@ -375,12 +374,14 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 				if (instance[fieldName] != undefined) {
 					switch (parameter.type) {
 						case "bool":
-							if (instance[fieldName] == "true") {
+						console.log("OHAI", parameter, instance[fieldName]);
+							// @TODO 	this is wrong
+							if (instance[fieldName] == "true" || instance[fieldName] == true){
 								item.checked = true;
 							} else {
 								item.checked = false;
 							}
-							break;
+						break;
 							
 						case "ref":
 							var referenceObject = this.formObject.controller.dataManager.getOpenCoreObjectByName(parameter.refclass);
@@ -393,16 +394,13 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 									}
 								}
 							}
-							break;
+						break;
 							
-						
 						default:
 							item.value = instance[fieldName];
-							break;	
+						break;	
 					}
-					
 				}
-				
 				
 				if (this.ZIndex != 0) {
 					item["z-index"] = this.ZIndex;
@@ -522,6 +520,7 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 	},
 	
 	parseValues : function(form){
+		console.log("parseValues");
 		// gets value from form and fills missing checkbox values (ext doesn't provide unchecked checkbox values)
 		if (form != undefined && form.getForm != undefined) {
 			var r = form.getForm().getValues();
@@ -531,6 +530,7 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 				
 				for (var fieldName in parameters) {
 					var field = parameters[fieldName];
+					console.log(field);
 					if (field.type == "bool") {
 						if (r[fieldName] == undefined) {
 							r[fieldName] = "false";
