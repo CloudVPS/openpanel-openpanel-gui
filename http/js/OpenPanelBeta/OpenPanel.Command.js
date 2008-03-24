@@ -32,7 +32,7 @@ OpenPanel.Command.Login  = {
 		var actionObject = callBackArguments;
 		if(callBackArguments.header.errorid == 0){
 			var rootObject = new OpenCore.DataManager.OpenCoreObject({}, "ROOT");
-			this.controller.currentUser = actionObject.userName;
+			this.controller.currentUser = actionObject.callBackArguments.userName; // que? this is wrong
 			this.buildMainArea();
 			// OpenCore.Debug.createDebugList();
 			OpenPanel.Controller.initializePing();
