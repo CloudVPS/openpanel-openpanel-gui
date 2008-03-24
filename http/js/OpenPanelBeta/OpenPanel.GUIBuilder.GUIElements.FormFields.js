@@ -328,7 +328,7 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 			
 			this.formPanel.render(contentDiv);
 			if(this.openCoreObject.canUpdate == false){
-				this.formPanel.disable();
+				//this.formPanel.disable();
 			}
 			
 			var parameters = this.openCoreObject.classInfo.structure.parameters;
@@ -373,12 +373,26 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 			var fieldType = parameter.type;
 			var item = this.createItem(fieldName, parameter);
 			
-			
 			if (item != undefined) {
+				if(this.isCreate != true){
+					
+					if(this.openCoreObject.canUpdate == false || parameter.enabled == false){
+						item.disabled = true;
+							item.disabledClass = "disabledField";
+							
+					}
+				
+					if(fieldName == "id"){
+						item.disabled = true;
+						item.disabledClass = "disabledField";
+						
+					
+					}
+				}
+				
 				if (instance[fieldName] != undefined) {
 					switch (parameter.type) {
 						case "bool":
-						console.log("OHAI", parameter, instance[fieldName]);
 							// @TODO 	this is wrong
 							if (instance[fieldName] == "true" || instance[fieldName] == true){
 								item.checked = true;
@@ -424,24 +438,26 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 		
 		
 		
-		
-		// is root object?
-		if(this.isCreate == true && this.openCoreObject.isRootObject){
-			
-			var item = this.createChildUsersPullDown("owner");
-			item.value = this.formObject.controller.currentUser;
-			
-			this.items[fieldName] = item;
-			
-			if (a == 0) {
-				itemsLeft.push(item);
-				a++;
-			}
-			else {
-				itemsRight.push(item);
-				a = 0;
-			}
+		if(this.isCreate == true){
+			if(this.openCoreObject.isRootObject){
+				
+				var item = this.createChildUsersPullDown("owner");
+				item.value = this.formObject.controller.currentUser;
+				
+				this.items[fieldName] = item;
+				
+				if (a == 0) {
+					itemsLeft.push(item);
+					a++;
+				}
+				else {
+					itemsRight.push(item);
+					a = 0;
+				}
+			} 
 		}
+		// is root object?
+		
 		var m = Math.ceil(this.itemCount/2);
 		var i = 0;
 		for(var key in this.items){

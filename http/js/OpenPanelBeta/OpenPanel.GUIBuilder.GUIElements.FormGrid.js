@@ -8,7 +8,7 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid = function(){
 	this.controller= {};
 	this.callBackCommand = "";
 	this.store = {};
-	this.gridWidth = 575;
+	this.gridWidth = 610;
 }
 
 OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {

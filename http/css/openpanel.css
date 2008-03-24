@@ -8,6 +8,12 @@ img, input {
 	behavior: url(/js/iepngfix/iepngfix.htc);
 }
 
+.disabledField {
+	border: 1px solid #e7e7e7; 
+	background: #e7e7e7;
+	
+}
+
 #saveButtonHolder {
 	width: 900px;
 	background-color : #eeeeee;
