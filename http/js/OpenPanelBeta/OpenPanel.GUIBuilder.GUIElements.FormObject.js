@@ -372,7 +372,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 				
 				if(openCoreObject != undefined){
 					hook.controller.action({
-						command: "showCreateInstanceFromFormObjectMeta",
+						command: "ShowCreateInstanceFromFormObjectMeta",
 						formObject : hook,
 						openCoreObject:openCoreObject,
 						parentUUID: hook.parentUUID,
@@ -381,10 +381,6 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 				}
 			}
 			
-			/*
-			 * 
-	
-			 */
 			for(var key in available){
 				var metaObject = available[key];
 				var optionElement = document.createElement("option");
@@ -438,7 +434,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 				if (displayOnly == undefined || displayOnly == false) {
 					createOne.onclick = function(){
 						hook.controller.action({
-							command: "showCreateInstanceFromFormObject",
+							command: "ShowCreateInstanceFromFormObject",
 							formObject: hook,
 							openCoreObject: hook.openCoreObject,
 							parentUUID: hook.parentUUID,
@@ -489,7 +485,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		
 		deleteOne.onclick = function(){
 			hook.controller.action({
-				command : "showDeleteInstanceFromFormObject",
+				command : "ShowDeleteInstanceFromFormObject",
 				formObject : hook,
 				openCoreObject:hook.openCoreObject,
 				parentUUID: hook.parentUUID,
@@ -728,16 +724,6 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		console.log(formData);
 	},
 	
-	updateRootInstance: function(openCoreObject, instance, formData){
-		console.log(this.openCoreObject.name);
-		console.log(this);
-		this.controller.action( {
-			command : "updateRootInstance",
-			openCoreObject : openCoreObject,
-			instance : instance,
-			formData : formData
-		});
-	},
 	
 	createCreatePopUp : function(targetDiv, callBack){
 		var popUpDiv = this.guiBuilder.createPopUp();

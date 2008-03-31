@@ -1,0 +1,56 @@
+#!/usr/bin/php
+<?php
+
+	require_once("lib/jsmin-1.1.1.php");
+	
+	$dir = new DirectoryIterator("../http/js/OpenPanelBeta");
+		$found = array();
+		$files = array();
+		
+	foreach ($dir as $file) { 
+		$fileName = $file->getFilename(); 
+		$parts = explode(".", $fileName);
+		$files[$fileName] = true;
+		if($parts[count($parts)-1] == "js"){
+			unset($parts[count($parts)-1]);
+			
+			$toSet = &$found;
+			foreach($parts as $part){
+				if(!isset($toSet[$part])){
+					$toSet[$part] = array();
+				}
+				$toSet = &$toSet[$part];	
+			}
+		}
+	} 
+	ksort($found);
+	
+	$contents = walk($files, $found);
+	
+	$c = JSMin::minify($contents);
+	
+	file_put_contents("../http/js/minified.js", $c);
+	
+	function walk($files, $value, $solution = null, &$contents = null){
+		if(!isset($solution)){
+			$solution = "";
+		}	
+		
+		if(!isset($contents)){
+			$contents = "";
+		}
+		
+		if(is_array($value)){
+			foreach($value as $key => $val){
+				$newSolution = $solution . $key . ".";
+				if(isset($files[$newSolution . "js"])){
+					$fileContents = file_get_contents("../http/js/OpenPanelBeta/".$newSolution . "js");
+					$contents .= $fileContents . "\n";
+				}
+				walk($files, $val, $newSolution, $contents);
+			}
+		}
+		
+		return $contents;
+	}
+?>

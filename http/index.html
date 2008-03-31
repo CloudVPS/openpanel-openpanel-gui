@@ -12,6 +12,7 @@
 	<script type="text/javascript" src="js/ext-2.0/ext-all.js"></script>
 	<script type="text/javascript" src="js/ext-2.0/build/util/KeyMap-min.js"></script>
 	<script type="text/javascript" src="js/trimpath-template-1.0.38/trimpath-template-1.0.38.js"></script>
+	<script type="text/javascript" src="js/radiogroup.js"></script>	
 	<script type="text/javascript" src="js/OpenPanelBeta/OpenCore.js"></script>
 	<script type="text/javascript" src="js/OpenPanelBeta/OpenCore.RPC.js"></script>
 	<script type="text/javascript" src="js/OpenPanelBeta/OpenCore.DataManager.js"></script>
@@ -26,9 +27,22 @@
 	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.GUIBuilder.GUIElements.FormFields.js"></script>
 	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.GUIBuilder.GUIElements.FormGrid.js"></script>
 	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.GUIBuilder.GUIElements.FormObject.js"></script>
-	<script type="text/javascript" src="js/OpenPanelBeta/radiogroup.js"></script>	
 	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.Controller.js"></script>
 	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.Command.js"></script>
+	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.Command.Init.js"></script>
+	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.Command.DeleteInstance.js"></script>
+	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.Command.ShowCreateInstanceFromItemList.js"></script>
+	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.Command.ShowCreateInstanceFromFormObject.js"></script>
+	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.Command.ShowCreateInstanceFromFormObjectMeta.js"></script>
+	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.Command.CreateInstanceFromFormObject.js"></script>
+	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.Command.CreateInstanceFromItemList.js"></script>
+	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.Command.ShowDeleteInstanceFromFormObject.js"></script>
+	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.Command.DeleteInstanceFromFormObject.js"></script>
+	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.Command.SaveForm.js"></script>
+	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.Command.SaveFormDone.js"></script>
+	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.Command.Login.js"></script>
+	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.Command.Logout.js"></script>
+	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.Command.Welcome.js"></script>
 	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.Command.BuildIconBar.js"></script>
 	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.Command.ClickIconBarItem.js"></script>
 	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.Command.ClickItemListItem.js"></script>
@@ -45,9 +59,8 @@
 			console = { log: function(){}}
 		}
 		
-		
 		$j(document).ready(function(){
-			
+				// why isn't this set by ******* default?
 				Ext.BLANK_IMAGE_URL = '/images/ext/resources/images/default/s.gif';  // Ext 2.0
 				OpenCore.RPC.RequestHandler.setOpenCoreURL("/fake-opencore-proxy/json");
 				

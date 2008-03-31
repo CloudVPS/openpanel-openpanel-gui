@@ -132,7 +132,7 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 	
 	createInstance : function(){
 		this.controller.action({
-			command : "showCreateInstanceFromItemList", 
+			command : "ShowCreateInstanceFromItemList", 
 			openCoreObject : this.openCoreObject,
 			formObjectHolder : this.formObjectHolder
 		});
@@ -141,7 +141,7 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 	
 	deleteInstance : function(){
 		OpenPanel.Controller.action({
-			command : "deleteInstance", 
+			command : "DeleteInstance", 
 			openCoreObject : this.openCoreObject, 
 			instance : this.currentInstance
 		});
