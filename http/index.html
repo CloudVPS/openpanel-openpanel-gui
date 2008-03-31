@@ -47,6 +47,8 @@
 		
 		
 		$j(document).ready(function(){
+			
+				Ext.BLANK_IMAGE_URL = '/images/ext/resources/images/default/s.gif';  // Ext 2.0
 				OpenCore.RPC.RequestHandler.setOpenCoreURL("/fake-opencore-proxy/json");
 				
 				OpenCore.DataManager.setRPC(OpenCore.RPC);
@@ -61,7 +63,7 @@
 				
 				OpenPanel.Controller.action( 
 				{
-					command: "Login",
+					command: "Init",
 					userName: "openadmin",
 					password: "foobar"
 				});
