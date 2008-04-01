@@ -413,8 +413,9 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 				}
 				
 				if (this.ZIndex != 0) {
-					item["z-index"] = this.ZIndex;
+					//item["z-index"] = this.ZIndex;
 				}
+				
 				this.itemCount++;
 				
 				this.items[fieldName] = item;
