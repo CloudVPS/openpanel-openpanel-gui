@@ -1,3 +1,3 @@
 all:
-	cd tools && ./builder
+	cd tools && ./minimizejs
 

@@ -1,0 +1,18 @@
+#!/bin/bash
+
+getlist() {
+ oldwd=`pwd`
+ cd ../http/js/OpenPanelBeta
+ match="[a-zA-Z]*\.js"
+ while [ -z "$DONE" ]; do
+   matches=`ls -1 | grep "^$match"`
+   if [ -z "$matches" ]; then
+     break
+   fi
+   echo $matches
+   match="[a-zA-Z]*\.${match}"
+ done
+ cd "$oldwd"
+}
+
+( for f in `getlist`; do cat ../http/js/OpenPanelBeta/$f; done ) | lib/jsmin.py > ../http/js/compressed_openpanel.js 

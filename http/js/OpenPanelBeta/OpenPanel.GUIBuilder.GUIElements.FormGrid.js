@@ -321,6 +321,9 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 		var record = this.store.getAt(rowIndex);
 		var fieldName = this.grid.getColumnModel().getDataIndex(columnIndex); // Get field name
         var id = record.get("id");
+		if(id == undefined){
+			id = record.get("uuid");
+		}
 		this.clickGridItem(id);
 	},
 	

@@ -83,7 +83,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		
 		this.fieldsDiv = document.createElement("div");
 		this.fieldsDiv.setAttribute("id", this.openCoreObject.name + ":fields");
-		this.fieldsDiv.setAttribute("id", "formFields");
+		this.fieldsDiv.setAttribute("class", "formFields");
 		this.targetDiv.appendChild(this.fieldsDiv);
 		
 		

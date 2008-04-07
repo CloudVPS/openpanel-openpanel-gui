@@ -206,6 +206,8 @@ OpenPanel.GUIBuilder = {
 		groupHolder.setAttribute("class", "groupHolder");
 		var table = document.createElement("table");
 		table.setAttribute("class", "groupTable");
+		table.setAttribute("cellpadding", "0");
+		table.setAttribute("cellspacing", "0");
 		groupHolder.appendChild(table);
 		
 		var tBody = document.createElement("tbody");
