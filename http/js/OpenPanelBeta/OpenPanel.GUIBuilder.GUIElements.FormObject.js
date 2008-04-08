@@ -597,7 +597,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 				var method = methods[key];
 				if(typeof(method) == "object"){
 					var item = {
-						html : method.description+method.description,
+						html : method.description,
 						style : "width: 100%;"
 						
 					};

@@ -419,7 +419,6 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 				this.itemCount++;
 				
 				this.items[fieldName] = item;
-				
 				console.log("item", item);
 				
 			}

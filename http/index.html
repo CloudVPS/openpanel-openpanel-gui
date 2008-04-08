@@ -62,6 +62,7 @@
 		$j(document).ready(function(){
 				// why isn't this set by ******* default?
 				Ext.BLANK_IMAGE_URL = '/images/ext/resources/images/default/s.gif';  // Ext 2.0
+				Ext.QuickTips.init();
 				OpenCore.RPC.RequestHandler.setOpenCoreURL("/fake-opencore-proxy/json");
 				
 				OpenCore.DataManager.setRPC(OpenCore.RPC);
