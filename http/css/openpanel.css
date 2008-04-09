@@ -346,10 +346,12 @@ img, input {
 	list-style-type: none;
 }
 
-.tabHolder li {
+#tabHolder li {
 	display: inline;
 	float : left;
 }
+
+
 
 li.tab, li.tabSelected, .tabStart ,.tabStartSelected ,.tabEnd ,.tabEndSelected, .tabDelimiter, .tabDelimiterSelected, li.tabDisabled {
 	margin: 0px 0px 0px 0px;

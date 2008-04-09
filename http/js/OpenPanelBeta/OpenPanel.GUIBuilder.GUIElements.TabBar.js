@@ -108,9 +108,9 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 			}
 			
 			
-			
 			for (var i = 0; i < tabs.length; i++) {
 				var tabSpan = tabs[i];
+
 				tabHolder.appendChild(tabSpan);
 				if (tabs.length > 1) {
 					if (i == 0) {
@@ -130,7 +130,7 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 				this.tabWidth += el.getWidth();
 			}
 			
-			
+	
 			if (tabs.length > 0) {
 				this.tabWidth += (tabs.length - 1) * 16 + 30;
 			}
