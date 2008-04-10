@@ -128,7 +128,6 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 		
    	 	
 		
-		
 		/*
 		var tableElement = document.createElement("table");
 		this.gridDiv.appendChild(tableElement);
@@ -263,6 +262,7 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 		});
 		
    	 	
+	
 		/*
 		var hook = this;
 		

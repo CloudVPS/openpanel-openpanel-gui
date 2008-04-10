@@ -291,6 +291,8 @@ img, input {
 	padding-left: 5px;
 }
 
+.td_nowrap { white-space: nowrap; }
+
 .iconTdLeft, .iconTdRight {
 	background-repeat: repeat-x;
 	height: 78px;
@@ -328,6 +330,8 @@ img, input {
 #tabBar {
 	clear: both;
 	height: 37px;
+	margin:0px;
+	padding:0px;
 	width: 900px;
 	background-image: url(/images/gui/groupFrameTop.gif);
 	background-repeat: no-repeat;
@@ -339,7 +343,7 @@ img, input {
 	left: 50%; 
 	padding-top: 13px;
 	margin-left: -200px; 
-	height: 30px;
+	/*height: 30px;*/
 }
 
 .tabHolder {
@@ -363,16 +367,29 @@ li.tab, li.tabSelected, .tabStart ,.tabStartSelected ,.tabEnd ,.tabEndSelected, 
 	vertical-align: text-bottom;
 }
 
-li.tab, li.tabDisabled {
+li.tab, li.tabDisabled , #tabHolder li  {
 	background-image: url(/images/gui/tab_fill.gif);
 	padding-left: 5px;
 	padding-right: 5px;
+	height:21px;
+	line-height:21px;
+}
+
+
+li #tabStart
+{
+	background-image:none;
+	background: url(/images/gui/tab_start.gif);
+	width:21px;
+	height:10px;
 }
 
 li.tabSelected {
 	background-image: url(/images/gui/tab_hlite.gif);
 	padding-left: 5px;
 	padding-right: 5px;
+	height:21px;
+	line-height:21px;
 }
 
 li.tabDisabled {
@@ -384,24 +401,32 @@ li.tabDisabled {
 }
 
 .tabStart, .tabStartSelected, .tabEnd, .tabEndSelected, .tabDisabled {
-	padding: 3px;
+	/*padding: 3px;*/
 	background-repeat: repeat-x;
 }
 
 .tabStart {
 	background-image: url(/images/gui/tab_start.gif);
+	height:21px;
+	width:10px;
 }
 
 .tabStartSelected {
 	background-image: url(/images/gui/tab_start_selected.gif);
+	height:21px;
+	width:10px;
 }
 
 .tabEnd {
 	background-image: url(/images/gui/tab_end.gif);
+	height:21px;
+	width:10px;
 }
 
 .tabEndSelected {
 	background-image: url(/images/gui/tab_end_selected.gif);
+	height:21px;
+	width:10px;
 }
 
 .tabDelimiter {
@@ -422,4 +447,8 @@ li.tabDisabled {
 
 .createOneSpan {
 	cursor: pointer;
+}
+
+.x-form-item *{
+	position: static !important;
 }

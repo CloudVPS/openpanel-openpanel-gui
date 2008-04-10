@@ -45,6 +45,8 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 		this.rootFormObject.setController(this.controller);
 		this.rootFormObject.setFormBuilder(this);
 		this.rootFormObject.build();
+
+
 	},
 	
 	setSaveButtonVisibility : function(isVisible){
@@ -66,6 +68,17 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 					this.finishLayout(formObject.parentFormObject);
 			}
 		}
+
+		// resetting formObjectHolders height for overflow
+		var fH = document.getElementById('formObjectHolder');
+ 		if ( !isEmpty(fH)) 
+		{
+			fH.style.height = parseInt(fH.offsetHeight) + 'px';
+
+			var mAF = document.getElementById('mainAreaForm');
+			mAF.style.height = fH.style.height;
+		}
+
 	},	
 	
 	setIsUpdateable : function(isUpdateable){

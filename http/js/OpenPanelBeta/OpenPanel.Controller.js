@@ -120,6 +120,7 @@ OpenPanel.Controller = {
 				this.guiBuilder.GUIElements.ItemList.highliteItem(this.currentRootClassInstance.uuid);
 			}
 			this.guiBuilder.GUIElements.TabBar.highliteItem(firstTabOpenCoreObject.name);
+
 		} else {
 
 			this.guiBuilder.GUIElements.TabBar.setOpenCoreObject(openCoreObject);

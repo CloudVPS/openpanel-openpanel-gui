@@ -111,7 +111,6 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 						iconHolder.appendChild(iconLi);
 						iconLi.setAttribute("id", childObject.description);
 						
-						
 						var tableElement = document.createElement("table");
 						tableElement.setAttribute("cellpadding", "0");
 						tableElement.setAttribute("cellspacing", "0");
@@ -149,6 +148,7 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 						
 						var classIcon = document.createElement("td");
 						classIcon.setAttribute("class", "classIcon");
+						classIcon.setAttribute("align", "Center");
 						var imgElement = document.createElement("img");
 						imgElement.setAttribute("src", "/images/icons/" + childObject.classInfo["class"].uuid + ".png");
 						classIcon.innerHTML = "<img src=\"/images/icons/" + childObject.classInfo["class"].uuid + ".png\"/>";
@@ -157,6 +157,8 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 						var classDescription = document.createElement("td");
 						classDescription.setAttribute("class", "classDescription");
 						classDescription.setAttribute("valign", "top");
+						classDescription.setAttribute("noWrap", "TRUE");
+						classDescription.setAttribute("align", "Center");
 						centreTrBottom.appendChild(classDescription);
 						
 						
