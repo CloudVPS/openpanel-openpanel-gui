@@ -8,8 +8,7 @@
 	this.controller;
 	this.isBuilt;
 	
-	this.parentFormObject;
-	this.childFormObjects = {};
+	this.parentFormObject = 666;
 	
 	this.openCoreObject;
  	this.parentUUID = "";
@@ -140,7 +139,6 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 				
 				console.log("create fields for " + this.openCoreObject.name + "  " + this.currentInstance.id);
 				console.log(this.currentInstance);
-				
 				
 			} else { //if (this.openCoreObject.canGetInfo == true) {
 				console.log("can not update");
@@ -506,9 +504,11 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 	},
 	
 	setCurrentInstance : function(instance){
+		
 		if (instance != undefined) {
 			this.currentInstance = instance;
-			this.openCoreObject.currentInstance = instance;
+			this.openCoreObject.setCurrentInstance(instance);
+			//this.openCoreObject.currentInstance = instance;
 			this.formBuilder.setCurrentInstance(this.openCoreObject.name, instance.id);
 		}
 	},
@@ -729,8 +729,8 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		var popUpDiv = this.guiBuilder.createPopUp();
 	},
 	
-	setParentFormObject : function(formObject){
-		this.parentFormObject = formObject;
+	setParentFormObject : function(foo){
+		this.parentFormObject = foo;
 		
 	}
 	

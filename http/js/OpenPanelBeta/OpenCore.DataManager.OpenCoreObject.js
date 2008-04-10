@@ -107,6 +107,9 @@ OpenCore.DataManager.OpenCoreObject.prototype = {
 			}
 		}
 	},
+	setCurrentInstance : function(instance){
+		this.currentInstance = instance;
+	},
 	
 	getCurrentInstance: function(uuid){
 		this.currentInstance = OpenCore.DataManager.getRecordByUUID(this.name, uuid);

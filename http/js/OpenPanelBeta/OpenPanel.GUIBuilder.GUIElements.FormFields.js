@@ -97,6 +97,7 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 				if (obj.regexp != undefined && obj.regexp != "") {
 					//item.regex = new RegEx(obj.regexp);
 				}
+				
 				return item;
 			}
 		}
@@ -431,6 +432,17 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 				var item = this.createChildUsersPullDown("owner");
 				item.value = this.formObject.controller.currentUser;
 				this.items["owner"] = item;
+			}
+			
+			if(this.openCoreObject.classInfo["class"].parentrealm != undefined){
+				
+				alert("HI");
+				//var parentObject = this.openCoreObject.parentObject;
+				console.log(777, this.formObject.openCoreObject.parent);
+				
+			
+				
+				//this.items["id"]
 			} 
 		}
 		// is root object?
