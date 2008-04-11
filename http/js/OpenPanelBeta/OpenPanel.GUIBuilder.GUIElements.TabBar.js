@@ -104,6 +104,7 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 					
 					this.itemElements[someObject.name] = tabSpan;
 					tabSpan.setAttribute("class", "tab");
+					STYLES.tab.tab(tabSpan);
 				}
 			}
 			
@@ -138,21 +139,24 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 			this.tabEnd.innerHTML = "&nbsp;";
 			this.tabEnd.setAttribute("id", "tabEnd");
 			this.tabEnd.setAttribute("class", "tabEnd");
+			
+			STYLES.tab.tabEnd(this.tabEnd);
 			tabHolder.appendChild(this.tabEnd);
 			
 			var tabDivElement = Ext.get("tabBarDiv");
+			
 			tabDivElement.setWidth(this.tabWidth);
 			tabDivElement.setStyle("marginLeft", Math.round(this.tabWidth / -2) + "px");
 			tabDivElement.setStyle("left", "50%");
-			
+
+
 		}
 	},
 	
 	createDelimiter : function(){
 		var delimiter = document.createElement("li");
-		
 		delimiter.setAttribute("class", "tabDelimiter");
-		
+		STYLES.tab.tabDelimiter(delimiter);
 		return delimiter;
 	},
 	
@@ -179,15 +183,19 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 						virgin = false;
 						if (someItem == currentItemElement) {
 							this.tabStart.setAttribute("class", "tabStartSelected");
+							STYLES.tab.tabStartSelected(this.tabStart);
 						} else {
 							this.tabStart.setAttribute("class", "tabStart");
+							STYLES.tab.tabStart(this.tabStart);
 						}
 					}
 					
 					if (someItem == currentItemElement) {
 						someItem.setAttribute("class", "tabSelected");
+						STYLES.tab.tabSelected(someItem);
 					} else {
 						someItem.setAttribute("class", "tab");
+						STYLES.tab.tab(someItem);
 					}
 					
 					this.setDelimiterClass(someItem, false);
@@ -204,8 +212,10 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 				if(someItem == currentItemElement){
 					// is last
 					this.tabEnd.setAttribute("class", "tabEndSelected");
+					STYLES.tab.tabEndSelected(this.tabEnd);
 				} else {
 					this.tabEnd.setAttribute("class", "tabEnd");
+					STYLES.tab.tabEnd(this.tabEnd);
 					
 				}
 			} 
@@ -219,6 +229,7 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 				tabSpan.onclick = {};
 				if(tabSpan.getAttribute("class") == "tab"){
 					tabSpan.setAttribute("class", "tabDisabled");
+					STYLES.tab.tabDisabled(this.tabSpan);
 				}
 				
 			}
@@ -226,11 +237,32 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 	},
 	
 	setDelimiterClass : function(tabElement, isSelected){
-		if(tabElement.leftDelimiter != undefined){
-			tabElement.leftDelimiter.setAttribute("class", isSelected==true?"tabDelimiterSelected":"tabDelimiter");
+		if(tabElement.leftDelimiter != undefined)
+		{
+			if (isSelected==true)
+			{
+				tabElement.leftDelimiter.setAttribute("class", "tabDelimiterSelected");
+				STYLES.tab.tabDelimiterSelected(tabElement.leftDelimiter);
+			}
+			else
+			{
+				tabElement.leftDelimiter.setAttribute("class", "tabDelimiter");
+				STYLES.tab.tabDelimiter(tabElement.leftDelimiter);
+			}
 		} 
-		if(tabElement.rightDelimiter != undefined){
-			tabElement.rightDelimiter.setAttribute("class", isSelected==true?"tabDelimiterSelected":"tabDelimiter");
+		
+		if(tabElement.rightDelimiter != undefined)
+		{
+			if (isSelected==true)
+			{
+				tabElement.rightDelimiter.setAttribute("class", "tabDelimiterSelected");
+				STYLES.tab.tabDelimiterSelected(tabElement.rightDelimiter);
+			}
+			else
+			{
+				tabElement.rightDelimiter.setAttribute("class", "tabDelimiter");
+				STYLES.tab.tabDelimiter(tabElement.rightDelimiter);
+			}
 		}
 	},
 	

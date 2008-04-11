@@ -22,7 +22,7 @@
 }
 
 .ext-ie .x-grid3 table,.ext-safari .x-grid3 table {
-    table-layout:fixed;
+    /*CS*table-layout:fixed;*/
 }
 .x-grid3-viewport{
 	overflow:hidden;
@@ -148,9 +148,13 @@
 
 /* header styles */
 .x-grid3-header{
-	background: #f9f9f9 url(../images/default/grid/grid3-hrow.gif) repeat-x 0 bottom;
+	
+	background-color: #f9f9f9;
+	background-image: url(../images/default/grid/grid3-hrow.gif);
+	background-repeat: repeat-x;
+	background-position:0 bottom;
 	cursor:default;
-    zoom:1;
+    /*CS*zoom:1;*/
     padding:1px 0 0 0;
 }
 
@@ -163,7 +167,12 @@
     border-left:1px solid #eee;
     width:14px;
     height:19px;
-    background: transparent url(../images/default/grid/hd-pop.gif) no-repeat center center;
+
+	background: transparent;
+	background-image: url(../images/default/grid/hd-pop.gif);
+	background-repeat: no-repeat;
+	background-position:center center;     
+    
 }
 .ext-ie .x-grid3-header-pop-inner {
     width:15px;
@@ -185,8 +194,13 @@ td.x-grid3-hd-over, td.sort-desc, td.sort-asc, td.x-grid3-hd-menu-open {
     border-left:1px solid #aaccf6;
     border-right:1px solid #aaccf6;
 }
-td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-asc .x-grid3-hd-inner, td.x-grid3-hd-menu-open .x-grid3-hd-inner {
-    background: #ebf3fd url(../images/default/grid/grid3-hrow-over.gif) repeat-x left bottom;
+td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-asc .x-grid3-hd-inner, td.x-grid3-hd-menu-open .x-grid3-hd-inner 
+{
+
+	background-color: #ebf3fd;
+	background-image: url(../images/default/grid/grid3-hrow-over.gif);
+	background-repeat: repeat-x;
+	background-position:left bottom;    
 
 }
 .x-grid3-sort-icon{

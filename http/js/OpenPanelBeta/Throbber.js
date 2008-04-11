@@ -10,7 +10,8 @@ var Throbber = {
 					this.stop();
 				}
 				
-				if (Throbber.throbberTimeout == undefined) {
+				if (Throbber.throbberTimeout == undefined) 
+				{
 					Throbber.throbberTimeout = setTimeout("Throbber.f()", this.timeout);
 				}
 			},
@@ -36,11 +37,20 @@ var Throbber = {
 				this.targetDiv.setAttribute("class", "throbber");
 			},
 			
-			animate : function(){
+			animate : function()
+			{
+				if (this.targetDiv.innerHTML.match('newTrobber') != -1)
+				{
+					var imageUrl = "/images/gui/newTrobber.gif";
+					this.targetDiv.innerHTML = "<img src=\""+imageUrl+"\"/>";
+				}
+
+				/*
 				var pic = new Image(50,50); 
 				var imageUrl = "/images/gui/zoomspin/zoom-spin-" + this.i+ ".png";
 				pic.src = imageUrl;
 				this.targetDiv.innerHTML = "<img src=\""+imageUrl+"\"/>";
+				*/
 			}
 		}
 		

@@ -192,8 +192,6 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 				}
 			}
 			
-			//this.targetDiv.innerHTML = this.targetDiv.innerHTML;
-			
 		} else {
 			alert("OpenPanel.GUIBuilder.GUIElements.IconBar.build(openCoreObject) : openCoreObject is undefined");
 		}

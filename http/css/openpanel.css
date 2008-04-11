@@ -7,6 +7,8 @@ body {
 img, input {
 	behavior: url(/js/iepngfix/iepngfix.htc);
 }
+small { font-size:9px; }
+td { font-size:11px; }
 
 .disabledField {
 	border: 1px solid #e7e7e7; 
@@ -17,12 +19,15 @@ img, input {
 	background-color: #e7e7e7;
 }
 #saveButtonHolder {
-	width: 900px;
 	background-color : #eeeeee;
 	clear: both;
 	text-align: right;
 	height: 30px;
 	float: right;
+	padding-right:20px;
+}
+html > body #saveButtonHolder {
+	padding-right:0px;
 }
 
 #saveButton {
@@ -33,7 +38,9 @@ img, input {
 #welcomeDivHolder {
 	margin-left: 25px;
 	margin-right: 25px;
+	font-size:11px;
 }
+
 
 .throbber {
 	background-repeat: no-repeat;
@@ -248,9 +255,13 @@ img, input {
 	width: 630px;
 	height: 400px;
 	float: left;
-	overflow-y: auto;
-	
+	overflow-y:auto;
 }
+#mainAreaRight p
+{
+	padding-right:30px;
+}
+
 
 #debug {
 	font-size: 8px;
@@ -327,11 +338,11 @@ img, input {
 .classDescription {
 	padding-top: 2px;
 	height: 25px;
+	font-size:11px;
 }
-li { 
-	margin:0px; padding:0px; 
-	hasLayout:1;
-}
+
+
+
 
 #tabBar {
 	clear: both;
@@ -342,6 +353,15 @@ li {
 	background-image: url(/images/gui/groupFrameTop.gif);
 	background-repeat: no-repeat;
 }
+
+#tabBar ul
+{
+	margin:0px;
+	padding:0px;
+	clear:both;
+	font-size:11px;	
+}
+
 
 #tabBarDiv {
 	position: relative;
@@ -356,57 +376,93 @@ li {
 	list-style-type: none;
 }
 
-#tabBarDiv ul
-{
-	clear:both;
-	margin:none;
-	padding:none;
-	float:left;
-}
-
-#tabBarDiv li {
+#tabHolder li {
 	display: inline;
 	float : left;
-	cursor:default;
-	height:21px;
-	line-height:21px;	
 }
 
 
+li.tab, li.tabSelected, li.tabStart ,li.tabStartSelected ,li.tabEnd ,li.tabEndSelected, li.tabDelimiter, li.tabDelimiterSelected, li.tabDisabled {
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+	height: 21px;
+	display: inline;
+	line-height: 21px;
+	cursor: pointer;
+	vertical-align: text-bottom;
+}
+li.tabDelimiterSelected {
+width:1px;
+}
+li.tab, li.tabDisabled {
+	background-image: url(/images/gui/tab_fill.gif);
+	padding-left: 5px;
+	padding-right: 5px;
+	height:21px;
+	line-height:21px;
+}
 
-.tabStart
+#tabStart, li.tabStart
 {
 	background-image:none;
 	background: url(/images/gui/tab_start.gif);
 	width:10px;
+	height:21px;
 }
-
-.tabStartSelected {
-	background-image: url(/images/gui/tab_start_selected.gif);
-	width:10px;
-}
-
-#tabBar #tabBarDiv #tabHolder .tab
-{
-	display: inline;
-	background-image: url(/images/gui/tab_fill.gif);
-	background-repeat:repeat-x;
-	padding-left: 5px;
-	padding-right: 5px;
-}
-
 
 .tabSelected {
 	background-image: url(/images/gui/tab_hlite.gif);
 	padding-left: 5px;
 	padding-right: 5px;
+	height:21px;
 	line-height:21px;
+}
+
+
+#tabStart.tabStartSelected, .tabStartSelected {
+	background-image: url(/images/gui/tab_start_selected.gif);
+	height:21px;
+	width:10px;
+}
+
+li.tabDisabled {
+	cursor: default;
+}
+
+.tabDisabled {
+	color: #808080;
+}
+
+.tabStart, .tabStartSelected, .tabEnd, .tabEndSelected, .tabDisabled {
+	/*padding: 3px;*/
+	background-repeat: repeat-x;
+}
+
+.tabStart {
+	background-image: url(/images/gui/tab_start.gif);
+	height:21px;
+	width:10px;
+}
+
+
+
+.tabEnd {
+	background-image: url(/images/gui/tab_end.gif);
+	height:21px;
+	width:10px;
+}
+
+.tabEndSelected {
+	background-image: url(/images/gui/tab_end_selected.gif);
+	height:21px;
+	width:10px;
 }
 
 .tabDelimiter {
 	background-image: url(/images/gui/tab_delimiter.gif);
 	padding-left: 1px;
 	height:21px;
+	width:1px;
 }
 
 .tabDelimiterSelected {
@@ -416,15 +472,7 @@ li {
 }
 
 
-.tabEnd {
-	background-image: url(/images/gui/tab_end.gif);
-	width:10px;
-}
 
-.tabEndSelected {
-	background-image: url(/images/gui/tab_end_selected.gif);
-	width:10px;
-}
 
 
 
