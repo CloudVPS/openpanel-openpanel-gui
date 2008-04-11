@@ -39,7 +39,10 @@ function doFix()
   if ((/\.png$/i).test(src))
   {
    if (currentStyle.width == 'auto' && currentStyle.height == 'auto')
+   {
     style.width = offsetWidth + 'px';
+   style.height = offsetHeight + 'px';
+   }
    filt(src, 'scale');
    src = blankImg;
   }

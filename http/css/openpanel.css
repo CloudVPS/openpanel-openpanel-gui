@@ -108,6 +108,7 @@ img, input {
 }
 
 #modalMessageDiv {
+	clear:both;
 	z-index: 10001;
 	width: 650px;
 	padding-top: 20px;
@@ -270,6 +271,8 @@ img, input {
 	background-repeat: no-repeat;
 }
 
+/*#iconBar table { border-collapse:collapse; }*/
+
 .iconBarDiv {
 	
 }
@@ -291,7 +294,6 @@ img, input {
 	padding-left: 5px;
 }
 
-.td_nowrap { white-space: nowrap; }
 
 .iconTdLeft, .iconTdRight {
 	background-repeat: repeat-x;
@@ -326,6 +328,10 @@ img, input {
 	padding-top: 2px;
 	height: 25px;
 }
+li { 
+	margin:0px; padding:0px; 
+	hasLayout:1;
+}
 
 #tabBar {
 	clear: both;
@@ -350,83 +356,51 @@ img, input {
 	list-style-type: none;
 }
 
-#tabHolder li {
+#tabBarDiv ul
+{
+	clear:both;
+	margin:none;
+	padding:none;
+	float:left;
+}
+
+#tabBarDiv li {
 	display: inline;
 	float : left;
-}
-
-
-
-li.tab, li.tabSelected, .tabStart ,.tabStartSelected ,.tabEnd ,.tabEndSelected, .tabDelimiter, .tabDelimiterSelected, li.tabDisabled {
-	margin: 0px 0px 0px 0px;
-	padding: 0px 0px 0px 0px;
-	height: 21px;
-	display: inline;
-	line-height: 21px;
-	cursor: pointer;
-	vertical-align: text-bottom;
-}
-
-li.tab, li.tabDisabled , #tabHolder li  {
-	background-image: url(/images/gui/tab_fill.gif);
-	padding-left: 5px;
-	padding-right: 5px;
+	cursor:default;
 	height:21px;
-	line-height:21px;
+	line-height:21px;	
 }
 
 
-li #tabStart
+
+.tabStart
 {
 	background-image:none;
 	background: url(/images/gui/tab_start.gif);
-	width:21px;
-	height:10px;
-}
-
-li.tabSelected {
-	background-image: url(/images/gui/tab_hlite.gif);
-	padding-left: 5px;
-	padding-right: 5px;
-	height:21px;
-	line-height:21px;
-}
-
-li.tabDisabled {
-	cursor: default;
-}
-
-.tabDisabled {
-	color: #808080;
-}
-
-.tabStart, .tabStartSelected, .tabEnd, .tabEndSelected, .tabDisabled {
-	/*padding: 3px;*/
-	background-repeat: repeat-x;
-}
-
-.tabStart {
-	background-image: url(/images/gui/tab_start.gif);
-	height:21px;
 	width:10px;
 }
 
 .tabStartSelected {
 	background-image: url(/images/gui/tab_start_selected.gif);
-	height:21px;
 	width:10px;
 }
 
-.tabEnd {
-	background-image: url(/images/gui/tab_end.gif);
-	height:21px;
-	width:10px;
+#tabBar #tabBarDiv #tabHolder .tab
+{
+	display: inline;
+	background-image: url(/images/gui/tab_fill.gif);
+	background-repeat:repeat-x;
+	padding-left: 5px;
+	padding-right: 5px;
 }
 
-.tabEndSelected {
-	background-image: url(/images/gui/tab_end_selected.gif);
-	height:21px;
-	width:10px;
+
+.tabSelected {
+	background-image: url(/images/gui/tab_hlite.gif);
+	padding-left: 5px;
+	padding-right: 5px;
+	line-height:21px;
 }
 
 .tabDelimiter {
@@ -440,6 +414,19 @@ li.tabDisabled {
 	padding-left: 1px;
 	height:21px;
 }
+
+
+.tabEnd {
+	background-image: url(/images/gui/tab_end.gif);
+	width:10px;
+}
+
+.tabEndSelected {
+	background-image: url(/images/gui/tab_end_selected.gif);
+	width:10px;
+}
+
+
 
 .grid, .fields {
 	padding-top: 8px;
