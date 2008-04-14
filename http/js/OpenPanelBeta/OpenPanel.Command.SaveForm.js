@@ -17,7 +17,6 @@ OpenPanel.Command.SaveForm  = {
 			newActionObject.openCoreObject = openCoreObject;
 			this.controller.dataManager.updateInstanceAsync(openCoreObject.name, instance.uuid, formData, this.controller, "action", newActionObject);
 		}
-		console.log(actionObject.transport);
 	}
 }
 

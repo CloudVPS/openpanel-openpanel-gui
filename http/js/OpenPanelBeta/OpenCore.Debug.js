@@ -13,10 +13,8 @@ OpenCore.Debug = {
 	createDebugList: function(){
 		var elm = document.getElementById("debugList");
 		elm.innerHTML = "";
-		
 		this.buildList(elm, OpenCore.DataManager.rootObject);
 		
-		//$j("#debugList span").click(function(){ OpenCore.Debug.debugObject(this.id)});
 	},
 	
 	buildList: function (elm, obj){
@@ -47,7 +45,6 @@ OpenCore.Debug = {
 	
 	buildFormList : function(elm, obj){
 		if(typeof(obj) != "function" && obj.openCoreObject != undefined){
-			console.log(obj);
 			var className = obj.openCoreObject.name;
 			var li = document.createElement("li");
 			li.setAttribute("id", className);

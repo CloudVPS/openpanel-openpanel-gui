@@ -15,7 +15,6 @@ OpenPanel.Command.DeleteInstanceFromFormObject  = {
 				className = openCoreObject.name;
 			}
 			this.controller.dataManager.deleteInstance(className, instance.uuid);
-			console.log(instance.uuid + " " + className);
 			openCoreObject.fetchedInstances = false;
 			openCoreObject.getInstances();
 			formObject.build();

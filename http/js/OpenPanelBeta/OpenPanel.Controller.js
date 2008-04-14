@@ -101,7 +101,6 @@ OpenPanel.Controller = {
 	
 	tabBarClick : function(openCoreObject){
 		
-		console.log("tabBarClick");
 		if (openCoreObject.getFirstInstance() != undefined) {
 			this.guiBuilder.GUIElements.TabBar.setOpenCoreObject(openCoreObject);
 		
