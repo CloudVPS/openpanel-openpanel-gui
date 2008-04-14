@@ -7,6 +7,7 @@ body {
 img, input {
 	behavior: url(/js/iepngfix/iepngfix.htc);
 }
+
 small { font-size:9px; }
 td { font-size:11px; }
 
@@ -25,9 +26,12 @@ td { font-size:11px; }
 	height: 30px;
 	float: right;
 	padding-right:20px;
+	width:880px;
 }
 html > body #saveButtonHolder {
 	padding-right:0px;
+	width:900px;
+	
 }
 
 #saveButton {
@@ -484,6 +488,4 @@ li.tabDisabled {
 	cursor: pointer;
 }
 
-.x-form-item *{
-	position: static !important;
-}
+ 
