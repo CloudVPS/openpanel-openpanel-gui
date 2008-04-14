@@ -42,7 +42,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 			this.init();
 			this.targetDiv.innerHTML = "";
 			this.createDivs();
-			if (this.openCoreObject.classInfo == undefined || (this.openCoreObject.classInfo.info != undefined && this.openCoreObject.classInfo.info.parent == undefined)) {
+			if (this.openCoreObject.classInfo == undefined || (this.openCoreObject.classInfo != undefined && this.openCoreObject.classInfo.info == undefined) || (this.openCoreObject.classInfo.info != undefined && this.openCoreObject.classInfo.info.parent == undefined)) {
 				this.createTopLevelForm();
 			} else {
 				this.createSubLevelFormAsync();
@@ -111,7 +111,6 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 			console.log("there is an instance");
 			if(this.isBuilt == true){
 				var record = this.controller.dataManager.getRecord(this.openCoreObject.name, this.currentInstance.id);
-				console.log('record', record);
 				this.currentInstance = record[this.openCoreObject.name];
 				
 				this.openCoreObject.instances[this.currentInstance.id] = this.currentInstance;

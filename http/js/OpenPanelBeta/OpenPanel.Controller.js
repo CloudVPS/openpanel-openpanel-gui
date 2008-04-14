@@ -101,28 +101,25 @@ OpenPanel.Controller = {
 	
 	tabBarClick : function(openCoreObject){
 		
-		
-		
 		console.log("tabBarClick");
 		if (openCoreObject.getFirstInstance() != undefined) {
 			this.guiBuilder.GUIElements.TabBar.setOpenCoreObject(openCoreObject);
-			this.guiBuilder.GUIElements.TabBar.build();
-			
-			
+		
+			this.guiBuilder.GUIElements.TabBar.build();	
 			var firstTabOpenCoreObject = this.guiBuilder.GUIElements.TabBar.getFirstTabItem();
-			
-			console.log(firstTabOpenCoreObject);
 			if (firstTabOpenCoreObject != undefined) {
 				this.guiBuilder.GUIElements.FormBuilder.setOpenCoreObject(firstTabOpenCoreObject);
 				this.guiBuilder.GUIElements.FormBuilder.setOpenCoreParentUUID(this.currentRootClassInstance.uuid);
+
 				this.guiBuilder.GUIElements.FormBuilder.build();
 				if (this.currentRootClassInstance != undefined) {
 					this.guiBuilder.GUIElements.ItemList.highliteItem(this.currentRootClassInstance.uuid);
 				}
 				this.guiBuilder.GUIElements.TabBar.highliteItem(firstTabOpenCoreObject.name);
+			} else {
+				this.guiBuilder.GUIElements.FormBuilder.setOpenCoreObject(openCoreObject);
 			}
 		} else {
-
 			this.guiBuilder.GUIElements.TabBar.setOpenCoreObject(openCoreObject);
 			this.guiBuilder.GUIElements.TabBar.build();
 			this.guiBuilder.GUIElements.TabBar.disable();

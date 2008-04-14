@@ -154,15 +154,15 @@ OpenCore.DataManager.OpenCoreObject.prototype = {
 		console.log(callBackWrapper);
 		console.log(this.name);
 		if(callBackWrapper != undefined && callBackWrapper.data != undefined){
-			this.instances = {};
 			this.fetchedInstances = true;
 			this.instances = callBackWrapper.data[this.name];
+			console.log("INSTANCES", this.instances, this);
 		}
 		var callBackObject;
 		var callBackFunction;
 		var callBackArguments = {};
 		var data;
-		console.log(this.instances);
+		console.log("OpenCoreObject instances ", this.instances);
 		if(callBackWrapper.callBackObject != undefined){
 			callBackObject = callBackWrapper.callBackObject;
 		}
@@ -176,8 +176,6 @@ OpenCore.DataManager.OpenCoreObject.prototype = {
 		}
 		
 		if(callBackWrapper.data != undefined){
-			console.log("asdads", callBackWrapper);
-				
 			data = callBackWrapper.data;
 			callBackArguments.data = data;
 		}
@@ -284,6 +282,7 @@ OpenCore.DataManager.OpenCoreObject.prototype = {
 	
 	getFirstInstance: function(){
 		this.getInstances();
+		console.log("instances again", this.instances, this);
 		for (var key in this.instances) {
 			return this.instances[key];
 		}

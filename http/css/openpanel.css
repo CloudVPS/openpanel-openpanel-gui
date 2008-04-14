@@ -4,6 +4,10 @@ body {
 	font: 11px Arial, Helvetica, sans-serif;
 }
 
+.foo {
+	width: 149px;
+}
+
 img, input {
 	behavior: url(/js/iepngfix/iepngfix.htc);
 }
@@ -18,6 +22,7 @@ td { font-size:11px; }
 .x-panel-footer {
 	background-color: #e7e7e7;
 }
+
 #saveButtonHolder {
 	background-color : #eeeeee;
 	clear: both;
@@ -25,9 +30,12 @@ td { font-size:11px; }
 	height: 30px;
 	float: right;
 	padding-right:20px;
+	width: 880px;
 }
+
 html > body #saveButtonHolder {
 	padding-right:0px;
+	width: 900px;
 }
 
 #saveButton {

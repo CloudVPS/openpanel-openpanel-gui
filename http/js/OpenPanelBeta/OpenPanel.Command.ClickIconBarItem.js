@@ -22,7 +22,7 @@ OpenPanel.Command.ClickIconBarItem  = {
 	},
 	
 	getInstancesDone : function(openCoreObject){
-		
+		var mekker = openCoreObject.getFirstInstance();
 		this.controller.currentRootClass 			= openCoreObject;
 		this.controller.currentRootClassInstance 	= openCoreObject.getFirstInstance();
 		this.controller.iconBarClick(openCoreObject);

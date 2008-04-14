@@ -39,15 +39,13 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 		
 		this.rootFormObject = new OpenPanel.GUIBuilder.GUIElements.FormObject();
 		this.rootFormObject.setOpenCoreObject(this.openCoreObject);
-		
+		console.log("formbuilder", this.openCoreObject);
 		this.rootFormObject.setParentUUID(this.parentUUID);
 		this.rootFormObject.setTargetDiv(this.formObjectHolder);
 		this.rootFormObject.setController(this.controller);
 		this.rootFormObject.setFormBuilder(this);
 		this.rootFormObject.build();
-
-
-	},
+},
 	
 	setSaveButtonVisibility : function(isVisible){
 		

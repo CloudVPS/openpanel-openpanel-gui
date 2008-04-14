@@ -215,7 +215,8 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 		    emptyText:'Select ...',
 		    selectOnFocus:true,
 			name: fieldName,
-			forceSelection: true
+			forceSelection: true,
+			cls : "foo"
 		});
 
 			
@@ -435,14 +436,9 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 			}
 			
 			if(this.openCoreObject.classInfo["class"].parentrealm != undefined){
-				
-				alert("HI");
 				//var parentObject = this.openCoreObject.parentObject;
-				console.log(777, this.formObject.openCoreObject.parent);
-				
-			
-				
 				//this.items["id"]
+				// TODO: que?
 			} 
 		}
 		// is root object?

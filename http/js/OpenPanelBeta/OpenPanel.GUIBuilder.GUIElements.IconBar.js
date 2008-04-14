@@ -202,7 +202,6 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 	},
 	
 	click: function(childObject){
-		
 		this.setTitle(childObject.title);
 		if (childObject.name != undefined) {
 			if (this.itemElements[childObject.name] != undefined) {

@@ -18,7 +18,7 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 		
 		this.itemElements = {};
 		
-		if (this.openCoreObject != undefined && this.openCoreObject.getChildCount() > 0) {
+		if (this.openCoreObject != undefined) {
 			var tabs = [];
 			var tabDiv = document.createElement("div");
 			tabDiv.setAttribute("id", "tabBarDiv");
