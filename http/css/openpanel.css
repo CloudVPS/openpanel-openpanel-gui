@@ -4,13 +4,10 @@ body {
 	font: 11px Arial, Helvetica, sans-serif;
 }
 
-.foo {
-	width: 149px;
-}
-
 img, input {
 	behavior: url(/js/iepngfix/iepngfix.htc);
 }
+
 small { font-size:9px; }
 td { font-size:11px; }
 
@@ -492,6 +489,4 @@ li.tabDisabled {
 	cursor: pointer;
 }
 
-.x-form-item *{
-	position: static !important;
-}
+ 
