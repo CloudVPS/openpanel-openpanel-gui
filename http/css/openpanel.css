@@ -287,17 +287,35 @@ html > body #saveButtonHolder {
 	background-repeat: no-repeat;
 }
 
-/*#iconBar table { border-collapse:collapse; }*/
 
-.iconBarDiv {
-	
+#iconBar table { 
+	margin-left:1px;
+	border-collapse:collapse; 
+	height:78px;
+}
+
+#iconBar table TD {
+	text-align:center;
+	vertical-align:top;
+}
+#iconbarIcon, #iconbarText{
+	padding:0px 5px 0px 5px;
+}
+#iconbarIcon{
+	padding-top:10px;
+}
+html > body > #iconbarIcon, #iconbarText{
+padding:0px;
 }
 
 .iconBarTitle {
+	display:none;
+/*
 	position: absolute;
 	width: 900px;
 	text-align: center;
 	padding-top: 5px;
+*/
 }
 
 .iconHolder {
@@ -313,7 +331,7 @@ html > body #saveButtonHolder {
 
 .iconTdLeft, .iconTdRight {
 	background-repeat: repeat-x;
-	height: 78px;
+
 	width: 4px;
 }
 .iconTdMain {
@@ -489,4 +507,3 @@ li.tabDisabled {
 	cursor: pointer;
 }
 
- 

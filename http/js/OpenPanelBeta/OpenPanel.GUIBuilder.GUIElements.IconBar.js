@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @author jp
  */
 OpenPanel.GUIBuilder.GUIElements.IconBar = {
@@ -110,11 +110,12 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 						var iconLi = document.createElement("td");
 						iconHolder.appendChild(iconLi);
 						iconLi.setAttribute("id", childObject.description);
+						iconLi.setAttribute("valign", "top");
 						
 						var tableElement = document.createElement("table");
 						tableElement.setAttribute("cellpadding", "0");
 						tableElement.setAttribute("cellspacing", "0");
-						tableElement.setAttribute("class", "iconTable");
+						tableElement.setAttribute("class", "iconTable");						
 						iconLi.appendChild(tableElement);
 						
 						var tbodyElement = document.createElement("tbody");
@@ -124,15 +125,34 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 						tbodyElement.appendChild(trElement);
 						
 						var iconTdLeft = document.createElement("td");
+						iconTdLeft.id = "iconTdLeft";
 						iconTdLeft.setAttribute("class", "iconTdLeft");
 						iconTdLeft.innerHTML = "&nbsp;";
 						trElement.appendChild(iconTdLeft);
 						
 						var tdMain = document.createElement("td");
+						tdMain.id = "iconTdMain";
 						tdMain.setAttribute("class", "iconTdMain");
+						tdMain.setAttribute("valign", "top");
 						trElement.appendChild(tdMain);
-						var centreTable = document.createElement("table");
 						
+
+						var cl = document.createElement("DIV");
+						cl.id = 'iconbarIcon';
+						cl.setAttribute("class", "classIcon");
+						cl.innerHTML = "<img src=\"/images/icons/" + childObject.classInfo["class"].uuid + ".png\"/><br\>";
+						tdMain.appendChild(cl);
+						
+
+						var cD = document.createElement("DIV");
+						cD.id = 'iconbarText';
+						cD.setAttribute("class", "classDescription");
+						cD.innerHTML = childObject.title;
+						tdMain.appendChild(cD);
+
+						/*
+						
+						var centreTable = document.createElement("table");
 						centreTable.setAttribute("cellpadding", "0");
 						centreTable.setAttribute("cellspacing", "0");
 						
@@ -144,9 +164,8 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 						var centreTrBottom = document.createElement("tr");
 						centreTbody.appendChild(centreTrBottom);
 						
-						
-						
 						var classIcon = document.createElement("td");
+						
 						classIcon.setAttribute("class", "classIcon");
 						classIcon.setAttribute("align", "Center");
 						var imgElement = document.createElement("img");
@@ -157,17 +176,20 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 						var classDescription = document.createElement("td");
 						classDescription.setAttribute("class", "classDescription");
 						classDescription.setAttribute("valign", "top");
-						classDescription.setAttribute("noWrap", "TRUE");
-						classDescription.setAttribute("align", "Center");
+						
+						//classDescription.setAttribute("noWrap", "TRUE");
+						//classDescription.setAttribute("align", "Center");
 						centreTrBottom.appendChild(classDescription);
 						
 						
 						var title = childObject.title;
-						
-						classDescription.appendChild(document.createTextNode(title));
-						
+						classDescription.appendChild(
+							document.createTextNode(title)
+						);
+						*/
 						
 						var iconTdRight = document.createElement("td");
+						iconTdRight.id = "iconTdRight";
 						iconTdRight.setAttribute("class", "iconTdRight");
 						iconTdRight.innerHTML = "&nbsp;";
 						trElement.appendChild(iconTdRight);
@@ -198,7 +220,8 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 	},
 	
 	setTitle : function(title){
-		this.iconBarTitleElement.innerHTML = title;
+		this.iconBarTitleElement.innerHTML = '';//title;
+		this.iconBarTitleElement.style.display="none";
 	},
 	
 	click: function(childObject){
@@ -222,8 +245,10 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 			for(var key in this.itemElements){
 				if(this.itemElements[key] == currentItemElement){
 					this.itemElements[key].setAttribute("class", "selected")
+					STYLES.iconBar.highliteItem(this.itemElements[key],'high');
 				} else {
 					this.itemElements[key].setAttribute("class", "");
+					STYLES.iconBar.highliteItem(this.itemElements[key],'low');
 				}
 			}
 		}
@@ -241,6 +266,4 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 			alert("div does not exist "+ targetDivName);
 		}
 	}
-	
 }
-

@@ -6,6 +6,36 @@
 */
 
 var STYLES = {
+
+	iconBar: {
+		highliteItem: function(obj, hi_lo)
+		{
+			if (typeof(obj) != 'object') return;
+		
+			var _elm = document.getElementById(obj.id);
+			elm = _elm.getElementsByTagName('TD');
+			
+			for (var x in elm)
+			{
+				if (x=='iconTdLeft')
+				{
+					if (hi_lo == 'high') elm[x].style.backgroundImage = "url(/images/gui/iconBarSelectedLeft.gif)";
+					else elm[x].style.background = "none";
+				}
+				else if(x =='iconTdRight')
+				{
+					if (hi_lo == 'high') elm[x].style.backgroundImage 	= "url(/images/gui/iconBarSelectedRight.gif)";
+					else elm[x].style.background = "none";
+				}
+				else if(x=='iconTdMain')
+				{
+					if (hi_lo == 'high') elm[x].style.backgroundImage 	= "url(/images/gui/iconBarSelectedMiddle.gif)";
+					else elm[x].style.background = "none";
+				}
+			}
+		}
+	},
+
 	tab: {
 		tab: function(obj)
 		{
