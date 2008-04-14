@@ -1,0 +1,86 @@
+ohai
+
+    *
+       
+      Users
+    *
+       
+      Domain
+    *
+       
+      Firewall
+    *
+       
+      MySQL Database
+    *
+       
+      Applications
+    *
+       
+      Network
+    *
+       
+      Software Updates
+    *
+       
+      System
+
+ 
+ 
+ 
+ 
+# ROOT
+
+    * Network
+          o Network:Interface
+    * Domain
+          o Domain:Vhost
+                + Vhost:AWStats
+                + FTP:User
+                + Wasp:Installation
+                      # Wasp:Installation:Parameter
+          o Domain:HTTPForward
+          o Domain:Alias
+          o Meta:DNSDomain
+          o DNSDomain:Master
+                + Meta:DNSDomain:Record
+                + DNSDomain:A
+                + DNSDomain:CNAME
+                + DNSDomain:MX
+                + DNSDomain:NS
+          o DNSDomain:Slave
+          o FTP:Master
+          o Mail
+                + Mail:Amavis
+                + Mail:List
+                + Meta:Mail:Address
+                + Mail:Box
+                + Mail:Alias
+                      # Mail:Destination
+    * IPTables
+          o IPTables:Port
+                + IPTables:Port:Rule
+    * MySQL:Database
+          o MySQL:DBUser
+                + MySQL:DBUserhost
+    * SoftwareUpdate
+          o SoftwareUpdate:UpdatePackage
+    * User
+          o SSH:Shell
+          o OpenCORE:Quota
+    * OpenCORE:System
+          o OpenCORE:ActiveSession
+          o OpenCORE:ErrorLog
+          o OpenCORE:ClassList
+    * Wasp:Application
+
+[controller]
+
+lastCommand
+
+buildIconBar
+
+currentRootClass
+
+currentRootClassInstance
+

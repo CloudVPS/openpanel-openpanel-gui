@@ -1,0 +1,67 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css"	href="css/openpanel.css" />	
+		<script type="text/javascript" src="js/widgets.js"></script>
+		<script type="text/javascript" src="js/functions.js"></script>
+	</head>
+	<body>
+		<div id="holder"></div>
+		<script>
+		
+			var holder =  document.getElementById('holder');
+			
+			var g_header = {0:'col1' , 1:'col2', 2:'col3'};
+			var g_data = {
+				 0: {0:'data1',1:'data2',2:'data3'}
+				,1: {0:'data1',1:'data2',2:'data3'}
+				,2: {0:'data1',1:'data2',2:'data3'}
+				,3: {0:'data1',1:'data2',2:'data3'}
+				,4: {0:'data1',1:'data2',2:'data3'}
+				,5: {0:'data1',1:'data2',2:'data3'}
+				,6: {0:'data1',1:'data2',2:'data3'}
+				,7: {0:'data1',1:'data2',2:'data3'}
+				,8: {0:'data1',1:'data2',2:'data3'}
+				,9: {0:'data1',1:'data2',2:'data3'}
+			};
+			
+			// -----------------------------------------------------------
+			// will redesign row index implementation (make it hidden)
+			// -----------------------------------------------------------
+			var g_attribs = {
+				 0: {'src': 'auqweyt-232323-adasd-qweqwe', 'pim':'lul'}
+				,1: {'src': 'auqweyt-232323-adasd-qweqwe', 'pim':'lul'}
+				,2: {'src': 'auqweyt-232323-adasd-qweqwe', 'pim':'lul'}
+				,3: {'src': 'auqweyt-232323-adasd-qweqwe', 'pim':'lul'}
+				,4: {'src': 'auqweyt-232323-adasd-qweqwe', 'pim':'lul'}
+				,5: {'src': 'auqweyt-232323-adasd-qweqwe', 'pim':'lul'}
+				,6: {'src': 'auqweyt-232323-adasd-qweqwe', 'pim':'lul'}
+				,7: {'src': 'auqweyt-232323-adasd-qweqwe', 'pim':'lul'}
+				,8: {'src': 'auqweyt-232323-adasd-qweqwe', 'pim':'lul'}
+				,9: {'src': 'auqweyt-232323-adasd-qweqwe', 'pim':'lul'}
+			}
+			
+			
+			
+			var grid = new widget.grid( holder , g_data, '300px', 3);
+
+			grid.addHeader(g_header);
+			grid.attributes = g_attribs;
+			
+			grid.callback = func_alert;
+			grid.draw();
+			
+			
+			function func_alert( a )
+			{
+				var p = getAllAttributes(a);
+				var l = '';
+				for ( var x in p )
+				{
+					l = l + x +': '+p[x]+"\n";
+				}
+				alert( l );
+			}
+		</script>
+	
+	</body>
+</html>

@@ -7,7 +7,6 @@ body {
 img, input {
 	behavior: url(/js/iepngfix/iepngfix.htc);
 }
-
 small { font-size:9px; }
 td { font-size:11px; }
 
@@ -16,11 +15,9 @@ td { font-size:11px; }
 	background: #e7e7e7;
 }
 
-label { font: 11px Arial, Helvetica, sans-serif; }
 .x-panel-footer {
 	background-color: #e7e7e7;
 }
-
 #saveButtonHolder {
 	background-color : #eeeeee;
 	clear: both;
@@ -28,12 +25,9 @@ label { font: 11px Arial, Helvetica, sans-serif; }
 	height: 30px;
 	float: right;
 	padding-right:20px;
-	width: 880px;
 }
-
 html > body #saveButtonHolder {
 	padding-right:0px;
-	width: 900px;
 }
 
 #saveButton {
@@ -288,35 +282,17 @@ html > body #saveButtonHolder {
 	background-repeat: no-repeat;
 }
 
+/*#iconBar table { border-collapse:collapse; }*/
 
-#iconBar table { 
-	margin-left:1px;
-	border-collapse:collapse; 
-	height:78px;
-}
-
-#iconBar table TD {
-	text-align:center;
-	vertical-align:top;
-}
-#iconbarIcon, #iconbarText{
-	padding:0px 5px 0px 5px;
-}
-#iconbarIcon{
-	padding-top:10px;
-}
-html > body > #iconbarIcon, #iconbarText{
-padding:0px;
+.iconBarDiv {
+	
 }
 
 .iconBarTitle {
-	display:none;
-/*
 	position: absolute;
 	width: 900px;
 	text-align: center;
 	padding-top: 5px;
-*/
 }
 
 .iconHolder {
@@ -332,7 +308,7 @@ padding:0px;
 
 .iconTdLeft, .iconTdRight {
 	background-repeat: repeat-x;
-
+	height: 78px;
 	width: 4px;
 }
 .iconTdMain {
@@ -508,3 +484,6 @@ li.tabDisabled {
 	cursor: pointer;
 }
 
+.x-form-item *{
+	position: static !important;
+}
