@@ -1,4 +1,4 @@
-﻿/**
+/**
  * @author jp
  */
 OpenPanel.GUIBuilder.GUIElements.IconBar = {
