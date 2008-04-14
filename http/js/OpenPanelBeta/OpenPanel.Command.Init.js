@@ -4,8 +4,6 @@ OpenPanel.Command.Init  = {
 		if (Ext.isGecko || Ext.isSafari || 1) {
 			this.controller.guiBuilder.hideModalMessageDiv();
 			this.controller.guiBuilder.loadTemplate("templates/login.html", "app");
-			//var targetElement = document.getElementById("app");
-			//targetElement.innerHTML = "";
 			this.controller.guiBuilder.renderLogin(document.getElementById("loginDiv"), actionObject);
 		} else {
 			var e = new Error();

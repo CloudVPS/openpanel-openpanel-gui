@@ -21,9 +21,7 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 		this.formObjectHolder.setAttribute("id", "formObjectHolder");
 		this.targetDiv.appendChild(this.formObjectHolder);
 		
-		
 		this.setSaveButtonVisibility(false);
-		
 		
 		var saveButtonHolder = document.getElementById("saveButtonHolder");
 		var hook = this;
@@ -39,7 +37,6 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 		
 		this.rootFormObject = new OpenPanel.GUIBuilder.GUIElements.FormObject();
 		this.rootFormObject.setOpenCoreObject(this.openCoreObject);
-		console.log("formbuilder", this.openCoreObject);
 		this.rootFormObject.setParentUUID(this.parentUUID);
 		this.rootFormObject.setTargetDiv(this.formObjectHolder);
 		this.rootFormObject.setController(this.controller);
@@ -56,7 +53,6 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 	finishLayout : function(formObject){
 		if(formObject!=undefined){
 			
-			console.log("foo", formObject, formObject.isUpdateable);
 			if(formObject.isUpdateable!= undefined && formObject.isUpdateable == true){
 				this.isUpdateable = true;
 				this.setSaveButtonVisibility(true);
@@ -69,7 +65,7 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 
 		// resetting formObjectHolders height for overflow
 		var fH = document.getElementById('formObjectHolder');
- 		if ( !isEmpty(fH)) 
+ 		if (fH == undefined) 
 		{
 			fH.style.height = parseInt(fH.offsetHeight) + 'px';
 

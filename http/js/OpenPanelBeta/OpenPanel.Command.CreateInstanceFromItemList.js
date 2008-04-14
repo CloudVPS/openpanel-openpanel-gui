@@ -17,11 +17,8 @@ OpenPanel.Command.CreateInstanceFromItemList  = {
 					console.log(key, instances[key]);
 				}
 				this.controller.currentRootClassInstance = openCoreObject.instances[actionObjectId];
-				console.log("this.currentRootClassInstance", this.controller.currentRootClassInstance);
 				
 				this.controller.iconBarClick(openCoreObject);
-				//this.guiBuilder.GUIElements.ItemList.setOpenCoreObject(actionObject.openCoreObject);
-				//this.guiBuilder.GUIElements.ItemList.build();
 				this.controller.guiBuilder.deletePopUp();
 			} else {
 				throw new Error(this.controller.dataManager.errorMessage);

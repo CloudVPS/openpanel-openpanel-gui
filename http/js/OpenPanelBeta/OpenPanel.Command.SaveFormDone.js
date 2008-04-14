@@ -1,7 +1,6 @@
 OpenPanel.Command.SaveFormDone  = {
 	controller : {},
 	execute : function(actionObject){
-		console.log(actionObject.header.errorid);
 		var errorId = actionObject.header.errorid;
 		actionObject.done++;
 		if(errorId != 0){

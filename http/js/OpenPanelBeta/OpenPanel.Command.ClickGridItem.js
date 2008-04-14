@@ -5,7 +5,6 @@ OpenPanel.Command.ClickGridItem  = {
 		var formObject = actionObject.formObject;
 		var instance = actionObject.instance;
 		
-		console.log("clickGridItem " + instance["class"] + formObject.openCoreObject.name);
 		var actualInstance;
 		formObject.setCurrentInstance(instance);
 		
@@ -21,12 +20,8 @@ OpenPanel.Command.ClickGridItem  = {
 			}
 		}
 		actualInstance = instance;
-		console.log(instance);
 		
 		var openCoreObject = this.controller.dataManager.getOpenCoreObjectByName(actualInstance["class"]);
-		console.log("clickGridItem2 " + openCoreObject.name);
-		
-		
 		formObject.createFields(openCoreObject, actualInstance, "", formObject.fieldsDiv);
 		
 		// create childFormObjects

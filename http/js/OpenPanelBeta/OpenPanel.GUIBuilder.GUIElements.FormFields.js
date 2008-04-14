@@ -183,7 +183,6 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 	
 	
 	createEnum: function(fieldName, obj){
-		console.log("createEnum", obj);
 		var item = {};
 		var enumItems = [];
 		if(this.openCoreObject.classInfo.enums[fieldName] != undefined){
@@ -441,10 +440,7 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 				// TODO: que?
 			} 
 		}
-		// is root object?
-		for(var key in this.items){
-			console.log(key, this.items[key]);
-		}
+		
 		var m = Math.ceil(this.itemCount/2);
 		var i = 0;
 		for(var key in this.items){
@@ -543,7 +539,6 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 	},
 	
 	parseValues : function(form){
-		console.log("parseValues");
 		// gets value from form and fills missing checkbox values (ext doesn't provide unchecked checkbox values)
 		if (form != undefined && form.getForm != undefined) {
 			var r = form.getForm().getValues();

@@ -41,8 +41,6 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 				if(this.openCoreObject.canUpdate == true || (this.openCoreObject.canUpdate == false && this.openCoreObject.getParameterCount() > 1)){
 					this.openCoreObjects.push(this.openCoreObject);
 				} 
-				
-				//this.itemElements[this.openCoreObject.name] = this.openCoreObject;
 			}
 			
 			

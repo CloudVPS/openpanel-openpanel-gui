@@ -107,6 +107,7 @@ OpenCore.DataManager.OpenCoreObject.prototype = {
 			}
 		}
 	},
+	
 	setCurrentInstance : function(instance){
 		this.currentInstance = instance;
 	},
@@ -156,13 +157,11 @@ OpenCore.DataManager.OpenCoreObject.prototype = {
 		if(callBackWrapper != undefined && callBackWrapper.data != undefined){
 			this.fetchedInstances = true;
 			this.instances = callBackWrapper.data[this.name];
-			console.log("INSTANCES", this.instances, this);
 		}
 		var callBackObject;
 		var callBackFunction;
 		var callBackArguments = {};
 		var data;
-		console.log("OpenCoreObject instances ", this.instances);
 		if(callBackWrapper.callBackObject != undefined){
 			callBackObject = callBackWrapper.callBackObject;
 		}
@@ -206,7 +205,6 @@ OpenCore.DataManager.OpenCoreObject.prototype = {
 	getInstanceByUUID: function(uuid){
 		if(this.fetchedInstances == false){
 			this.getInstances();
-			console.log("this.instances", this.instances);
 			for(var metaId in this.instances){
 				var instance = this.instances[metaId];
 				console.log("instance", instance);
@@ -282,7 +280,6 @@ OpenCore.DataManager.OpenCoreObject.prototype = {
 	
 	getFirstInstance: function(){
 		this.getInstances();
-		console.log("instances again", this.instances, this);
 		for (var key in this.instances) {
 			return this.instances[key];
 		}
@@ -302,6 +299,4 @@ OpenCore.DataManager.OpenCoreObject.prototype = {
 	getChildCount: function(){
 		return this.childCount;
 	}
-	
-	
 }
