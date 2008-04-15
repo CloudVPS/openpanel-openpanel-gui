@@ -518,14 +518,16 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		var actualInstance;
 		
 		if(this.openCoreObject.meta == true){
-			actualOpenCoreObject = this.controller.dataManager.getOpenCoreObjectByName(this.currentMetaInstance["class"]);
-			actualInstance = this.currentMetaInstance;
+			if (this.currentMetaInstance != undefined && this.currentMetaInstance["class"] != undefined) {
+				actualOpenCoreObject = this.controller.dataManager.getOpenCoreObjectByName(this.currentMetaInstance["class"]);
+				actualInstance = this.currentMetaInstance;
+			}
 		} else{
 			actualOpenCoreObject = this.openCoreObject;
 			actualInstance = this.currentInstance;
 		}
 		
-		if(actualOpenCoreObject.canUpdate == true){
+		if(actualOpenCoreObject!= undefined && actualOpenCoreObject.canUpdate == true){
 			console.log("hi");
 			var formData = this.getFormData();
 			
@@ -542,7 +544,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		for(var key in this.childFormObjects){
 			var childFormObject = this.childFormObjects[key];
 			if (typeof(childFormObject) == "object") {
-				console.log("childFormObject", childFormObject);
+				console.log("childFormObject", this.openCoreObject.name, childFormObject, childFormObject.openCoreObject.name);
 				console.log("child: " + childFormObject.openCoreObject.name);
 				childFormObject.getData(transport);
 			}
@@ -682,7 +684,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 	
 	createChildFormObject : function(openCoreObject, parentUUID, targetDiv, controller){
 		var childFormObject = new OpenPanel.GUIBuilder.GUIElements.FormObject();
-		this.childFormObjects.push(childFormObject);
+		// this.childFormObjects.push(childFormObject);
 		childFormObject.setOpenCoreObject(openCoreObject);
 		childFormObject.setParentFormObject(this);
 		

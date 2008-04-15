@@ -81,7 +81,7 @@ OpenPanel.Controller = {
 		popupFormObject.fields.formPanel.enable();
 	},
 	
-	showCreateInstanceFromFormObjectMeta : function(formObject, openCoreObject, formObjectHolder, finishedAction){
+	showCreateInstanceFromFormObjectMeta : function(formObject, openCoreObject, formObjectHolder, finishedAction) {
 		console.log(openCoreObject);
 		var popUpDiv = this.guiBuilder.createPopUp();
 		var popupFormObject = new OpenPanel.GUIBuilder.GUIElements.FormObject();
@@ -92,14 +92,13 @@ OpenPanel.Controller = {
 		popupFormObject.fields.formPanel.enable();
 	},
 	
-	iconBarClick : function(openCoreObject){
+	iconBarClick : function(openCoreObject) {
 		this.guiBuilder.GUIElements.ItemList.setOpenCoreObject(openCoreObject);
 		this.guiBuilder.GUIElements.ItemList.build();
 		this.tabBarClick(openCoreObject);
-		
 	},
 	
-	tabBarClick : function(openCoreObject){
+	tabBarClick : function(openCoreObject) {
 		
 		if (openCoreObject.getFirstInstance() != undefined) {
 			this.guiBuilder.GUIElements.TabBar.setOpenCoreObject(openCoreObject);
@@ -193,7 +192,7 @@ OpenPanel.Controller = {
 						}
 					}
 					
-					alert(errorString);
+					alert("mekker " + errorString);
 					if(goToInit == true){
 						this.action({
 							command: "Init",
@@ -248,7 +247,7 @@ OpenPanel.Controller = {
 		targetDiv.appendChild(tableElement);
 		
 		for (var i=0;i<this.error.length;i++) {
-			if(i==0){
+			if(i==0) {
 				var tbodyBombElement = document.createElement("tbody");
 				tableElement.appendChild(tbodyBombElement);
 				var trBombElement = document.createElement("tr");
@@ -259,7 +258,7 @@ OpenPanel.Controller = {
 				trBombElement.appendChild(tdBombElement);
 				var imageElement = document.createElement("img");
 				imageElement.setAttribute("src", "/images/gui/error_bomb.png");
-				imageElement.setAttribute("alt", "boom!");
+				imageElement.setAttribute("alt", "Boom!");
 				tdBombElement.appendChild(imageElement)
 			}
 			var errorCouple = this.error[i];
