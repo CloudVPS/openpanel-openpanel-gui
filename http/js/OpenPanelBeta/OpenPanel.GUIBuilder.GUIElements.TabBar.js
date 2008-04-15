@@ -90,19 +90,21 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 			
 			for (var key in sortedChildren) {
 				var someObject = sortedChildren[key];
-				if (someObject.metaType != "derived") {
-					var tabSpan = document.createElement("li");
-					tabSpan.setAttribute("id", someObject.uuid);
-					tabSpan.setAttribute("OC:Class", someObject.name);
-					tabSpan.appendChild(document.createTextNode(someObject.title));
-					tabs.push(tabSpan);
-					tabSpan.onclick = function(){
-						OpenPanel.GUIBuilder.GUIElements.TabBar.click(this.getAttribute("OC:Class"))
+				if (typeof(someObject) == "object") {
+					if (someObject.metaType != "derived") {
+						var tabSpan = document.createElement("li");
+						tabSpan.setAttribute("id", someObject.uuid);
+						tabSpan.setAttribute("OC:Class", someObject.name);
+						tabSpan.appendChild(document.createTextNode(someObject.title));
+						tabs.push(tabSpan);
+						tabSpan.onclick = function(){
+							OpenPanel.GUIBuilder.GUIElements.TabBar.click(this.getAttribute("OC:Class"))
+						}
+						
+						this.itemElements[someObject.name] = tabSpan;
+						tabSpan.setAttribute("class", "tab");
+						this.setTab(tabSpan);
 					}
-					
-					this.itemElements[someObject.name] = tabSpan;
-					tabSpan.setAttribute("class", "tab");
-					STYLES.tab.tab(tabSpan);
 				}
 			}
 			
@@ -138,7 +140,7 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 			this.tabEnd.setAttribute("id", "tabEnd");
 			this.tabEnd.setAttribute("class", "tabEnd");
 			
-			STYLES.tab.tabEnd(this.tabEnd);
+			this.setTabEnd(this.tabEnd);
 			tabHolder.appendChild(this.tabEnd);
 			
 			var tabDivElement = Ext.get("tabBarDiv");
@@ -154,7 +156,7 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 	createDelimiter : function(){
 		var delimiter = document.createElement("li");
 		delimiter.setAttribute("class", "tabDelimiter");
-		STYLES.tab.tabDelimiter(delimiter);
+		this.setTabDelimiter(delimiter);
 		return delimiter;
 	},
 	
@@ -181,19 +183,19 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 						virgin = false;
 						if (someItem == currentItemElement) {
 							this.tabStart.setAttribute("class", "tabStartSelected");
-							STYLES.tab.tabStartSelected(this.tabStart);
+							this.setTabStartSelected(this.tabStart);
 						} else {
 							this.tabStart.setAttribute("class", "tabStart");
-							STYLES.tab.tabStart(this.tabStart);
+							this.setTabStart(this.tabStart);
 						}
 					}
 					
 					if (someItem == currentItemElement) {
 						someItem.setAttribute("class", "tabSelected");
-						STYLES.tab.tabSelected(someItem);
+						this.setTabSelected(someItem);
 					} else {
 						someItem.setAttribute("class", "tab");
-						STYLES.tab.tab(someItem);
+						this.setTab(someItem);
 					}
 					
 					this.setDelimiterClass(someItem, false);
@@ -210,10 +212,10 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 				if(someItem == currentItemElement){
 					// is last
 					this.tabEnd.setAttribute("class", "tabEndSelected");
-					STYLES.tab.tabEndSelected(this.tabEnd);
+					this.setTabEndSelected(this.tabEnd);
 				} else {
 					this.tabEnd.setAttribute("class", "tabEnd");
-					STYLES.tab.tabEnd(this.tabEnd);
+					this.setTabEnd(this.tabEnd);
 					
 				}
 			} 
@@ -227,7 +229,7 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 				tabSpan.onclick = {};
 				if(tabSpan.getAttribute("class") == "tab"){
 					tabSpan.setAttribute("class", "tabDisabled");
-					STYLES.tab.tabDisabled(this.tabSpan);
+					this.setTabDisabled(tabSpan);
 				}
 				
 			}
@@ -240,12 +242,12 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 			if (isSelected==true)
 			{
 				tabElement.leftDelimiter.setAttribute("class", "tabDelimiterSelected");
-				STYLES.tab.tabDelimiterSelected(tabElement.leftDelimiter);
+				this.setTabDelimiterSelected(tabElement.leftDelimiter);
 			}
 			else
 			{
 				tabElement.leftDelimiter.setAttribute("class", "tabDelimiter");
-				STYLES.tab.tabDelimiter(tabElement.leftDelimiter);
+				this.setTabDelimiter(tabElement.leftDelimiter);
 			}
 		} 
 		
@@ -254,12 +256,12 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 			if (isSelected==true)
 			{
 				tabElement.rightDelimiter.setAttribute("class", "tabDelimiterSelected");
-				STYLES.tab.tabDelimiterSelected(tabElement.rightDelimiter);
+				this.setTabDelimiterSelected(tabElement.rightDelimiter);
 			}
 			else
 			{
 				tabElement.rightDelimiter.setAttribute("class", "tabDelimiter");
-				STYLES.tab.tabDelimiter(tabElement.rightDelimiter);
+				this.setTabDelimiter(tabElement.rightDelimiter);
 			}
 		}
 	},
@@ -285,6 +287,71 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 			}
 		}
 		
+	},
+	
+	setTab: function(obj) {
+		obj.style.backgroundImage = "url(/images/gui/tab_fill.gif)";
+		obj.style.paddingLeft = "5px";
+		obj.style.paddingRight = "5px";
+		obj.style.lineHeight = "21px";
+		obj.style.height = "21px";
+		obj.style.cursor = "default";
+		
+	},
+	
+	setTabDelimiter: function(obj) {
+		obj.style.backgroundImage = "url(/images/gui/tab_delimiter.gif)";
+		obj.style.height = "21px";
+		obj.style.width = "1px";
+		obj.style.cursor = "default";
+	},		
+	
+	setTabDelimiterSelected: function(obj) {
+		obj.style.backgroundImage = "url(/images/gui/tab_delimiter_selected.gif)";
+		obj.style.height = "21px";
+		obj.style.width = "1px";
+		obj.style.cursor = "default";
+	},	
+	
+	setTabStartSelected: function(obj) {
+		obj.style.backgroundImage = "url(/images/gui/tab_start_selected.gif)";
+		obj.style.height = "21px";
+		obj.style.width = "10px";
+		obj.style.cursor = "default";
+	},
+	
+	setTabStart: function(obj) {
+		obj.style.backgroundImage = "url(/images/gui/tab_start.gif)";
+		obj.style.height = "21px";
+		obj.style.width = "10px";
+		obj.style.cursor = "default";
+	},	
+	
+	setTabSelected: function(obj) {
+		obj.style.backgroundImage = "url(/images/gui/tab_hlite.gif)";
+		obj.style.paddingLeft = "5px";
+		obj.style.paddingRight = "5px";
+		obj.style.lineHeight = "21px";
+		obj.style.height = "21px";
+		obj.style.cursor = "default";
+	},
+
+	setTabEndSelected: function(obj){
+		obj.style.backgroundImage = "url(/images/gui/tab_end_selected.gif)";
+		obj.style.height = "21px";
+		obj.style.width = "10px";
+		obj.style.cursor = "default";
+	},
+	
+	setTabEnd: function(obj) {
+		obj.style.backgroundImage = "url(/images/gui/tab_end.gif)";
+		obj.style.height = "21px";
+		obj.style.width = "10px";
+		obj.style.cursor = "default";
+	},
+	
+	setTabDisabled: function(obj) {
+		return this.setTab(obj);
 	}
 	
 	
