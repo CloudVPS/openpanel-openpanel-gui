@@ -50,27 +50,24 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 		saveButtonElement.style.visibility = isVisible==true?"visible":"hidden";
 	},
 	
-	finishLayout : function(formObject){
+	finishLayout : function(formObject) {
 		if(formObject!=undefined){
-			
-			if(formObject.isUpdateable!= undefined && formObject.isUpdateable == true){
+			if(formObject.isUpdateable!= undefined && formObject.isUpdateable == true) {
 				this.isUpdateable = true;
 				this.setSaveButtonVisibility(true);
 			}
 			
-			if(formObject.parentFormObject!=undefined){
+			if(formObject.parentFormObject!=undefined) {
 					this.finishLayout(formObject.parentFormObject);
 			}
 		}
 
 		// resetting formObjectHolders height for overflow
-		var fH = document.getElementById('formObjectHolder');
- 		if (fH == undefined) 
-		{
-			fH.style.height = parseInt(fH.offsetHeight) + 'px';
-
-			var mAF = document.getElementById('mainAreaForm');
-			mAF.style.height = fH.style.height;
+		var formObjectHolderElement = document.getElementById('formObjectHolder');
+ 		if (formObjectHolderElement == undefined) {
+			formObjectHolderElement.style.height = parseInt(formObjectHolderElement.offsetHeight) + 'px';
+			var mainAreaFormElement = document.getElementById('mainAreaForm');
+			mainAreaFormElement.style.height = formObjectHolderElement.style.height;
 		}
 
 	},	

@@ -129,7 +129,6 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 				boxLabel:paramName,
 				listeners:{
 					'check':function(r,c){
-						
 						var foundStuff = hook.formPanel.find("name", this.boxLabel);
 						
 						if (c == true) {
@@ -140,6 +139,7 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 						} else {
 							for(var i = 0;i< foundStuff.length;i++){
 								foundStuff[i].disable();
+								foundStuff[i].value = "";
 								foundStuff[i].setVisible(true);
 							}
 						}
@@ -151,11 +151,11 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 		}
 	
 		var item = {xtype:'ux-radiogroup',
-					fieldLabel:fieldName,
-					name:fieldName,
-					horizontal:false,
-					radios:radios
-			};
+				fieldLabel:fieldName,
+				name:fieldName,
+				horizontal:false,
+				radios:radios
+		};
 		
 		return item;	
 	},

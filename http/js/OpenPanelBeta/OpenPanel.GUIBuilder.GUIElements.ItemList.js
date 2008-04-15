@@ -44,9 +44,6 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 					items.push(item);
 				}
 				
-		
-				
-				
 				this.gridDiv = document.createElement("div");
 				this.gridDiv.setAttribute("id", "itemListGrid");
 				this.targetDiv.appendChild(this.gridDiv);

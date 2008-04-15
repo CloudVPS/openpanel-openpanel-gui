@@ -145,7 +145,6 @@ OpenPanel.Controller = {
 	},
 	
 	pingDone : function(callBackArguments){
-		
 		try {
 			if(callBackArguments.data == undefined){
 				var d = "";

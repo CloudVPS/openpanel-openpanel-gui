@@ -125,72 +125,43 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 			header: false,
 			sm : new Ext.grid.RowSelectionModel({singleSelect:true})
 		});
-		
-   	 	
-		
-		/*
-		var tableElement = document.createElement("table");
-		this.gridDiv.appendChild(tableElement);
-		
-		var headers;
-		for(var id in instances){
-			var instance = instances[id];
-			if(headers == undefined){
-				headers = true;
-				var headerTBodyElement = document.createElement("tbody");
-				var headerTrElement = document.createElement("tr");
-				tableElement.appendChild(headerTBodyElement);
-				headerTBodyElement.appendChild(headerTrElement);
-				var className = instance["class"] != undefined ? instance["class"]: undefined;
-				if(className != undefined){
-					var openCoreObject = this.openCoreObject;
-					if(openCoreObject.classInfo.structure != undefined && openCoreObject.classInfo.structure.parameters != undefined){
-						var parameters = openCoreObject.classInfo.structure.parameters;
-						for(var paramName in parameters){
-							var param = parameters[paramName];
-							var headerTdElement = document.createElement("td");
-							headerTrElement.appendChild(headerTdElement);
-							headerTdElement.appendChild(document.createTextNode(param.description));
-						}
-					} else {
-						alert("class " + openCoreObject.name + " has no classinfo.structure");
-					}
-				}
-			}
-			
-			if(parameters != undefined){
-				var tBodyElement = document.createElement("tbody");
-				var trElement = document.createElement("tr");
-				tableElement.appendChild(tBodyElement);
-				tBodyElement.appendChild(trElement);
-				
-				for(var paramName in parameters){
-					var param = parameters[paramName];
-					var tdElement = document.createElement("td");
-					tdElement.setAttribute("id", id);
-					trElement.appendChild(tdElement);
-					tdElement.appendChild(document.createTextNode(instance[paramName]));
-					tdElement.onclick = function(){
-						hook.clickGridItem(this.id);
-					}
-				}
-			}
-		}
-		*/
 	},
 	
 	createGrid : function(instances){
 		// create the data store
-			
+		
 		var storeData = new Array();
 		var instanceKeys = new Array();
+		var classInfo = this.formObject.controller.dataManager.getClassInfo(this.openCoreObject.name);
+		var params = classInfo.structure.parameters;
+				
 		
+		var nickParams = {};
+		for(var paramKey in params){
+			var param = params[paramKey];
+			if(param.nick != undefined){
+				nickParams[paramKey] = param.nick;
+			}
+		}
+		
+		console.log("nickParams", nickParams);
 		for(var key in instances){
-			var instance = instances[key];
+			var realInstance = instances[key];
+
+			// KITTEH CRY
+			var instance = {};
+			for(var key in realInstance){
+				if (nickParams[key] != undefined ) {
+					// && realInstance[nickParams[key]] != undefined && realInstance[nickParams[key]] != ""
+					console.log("realInstance", realInstance, nickParams[key]);
+					instance[nickParams[key]] = realInstance[key];
+				} else {
+					instance[key] = realInstance[key];
+				}
+			}
+			
 			if(typeof(instance) == "object"){
 				var className = instance["class"];
-				var classInfo = this.formObject.controller.dataManager.getClassInfo(className);
-				var params = classInfo.structure.parameters;
 				var storeDataEntry = [instance.uuid];
 				
 				for(var paramKey in params){
@@ -198,7 +169,6 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 					if(param.gridhide == undefined){
 						storeDataEntry.push(instance[paramKey]);
 					}
-					
 				}
 				
 				storeData.push(storeDataEntry);
@@ -222,6 +192,7 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 		for(var paramName in params){
 			var param = params[paramName];
 			if (param.gridhide == undefined) {
+				
 				fields.push({
 					name: paramName
 				});
@@ -236,18 +207,20 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 					obj.hidden = true;
 				}
 				
-				if(param.gridwidth != undefined){
-					obj.width = (this.gridWidth - 10)* param.gridwidth/100;
+				if (param.gridwidth != undefined) {
+					obj.width = (this.gridWidth - 10) * param.gridwidth / 100;
 					
 				}
-			
+				
 				columns.push(obj);
+				
 			}
 		}
 		
 		this.store = new Ext.data.SimpleStore({
 	        fields: fields
 	    });
+		
 		this.store.loadData(storeData);
 		
 		this.grid = new Ext.grid.GridPanel({

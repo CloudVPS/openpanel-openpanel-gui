@@ -329,7 +329,6 @@ padding:0px;
 	padding-left: 5px;
 }
 
-
 .iconTdLeft, .iconTdRight {
 	background-repeat: repeat-x;
 
@@ -351,9 +350,11 @@ padding:0px;
 .selected .iconTdMain {
 	background-image: url(/images/gui/iconBarSelectedMiddle.gif);
 }
+
 .classIcon {
 	padding-top: 17px;
 }
+
 .classDescription, .classIcon {
 	cursor: pointer;
 	text-align: center;
@@ -364,9 +365,6 @@ padding:0px;
 	height: 25px;
 	font-size:11px;
 }
-
-
-
 
 #tabBar {
 	clear: both;
@@ -405,7 +403,6 @@ padding:0px;
 	float : left;
 }
 
-
 li.tab, li.tabSelected, li.tabStart ,li.tabStartSelected ,li.tabEnd ,li.tabEndSelected, li.tabDelimiter, li.tabDelimiterSelected, li.tabDisabled {
 	margin: 0px 0px 0px 0px;
 	padding: 0px 0px 0px 0px;
@@ -415,8 +412,9 @@ li.tab, li.tabSelected, li.tabStart ,li.tabStartSelected ,li.tabEnd ,li.tabEndSe
 	cursor: pointer;
 	vertical-align: text-bottom;
 }
+
 li.tabDelimiterSelected {
-width:1px;
+	width:1px;
 }
 li.tab, li.tabDisabled {
 	background-image: url(/images/gui/tab_fill.gif);
@@ -494,11 +492,6 @@ li.tabDisabled {
 	padding-left: 1px;
 	height:21px;
 }
-
-
-
-
-
 
 .grid, .fields {
 	padding-top: 8px;

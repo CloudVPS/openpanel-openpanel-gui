@@ -106,7 +106,6 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 				if (typeof(childObject) == "object") {
 					if (key != "spacer") {
 					
-					
 						var iconLi = document.createElement("td");
 						iconHolder.appendChild(iconLi);
 						iconLi.setAttribute("id", childObject.description);
