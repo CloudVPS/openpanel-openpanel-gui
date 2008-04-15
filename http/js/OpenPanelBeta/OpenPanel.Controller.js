@@ -248,19 +248,27 @@ OpenPanel.Controller = {
 		targetDiv.appendChild(tableElement);
 		
 		for (var i=0;i<this.error.length;i++) {
-			var errorCouple = this.error[i];
-			var trElement = document.createElement("tr");
-			tableElement.appendChild(trElement);
 			if(i==0){
+				var tbodyBombElement = document.createElement("tbody");
+				tableElement.appendChild(tbodyBombElement);
+				var trBombElement = document.createElement("tr");
+				tbodyBombElement.appendChild(trBombElement);
+				
 				var tdBombElement = document.createElement("td");
-				tdBombElement.setAttribute("valign", "top");
-				tdBombElement.setAttribute("rowspan", this.error.length);
+				tdBombElement.setAttribute("colspan", "3");
+				trBombElement.appendChild(tdBombElement);
 				var imageElement = document.createElement("img");
 				imageElement.setAttribute("src", "/images/gui/error_bomb.png");
 				imageElement.setAttribute("alt", "boom!");
-				tdBombElement.appendChild(imageElement);
-				trElement.appendChild(tdBombElement)
+				tdBombElement.appendChild(imageElement)
 			}
+			var errorCouple = this.error[i];
+			var tbodyElement = document.createElement("tbody");
+			tableElement.appendChild(tbodyElement);
+				
+			var trElement = document.createElement("tr");
+			tbodyElement.appendChild(trElement);
+			
 			var tdKeyElement = document.createElement("td");
 			tdKeyElement.setAttribute("valign", "top");
 			tdKeyElement.appendChild(document.createTextNode(errorCouple[0]));
@@ -269,6 +277,7 @@ OpenPanel.Controller = {
 			tdValueElement.setAttribute("valign", "top");
 			tdValueElement.appendChild(document.createTextNode(errorCouple[1]));
 			trElement.appendChild(tdValueElement);
+			
 		}
 	},
 	
