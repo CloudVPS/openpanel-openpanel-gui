@@ -15,4 +15,4 @@ getlist() {
  cd "$oldwd"
 }
 
-( for f in `getlist`; do cat ../http/js/OpenPanelBeta/$f; done ) | lib/jsmin.py > ../http/js/compressed_openpanel.js 
+( for f in `getlist`; do cat ../http/js/OpenPanelBeta/$f; echo ""; done ) | lib/jsmin.py > ../http/js/compressed_openpanel.js 
