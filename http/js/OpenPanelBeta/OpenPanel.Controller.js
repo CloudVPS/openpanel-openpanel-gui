@@ -231,7 +231,6 @@ OpenPanel.Controller = {
 					this.error.push([errorKey, e[errorKey]]);
 				}
 				this.displayError(targetDiv);
-				// OpenPanel.GUIBuilder.loadTemplateIntoDiv("templates/fatalError.html", targetDiv);
 			break;
 		}
 		
@@ -246,9 +245,8 @@ OpenPanel.Controller = {
 		targetDiv.appendChild(bElement);
 		
 		var tableElement = document.createElement("table");
-		tableElement.setAttribute("border", "1");
 		targetDiv.appendChild(tableElement);
-		console.log("que", this.error);
+		
 		for (var i=0;i<this.error.length;i++) {
 			var errorCouple = this.error[i];
 			var trElement = document.createElement("tr");
@@ -272,23 +270,6 @@ OpenPanel.Controller = {
 			tdValueElement.appendChild(document.createTextNode(errorCouple[1]));
 			trElement.appendChild(tdValueElement);
 		}
-		/*
-		targetDiv.innerHTML = "<b>Error</b><table border=\"1\"><tr><td rowspan=\"100\" colspan=\"2\" valign=\"top\"><img src=\"/images/gui/error_bomb.png\"/></td></tr>";
-		for(var errorCouple in this.error){
-			targetDiv.innerHTML+= "<tr>";
-			targetDiv.innerHTML+= "<td valign=\"top\">asds" + errorCouple[0] + "</td>";
-			targetDiv.innerHTML+= "<td valign=\"top\">asds" + errorCouple[1] + "</td>";
-			targetDiv.innerHTML+= "</tr>";
-		}
-		targetDiv.innerHTML+= "</table>";
-		*/
-		/*
-		 * <b>Error</b><table><tr><td rowspan="100" colspan="2" valign="top"><img src="/images/gui/error_bomb.png"/></td>{for errorCouple in controller.error}
-<tr>{for e in errorCouple}
-<td valign="top">${e}</td>
-{/for}</tr>
-{/for}</table>
-		 */
 	},
 	
 	proceedAfterError : function(){
