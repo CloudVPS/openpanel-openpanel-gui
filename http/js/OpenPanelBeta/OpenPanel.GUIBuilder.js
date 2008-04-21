@@ -103,7 +103,7 @@ OpenPanel.GUIBuilder = {
 			monitorValid: true,
 	
 	        items: [{
-	                fieldLabel: 'Username',
+	                fieldLabel: 'User name',
 	                name: 'userName',
 					allowBlank:false,
 					value: params.userName!=undefined?params.userName:""
