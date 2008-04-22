@@ -1,4 +1,4 @@
-var RPCError = function(message, status){
+RPCError = function(message, status){
 	var err = new Error(message)
     // take care of IE5/5.5
     if (!err.message) {

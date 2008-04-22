@@ -27,8 +27,9 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 			this.fieldsDiv = document.createElement("div");
 			this.fieldsDiv.setAttribute("class", "fields");
 			this.targetDiv.appendChild(this.fieldsDiv);
-			
-			this.createFields(this.instance);
+			if (this.instance != undefined) {
+				this.createFields(this.instance);
+			}
 		}
 	},
 
@@ -323,7 +324,7 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 			var groupHolder = fieldContainerGroup.groupHolder;
 			var contentDiv = fieldContainerGroup.contentDiv;
 			this.fieldsDiv.appendChild(groupHolder);
-			
+			console.log("contentDiv", this.instance);
 			this.formPanel.render(contentDiv);
 			if(this.openCoreObject.canUpdate == false){
 				//this.formPanel.disable();

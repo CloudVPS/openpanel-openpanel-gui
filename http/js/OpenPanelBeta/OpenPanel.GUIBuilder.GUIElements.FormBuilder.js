@@ -45,7 +45,7 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 },
 	
 	setSaveButtonVisibility : function(isVisible){
-		
+		console.log("isVisible", isVisible);
 		var saveButtonElement = document.getElementById("saveButton");
 		saveButtonElement.style.visibility = isVisible==true?"visible":"hidden";
 	},
@@ -78,6 +78,7 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 	
 	clean : function(){
 		this.targetDiv.innerHTML = "";	
+		this.setSaveButtonVisibility(false);
 	},
 	
 	getData : function(){

@@ -254,26 +254,26 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 	},
 	
 	
-	setHighLite: function(obj, hi_lo) {
-		if (typeof(obj) == 'object') {
+	setHighLite: function(obj, state) {
+		if (typeof(obj) == "object") {
 			var someElement = document.getElementById(obj.id);
-			tdElement = someElement.getElementsByTagName('TD');
+			tdElement = someElement.getElementsByTagName("TD");
 			
 			for (var x in tdElement) {
-				if (x == 'iconTdLeft') {
-					if (hi_lo == 'high') {
+				if (x == "iconTdLeft") {
+					if (state == "high") {
 						tdElement[x].style.backgroundImage = "url(/images/gui/iconBarSelectedLeft.gif)";
 					} else {
 						tdElement[x].style.background = "none";
 					}
-				} else if (x == 'iconTdRight') {
-					if (hi_lo == 'high') {
+				} else if (x == "iconTdRight") {
+					if (state == "high") {
 						tdElement[x].style.backgroundImage = "url(/images/gui/iconBarSelectedRight.gif)";
 					} else {
 						tdElement[x].style.background = "none";
 					}
-				} else if (x == 'iconTdMain') {
-					if (hi_lo == 'high') {
+				} else if (x == "iconTdMain") {
+					if (state == "high") {
 						tdElement[x].style.backgroundImage = "url(/images/gui/iconBarSelectedMiddle.gif)";
 					} else {
 						tdElement[x].style.background = "none";
