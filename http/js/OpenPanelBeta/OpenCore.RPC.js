@@ -76,6 +76,7 @@ OpenCore.RPC.RequestHandler = {
 				var callBackObject = requestResult.argument.callBackObject;
 				var callBackFunction = requestResult.argument.callBackFunction;
 				var callBackArguments = requestResult.argument.callBackArguments;
+				console.log("requestResult.responseText", requestResult.responseText);
 				callBackArguments.data = Ext.util.JSON.decode(requestResult.responseText);
 				
 				if (callBackFunction == undefined) {

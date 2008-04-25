@@ -47,7 +47,9 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 	setSaveButtonVisibility : function(isVisible){
 		console.log("isVisible", isVisible);
 		var saveButtonElement = document.getElementById("saveButton");
-		saveButtonElement.style.visibility = isVisible==true?"visible":"hidden";
+		if (saveButtonElement != undefined) {
+			saveButtonElement.style.visibility = isVisible == true ? "visible" : "hidden";
+		}
 	},
 	
 	finishLayout : function(formObject) {

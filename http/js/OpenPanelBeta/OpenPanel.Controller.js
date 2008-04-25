@@ -220,15 +220,17 @@ OpenPanel.Controller = {
 				}
 			break;
 			
-			case "RPCError":
 			default:
+				var extraText = ", please try loggin in again.";
+			case "RPCError":
+			
 				
 				var targetDiv = OpenPanel.GUIBuilder.createPopUp();
 				this.error = new Array();
 				for(var errorKey in e){
 					this.error.push([errorKey, e[errorKey]]);
 				}
-				this.displayError(targetDiv);
+				this.displayError(targetDiv, extraText);
 			break;
 		}
 		
@@ -237,38 +239,41 @@ OpenPanel.Controller = {
 		}
 	},
 	
-	displayError : function(targetDiv){
+	displayError : function(targetDiv, extraText){
+		if(extraText == undefined){
+			extraText = "";
+		}
 		var bElement = document.createElement("b");
-		bElement.appendChild(document.createTextNode("Error"));
+		bElement.appendChild(document.createTextNode("Unrecoverable Error" + extraText));
 		targetDiv.appendChild(bElement);
 		
 		var tableElement = document.createElement("table");
+		tableElement.setAttribute("border", 1);
 		targetDiv.appendChild(tableElement);
-		
+		var tbodyElement = document.createElement("tbody");
+		tableElement.appendChild(tbodyElement);
 		for (var i=0;i<this.error.length;i++) {
+			var errorCouple = this.error[i];
+			
+			var trElement = document.createElement("tr");
+			tbodyElement.appendChild(trElement);
+			
 			if(i==0) {
-				var tbodyBombElement = document.createElement("tbody");
-				tableElement.appendChild(tbodyBombElement);
-				var trBombElement = document.createElement("tr");
-				tbodyBombElement.appendChild(trBombElement);
-				
 				var tdBombElement = document.createElement("td");
-				tdBombElement.setAttribute("colspan", "3");
-				trBombElement.appendChild(tdBombElement);
+				tdBombElement.setAttribute("rowspan", this.error.length);
+				tdBombElement.setAttribute("valign", "top");
+				trElement.appendChild(tdBombElement);
+				
 				var imageElement = document.createElement("img");
 				imageElement.setAttribute("src", "/images/gui/error_bomb.png");
 				imageElement.setAttribute("alt", "Boom!");
 				tdBombElement.appendChild(imageElement)
 			}
-			var errorCouple = this.error[i];
-			var tbodyElement = document.createElement("tbody");
-			tableElement.appendChild(tbodyElement);
-				
-			var trElement = document.createElement("tr");
-			tbodyElement.appendChild(trElement);
+		
 			
 			var tdKeyElement = document.createElement("td");
 			tdKeyElement.setAttribute("valign", "top");
+			
 			tdKeyElement.appendChild(document.createTextNode(errorCouple[0]));
 			trElement.appendChild(tdKeyElement);
 			var tdValueElement = document.createElement("td");

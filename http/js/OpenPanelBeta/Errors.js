@@ -12,7 +12,7 @@ RPCError = function(message, status){
 	}
 	
     err.name = "RPCError"
-    return err
+    return err;
 }
 
 var OpenCoreError = function(message, errorCode){
@@ -24,7 +24,7 @@ var OpenCoreError = function(message, errorCode){
 	
 	err.errorCode = errorCode!=undefined?errorCode:"";
     err.name = "OpenCoreError"
-    return err
+    return err;
 }
 
 	
