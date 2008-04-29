@@ -191,7 +191,7 @@ OpenPanel.Controller = {
 						}
 					}
 					
-					alert("mekker " + errorString);
+					alert("OpenCore said: " + errorString);
 					if(goToInit == true){
 						this.action({
 							command: "Init",
@@ -248,7 +248,7 @@ OpenPanel.Controller = {
 		targetDiv.appendChild(bElement);
 		
 		var tableElement = document.createElement("table");
-		tableElement.setAttribute("border", 1);
+		// tableElement.setAttribute("border", 1);
 		targetDiv.appendChild(tableElement);
 		var tbodyElement = document.createElement("tbody");
 		tableElement.appendChild(tbodyElement);
