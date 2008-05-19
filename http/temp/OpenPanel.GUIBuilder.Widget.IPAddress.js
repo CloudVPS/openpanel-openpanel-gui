@@ -83,8 +83,9 @@ OpenPanel.GUIBuilder.Widget.IPAddress.prototype = {
 					newValue+=String.fromCharCode(currentChar);
 				}
 			}
-		
-			ipField.value = newValue.substring(0,3);
+			if (ipField.value != newValue) {
+				ipField.value = newValue.substring(0, 3);
+			}
 			ipField.isTabbing = false;
 			this.validateFields();
 		}
@@ -130,7 +131,6 @@ OpenPanel.GUIBuilder.Widget.IPAddress.prototype = {
 		var nextIpField = this.ipFields[ipField.index+1];
 		if(nextIpField!=undefined){
 			nextIpField.focus();
-			nextIpField.select();
 			nextIpField.isTabbing = true;
 		}
 	},
