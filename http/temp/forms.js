@@ -20,7 +20,7 @@ var dummyData = {
 	
 	first: {
 		name: "first",
-		label: "adresadresadresadresadresadresadres",
+		label: "address",
 		type: "TextField"
 	},
 	
@@ -61,7 +61,7 @@ var dummyData = {
 	fifth: {
 		name: "fifth",
 		label: "fifth Var",
-		type: "TextField"
+		type: "EmailAddress"
 	},
 	
 	sixth: {
@@ -114,7 +114,7 @@ var dummyValues = {
 	secondBis: 250,
 	third: 350,
 	fourthBis: "192.168.1",
-	fifth: 500,
+	fifth: "",
 	sixth: 550,
 	eigth: 650,
 	nineth: 500,

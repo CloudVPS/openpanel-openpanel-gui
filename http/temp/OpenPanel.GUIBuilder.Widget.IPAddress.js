@@ -39,16 +39,26 @@ OpenPanel.GUIBuilder.Widget.IPAddress.prototype = {
 	},
 	
 	onkeypress : function(ipField, someEvent){
+		console.log(someEvent);
 		if(
 			(someEvent.charCode >= 48 && someEvent.charCode <=57) // numerics
 			|| (someEvent.keyCode == 37 	// left
 			|| someEvent.keyCode == 39		// right
 			|| someEvent.keyCode == 8		// backspace
 			|| someEvent.keyCode == 9		// tab
+			|| someEvent.charCode == 46		// tab
 			)
 		){
-			
-			ipField.onkeypressOk = true;
+			if(someEvent.charCode == 46){
+				if(ipField.value.length>0){
+					if (ipField.value.length > 0) {
+						this.focusNextField(ipField);
+					}
+				}
+				return false;
+			} else {
+				ipField.onkeypressOk = true;
+			}
 			
 		} else {
 			ipField.onkeypressOk = false;
@@ -67,13 +77,6 @@ OpenPanel.GUIBuilder.Widget.IPAddress.prototype = {
 			
 			if(ipField.value > 255){
 				ipField.value = ipField.value.substring(0,ipField.value.length-1);
-			}
-			
-			if(someEvent.keyCode >= 48 && someEvent.keyCode <= 57){
-				if(ipField.value.length == 3 && ipField.isTabbing != true){
-					ipField.onkeypressOk = false;
-					this.focusNextField(ipField);
-				}
 			}
 			
 			var newValue = "";
@@ -127,11 +130,10 @@ OpenPanel.GUIBuilder.Widget.IPAddress.prototype = {
 	
 	focusNextField : function(ipField){
 		
-		
 		var nextIpField = this.ipFields[ipField.index+1];
 		if(nextIpField!=undefined){
 			nextIpField.focus();
-			nextIpField.isTabbing = true;
+			nextIpField.select();
 		}
 	},
 	
@@ -157,7 +159,4 @@ OpenPanel.GUIBuilder.Widget.IPAddress.prototype = {
 		result = result.substring(0, result.length-1);
 		return result;
 	}
-	
-	
-	
 }
