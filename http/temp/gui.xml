@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<parameters>
+	<mekker>
+		<id>first</id>
+		<label>First Parameter</label>
+	</mekker>
+	<blaat>
+		<id>second</id>
+		<label>Second Parameter</label>
+	</blaat>
+</parameters>
