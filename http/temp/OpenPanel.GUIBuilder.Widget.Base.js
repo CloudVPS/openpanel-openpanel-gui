@@ -7,6 +7,7 @@ OpenPanel.GUIBuilder.Widget.Base = function(){
 	this.needed = false;
 	this.isGrouped = false;
 	this.groupName = "";
+	this.isValid = true;
 	
 };
 

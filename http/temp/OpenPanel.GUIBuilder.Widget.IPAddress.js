@@ -90,13 +90,16 @@ OpenPanel.GUIBuilder.Widget.IPAddress.prototype = {
 			} else {
 				if(valid == false){
 					this.setFieldNotValid();
+					this.isValid = false;
 				}
 			}
 		} else {
 			if(valid == false){
 				this.setFieldNotValid();
+				this.isValid = false;
 			} else {
 				this.setFieldValid();
+				this.isValid = true;
 			}
 		}
 	},
@@ -146,6 +149,11 @@ OpenPanel.GUIBuilder.Widget.IPAddress.prototype = {
 	},
 	
 	disable : function(){
+		if(this.isValid == false) {
+			this.setValue();
+			this.setFieldValid();
+		}
+		
 		for(var i = 0;i<this.ipFields.length;i++){
 			var ipField = this.ipFields[i];
 			console.log('ehy now');
