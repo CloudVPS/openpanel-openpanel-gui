@@ -55,13 +55,6 @@ var dummyData = {
 		type: "IPAddress"
 	},
 	
-	fifth: {
-		name: "fifth",
-		label: "fifth Var",
-		type: "EmailAddress",
-		emailDomain: "poop.com"
-	},
-	
 	sixth: {
 		name: "sixth",
 		label: "sixth Var",
@@ -105,6 +98,15 @@ var dummyData = {
 		name: "twelveth",
 		label: "twelveth Var",
 		type: "TextField",
+		group: "mekker"
+	},
+	
+	
+	fifth: {
+		name: "fifth",
+		label: "fifth Var",
+		type: "EmailAddress",
+		emailDomain: "poop.com",
 		group: "mekker"
 	},
 	
