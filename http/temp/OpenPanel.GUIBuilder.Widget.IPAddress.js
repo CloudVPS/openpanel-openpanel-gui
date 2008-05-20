@@ -19,98 +19,72 @@ OpenPanel.GUIBuilder.Widget.IPAddress.prototype = {
 		
 		
 		for(var i = 0;i<4;i++){
-			var ipField = document.createElement("INPUT");
+			var f = OpenPanel.GUIBuilder.Widget.createWidget(
+				{
+					label: "ip" + i, 
+					type: "TextField", 
+					size: "3", 
+					regExp: "^([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"
+				}
+			);
+			f.init();
+			var ipField = f.createInputField();
+			
 			var hook = this;
 			
 			ipField.onkeypress = function(event){
 				return hook.onkeypress(this, event);
 			}
 			
-			ipField.onkeyup = function(event){
-				hook.onkeyup(this, event);
-			}
+			f.addOnKeyUpHandler(function(inputElement, someEvent){
+				hook.onkeyup(inputElement, someEvent);
+				hook.setChanged();
+			});
+			
+			f.addOnKeyDownHandler(function(inputElement, someEvent){
+				hook.onkeydown(inputElement, someEvent);
+			});
 			
 			ipField.index = i;
-			ipField.setAttribute("type", "text");
-			ipField.setAttribute("size", 3);
+			
 			this.fieldElement.appendChild(ipField);
+			
+			if(i<3){
+				var dotElement = document.createElement("SPAN");
+				dotElement.appendChild(document.createTextNode("."));
+				this.fieldElement.appendChild(dotElement);
+			}
 			this.ipFields.push(ipField);
 		}
 	},
 	
 	onkeypress : function(ipField, someEvent){
-		console.log(someEvent);
-		if(
-			(someEvent.charCode >= 48 && someEvent.charCode <=57) // numerics
-			|| (someEvent.keyCode == 37 	// left
-			|| someEvent.keyCode == 39		// right
-			|| someEvent.keyCode == 8		// backspace
-			|| someEvent.keyCode == 9		// tab
-			|| someEvent.charCode == 46		// tab
-			)
-		){
-			if(someEvent.charCode == 46){
-				if(ipField.value.length>0){
-					if (ipField.value.length > 0) {
-						this.focusNextField(ipField);
-					}
+		if(someEvent.charCode == 46){
+			if(ipField.value.length>0){
+				if (ipField.value.length > 0) {
+					this.focusNextField(ipField);
 				}
-				return false;
-			} else {
-				ipField.onkeypressOk = true;
 			}
-			
-		} else {
-			ipField.onkeypressOk = false;
 			return false;
 		}
-		
 	},
 	
 	onkeyup : function(ipField, someEvent){
-		if (ipField.onkeypressOk == true) {
-			if(ipField.value.length>1){
-				if(ipField.value.substring(0,1) == "0"){
-					ipField.value = ipField.value.substring(1, ipField.value.length);
-				}
-			}
-			
-			if(ipField.value > 255){
-				ipField.value = ipField.value.substring(0,ipField.value.length-1);
-			}
-			
-			var newValue = "";
-			for(var i = 0;i<ipField.value.length;i++){
-				var currentChar = ipField.value.charCodeAt(i);
-				if(currentChar>=48 && currentChar<=57){
-					newValue+=String.fromCharCode(currentChar);
-				}
-			}
-			if (ipField.value != newValue) {
-				ipField.value = newValue.substring(0, 3);
-			}
-			ipField.isTabbing = false;
-			this.validateFields();
-		}
+		this.validateFields();
 	},
 	
 	validateFields : function(){
 		var valid = true;
 		var emptyFieldCount = 0;
-		console.log("----");
 		for(var i = 0;i<4;i++){
 			var ipField = this.ipFields[i];
-			console.log('valid', ipField.value);
-			if(ipField.value>=0 && ipField.value <= 255 && ipField.value!=undefined && ipField.value!=""){
-				console.log("ok");
-			} else {
+			if(ipField.value.length < 1 || ipField.value == undefined || ipField.value == ""){
 				valid = false;
 				emptyFieldCount++;
 			}
 		}
 		
 		if(this.needed == false){
-			console.log("emptyFieldCount", emptyFieldCount);
 			if(emptyFieldCount==4 || valid == true){
 				this.setFieldValid();
 			} else {
@@ -125,7 +99,6 @@ OpenPanel.GUIBuilder.Widget.IPAddress.prototype = {
 				this.setFieldValid();
 			}
 		}
-		
 	},
 	
 	focusNextField : function(ipField){
@@ -144,6 +117,11 @@ OpenPanel.GUIBuilder.Widget.IPAddress.prototype = {
 				var ipField = this.ipFields[i];
 				ipField.value = ipParts[i] != undefined && ipParts[i] != "" ? ipParts[i] : 0;
 			}
+		} else {
+			for (var i in this.ipFields) {
+				var ipField = this.ipFields[i];
+				ipField.value = "";
+			}
 		}
 	},
 	
@@ -158,5 +136,20 @@ OpenPanel.GUIBuilder.Widget.IPAddress.prototype = {
 		}
 		result = result.substring(0, result.length-1);
 		return result;
-	}
+	},
+	
+	enable : function(){
+		for(var i = 0;i<this.ipFields.length;i++){
+			var ipField = this.ipFields[i];
+			ipField.owner.enable();
+		}
+	},
+	
+	disable : function(){
+		for(var i = 0;i<this.ipFields.length;i++){
+			var ipField = this.ipFields[i];
+			console.log('ehy now');
+			ipField.owner.disable();
+		}
+	},
 }

@@ -51,3 +51,11 @@
 	float: left;
 	max-width: 200px;
 }
+
+.textFieldDisabled {
+	background-color: #c0c0c0;
+}
+
+.textFieldEnabled {
+	
+}

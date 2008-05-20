@@ -21,7 +21,8 @@ var dummyData = {
 	first: {
 		name: "first",
 		label: "address",
-		type: "TextField"
+		type: "TextField",
+		regExp: "^([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"
 	},
 	
 	second: {
@@ -30,6 +31,9 @@ var dummyData = {
 		type: "TextField",
 		sameline: true,
 		showLabel: true,
+		size: 3,
+		regExp: "^([0-9]+[a-zA-Z]{0,3})$"
+		
 	},
 	
 	secondBis: {
@@ -51,17 +55,11 @@ var dummyData = {
 		type: "IPAddress"
 	},
 	
-	fourthBis: {
-		name: "fourthBis",
-		label: "Fourth Var * needed",
-		type: "IPAddress",
-		needed: true
-	},
-	
 	fifth: {
 		name: "fifth",
 		label: "fifth Var",
-		type: "EmailAddress"
+		type: "EmailAddress",
+		emailDomain: "poop.com"
 	},
 	
 	sixth: {
@@ -91,19 +89,30 @@ var dummyData = {
 	eleventh: {
 		name: "nineth",
 		label: "Fourth Var",
-		type: "TextField"
+		type: "TextField",
+		group: "mekker"
 	},
+	fourthBis: {
+		name: "fourthBis",
+		label: "Fourth Var * needed",
+		type: "IPAddress",
+		needed: true,
+		group : "mekker"
+	},
+	
 	
 	twelveth: {
 		name: "twelveth",
 		label: "twelveth Var",
-		type: "TextField"
+		type: "TextField",
+		group: "mekker"
 	},
 	
 	thirteenth: {
 		name: "thirteenth",
 		label: "thirteenth Var",
-		type: "TextField"
+		type: "TextField",
+		group: "mekker"
 	}
 }
 
@@ -118,13 +127,11 @@ var dummyValues = {
 	sixth: 550,
 	eigth: 650,
 	nineth: 500,
-	tenth: 450,
-	eleventh: 400,
-	twelveth: 350,
-	thirteenth: 200
+	tenth: 450
 }
 
 function build(){
+	
 	var rootElement = document.getElementById("t");
 	var tableElement = document.createElement("table");
 	tableElement.setAttribute("class", "formTable");
@@ -152,7 +159,7 @@ function build(){
 	var rows = 0;
 	for(var paramName in dummyData){
 		var parameter = dummyData[paramName];
-		var f = new OpenPanel.GUIBuilder.Widget.createWidget(parameter);
+		var f = OpenPanel.GUIBuilder.Widget.createWidget(parameter);
 		
 		f.init();
 		f.build();
@@ -161,8 +168,9 @@ function build(){
 		var e = f.getElement();
 		var formElementLabel = f.formElementLabel;
 		var fieldElementContainer = f.fieldElementContainer;
-		console.log(fieldElementContainer);
 		var fieldElement = f.fieldElement;
+		
+		
 		
 		if(rows == 0 || rows == maxRows){
 			var columnElement = document.createElement("td");
@@ -179,7 +187,13 @@ function build(){
 		
 		if(parameter.sameline == true){
 			if(parameter.showLabel != undefined && parameter.showLabel == true){
+				if(f.isGrouped == true){
+					rowRightElement.appendChild(f.groupElement);
+				}
 				rowRightElement.appendChild(formElementLabel);
+				if(f.extraElement != undefined){
+					rowRightElement.appendChild(f.extraElement);
+				}
 			}
 			rowRightElement.appendChild(fieldElementContainer);
 		} else {
@@ -196,12 +210,21 @@ function build(){
 			innerTr.appendChild(rowRightElement);
 			
 			rowLeftElement.appendChild(formElementLabel);
+			if(f.isGrouped == true){
+					rowRightElement.appendChild(f.groupElement);
+				}
 			rowRightElement.appendChild(fieldElementContainer);
+			if(f.extraElement != undefined){
+				rowRightElement.appendChild(f.extraElement);
+			}
+			
 			rows++;
 		}
 		
 		i++;
 	}
+	
+	OpenPanel.GUIBuilder.Widget.validateGroupValues();
 	
 	console.log(OpenPanel.GUIBuilder.Widget.widgets);
 	var okButton = document.getElementById("okButton");
