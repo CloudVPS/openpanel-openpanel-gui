@@ -1,7 +1,6 @@
 OpenPanel.Command.ClickGridItem  = {
 	controller : {},
 	execute : function(actionObject){
-		console.log(actionObject);
 		var formObject = actionObject.formObject;
 		var instance = actionObject.instance;
 		
@@ -42,7 +41,6 @@ OpenPanel.Command.ClickGridItem  = {
 		}
 		
 		OpenPanel.GUIBuilder.goToAnchor(formObject.openCoreObject.name);
-		
 	}
 }
 

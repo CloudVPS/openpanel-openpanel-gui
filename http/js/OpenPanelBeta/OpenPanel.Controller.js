@@ -15,8 +15,6 @@ OpenPanel.Controller = {
 	currentUser : {},
 	
 	action: function(actionObject){
-		console.log("controller actionObject", actionObject);
-		
 		try {
 			this.lastCommand = actionObject.command;
 			this.lastArgumentObject = actionObject;
@@ -27,20 +25,17 @@ OpenPanel.Controller = {
 				commandObject.controller = this;
 				commandObject.execute(actionObject);
 			} else {
-				
+				// wut?
 				switch (actionObject.command) {
 					
 					default:
 					break;
 				}
 			}
-			
 			//OpenCore.Debug.controllerDebug(this);
-			console.log("---------------------------");
 		} catch (e) {
 			// errors are caught here
 			this.handleErrors(e);
-			
 		}
 	},
 	
@@ -82,7 +77,6 @@ OpenPanel.Controller = {
 	},
 	
 	showCreateInstanceFromFormObjectMeta : function(formObject, openCoreObject, formObjectHolder, finishedAction) {
-		console.log(openCoreObject);
 		var popUpDiv = this.guiBuilder.createPopUp();
 		var popupFormObject = new OpenPanel.GUIBuilder.GUIElements.FormObject();
 		popupFormObject.setOpenCoreObject(openCoreObject);
@@ -138,9 +132,7 @@ OpenPanel.Controller = {
 		}
 	},
 	
-	
 	ping : function(){
-		console.log("ping");
 		this.dataManager.getRecordsAsync("ping", undefined, OpenPanel.Controller, "pingDone", {}, true);
 	},
 	
@@ -206,7 +198,7 @@ OpenPanel.Controller = {
 						case 12288:
 						case 8193:
 							
-							alert(e);
+							alert("error: " + e.message);
 							this.action({
 								command: "Init",
 								msg: e.message
@@ -221,10 +213,8 @@ OpenPanel.Controller = {
 			break;
 			
 			default:
-				var extraText = ", please try loggin in again.";
+				var extraText = ", please try logging in again.";
 			case "RPCError":
-			
-				
 				var targetDiv = OpenPanel.GUIBuilder.createPopUp();
 				this.error = new Array();
 				for(var errorKey in e){
@@ -232,10 +222,6 @@ OpenPanel.Controller = {
 				}
 				this.displayError(targetDiv, extraText);
 			break;
-		}
-		
-		for(var key in e){
-			console.log(key +  ": " + e[key]);
 		}
 	},
 	
@@ -248,7 +234,7 @@ OpenPanel.Controller = {
 		targetDiv.appendChild(bElement);
 		
 		var tableElement = document.createElement("table");
-		// tableElement.setAttribute("border", 1);
+		tableElement.setAttribute("width", "410");
 		targetDiv.appendChild(tableElement);
 		var tbodyElement = document.createElement("tbody");
 		tableElement.appendChild(tbodyElement);

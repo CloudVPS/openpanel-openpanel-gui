@@ -101,7 +101,6 @@ OpenCore.DataManager = {
 	
 	checkQuotum : function(className){
 		var quotum = this.quotaByClassName[className];
-		console.log(quotum);
 		if(quotum==undefined){
 			return true;
 		} else {
@@ -206,7 +205,6 @@ OpenCore.DataManager = {
 	},
 	
 	updateInstanceAsyncDone : function(callBackWrapper){
-		console.log("callBackWrapper", callBackWrapper);
 		var callBackObject;
 		var callBackFunction;
 		var callBackArguments;
@@ -520,7 +518,6 @@ OpenCore.DataManager = {
 		var callBackFunction;
 		var callBackArguments;
 		var data;
-		console.log(callBackWrapper);
 		
 		if(callBackWrapper.callBackObject != undefined){
 			callBackObject = callBackWrapper.callBackObject;

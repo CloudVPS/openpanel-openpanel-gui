@@ -27,7 +27,6 @@ OpenCore.RPC.RequestHandler = {
 		var responseText = response.responseText;
 		if(response.status != 200){
 			throw RPCError(HTTPStatus.getStatus(response.status), response.status);
-			
 		}
 		return responseText;
 	},
@@ -76,7 +75,6 @@ OpenCore.RPC.RequestHandler = {
 				var callBackObject = requestResult.argument.callBackObject;
 				var callBackFunction = requestResult.argument.callBackFunction;
 				var callBackArguments = requestResult.argument.callBackArguments;
-				console.log("requestResult.responseText", requestResult.responseText);
 				callBackArguments.data = Ext.util.JSON.decode(requestResult.responseText);
 				
 				if (callBackFunction == undefined) {

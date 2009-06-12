@@ -9,6 +9,7 @@ OpenPanel.Command.Welcome = {
 		mainAreaDiv.innerHTML = "";
 		var welcomeDivHolder = document.createElement("div");
 		welcomeDivHolder.setAttribute("id", "welcomeDivHolder");
+		
 		mainAreaDiv.appendChild(welcomeDivHolder);
 		this.controller.guiBuilder.loadTemplate("dynamic/", "welcomeDivHolder");
 		this.controller.guiBuilder.GUIElements.IconBar.highliteItem("Welcome");

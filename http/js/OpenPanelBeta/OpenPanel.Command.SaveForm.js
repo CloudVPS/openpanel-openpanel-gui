@@ -10,10 +10,6 @@ OpenPanel.Command.SaveForm  = {
 		newActionObject.failed = false;
 		
 		newActionObject.command = "SaveFormDone";
-		console.log(transport);
-		for (var key in transport) {
-			console.log(key, transport[key].instance);
-		}
 		
 		for(var i = 0;i<transport.length;i++) {
 			var openCoreObject = transport[i].openCoreObject;

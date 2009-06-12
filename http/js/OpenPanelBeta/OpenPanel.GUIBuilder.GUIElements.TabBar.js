@@ -36,13 +36,11 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 			
 			this.openCoreObjects = [];
 			
-			
 			if (this.openCoreObject.classInfo["class"].metabase == "") {
 				if(this.openCoreObject.canUpdate == true || (this.openCoreObject.canUpdate == false && this.openCoreObject.getParameterCount() > 1)){
 					this.openCoreObjects.push(this.openCoreObject);
 				} 
 			}
-			
 			
 			var sortIndexes = {};
 			var sortIndexesToSort = [];
@@ -147,8 +145,8 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 			
 			tabDivElement.setWidth(this.tabWidth);
 			tabDivElement.setStyle("marginLeft", Math.round(this.tabWidth / -2) + "px");
-			tabDivElement.setStyle("left", "50%");
-
+			tabDivElement.setStyle("left", "53%");
+			
 
 		}
 	},
@@ -291,8 +289,8 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 	
 	setTab: function(obj) {
 		obj.style.backgroundImage = "url(/images/gui/tab_fill.gif)";
-		obj.style.paddingLeft = "5px";
-		obj.style.paddingRight = "5px";
+		obj.style.paddingLeft = "8px";
+		obj.style.paddingRight = "8px";
 		obj.style.lineHeight = "21px";
 		obj.style.height = "21px";
 		obj.style.cursor = "default";
@@ -329,8 +327,8 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 	
 	setTabSelected: function(obj) {
 		obj.style.backgroundImage = "url(/images/gui/tab_hlite.gif)";
-		obj.style.paddingLeft = "5px";
-		obj.style.paddingRight = "5px";
+		obj.style.paddingLeft = "8px";
+		obj.style.paddingRight = "8px";
 		obj.style.lineHeight = "21px";
 		obj.style.height = "21px";
 		obj.style.cursor = "default";

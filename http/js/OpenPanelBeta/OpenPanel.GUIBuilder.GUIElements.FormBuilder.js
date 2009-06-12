@@ -13,7 +13,7 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 	isUpdateable : false,
 	lastCreatedFormObject : {},
 	
-	build : function(){
+	build: function() {
 		this.targetDiv.innerHTML = "";
 		this.isUpdateable = false;
 		
@@ -23,14 +23,17 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 		
 		this.setSaveButtonVisibility(false);
 		
-		var saveButtonHolder = document.getElementById("saveButtonHolder");
+		var saveButton = document.getElementById("saveButton");
+		saveButton.innerHTML = "Save";
+		
+		this.controller.guiBuilder.renderButton(saveButton);
 		var hook = this;
-		saveButtonHolder.onclick = function(){
+		saveButton.onclick = function() {
 			var transport = hook.getData();
 			var actionObject = {
-				command : "SaveForm",
+				command: "SaveForm",
 				formBuilder: hook,
-				transport : transport
+				transport: transport
 			};
 			hook.controller.action(actionObject);
 		}
@@ -42,10 +45,9 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 		this.rootFormObject.setController(this.controller);
 		this.rootFormObject.setFormBuilder(this);
 		this.rootFormObject.build();
-},
+	},
 	
 	setSaveButtonVisibility : function(isVisible){
-		console.log("isVisible", isVisible);
 		var saveButtonElement = document.getElementById("saveButton");
 		if (saveButtonElement != undefined) {
 			saveButtonElement.style.visibility = isVisible == true ? "visible" : "hidden";
@@ -58,12 +60,26 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 				this.isUpdateable = true;
 				this.setSaveButtonVisibility(true);
 			}
-			
+			var parameters = this.openCoreObject.getClassInfo().structure.parameters;
+			if(parameters!=undefined){
+				var i = 0;
+				var j = 0;
+				for(var key in parameters){
+					var parameter = parameters[key];
+					if(parameter.readOnly != undefined && parameter.readOnly == true){
+						j++;
+					}
+					i++;
+				}
+			}
+			if(i==j){
+				this.setSaveButtonVisibility(false);	
+			}
 			if(formObject.parentFormObject!=undefined) {
-					this.finishLayout(formObject.parentFormObject);
+				this.finishLayout(formObject.parentFormObject);
 			}
 		}
-
+		
 		// resetting formObjectHolders height for overflow
 		var formObjectHolderElement = document.getElementById('formObjectHolder');
  		if (formObjectHolderElement == undefined) {

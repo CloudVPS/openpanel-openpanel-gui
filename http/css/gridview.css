@@ -1,0 +1,80 @@
+.windowContentArea {
+	background-image: url(/images/gui/mid.png);
+	background-repeat: repeat;
+	border-top-color: rgb(51, 51, 51);
+	border-top-style: solid;
+	border-top-width: 1px;
+	top: 96px;
+	bottom: 24px;
+	display: block;
+	font: 12px Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
+	left: 50%;
+	margin-bottom: 0px;
+	margin-left: -408px;
+	margin-right: 0px;
+	margin-top: 0px;
+	overflow: auto;
+	padding-bottom: 0px;
+	padding-left: 4px;
+	padding-right: 4px;
+	padding-top: 4px;
+	position: fixed;
+	width: 816px;
+}
+
+.gridView {
+	overflow: hidden;
+	border-width: 1px;
+	border-top: 1px solid #444444;
+	border-left: 1px solid #aaaaaa;
+	border-right: 1px solid #aaaaaa;
+	border-bottom: 1px solid #aaaaaa;
+	background-color: #f8f8f8;
+}
+
+.gridViewTitle {
+	height: 15px;
+	padding: 0px;
+	overflow: hidden;
+	background-image: url(/images/gui/gridview_title_bg.png);
+	border-bottom: 1px solid #aaaaaa;
+}
+
+.gridViewTitleItem {
+	float: left;
+	height: 15px;
+	padding-left: 2px;
+	padding-right: 2px;
+	border-right: 1px solid #aaaaaa;
+	margin: 0px;
+	font: 12px Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
+	font-weight: bold;
+}
+
+.gridViewContents {
+	top: 15px;
+	bottom: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	overflow: auto;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.gridViewRow {
+	width: 284px;
+	height: 17px;
+	padding: 0px;
+	overflow: hidden;
+	cursor: default;
+}
+
+.gridViewColumn {
+	float: left;
+	height: 17px;
+	padding-left: 4px;
+	padding-right: 1px;
+	font: 12px Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
+	overflow: hidden;
+	cursor: default;
+}

@@ -15,7 +15,6 @@ OpenPanel.Command.CreateInstanceFromFormObject  = {
 			} else {
 				throw new Error(this.controller.dataManager.errorMessage);
 			}
-		
 		}
 	}
 }

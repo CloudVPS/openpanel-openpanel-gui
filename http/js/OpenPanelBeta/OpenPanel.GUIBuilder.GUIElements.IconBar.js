@@ -10,25 +10,18 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 	iconBarTitleElement : {},
 	
 	build : function(){
-		//this.targetDiv.innerHTML = '<div id="iconBarDiv"><ul class="iconHolder"><li>asd</li><li>asd</li><li>asd</li><li>asd</li><li>asd</li></ul></div>';
+		
 		this.targetDiv.innerHTML = "";
-	
-	
 	
 		this.itemElements = {};
 		if(this.openCoreObject != undefined){
 			var iconBarDiv = document.createElement("div");
 			iconBarDiv.setAttribute("class", "iconBarDiv");
 			
-			this.iconBarTitleElement = document.createElement("div");
-			this.iconBarTitleElement.setAttribute("class", "iconBarTitle");
-			this.iconBarTitleElement.appendChild(document.createTextNode(""));
-			iconBarDiv.appendChild(this.iconBarTitleElement);
-			
 			var iconHolderTable = document.createElement("table");
 			iconHolderTable.setAttribute("cellpadding", "0");
 			iconHolderTable.setAttribute("cellspacing", "0");
-			iconHolderTable.setAttribute("class", "iconHolder");
+			iconHolderTable.style.cssText="margin-left: 3px;";
 			
 			iconBarDiv.appendChild(iconHolderTable);
 			var iconHolderTBody = document.createElement("tbody");
@@ -82,7 +75,7 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 			
 			// add exit button
 			var hook = this;
-			
+			/*
 			sortedChildren["spacer"] = { };
 			
 			sortedChildren["exit"] = {
@@ -99,13 +92,12 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 						hook.controller.action({command: "Logout"});
 					}
 			};
-			
+			*/
 			
 			for(var key in sortedChildren){
 				var childObject = sortedChildren[key];
 				if (typeof(childObject) == "object") {
 					if (key != "spacer") {
-					
 						var iconLi = document.createElement("td");
 						iconHolder.appendChild(iconLi);
 						iconLi.setAttribute("id", childObject.description);
@@ -135,14 +127,12 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 						tdMain.setAttribute("valign", "top");
 						trElement.appendChild(tdMain);
 						
-
 						var cl = document.createElement("DIV");
 						cl.id = 'iconbarIcon';
 						cl.setAttribute("class", "classIcon");
 						cl.innerHTML = "<img src=\"/images/icons/" + childObject.classInfo["class"].uuid + ".png\"/><br\>";
 						tdMain.appendChild(cl);
 						
-
 						var cD = document.createElement("DIV");
 						cD.id = 'iconbarText';
 						cD.setAttribute("class", "classDescription");
@@ -193,8 +183,6 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 						iconTdRight.innerHTML = "&nbsp;";
 						trElement.appendChild(iconTdRight);
 						
-						
-						
 						if (childObject.onclick == undefined) {
 							iconLi.childObject = childObject;
 							iconLi.onclick = function(){
@@ -219,8 +207,7 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 	},
 	
 	setTitle : function(title){
-		this.iconBarTitleElement.innerHTML = '';//title;
-		this.iconBarTitleElement.style.display="none";
+		document.getElementById("iconBarTitle").innerHTML = title;
 	},
 	
 	click: function(childObject){

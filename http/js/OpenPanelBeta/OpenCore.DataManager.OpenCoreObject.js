@@ -3,7 +3,7 @@ OpenCore.DataManager.OpenCoreObject = function(parent, name){
 	this.parent;
 	this.name = "";
 	this.children = [];
-	this.classInfo = undefined;
+	this.classInfo;
 	this.instances = {};
 	this.fetchedInstances = false;
 	
@@ -91,6 +91,13 @@ OpenCore.DataManager.OpenCoreObject.prototype = {
 		return this.classInfo;
 	},
 	
+	getEnums : function(){
+		if(this.classInfo.enums!=undefined && this.classInfo.enums!=""){
+			return this.classInfo.enums;
+		} else {
+			return {}
+		}
+	},
 	getChildren: function(){
 		this.getClassInfo();
 		this.children = [];
@@ -151,9 +158,6 @@ OpenCore.DataManager.OpenCoreObject.prototype = {
 	},
 	
 	getInstancesAsyncDone : function(callBackWrapper){
-		console.log("getInstancesAsyncDone");
-		console.log(callBackWrapper);
-		console.log(this.name);
 		if(callBackWrapper != undefined && callBackWrapper.data != undefined){
 			this.fetchedInstances = true;
 			this.instances = callBackWrapper.data[this.name];
@@ -196,7 +200,6 @@ OpenCore.DataManager.OpenCoreObject.prototype = {
 			var r = OpenCore.DataManager.getInstancesByParentUUID(this.name, uuid);
 			if(r!=undefined){
 				this.instances = r[this.name];
-				console.log(this.instances);
 			}
 		}
 		return this.instances;
@@ -207,7 +210,6 @@ OpenCore.DataManager.OpenCoreObject.prototype = {
 			this.getInstances();
 			for(var metaId in this.instances){
 				var instance = this.instances[metaId];
-				console.log("instance", instance);
 				if(instance.uuid == uuid){
 					return instance;
 				}
@@ -231,7 +233,6 @@ OpenCore.DataManager.OpenCoreObject.prototype = {
 	
 	getInstancesByParentUUIDAsyncDone : function getInstancesByParentUUIDAsyncDone(resultObject, callBackWrapper){
 		if(resultObject != undefined){
-			console.log(resultObject);
 			this.instances = resultObject[this.name];
 		}
 		

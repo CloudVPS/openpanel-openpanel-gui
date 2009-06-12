@@ -32,9 +32,10 @@ OpenPanel.GUIBuilder = {
 		var o = TrimPath.parseTemplate(f);
 		
 		this.targetDiv = targetDiv;
-		this.targetDiv.innerHTML = o.process({ 
+		this.targetDiv.innerHTML = f;
+		/*o.process({ 
 			controller: this.controller 
-		});
+		});*/
 	},
 	
 	createPopUp : function(){
@@ -54,7 +55,6 @@ OpenPanel.GUIBuilder = {
 	
 	
 	deletePopUp : function(){
-		
 		this.exitModalMode();
 		this.hideModalMessageDiv();
 		var modalMessageDiv = document.getElementById("modalMessageContent");
@@ -65,71 +65,84 @@ OpenPanel.GUIBuilder = {
 	},
 	
 	renderLogin : function(el, params){
-		var hook = this;
-		
-		if(params!=undefined && params.msg != undefined){
-			// show error message
-		}
-		
-		var simple = new Ext.FormPanel({
-	        labelWidth: 75, // label settings here cascade unless overridden
-	        submit: function() {
-	           
-				var obj = {};
-				for(var key in this.items.items){
-					var item = this.items.items[key];
-					if(typeof(item) == "object"){
-						var name = item.getName();
-						var value = item.getValue();
-						var initValue = item.initValue();
-						obj[name] = value;
+		var data = {
+			structure : {
+				parameters : {
+					userName : {	
+						type : "String",
+						description : "Username",
+						textwidth: 20,
+						example : "enter your username",
+						required : true
+					},
+					password : {	
+						type : "Password",
+						description : "Password",
+						textwidth: 20,
+						example : "enter enter",
+						required : true
 					}
 				}
-				obj.command = "Login";
-				hook.controller.action(obj);
-	        },
+			},
+			isCreate : true
+		}
+		
+		var values = {};
+		if(params.userName!=undefined){
+			values.userName = params.userName;
+		}
+		if(params.password!=undefined){
+			values.password = params.password;
+		}
+		
+		var formPanel = new OpenPanel.GUIBuilder.Form("firstForm", data);
+		
+		formPanel.setHideAsterisks(true);
+		formPanel.addRenderer(
+			new OpenPanel.GUIBuilder.SingleColumnFormRenderer({
+				name: "SingleColumnFormRenderer"
+			})
+		);
+		
+		el.appendChild(formPanel.render("SingleColumnFormRenderer"));
+		formPanel.setValues(values);
+		
+		var form = document.getElementById("loginForm");
+		
 	
-			
-	        frame:true,
-	        title: 'Log in',
-	        bodyStyle:'padding:5px 5px 0',
-	        width: 290,
-	        defaults: {width: 170},
-	        defaultType: 'textfield',
-			buttonAlign: "right",
-			shadow: "frame",
-			shadowOffset: 3,
-			formId: "loginForm",
-			monitorValid: true,
-	
-	        items: [{
-	                fieldLabel: 'User name',
-	                name: 'userName',
-					allowBlank:false,
-					value: params.userName!=undefined?params.userName:""
-	            },{
-	                fieldLabel: 'Password',
-	                name: 'password',
-					inputType: 'password',
-					allowBlank:false,
-					value: params.password!=undefined?params.password:""
-	            }
-	        ],
-	        buttons: [{
-	            text: 'Ok',
-				handler: function(){
-	               simple.submit();
-				},
-				formBind:true
-	        }]
-    	});
-
-    	simple.render(el);
-		// var windowSize = OpenPanel.GUIBuilder.getWindowSize();
-		// why does this not work?
-    	simple.setPosition(100, 10);
+		formPanel.getElement("userName").focus();
+		//document.getElementById("userName").focus();
+		
+		var hook = this;
+		var onsubmit = function(){
+			var obj = { command : "Login"};
+			var values = formPanel.getValues();
+			for(var key in values){
+				obj[key] = values[key];
+			}
+			hook.controller.action(obj);
+			return false;
+		}
+		try {
+			form.attachEvent("onsubmit", function() {
+				onsubmit();
+				return false;
+			}, false);
+		} catch (IEBlowsGoats){
+			form.onsubmit = onsubmit; 
+			return false;
+		}
+		
+		//var buttonOk = document.getElementById("buttonOk");
+		//this.renderButton(buttonOk);
+		
+		/*form.onsubmit = function(){
+			alert('hi!!');
+			return false;
+		}*/
 		
 	},
+	
 	
 	enterModalMode : function(){
 		var modalDiv = document.getElementById("modal");
@@ -153,7 +166,6 @@ OpenPanel.GUIBuilder = {
 	},
 	
 	hideModalMessageDiv : function(){
-		console.log("hideModalMessageDiv");
 		var modalMessageDiv = document.getElementById("modalMessageDiv");
 		modalMessageDiv.style.visibility = "hidden";
 		
@@ -177,7 +189,6 @@ OpenPanel.GUIBuilder = {
 	onresize : function(){ 
 		var modalDiv = document.getElementById("modal");
 		var windowSizes = OpenPanel.GUIBuilder.getWindowSize();
-		console.log("windowSizes", windowSizes);
 		modalDiv.style.width = windowSizes.width + "px";
 		modalDiv.style.height = windowSizes.height + "px";
 	},
@@ -257,7 +268,6 @@ OpenPanel.GUIBuilder = {
 	goToAnchor : function (anchor) {
 		// let's not do this yet
 		this.lastAnchor = anchor;
-		console.log("anchor", anchor);
 		if(anchor != undefined && anchor!=""){
 			window.location.hash = anchor;
 		}
@@ -268,5 +278,49 @@ OpenPanel.GUIBuilder = {
 	},
 	goToLastAnchor : function(){
 		this.goToAnchor(this.lastAnchor);
+	},
+	
+	renderButton : function(el){
+		var buttonText = el.innerHTML;
+		el.innerHTML = "";
+		var button = document.createElement("div");
+		button.setAttribute("type", "submit");
+		button.className = "generatedButton";
+		el.appendChild(button);
+		
+		var t = document.createElement("table");
+		t.setAttribute("border", "0");
+		t.setAttribute("cellpadding", "0");
+		t.setAttribute("cellspacing", "0");
+		// IE7 is a fucking idiot
+		t.style.cssText="border-collapse: collapse";
+		var tb = document.createElement("tbody");
+		tb.style.cssText = "border: 0px;";
+		var tr = document.createElement("tr");
+		tr.style.cssText = "border: 0px;";
+		var left = document.createElement("td");
+		var center = document.createElement("td");
+		var right = document.createElement("td");
+		var txt = document.createTextNode(buttonText);
+		t.appendChild(tb);
+		tb.appendChild(tr);
+		tr.appendChild(left);
+		tr.appendChild(center);
+		tr.appendChild(right);
+		center.appendChild(txt);
+		button.appendChild(t);
+		
+		button.onmouseover = button.onfocus = function(){
+			left.className = "buttonLeftOver";
+			right.className = "buttonRightOver";
+			center.className = "buttonCenterOver";
+		}
+	
+		button.onmouseout = button.onblur = function(){
+			left.className = "buttonLeft";
+			right.className = "buttonRight";
+			center.className = "buttonCenter";
+		}
+		button.onmouseout();
 	}
 }

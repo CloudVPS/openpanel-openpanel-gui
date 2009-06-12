@@ -29,9 +29,8 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 		if(this.openCoreObject != undefined){
 			if (this.openCoreObject.singleton == false) {
 				this.instances = this.openCoreObject.getInstances();
-				var items = [];
+				var items = {};
 				for (var metaid in this.instances) {
-					
 					var instance = this.instances[metaid];
 					if(this.currentInstance == undefined){
 						this.currentInstance = instance;
@@ -39,9 +38,16 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 					if (typeof(instance) == "object") {
 						var userInstance = this.userObject.getInstanceByUUID(instance.ownerid);
 						var ownerName = userInstance!=undefined?userInstance.name_customer:"";
-						var item = [instance.uuid, this.openCoreObject.name, metaid, ownerName];
+						//var item = [instance.uuid, this.openCoreObject.name, metaid, ownerName];
+						var item = {
+							id: metaid,
+							name: this.openCoreObject.name,
+							metaid: metaid,
+							owner: ownerName,
+							uuid: instance.uuid
+						};
 					}
-					items.push(item);
+					items[metaid] = item;
 				}
 				
 				this.gridDiv = document.createElement("div");
@@ -53,9 +59,11 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 				this.buttonsDiv.setAttribute("id", "itemListButtons");
 				this.targetDiv.appendChild(this.buttonsDiv);
 				
-				this.renderGrid(this.gridDiv, items);
+				this.renderG(this.gridDiv, items);
 				this.renderButtons(this.buttonsDiv);
-				
+				if(this.currentInstance != undefined){
+					this.highliteItem(this.currentInstance.uuid);
+				}
 				
 			} else {
 				this.targetDiv.innerHTML = "<center><img src=\"/images/emblems/"+this.openCoreObject.uuid+".png\"/></center>";
@@ -87,7 +95,6 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 					createButton.onclick = function(){
 						hook.createInstance();
 					}
-					
 				} else {
 					createButton.setAttribute("class", "addButtonDisabled");
 				}
@@ -95,20 +102,18 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 				var deleteButton = document.createElement("div");
 				addDeleteButtonHolder.appendChild(deleteButton);
 				var l = 0;
-					for (var key in this.instances) {
-						l = 1;
-						break;
-					}
+				for (var key in this.instances) {
+					l = 1;
+					break;
+				}
 				if (this.controller.dataManager.checkQuotum(this.openCoreObject.name) == true && this.openCoreObject.canDelete == true && l==1) {
 					
 					// create delete button
-					
-					
-						deleteButton.setAttribute("class", "deleteButton");
-						var hook = this;
-						deleteButton.onclick = function(){
-							hook.deleteInstance();
-						}
+					deleteButton.setAttribute("class", "deleteButton");
+					var hook = this;
+					deleteButton.onclick = function(){
+						hook.deleteInstance();
+					}
 				} else {
 					deleteButton.setAttribute("class", "deleteButtonDisabled");
 				}
@@ -145,9 +150,9 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 	},
 	
 	
-	click: function(uuid){
-		
-		if (uuid != undefined) {
+	click: function(metaid, instance){
+		if (metaid!=undefined && instance != undefined) {
+			var uuid = instance.uuid;
 			var instance = this.openCoreObject.getInstanceByUUID(uuid);
 			
 			this.currentInstance = instance;
@@ -167,6 +172,9 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 	
 	highliteItem: function(uuid){
 		this.renderButtons(this.buttonsDiv);
+		if(this.currentInstance != undefined){
+			this.grid.setSelection(this.currentInstance.id);
+		}
 	},
 	
 	setOpenCoreObject : function(openCoreObject){
@@ -182,48 +190,31 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 		}
 	},
 	
-	renderGrid: function(targetDiv, data){
-		// create the data store
-	    var store = new Ext.data.SimpleStore({
-	        fields: [
-	           {name: 'uuid'},
-	           {name: 'className'},
-			   {name: 'id'},
-			   {name: 'ownerid'}
-	          
-	        ]
-	    });
-    	store.loadData(data);
-		
-		// create the Grid
-	    this.grid = new Ext.grid.GridPanel({
-	        store: store,
-	        columns: [
-	            {id:'uuid',header: "Uuid", width: 0, sortable: true, dataIndex: 'uuid', hidden: true, hideable:false, fixed: true},
-	            {header: "id", width: 190, sortable: true, dataIndex: 'id', hideable:false},
-	            {header: "className", width: 0, sortable: true, dataIndex: 'className', hidden: true, hideable:false},
-				{header: "ownerid", width: 0, sortable: true, dataIndex: 'ownerid', hidden: true, hideable:true}
-			],
-	        stripeRows: false,
-	        autoExpandColumn: 'uuid',
-	        height:372,
-	        width:200,
-	        title:this.openCoreObject.description,
-			header: false,
-			forceFit: true
-			
-	    });
-		
-   	 	this.grid.render(targetDiv);
-
-    	this.grid.getSelectionModel().selectFirstRow();
+	renderG : function(targetDiv, instances){
+		this.grid = new OpenPanel.GUIBuilder.GUIElements.Grid();
+		var parameters = this.openCoreObject.getClassInfo().structure.parameters;
+		var createObject = {};
+		for(var key in parameters){
+			var parameter = parameters[key];
+			if (key == "id") {
+				createObject[key] = new Array(key, parameter.gridwidth != undefined ? parameter.gridwidth : 10);
+			}
+		}
+		var data = {};
+		for(var key in instances){
+			var instance = instances[key];
+			if(key =="id"){
+				data[key] = {id: instance.id};
+			}
+		}
+      	
+		this.grid.create (this.gridDiv,createObject, 180, 0, 140, 127, -420);
+      	this.grid.setGrid (instances);
 		var hook = this;
-		this.grid.on("cellclick", function(grid, rowIndex, columnIndex, e) {
-	        hook.cellClick(this.grid, rowIndex, columnIndex, e);
-		
-	    }); 
+		this.grid.onclick = function(metaid, fields){
+			hook.click(metaid, fields);
+		}
 	},
-	
 	
 	cellClick : function(grid, rowIndex, columnIndex, e) {
         var record = this.grid.getStore().getAt(rowIndex);  // Get the Record

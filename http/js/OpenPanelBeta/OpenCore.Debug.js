@@ -86,7 +86,7 @@ OpenCore.Debug = {
 				pElement.key = key;
 				pElement.controller = controller;
 				pElement.onclick = function(){
-					console.log(this.controller[this.key]);
+					//console.log(this.controller[this.key]);
 				}
 				elm.appendChild(pElement);
 			}

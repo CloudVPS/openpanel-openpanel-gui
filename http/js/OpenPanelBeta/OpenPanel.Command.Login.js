@@ -6,10 +6,9 @@ OpenPanel.Command.Login  = {
 			/*if(this.controller.dataManager.login(actionObject.userName, actionObject.password)){
 				// get user info
 			} else {
-				
 				//this.controller.action({ command : "Init", msg: "login failed"})
 			}*/
-		}
+		} 
 	},
 	
 	loginDone : function(data, callBackArguments){
@@ -23,13 +22,15 @@ OpenPanel.Command.Login  = {
 			this.controller.action({command: "Welcome"});
 			
 		} else {
-			throw new OpenCoreError(callBackArguments.header.error, callBackArguments.header.errorid);
 			
+			//throw new OpenCoreError(callBackArguments.header.error, callBackArguments.header.errorid);
+			this.controller.action({ command : "Init", msg: "login failed"})
 		}
 	},
 	
 	buildMainArea : function(){
 		this.controller.guiBuilder.loadTemplate("templates/main.html", "app");
+			document.getElementById("modalLoadingDiv").className = "modalLoadingDiv";
 			this.controller.guiBuilder.GUIElements.FormBuilder.setSaveButtonVisibility(false);
 			OpenPanel.GUIBuilder.GUIElements.IconBar.setTargetDivName("iconBar");
 			OpenPanel.GUIBuilder.GUIElements.ItemList.setTargetDivName("mainAreaLeft");

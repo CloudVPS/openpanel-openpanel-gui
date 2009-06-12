@@ -2,9 +2,15 @@ OpenPanel.Command.Init  = {
 	controller : {},
 	execute : function(actionObject){
 		if (Ext.isGecko || Ext.isSafari || 1) {
+			document.getElementById("modalLoadingDiv").className = "modalLoadingDivLogin";
 			this.controller.guiBuilder.hideModalMessageDiv();
 			this.controller.guiBuilder.loadTemplate("templates/login.html", "app");
 			this.controller.guiBuilder.renderLogin(document.getElementById("loginDiv"), actionObject);
+			if(actionObject.msg != undefined){
+				document.getElementById("loginMessageDiv").innerHTML = actionObject.msg;
+			} else {
+				document.getElementById("loginMessageDiv").innerHTML = "";
+			}
 		} else {
 			var e = new Error();
 			e.message = "Unsupported browser.";
