@@ -316,7 +316,7 @@ html > body #saveButtonHolder {
 	width: 630px;
 	margin-left: 50%;
 	left: -205px;
-	overflow-y: auto;
+	overflow: hidden;
 	position: fixed;
 }
 
