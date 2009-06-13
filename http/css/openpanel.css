@@ -821,7 +821,7 @@ li.tabDisabled {
 }
 
 #saveButton .buttonCenterOver {
-	padding-top: 2px;
+	margin-top: 2px;
 	background: url(/images/gui/savebutton.png) no-repeat 0 0;
 	height: 20px;
 	width: 69px;
