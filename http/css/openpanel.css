@@ -311,11 +311,11 @@ html > body #saveButtonHolder {
 }
 
 #itemListArea {
-	top: 140px;
-	bottom: 105px;
-	width: 630px;
-	margin-left: 50%;
-	left: -205px;
+	top: 138px;
+	bottom: 95px;
+	width: 181px;
+	margin-left: -432px;
+	left: 50%;
 	overflow: hidden;
 	position: fixed;
 }
