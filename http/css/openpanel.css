@@ -71,6 +71,7 @@ html > body #saveButtonHolder {
 }
 
 #saveButton {
+	padding-top: 5px;
 	padding-right: 20px;
 	width: 70px;
 }
