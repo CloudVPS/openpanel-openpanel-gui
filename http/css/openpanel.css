@@ -778,7 +778,8 @@ li.tabDisabled {
 }
 
 #saveButton .buttonCenter {
-	background: url(/images/gui/savebutton.png);
+	padding-top: 2px;
+	background: url(/images/gui/savebutton.png) no-repeat 0 0;
 	height: 20px;
 	width: 69px;
 	font-size: 1px;
@@ -820,7 +821,8 @@ li.tabDisabled {
 }
 
 #saveButton .buttonCenterOver {
-	background: url(/images/gui/savebutton.png);
+	padding-top: 2px;
+	background: url(/images/gui/savebutton.png) no-repeat 0 0;
 	height: 20px;
 	width: 69px;
 	font-size: 1px;
