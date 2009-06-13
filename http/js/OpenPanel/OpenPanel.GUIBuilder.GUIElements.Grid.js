@@ -28,6 +28,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			this.titleImage = "url(/images/gui/gridview_title_bg.png)";
 			this.titleBorderBottom = "#888888";
 			this.contentPadding = "0px";
+			this.selectedShadow = "";
 			
 			var tabWidthWeight = 0;
 			var count = 0;
@@ -74,6 +75,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 					this.titleImage = "url(/images/gui/gridview_title_bg2.png)";
 					this.titleBorderBottom = "#444444";
 					this.contentPadding = "1px";
+					this.selectedShadow = "rgb(0,0,0) 0px 1px 1px";
 				}
 			}
 			
@@ -151,10 +153,12 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 					self.selectedObject.style.background = "";
 					self.selectedObject.style.color = "#000000";
 					self.selectedObject.style.fontWeight = "normal";
+					self.selectedObject.style.textShadow = "";
 				}
 				this.style.background = self.selectedImage;
 				this.style.color = self.selectedColor;
 				this.style.fontWeight = self.selectedWeight;
+				this.style.textShadow = self.selectedShadow;
 				self.haveActiveSelection = true;
 				self.handleClick(this, id, values);
 			}
