@@ -76,7 +76,7 @@ OpenPanel.GUIBuilder.SingleColumnFormRenderer.prototype = {
 			} else {
 				var container = document.createElement("div");
 				container.className = "elementContainer";
-				label.style.cssText = "padding-left: 4px; float: left;";
+				label.style.cssText = "padding-left: 4px; float: left; text-align: right;";
 				if (formElement.labelwidth != 0)
 				{
 					label.style.width = "" + formElement.labelwidth + "px";
