@@ -204,7 +204,7 @@ html > body #saveButtonHolder {
 	margin-bottom:-20px;
 }
 .addDeleteButtonHolder {
-	padding-top: 5px;
+	padding-top: 3px;
 }
 
 .addButton, .addButtonDisabled {
@@ -825,6 +825,7 @@ li.tabDisabled {
 	position: fixed;
 	left: 50%;
 	margin-left: -450px;
+	padding-top: 0px;
 	padding-left: 6px;
 	bottom: 41px;
 	height: 27px;
