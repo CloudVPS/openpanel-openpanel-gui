@@ -312,7 +312,7 @@ html > body #saveButtonHolder {
 
 #itemListArea {
 	top: 138px;
-	bottom: 95px;
+	bottom: 80px;
 	width: 181px;
 	margin-left: -432px;
 	left: 50%;
@@ -823,7 +823,7 @@ li.tabDisabled {
 	position: fixed;
 	left: 50%;
 	margin-left: -420px;
-	bottom: 102px;
+	bottom: 64px;
 }
 
 .createMultiple {
