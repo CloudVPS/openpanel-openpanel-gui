@@ -824,8 +824,13 @@ li.tabDisabled {
 #itemListButtons{
 	position: fixed;
 	left: 50%;
-	margin-left: -442px;
-	bottom: 43px;
+	margin-left: -450px;
+	padding-left: 8px;
+	bottom: 41px;
+	height: 29px;
+	width: 198px;
+	border-right: 1px solid #aaaaaa;
+	border-left: 1px solid #aaaaaa;
 }
 
 .createMultiple {
