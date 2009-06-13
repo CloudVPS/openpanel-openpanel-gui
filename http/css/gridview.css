@@ -47,7 +47,8 @@
 	padding-right: 2px;
 	border-right: 1px solid #aaaaaa;
 	margin: 0px;
-	font: 12px Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
+	font-size: 12px;
+	font-family: Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
 	font-weight: bold;
 }
 
@@ -74,7 +75,8 @@
 	height: 17px;
 	padding-left: 4px;
 	padding-right: 1px;
-	font: 12px Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
+	font-size: 12px;
+	font-family: Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
 	overflow: hidden;
 	cursor: default;
 }
