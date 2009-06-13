@@ -50,7 +50,7 @@ OpenPanel.GUIBuilder.SingleColumnFormRenderer.prototype = {
 				var row = document.createElement("tr");
 				if (formElement.paddingtop != 0)
 				{
-					row.cssText = "padding-top: " + formElement.paddingtop + "px;";
+					row.style.marginTop = "" + formElement.paddingtop + "px;";
 				}
 				var labelTD = document.createElement("td");
 				labelTD.className = "labelTd";
