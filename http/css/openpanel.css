@@ -308,7 +308,6 @@ html > body #saveButtonHolder {
 	left: -420px;
 	overflow-y: visible;
 	position: fixed;
-	z-index: -15;
 }
 
 #itemListArea {
