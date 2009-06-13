@@ -296,19 +296,19 @@ html > body #saveButtonHolder {
 	background-image: url(/images/gui/groupFrameMiddle.png);
 	overflow-y: hidden;
 	position: fixed;
-	z-index: 10;
+	z-index: -10;
 }
 
 #mainAreaLeft {
 	margin-right: 0px;
-	top: 122px;
+	top: 145px;
 	bottom: 42px;
 	width: 220px;
 	margin-left: 50%;
 	left: -420px;
 	overflow-y: visible;
 	position: fixed;
-	z-index: -10;
+	z-index: 10;
 }
 
 #mainAreaRight {
