@@ -17,7 +17,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 	///            positioning, provide the top pixel offset here.
 	/// @param bottom The bottom pixel offset for p
   	OpenPanel.GUIBuilder.GUIElements.Grid.prototype = {
-		create: function(parentidorobj, def, width, height, top, bottom, marginleft) {
+		create: function(parentidorobj, def, width, height, top, bottom, marginleft,color) {
 			this.sizes = new Array();
 			this.headers = new Array();
 			this.keys = new Array();
@@ -52,6 +52,11 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			this.totalWidth = width;
 			var i = 0;
 			
+			if (typeof(color) == 'undefined')
+			{
+				color = "#f8f8f8";
+			}
+			
 			for (var ki in def) {
 				this.headers[i] = def[ki][0];
 				this.sizes[i] = parseInt(def[ki][1] * tabWidthWeight);
@@ -61,6 +66,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			
 			var gridViewNode = document.createElement("div");
 			gridViewNode.className = "gridView";
+			gridViewNode.style.backgroundColor = color;
 			gridViewNode.style.width = "" + this.totalWidth + "px";
 			if (height) {
 				gridViewNode.style.height = "" + height + "px";
