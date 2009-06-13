@@ -208,7 +208,7 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 			}
 		}
       	
-		this.grid.create (this.gridDiv,createObject, 180, 0, 140, 127, -420);
+		this.grid.create (this.gridDiv,createObject, 180, 0, 122, 95, -432);
       	this.grid.setGrid (instances);
 		var hook = this;
 		this.grid.onclick = function(metaid, fields){
