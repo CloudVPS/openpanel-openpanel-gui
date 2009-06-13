@@ -48,6 +48,10 @@ OpenPanel.GUIBuilder.SingleColumnFormRenderer.prototype = {
 			
 			if (formElement.sameline != true) {
 				var row = document.createElement("tr");
+				if (formElement.paddingtop != 0)
+				{
+					row.cssText = "padding-top: " + formElement.paddingtop + "px;";
+				}
 				var labelTD = document.createElement("td");
 				labelTD.className = "labelTd";
 				labelTD.setAttribute("valign", "top");

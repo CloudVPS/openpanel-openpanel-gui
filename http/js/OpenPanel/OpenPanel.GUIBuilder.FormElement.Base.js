@@ -19,6 +19,7 @@ OpenPanel.GUIBuilder.FormElement.Base = function(name, form, initObject){
 	this.readOnly = initObject.readOnly != undefined? initObject.readOnly:false;
 	this.isCreate = initObject.isCreate != undefined? initObject.isCreate:false;
 	this.sameline = initObject.sameline || false;
+	this.paddingtop = (initObject.paddingtop != undefined)?initObject.paddingtop:0;
 	this.radioElement;
 	this.parentElement;
 	this.DOMElement;
