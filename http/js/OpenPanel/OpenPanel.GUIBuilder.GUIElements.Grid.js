@@ -90,6 +90,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			gridViewNode.className = "gridView";
 			gridViewNode.style.backgroundColor = color;
 			gridViewNode.style.width = "" + this.totalWidth + "px";
+			gridViewNode.style.borderBottomColor = this.titleBorderBottom;
 			if (height) {
 				gridViewNode.style.height = "" + height + "px";
 			} else {
