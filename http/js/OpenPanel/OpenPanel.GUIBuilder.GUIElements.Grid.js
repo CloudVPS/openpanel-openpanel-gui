@@ -140,7 +140,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 					self.selectedObject.style.background = "";
 					self.selectedObject.style.color = "#000000";
 				}
-				this.style.background = selectedImage;
+				this.style.background = self.selectedImage;
 				this.style.color = self.selectedColor;
 				self.haveActiveSelection = true;
 				self.handleClick(this, id, values);
