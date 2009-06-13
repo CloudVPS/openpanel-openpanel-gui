@@ -111,6 +111,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			var gridViewContents = document.createElement("div");
 			gridViewContents.className = "gridViewContents";
 			gridViewContents.style.paddingTop = this.contentPadding;
+			gridViewContents.style.borderTop = this.titleBorderBottom;
 			gridViewContents.style.width = "" + this.totalWidth + "px";
 			if (height) {
 				gridViewContents.style.height = "" + (height - 15) + "px";
