@@ -54,7 +54,11 @@ OpenPanel.GUIBuilder.FormElement.Base.prototype = {
 		} else {
 			this.labelElement = document.createElement("div");
 		}
-		if (this.hidelabel) return this.labelElement;
+		if (this.hidelabel)
+		{
+			this.labelElement.innerHTML = "&nbsp;";
+			return this.labelElement;
+		}
 		this.labelElement.innerHTML = this.description;
 		if(this.form.hideAsterisks == false && this.hideAsterisk == false){
 			if(this.readOnly == false){
