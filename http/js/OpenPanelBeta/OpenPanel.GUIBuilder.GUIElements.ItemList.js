@@ -208,7 +208,7 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 			}
 		}
       	
-		this.grid.create (this.gridDiv,createObject, 198, 0, 98, 68, -450, "#e4e7ed");
+		this.grid.create (this.gridDiv,createObject, 198, 0, 98, 68, -450, "itunes");
       	this.grid.setGrid (instances);
 		var hook = this;
 		this.grid.onclick = function(metaid, fields){

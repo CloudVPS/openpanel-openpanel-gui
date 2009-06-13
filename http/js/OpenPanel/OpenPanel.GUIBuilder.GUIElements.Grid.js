@@ -17,11 +17,13 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 	///            positioning, provide the top pixel offset here.
 	/// @param bottom The bottom pixel offset for p
   	OpenPanel.GUIBuilder.GUIElements.Grid.prototype = {
-		create: function(parentidorobj, def, width, height, top, bottom, marginleft,color) {
+		create: function(parentidorobj, def, width, height, top, bottom, marginleft,liststyle) {
 			this.sizes = new Array();
 			this.headers = new Array();
 			this.keys = new Array();
 			this.rowsByID = new Array();
+			this.selectedImage = "url(/images/gui/selected.png)";
+			this.selectedColor = "#000000";
 			
 			var tabWidthWeight = 0;
 			var count = 0;
@@ -52,9 +54,19 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			this.totalWidth = width;
 			var i = 0;
 			
-			if (typeof(color) == 'undefined')
+			var color;
+			if (typeof(liststyle) == 'undefined')
 			{
 				color = "#f8f8f8";
+			}
+			else
+			{
+				if (liststyle == "itunes")
+				{
+					color = "#d0d7e2";
+					this.selectedImage = "url(/images/gui/selected2.png)";
+					this.selectedColor = "#ffffff";
+				}
 			}
 			
 			for (var ki in def) {
@@ -126,8 +138,10 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			row.onclick = function() {
 				if (self.haveActiveSelection == true) {
 					self.selectedObject.style.background = "";
+					self.selectedObject.style.color = "#000000";
 				}
-				this.style.background = "url(/images/gui/selected.png)";
+				this.style.background = selectedImage;
+				this.style.color = self.selectedColor;
 				self.haveActiveSelection = true;
 				self.handleClick(this, id, values);
 			}
