@@ -28,7 +28,6 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			this.titleImage = "url(/images/gui/gridview_title_bg.png)";
 			this.titleBorderBottom = "#888888";
 			this.contentBorderTop = "";
-			this.contentPadding = "0px";
 			this.selectedShadow = "";
 			
 			var tabWidthWeight = 0;
@@ -75,7 +74,6 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 					this.selectedWeight = "bold";
 					this.titleImage = "url(/images/gui/gridview_title_bg2.png)";
 					this.titleBorderBottom = "#444444";
-					this.contentPadding = "1px";
 					this.selectedShadow = "rgb(0,0,0) 0px 1px 1px";
 					this.contentBorderTop = "1px solid #444444";
 				}
@@ -112,7 +110,6 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			
 			var gridViewContents = document.createElement("div");
 			gridViewContents.className = "gridViewContents";
-			gridViewContents.style.paddingTop = this.contentPadding;
 			gridViewContents.style.borderTop = this.contentBorderTop;
 			gridViewContents.style.width = "" + this.totalWidth + "px";
 			if (height) {
