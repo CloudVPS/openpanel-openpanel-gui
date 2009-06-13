@@ -24,6 +24,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			this.rowsByID = new Array();
 			this.selectedImage = "url(/images/gui/selected.png)";
 			this.selectedColor = "#000000";
+			this.selectedWeight = "normal";
 			
 			var tabWidthWeight = 0;
 			var count = 0;
@@ -66,6 +67,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 					color = "#d0d7e2";
 					this.selectedImage = "url(/images/gui/selected2.png)";
 					this.selectedColor = "#ffffff";
+					this.selectedWeight = "bold";
 				}
 			}
 			
@@ -139,9 +141,11 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 				if (self.haveActiveSelection == true) {
 					self.selectedObject.style.background = "";
 					self.selectedObject.style.color = "#000000";
+					self.selectedObject.style.fontWeight = "normal";
 				}
 				this.style.background = self.selectedImage;
 				this.style.color = self.selectedColor;
+				this.style.fontWeight = self.selectedWeight;
 				self.haveActiveSelection = true;
 				self.handleClick(this, id, values);
 			}
