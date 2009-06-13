@@ -827,7 +827,8 @@ li.tabDisabled {
 	margin-left: -450px;
 	padding-left: 6px;
 	bottom: 41px;
-	height: 29px;
+	height: 27px;
+	background-color: #f2f2f2;
 	width: 192px;
 	border-right: 1px solid #aaaaaa;
 	border-left: 1px solid #aaaaaa;
