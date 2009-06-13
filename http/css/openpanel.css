@@ -255,7 +255,7 @@ html > body #saveButtonHolder {
 	text-align: right;
 	margin-left: 50%;
 	left: -450px;
-	bottom: 74px;
+	bottom: 79px;
 	position: fixed;
 }
 
@@ -323,7 +323,7 @@ html > body #saveButtonHolder {
 
 #mainAreaRight {
 	top: 140px;
-	bottom: 105px;
+	bottom: 94px;
 	width: 630px;
 	margin-left: 50%;
 	left: -209px;
