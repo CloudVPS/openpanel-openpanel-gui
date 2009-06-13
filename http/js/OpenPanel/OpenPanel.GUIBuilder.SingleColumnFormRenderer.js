@@ -54,7 +54,7 @@ OpenPanel.GUIBuilder.SingleColumnFormRenderer.prototype = {
 					var ttd = document.createElement("td");
 					ttd.colSpan = 2;
 					var tdiv = document.createElement("div");
-					tdiv.cssText = "height: " + formElement.paddingtop + "px";
+					tdiv.style.cssText = "height: " + formElement.paddingtop + "px;";
 					ttd.appendChild(tdiv);
 					trow.appendChild(ttd);
 					this.tbodyElement.appendChild(trow);
