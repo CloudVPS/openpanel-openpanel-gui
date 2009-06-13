@@ -275,14 +275,14 @@ html > body #saveButtonHolder {
 }
 
 #mainBottom {
-	height: 12px;
+	height: 21px;
 	width: 900px;
 	background-image: url(/images/gui/groupFrameBottom.png);
 	background-repeat: no-repeat;
 	text-align: right;
 	margin-left: 50%;
 	left: -450px;
-	bottom: 79px;
+	bottom: 70px;
 	position: fixed;
 }
 
