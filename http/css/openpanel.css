@@ -250,7 +250,7 @@ html > body #saveButtonHolder {
 #mainBottom {
 	height: 12px;
 	width: 900px;
-	background-image: url(/images/gui/groupFrameBottom.gif);
+	background-image: url(/images/gui/groupFrameBottom.png);
 	background-repeat: no-repeat;
 	text-align: right;
 	margin-left: 50%;
@@ -293,7 +293,7 @@ html > body #saveButtonHolder {
 	top: 115px;
 	bottom: 50px;
 	width: 900px;
-	background-image: url(/images/gui/groupFrameMiddle.gif);
+	background-image: url(/images/gui/groupFrameMiddle.png);
 	overflow-y: hidden;
 	position: fixed;
 	z-index: -10;
@@ -434,7 +434,7 @@ html > body > #iconbarIcon, #iconbarText{
 	left: -450px;
 	height: 37px;
 	width: 900px;
-	background-image: url(/images/gui/groupFrameTop.gif);
+	background-image: url(/images/gui/groupFrameTop.png);
 	background-repeat: no-repeat;
 	position: fixed;
 }
