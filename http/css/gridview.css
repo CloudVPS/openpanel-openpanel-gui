@@ -53,7 +53,8 @@
 }
 
 .gridViewContents {
-	top: 17px;
+	top: 16px;
+	padding-top: 1px;
 	bottom: 0px;
 	margin-top: 0px;
 	margin-bottom: 0px;

@@ -26,7 +26,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			this.selectedColor = "#000000";
 			this.selectedWeight = "normal";
 			this.titleImage = "url(/images/gui/gridview_title_bg.png)";
-			this.titleBorderBottom = "#aaaaaa";
+			this.titleBorderBottom = "#888888";
 			
 			var tabWidthWeight = 0;
 			var count = 0;
