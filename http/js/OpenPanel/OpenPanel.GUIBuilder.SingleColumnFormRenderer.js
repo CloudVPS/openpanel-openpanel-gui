@@ -53,7 +53,10 @@ OpenPanel.GUIBuilder.SingleColumnFormRenderer.prototype = {
 					var trow = document.createElement("tr");
 					var ttd = document.createElement("td");
 					ttd.colSpan = 2;
-					ttd.innerHTML = "&nbsp;";
+					var tdiv = document.createElement("div");
+					tdiv.style.height = "" + formElement.paddingtop + "px";
+					tdiv.style.width = "8px";
+					ttd.appendChild(tdiv);
 					trow.appendChild(ttd);
 					this.tbodyElement.appendChild(trow);
 				}
