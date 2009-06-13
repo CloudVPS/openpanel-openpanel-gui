@@ -76,7 +76,7 @@ html > body #saveButtonHolder {
 
 #saveButton {
 	padding-top: 4px;
-	padding-right: 20px;
+	padding-right: 6px;
 	width: 70px;
 }
 
@@ -896,7 +896,7 @@ li.tabDisabled {
 	position: fixed;
 	left: 50%;
 	margin-left: -450px;
-	padding-top: 2px;
+	padding-top: 3px;
 	padding-left: 6px;
 	bottom: 41px;
 	height: 27px;
