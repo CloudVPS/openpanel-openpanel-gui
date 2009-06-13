@@ -55,14 +55,18 @@ label { font: 11px Arial, Helvetica, sans-serif; }
 }
 
 #saveButtonHolder {
-	bottom: 40px;
+	bottom: 41px;
 	position: fixed;
-	background-color: #e8e8e8;
-	height: 39px;
+	background-image: url(/images/gui/itemlistbottom.png);
+	height: 27px;
 	padding-right:20px;
 	width: 900px;
 	margin-left: 50%;
 	left: -450px;
+	border-right: 1px solid #aaaaaa;
+	border-left: 1px solid #aaaaaa;
+	border-top: 1px solid #444444;
+	border-bottom: 1px solid #222222;
 }
 
 html > body #saveButtonHolder {
@@ -71,7 +75,7 @@ html > body #saveButtonHolder {
 }
 
 #saveButton {
-	padding-top: 5px;
+	padding-top: 2px;
 	padding-right: 20px;
 	width: 70px;
 }
@@ -832,10 +836,7 @@ li.tabDisabled {
 	padding-left: 6px;
 	bottom: 41px;
 	height: 27px;
-	background-image: url(/images/gui/itemlistbottom.png);
-	width: 900px;
-	border-right: 1px solid #aaaaaa;
-	border-left: 1px solid #aaaaaa;
+	width: 192px;
 }
 
 .createMultiple {
