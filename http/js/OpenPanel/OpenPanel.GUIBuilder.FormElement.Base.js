@@ -21,6 +21,7 @@ OpenPanel.GUIBuilder.FormElement.Base = function(name, form, initObject){
 	this.sameline = initObject.sameline || false;
 	this.paddingtop = (initObject.paddingtop != undefined)?initObject.paddingtop:0;
 	this.labelwidth = (initObject.labelwidth != undefined)?initObject.labelwidth:0;
+	this.hidelabel = (initObject.hidelabel != undefined)?initObject.hidelabel:false;
 	this.radioElement;
 	this.parentElement;
 	this.DOMElement;
@@ -53,6 +54,7 @@ OpenPanel.GUIBuilder.FormElement.Base.prototype = {
 		} else {
 			this.labelElement = document.createElement("div");
 		}
+		if (this.hidelabel) return this.labelElement;
 		this.labelElement.innerHTML = this.description;
 		if(this.form.hideAsterisks == false && this.hideAsterisk == false){
 			if(this.readOnly == false){
