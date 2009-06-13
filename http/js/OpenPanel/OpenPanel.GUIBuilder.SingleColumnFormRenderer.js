@@ -47,11 +47,13 @@ OpenPanel.GUIBuilder.SingleColumnFormRenderer.prototype = {
 			var field = formElement.renderField();
 			
 			if (formElement.sameline != true) {
-				var row = document.createElement("tr");
+				var trow = document.createElement("tr");
+				var row = document.createElement("div");
 				if (formElement.paddingtop != 0)
 				{
-					row.style.marginTop = "" + formElement.paddingtop + "px;";
+					row.style.paddingTop = "" + formElement.paddingtop + "px;";
 				}
+				trow.appendChild(row);
 				var labelTD = document.createElement("td");
 				labelTD.className = "labelTd";
 				labelTD.setAttribute("valign", "top");
