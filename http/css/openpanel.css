@@ -802,7 +802,11 @@ li.tabDisabled {
 	height: 24px;
 }
 
-
+#saveButton > .buttonLeftOver {
+	background-image: none;
+	width: 0px;
+	height: 24px;
+}
 
 .buttonCenterOver {
 	background: url(/images/gui/buttonCenter.png) repeat-x 0 0px;
@@ -814,10 +818,22 @@ li.tabDisabled {
 	padding-bottom: 2px;
 }
 
+#saveButton > .buttonCenterOver {
+	background: url(/images/gui/savebutton.png);
+	height: 23px;
+	width: 69px;
+	font-size: 1px;
+}
+
 .buttonRightOver {
 	background: url(/images/gui/buttonRight.png) no-repeat 0 0;
 	width: 14px;
 	height: 24px;
+}
+
+#saveButton > .buttonRightOver {
+	background-image: none;
+	width: 0px;
 }
 
 .generatedButton {
