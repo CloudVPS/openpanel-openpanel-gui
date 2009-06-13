@@ -823,8 +823,8 @@ li.tabDisabled {
 #itemListButtons{
 	position: fixed;
 	left: 50%;
-	margin-left: -420px;
-	bottom: 64px;
+	margin-left: -432px;
+	bottom: 67px;
 }
 
 .createMultiple {
