@@ -225,6 +225,18 @@ html > body #saveButtonHolder {
 	background-image: url(/images/gui/addButtonDisabled.gif);
 }
 
+#itemListButtons .addButton {
+	width: 26px;
+	height: 19px;
+	background-image: url(/images/gui/listAddButton.png);
+}
+
+#itemListButtons .addButtonDisabled {
+	width: 26px;
+	height: 19px;
+	background-image: url(/images/gui/listAddButtonDisabled.png);
+}
+
 .deleteButton, .deleteButtonDisabled {
 	width: 22px;
 	height: 22px;
@@ -240,6 +252,18 @@ html > body #saveButtonHolder {
 
 .deleteButtonDisabled {
 	background-image: url(/images/gui/deleteButtonDisabled.gif);
+}
+
+#itemListButtons .deleteButton {
+	width: 25px;
+	height: 19px;
+	background-image: url(/images/gui/listDeleteButton.png);
+}
+
+#itemListButtons .deleteButtonDisabled {
+	width: 25px;
+	height: 19px;
+	background-image: url(/images/gui/listDeleteButtonDisabled.png);
 }
 
 #app {
