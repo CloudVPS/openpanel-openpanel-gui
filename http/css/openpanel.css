@@ -311,6 +311,16 @@ html > body #saveButtonHolder {
 	z-index: -15;
 }
 
+#itemListArea {
+	top: 140px;
+	bottom: 105px;
+	width: 630px;
+	margin-left: 50%;
+	left: -205px;
+	overflow-y: auto;
+	position: fixed;
+}
+
 #mainAreaRight {
 	top: 140px;
 	bottom: 105px;
