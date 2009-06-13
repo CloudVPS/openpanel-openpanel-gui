@@ -290,7 +290,7 @@ html > body #saveButtonHolder {
 	width: 900px;
 	margin-left: 50%;
 	left: -450px;
-	top: 115px;
+	top: 97px;
 	bottom: 50px;
 	width: 900px;
 	background-image: url(/images/gui/groupFrameMiddle.png);
@@ -302,7 +302,7 @@ html > body #saveButtonHolder {
 #mainAreaLeft {
 	margin-right: 0px;
 	top: 145px;
-	bottom: 50px;
+	bottom: 42px;
 	width: 220px;
 	margin-left: 50%;
 	left: -420px;
