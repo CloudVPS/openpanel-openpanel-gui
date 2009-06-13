@@ -759,6 +759,12 @@ li.tabDisabled {
 	cursor: default;
 }
 
+#saveButton > .buttonLeft {
+	background-image: none;
+	width: 0px;
+	height: 24px;
+}
+
 .buttonCenter {
 	background: url(/images/gui/buttonCenter.png) repeat-x 0 -24px;
 	height: 23px;
@@ -771,6 +777,13 @@ li.tabDisabled {
 	cursor: default;
 }
 
+#saveButton > .buttonCenter {
+	background: url(/images/gui/savebutton.png);
+	height: 23px;
+	width: 69px;
+	font-size: 1px;
+}
+
 .buttonRight {
 	background: url(/images/gui/buttonRight.png) no-repeat 0 -24px;
 	width: 14px;
@@ -778,11 +791,18 @@ li.tabDisabled {
 	cursor: default;
 }
 
+#saveButton > .buttonRight {
+	background-image: none;
+	width: 0px;
+}
+
 .buttonLeftOver {
 	background: url(/images/gui/buttonLeft.png) no-repeat 0 -0px;
 	width: 14px;
 	height: 24px;
 }
+
+
 
 .buttonCenterOver {
 	background: url(/images/gui/buttonCenter.png) repeat-x 0 0px;
