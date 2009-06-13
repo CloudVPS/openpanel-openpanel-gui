@@ -55,10 +55,10 @@ label { font: 11px Arial, Helvetica, sans-serif; }
 }
 
 #saveButtonHolder {
-	bottom: 40px;
+	bottom: 39px;
 	position: fixed;
 	background-image: url(/images/gui/itemlistbottom.png);
-	height: 28px;
+	height: 29px;
 	padding-right:20px;
 	width: 900px;
 	margin-left: 50%;
