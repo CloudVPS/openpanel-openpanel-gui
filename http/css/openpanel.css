@@ -832,7 +832,7 @@ li.tabDisabled {
 	padding-left: 6px;
 	bottom: 41px;
 	height: 27px;
-	background-color: #f2f2f2;
+	background-image: url(/images/gui/itemlistbottom.png);
 	width: 192px;
 	border-right: 1px solid #aaaaaa;
 	border-left: 1px solid #aaaaaa;
