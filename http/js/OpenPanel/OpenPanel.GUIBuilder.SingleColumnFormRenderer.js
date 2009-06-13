@@ -76,11 +76,11 @@ OpenPanel.GUIBuilder.SingleColumnFormRenderer.prototype = {
 			} else {
 				var container = document.createElement("div");
 				container.className = "elementContainer";
+				label.style.cssText = "padding-left: 4px; float: left;";
 				if (formElement.labelwidth != 0)
 				{
-					container.style.width = "" + formElement.labelwidth + "px";
+					label.style.width = "" + formElement.labelwidth + "px";
 				}
-				label.style.cssText = "padding-left: 4px; float: left;";
 				container.appendChild(label);
 				container.appendChild(field);
 				sameLineDiv.appendChild(container);
