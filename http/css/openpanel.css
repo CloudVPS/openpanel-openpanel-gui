@@ -328,7 +328,7 @@ html > body #saveButtonHolder {
 	left: -205px;
 	overflow-y: auto;
 	position: fixed;
-	z-index: 10;
+	z-index: -100;
 }
 
 #mainAreaRight p {
