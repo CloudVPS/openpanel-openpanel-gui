@@ -9,7 +9,7 @@ img, input {
 	behavior: url(/js/iepngfix/iepngfix.htc);
 }
 
-input[type="checkbox"] { margin-top: 6px; }
+input[type="checkbox"] { margin-top: 5px; }
 
 small { 
 	font-size:9px; 
