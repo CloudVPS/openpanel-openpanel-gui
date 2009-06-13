@@ -1,6 +1,6 @@
 OpenPanel.GUIBuilder.FormElement.Integer = function(name, form, initObject){
 	OpenPanel.GUIBuilder.FormElement.Base.inherit(this, name, form, initObject);
-	this.textWidth = initObject.textWidth || 30;
+	this.textwidth = initObject.textwidth || 30;
 	this.inputElement;
 	this.hasValue = false;
 	this.regExp = /^-?[0-9]*$/;
@@ -57,7 +57,7 @@ OpenPanel.GUIBuilder.FormElement.Integer.prototype = {
 	},
 	
 	setStyleWidth : function(){
-		this.inputElement.style["width"] = (this.textWidth * 7.7) + "px";	
+		this.inputElement.style["width"] = (this.textwidth * 7.7) + "px";	
 	},
 	
 	focus : function(){
