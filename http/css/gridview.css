@@ -38,6 +38,7 @@
 	overflow: hidden;
 	background-image: url(/images/gui/gridview_title_bg.png);
 	border-bottom: 1px solid #aaaaaa;
+	margin-bottom: 1px;
 }
 
 .gridViewTitleItem {
@@ -53,9 +54,9 @@
 }
 
 .gridViewContents {
-	top: 17px;
+	top: 16px;
 	padding-top: 0px;
-	bottom: 1px;
+	bottom: 0px;
 	margin-top: 0px;
 	margin-bottom: 0px;
 	overflow: auto;
