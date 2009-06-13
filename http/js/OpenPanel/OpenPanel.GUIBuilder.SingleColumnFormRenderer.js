@@ -78,12 +78,9 @@ OpenPanel.GUIBuilder.SingleColumnFormRenderer.prototype = {
 				container.className = "elementContainer";
 				if (formElement.labelwidth != 0)
 				{
-					label.cssText = "text-align: right; float: left; width: " + formElement.labelwidth + "px;";
+					container.style.width = "" + formElement.labelwidth + "px";
 				}
-				else
-				{
-					label.cssText = "padding-left: 4px; float: left;";
-				}
+				label.style.cssText = "padding-left: 4px; float: left;";
 				container.appendChild(label);
 				container.appendChild(field);
 				sameLineDiv.appendChild(container);
