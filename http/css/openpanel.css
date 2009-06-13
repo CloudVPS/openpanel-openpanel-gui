@@ -762,7 +762,7 @@ li.tabDisabled {
 #saveButton .buttonLeft {
 	background-image: none;
 	width: 0px;
-	height: 24px;
+	height: 20px;
 }
 
 .buttonCenter {
@@ -779,7 +779,7 @@ li.tabDisabled {
 
 #saveButton .buttonCenter {
 	background: url(/images/gui/savebutton.png);
-	height: 23px;
+	height: 20px;
 	width: 69px;
 	font-size: 1px;
 }
@@ -793,6 +793,7 @@ li.tabDisabled {
 
 #saveButton .buttonRight {
 	background-image: none;
+	height: 20px;
 	width: 0px;
 }
 
@@ -805,7 +806,7 @@ li.tabDisabled {
 #saveButton .buttonLeftOver {
 	background-image: none;
 	width: 0px;
-	height: 24px;
+	height: 20px;
 }
 
 .buttonCenterOver {
@@ -820,7 +821,7 @@ li.tabDisabled {
 
 #saveButton .buttonCenterOver {
 	background: url(/images/gui/savebutton.png);
-	height: 23px;
+	height: 20px;
 	width: 69px;
 	font-size: 1px;
 }
@@ -833,6 +834,7 @@ li.tabDisabled {
 
 #saveButton .buttonRightOver {
 	background-image: none;
+	height: 20px;
 	width: 0px;
 }
 
