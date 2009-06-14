@@ -74,7 +74,7 @@ OpenPanel.GUIBuilder.FormElement.String.prototype = {
 
 	setHint : function(){
 		if(this.hasValue == false){
-			if (this.readOnly == false) {
+			if ((this.readOnly == false) && (this.form.isCreate == true)){
 				this.inputElement.value = this.example != undefined ? this.example : "";
 				this.setHintStyle();
 			}
