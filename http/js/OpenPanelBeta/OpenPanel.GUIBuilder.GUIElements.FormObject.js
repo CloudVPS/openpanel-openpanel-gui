@@ -243,6 +243,24 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 							this.createCreateOption(false, true, this.fieldsDiv);
 							this.createDeleteOption(this.fieldsDiv);
 						}
+						
+						this.childFormObjects = [];
+						for(var childOpenCoreObjectName in actualOpenCoreObject.children){
+							var childOpenCoreObject = actualOpenCoreObject.children[childOpenCoreObjectName];
+							if (typeof(childOpenCoreObject) == "object") {
+								
+								//console.log(childOpenCoreObject);
+								if (childOpenCoreObject.classInfo["class"].metabase == "") {
+									// non meta stuff
+									var someDiv = document.createElement("div");
+									this.childFormObjectsDiv.appendChild(someDiv);
+									if (typeof(childOpenCoreObject) == "object") {
+										this.createChildFormObject(childOpenCoreObject, actualInstance.uuid, someDiv, this.controller);
+									}
+								}
+							}
+						}
+
 					} else {
 						//console.log("not singleton");
 						// not a singleton
