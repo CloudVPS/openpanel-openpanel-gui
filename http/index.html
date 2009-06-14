@@ -77,8 +77,6 @@
 	<script type="text/javascript" src="js/OpenPanel/OpenPanel.GUIBuilder.GUIElements.Grid.js"></script>
 	
 	<script type="text/javascript">
-		var $j = jQuery.noConflict();
-		
 		if(typeof(console) != "object") {
 			console = { log: function(){} }
 		}
@@ -95,6 +93,8 @@
 		<div id="modal"></div>
 	    <div id="modalLoadingDiv" class="modalLoadingDivLogin"></div>
 	    <script type="text/javascript">
+			var $j = jQuery.noConflict();
+		
 	    
 			preloadImages();
 		
@@ -122,6 +122,6 @@
 				
 				
 			}
-	    
+	    </script>
 		</body>
 </html>
