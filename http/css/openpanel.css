@@ -1,5 +1,6 @@
 body {
-	background-image: url(/images/gui/sky.jpg);
+	background-image: url(/images/gui/loadingbackground.png);
+	background-repeat: repeat;
 	font: 13px Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
 	
 	overflow: hidden;
