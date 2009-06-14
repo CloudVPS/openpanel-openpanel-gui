@@ -82,12 +82,13 @@ html > body #saveButtonHolder {
 
 #welcomeDivHolder {
 	margin-left: 50%;
-	left: -430px;
-	top: 140px;
+	left: -450px;
+	top: 97px;
 	position: fixed;
 	font-size:11px;
-	width: 850px;
-	bottom: 88px;
+	width: 900px;
+	bottom: 50px;
+	background-color: #e8e8e8;
 	overflow-y: auto;
 }
 
