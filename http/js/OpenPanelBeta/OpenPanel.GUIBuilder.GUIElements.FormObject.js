@@ -238,10 +238,11 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 					this.createMethods(actualOpenCoreObject);
 						
 					if(actualOpenCoreObject.singleton == true){
-						console.log("singleton, create create and delete");
-						console.log(actualOpenCoreObject);
-						this.createCreateOption(false, true, this.fieldsDiv);
-						this.createDeleteOption(this.fieldsDiv);
+						//console.log("singleton, create create and delete");
+						if (actualOpenCoreObject.canDelete == true) {
+							this.createCreateOption(false, true, this.fieldsDiv);
+							this.createDeleteOption(this.fieldsDiv);
+						}
 					} else {
 						//console.log("not singleton");
 						// not a singleton
