@@ -128,11 +128,15 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 				var el = Ext.get(tabSpan.getAttribute("id"));
 				this.tabWidth += el.getWidth();
 			}
-			
+	
+			console.log ("tabwidth 01: " + this.tabWidth);
 	
 			if (tabs.length > 0) {
 				this.tabWidth += (tabs.length - 1) * 16 + 30;
 			}
+			
+			console.log ("tabwidth 02: " + this.tabWidth);
+			
 			this.tabEnd = document.createElement("li");
 			this.tabEnd.innerHTML = "&nbsp;";
 			this.tabEnd.setAttribute("id", "tabEnd");
