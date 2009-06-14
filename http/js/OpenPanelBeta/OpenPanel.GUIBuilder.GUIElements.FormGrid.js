@@ -70,7 +70,7 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 			}
 		}
 		this.grid = new OpenPanel.GUIBuilder.GUIElements.Grid();
-		this.grid.create(this.gridDiv,createObject,610, 100);
+		this.grid.create(this.gridDiv,createObject,600, 100);
       	this.grid.setGrid (instances);
 		this.grid.render = function(){ }
 	},
