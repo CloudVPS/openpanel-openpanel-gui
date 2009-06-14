@@ -4,7 +4,7 @@ OpenPanel.GUIBuilder.FormElement.Integer = function(name, form, initObject){
 	this.inputElement;
 	this.hasValue = false;
 	this.regExp = /^-?[0-9]*$/;
-	this.example = initObject.example?initObject.example:null;
+	if (form.isCreate) this.example = initObject.example?initObject.example:null;
 }
 
 OpenPanel.GUIBuilder.FormElement.Integer.prototype = {

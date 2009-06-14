@@ -4,7 +4,7 @@ OpenPanel.GUIBuilder.FormElement.String = function(name, form, initObject){
 	this.inputElement;
 	this.hasValue = false;
 	this.regExp = initObject.regexp?new RegExp(initObject.regexp):null;
-	this.example = initObject.example?initObject.example:null;
+	if (form.isCreate) this.example = initObject.example?initObject.example:null;
 }
 
 OpenPanel.GUIBuilder.FormElement.String.prototype = {
