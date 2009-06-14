@@ -1,6 +1,7 @@
 OpenPanel.Command.Welcome = {
 	controller : {},
 	execute : function(actionObject){
+		document.getElementById("itemListArea").innerHTML = "";
 		var tabBarDiv = document.getElementById("tabBar");
 		if(tabBarDiv != undefined){
 			tabBarDiv.innerHTML = "";
