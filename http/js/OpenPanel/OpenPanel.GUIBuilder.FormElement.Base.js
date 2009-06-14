@@ -61,7 +61,7 @@ OpenPanel.GUIBuilder.FormElement.Base.prototype = {
 		}
 		this.labelElement.innerHTML = this.description;
 		if(this.form.hideAsterisks == false && this.hideAsterisk == false){
-			if(this.readOnly == false){
+			if(this.readOnly == false && this.form.isCreate == true){
 				this.labelElement.innerHTML+= this.required == true?" *":"";
 			}
 		}
