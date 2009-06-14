@@ -132,7 +132,7 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 			console.log ("tabwidth 01: " + this.tabWidth);
 	
 			if (tabs.length > 0) {
-				this.tabWidth += 16 + ((tabs.length) * 4);
+				this.tabWidth += 30 + ((tabs.length) * 4);
 			}
 			
 			console.log ("tabwidth 02: " + this.tabWidth);
