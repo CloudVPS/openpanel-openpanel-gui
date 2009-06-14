@@ -12,8 +12,13 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 	currentInstances : {},
 	isUpdateable : false,
 	lastCreatedFormObject : {},
+	fullWindowOverlayDiv : {},
 	
 	build: function() {
+		if (this.fullWindowOverlayDiv != undefined)
+		{
+			this.fullWindowOverlayDiv.style.visibility = "hidden";
+		}
 		this.targetDiv.innerHTML = "";
 		this.isUpdateable = false;
 		
@@ -131,6 +136,11 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 		} else {
 			alert("div does not exist "+ targetDivName);
 		}
+	},
+	
+	setFullWindowOverlayDivName : function(divName){
+		var overlayDiv = document.getElementById(divName);
+		if (overlayDiv != undefined) this.fullWindowOverlayDiv = overlayDiv;
 	},
 	
 	setCurrentRootClassInstance: function(currentRootClassInstance){

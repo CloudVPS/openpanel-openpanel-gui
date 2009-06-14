@@ -6,12 +6,13 @@ OpenPanel.Command.Welcome = {
 		if(tabBarDiv != undefined){
 			tabBarDiv.innerHTML = "";
 		}
-		var mainAreaDiv = document.getElementById("mainArea");
-		mainAreaDiv.innerHTML = "";
+		var fullWindowAreaDiv = document.getElementById("fullWindowArea");
+		fullWindowAreaDiv.innerHTML = "";
 		var welcomeDivHolder = document.createElement("div");
 		welcomeDivHolder.setAttribute("id", "welcomeDivHolder");
 		
-		mainAreaDiv.appendChild(welcomeDivHolder);
+		fullWindowAreaDiv.appendChild(welcomeDivHolder);
+		fullWindowAreaDiv.style.visibility = "visible";
 		this.controller.guiBuilder.loadTemplate("dynamic/", "welcomeDivHolder");
 		this.controller.guiBuilder.GUIElements.IconBar.highliteItem("Welcome");
 		this.controller.guiBuilder.GUIElements.IconBar.setTitle("Welcome");

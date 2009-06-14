@@ -80,6 +80,17 @@ html > body #saveButtonHolder {
 	width: 70px;
 }
 
+#fullWindowArea {
+	margin-left: 50%;
+	left: -450px;
+	top: 97px;
+	position: fixed;
+	width: 900px;
+	bottom: 50px;
+	overflow: hidden;
+	visibility: hidden;
+}
+
 #welcomeDivHolder {
 	margin-left: 50%;
 	left: -450px;
@@ -90,7 +101,6 @@ html > body #saveButtonHolder {
 	bottom: 50px;
 	background-color: #e8e8e8;
 	overflow-y: auto;
-	z-index: 20;
 }
 
 
