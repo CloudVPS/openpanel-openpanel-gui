@@ -98,7 +98,8 @@ html > body #saveButtonHolder {
 	position: fixed;
 	font-size:11px;
 	width: 900px;
-	bottom: 41px;
+	bottom: 50px;
+	border-bottom: 1px solid #444444;
 	background-color: #e8e8e8;
 	overflow-y: auto;
 }
