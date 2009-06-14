@@ -132,7 +132,7 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 			console.log ("tabwidth 01: " + this.tabWidth);
 	
 			if (tabs.length > 0) {
-				this.tabWidth += 30 + ((tabs.length) * 4);
+				this.tabWidth += (tabs.length) * 4;
 			}
 			
 			console.log ("tabwidth 02: " + this.tabWidth);
@@ -147,7 +147,7 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 			
 			var tabDivElement = Ext.get("tabBarDiv");
 			
-			tabDivElement.setWidth(this.tabWidth);
+			tabDivElement.setWidth(this.tabWidth + 30);
 			tabDivElement.setStyle("marginLeft", Math.round((this.tabWidth / -2)+98) + "px");
 			tabDivElement.setStyle("left", "50%");
 			
