@@ -100,6 +100,10 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 	},
 	
 	clean : function(){
+		if (this.fullWindowOverlayDiv != undefined)
+		{
+			this.fullWindowOverlayDiv.style.visibility = "hidden";
+		}
 		this.targetDiv.innerHTML = "";	
 		this.setSaveButtonVisibility(false);
 	},
