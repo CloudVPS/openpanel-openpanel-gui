@@ -14,6 +14,8 @@
 	<script type="text/javascript">
 		var bgimage = new Image(32,32);
 		bgimage.src = "/images/gui/loadingbackground.png";
+		var crowimage = new Image(32,32);
+		crowimage.src = "/images/gui/crow.png";
 	</script>
 	<script type="text/javascript" src="js/preloader.js"></script>
 	<script type="text/javascript" src="js/jquery-1.2.2.js"></script>
@@ -88,6 +90,7 @@
 	</script>
   	</head>
 	<body onload="startGUI()">
+		<div id="loaderDiv"></div>
 		<div id="modalMessageDiv">
 			<div id="modalMessageDivTop"></div>
 			<div id="modalMessageContent"></div>
@@ -103,6 +106,7 @@
 		
 			function startGUI() {
 				document.body.style.backgroundImage = "url(/images/gui/sky.jpg)";
+				document.getElementById("loaderDiv").style.visibility = "hidden";
 				document.getElementById("app").style.visibility = "visible";
 				
 				Ext.BLANK_IMAGE_URL = '/images/ext/resources/images/default/s.gif';  // Ext 2.0

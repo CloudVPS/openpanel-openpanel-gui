@@ -19,6 +19,16 @@ td {
 	font-size:11px; 
 }
 
+#loaderDiv {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin-top: -61px;
+	margin-left: -43px;
+	background-image: url(/iamges/gui/crow.png);
+	visibility: visible;
+}
+
 #loginDiv {
 	margin-top: 150px;
 	width: 290px;
