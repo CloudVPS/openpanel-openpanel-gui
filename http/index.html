@@ -11,6 +11,10 @@
 	<!--[if gte IE 7]>
 	<link rel="stylesheet" type="text/css"	href="css/openpanel.ie7.css">
 	<![endif]-->
+	<script type="text/javascript">
+		var bgimage = new Image(32,32);
+		bgimage.src = "/images/gui/loadingbackground.png";
+	</script>
 	<script type="text/javascript" src="js/preloader.js"></script>
 	<script type="text/javascript" src="js/jquery-1.2.2.js"></script>
 	<script type="text/javascript" src="js/json.js"></script>
@@ -95,9 +99,6 @@
 	    <script type="text/javascript">
 			var $j = jQuery.noConflict();
 		
-	    	var bgimage = new Image(32,32);
-	    	bgimage.src = "/images/gui/loadingbackground.png";
-	    
 			preloadImages();
 		
 			function startGUI() {
