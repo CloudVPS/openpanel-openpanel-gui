@@ -90,6 +90,7 @@ html > body #saveButtonHolder {
 	bottom: 50px;
 	background-color: #e8e8e8;
 	overflow-y: auto;
+	z-index: 20;
 }
 
 
