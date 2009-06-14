@@ -11,248 +11,7 @@
 	<!--[if gte IE 7]>
 	<link rel="stylesheet" type="text/css"	href="css/openpanel.ie7.css">
 	<![endif]-->
-	<script type="text/javascript">
-function preloadImages () {
-this.preloadedImages = new Array();
-this.preloadedImages["groupFrameBottom.png"] = new Image(32,32);
-this.preloadedImages["groupFrameBottom.png"].src = "/images/gui/groupFrameBottom.png";
-this.preloadedImages["groupFrameMiddle.png"] = new Image(32,32);
-this.preloadedImages["groupFrameMiddle.png"].src = "/images/gui/groupFrameMiddle.png";
-this.preloadedImages["groupFrameTop.png"] = new Image(32,32);
-this.preloadedImages["groupFrameTop.png"].src = "/images/gui/groupFrameTop.png";
-this.preloadedImages["iconBarBackground.png"] = new Image(32,32);
-this.preloadedImages["iconBarBackground.png"].src = "/images/gui/iconBarBackground.png";
-this.preloadedImages["iconBarSelected.png"] = new Image(32,32);
-this.preloadedImages["iconBarSelected.png"].src = "/images/gui/iconBarSelected.png";
-this.preloadedImages["iconBarSelectedLeft.png"] = new Image(32,32);
-this.preloadedImages["iconBarSelectedLeft.png"].src = "/images/gui/iconBarSelectedLeft.png";
-this.preloadedImages["iconBarSelectedMiddle.png"] = new Image(32,32);
-this.preloadedImages["iconBarSelectedMiddle.png"].src = "/images/gui/iconBarSelectedMiddle.png";
-this.preloadedImages["iconBarSelectedRight.png"] = new Image(32,32);
-this.preloadedImages["iconBarSelectedRight.png"].src = "/images/gui/iconBarSelectedRight.png";
-this.preloadedImages["nothernlightsbg.jpg"] = new Image(32,32);
-this.preloadedImages["nothernlightsbg.jpg"].src = "/images/gui/nothernlightsbg.jpg";
-this.preloadedImages["tab_delimiter.png"] = new Image(32,32);
-this.preloadedImages["tab_delimiter.png"].src = "/images/gui/tab_delimiter.png";
-this.preloadedImages["tab_delimiter_selected.png"] = new Image(32,32);
-this.preloadedImages["tab_delimiter_selected.png"].src = "/images/gui/tab_delimiter_selected.png";
-this.preloadedImages["tab_end.png"] = new Image(32,32);
-this.preloadedImages["tab_end.png"].src = "/images/gui/tab_end.png";
-this.preloadedImages["tab_end_selected.png"] = new Image(32,32);
-this.preloadedImages["tab_end_selected.png"].src = "/images/gui/tab_end_selected.png";
-this.preloadedImages["tab_fill.png"] = new Image(32,32);
-this.preloadedImages["tab_fill.png"].src = "/images/gui/tab_fill.png";
-this.preloadedImages["tab_hlite.png"] = new Image(32,32);
-this.preloadedImages["tab_hlite.png"].src = "/images/gui/tab_hlite.png";
-this.preloadedImages["tab_mdelim.png"] = new Image(32,32);
-this.preloadedImages["tab_mdelim.png"].src = "/images/gui/tab_mdelim.png";
-this.preloadedImages["tab_start.png"] = new Image(32,32);
-this.preloadedImages["tab_start.png"].src = "/images/gui/tab_start.png";
-this.preloadedImages["tab_start_selected.png"] = new Image(32,32);
-this.preloadedImages["tab_start_selected.png"].src = "/images/gui/tab_start_selected.png";
-this.preloadedImages["addButton.png"] = new Image(32,32);
-this.preloadedImages["addButton.png"].src = "/images/gui/addButton.png";
-this.preloadedImages["addButtonDisabled.png"] = new Image(32,32);
-this.preloadedImages["addButtonDisabled.png"].src = "/images/gui/addButtonDisabled.png";
-this.preloadedImages["cap_add.png"] = new Image(32,32);
-this.preloadedImages["cap_add.png"].src = "/images/gui/cap_add.png";
-this.preloadedImages["cap_add_disabled.png"] = new Image(32,32);
-this.preloadedImages["cap_add_disabled.png"].src = "/images/gui/cap_add_disabled.png";
-this.preloadedImages["cap_del.jpg"] = new Image(32,32);
-this.preloadedImages["cap_del.jpg"].src = "/images/gui/cap_del.jpg";
-this.preloadedImages["cap_del_disabled.png"] = new Image(32,32);
-this.preloadedImages["cap_del_disabled.png"].src = "/images/gui/cap_del_disabled.png";
-this.preloadedImages["deleteButton.png"] = new Image(32,32);
-this.preloadedImages["deleteButton.png"].src = "/images/gui/deleteButton.png";
-this.preloadedImages["deleteButtonDisabled.png"] = new Image(32,32);
-this.preloadedImages["deleteButtonDisabled.png"].src = "/images/gui/deleteButtonDisabled.png";
-this.preloadedImages["groupFrameBottom.jpg"] = new Image(32,32);
-this.preloadedImages["groupFrameBottom.jpg"].src = "/images/gui/groupFrameBottom.jpg";
-this.preloadedImages["iconBarBackground.jpg"] = new Image(32,32);
-this.preloadedImages["iconBarBackground.jpg"].src = "/images/gui/iconBarBackground.jpg";
-this.preloadedImages["iconBarSelectedLeft.jpg"] = new Image(32,32);
-this.preloadedImages["iconBarSelectedLeft.jpg"].src = "/images/gui/iconBarSelectedLeft.jpg";
-this.preloadedImages["iconBarSelectedMiddle.jpg"] = new Image(32,32);
-this.preloadedImages["iconBarSelectedMiddle.jpg"].src = "/images/gui/iconBarSelectedMiddle.jpg";
-this.preloadedImages["iconBarSelectedRight.jpg"] = new Image(32,32);
-this.preloadedImages["iconBarSelectedRight.jpg"].src = "/images/gui/iconBarSelectedRight.jpg";
-this.preloadedImages["addButton.gif"] = new Image(32,32);
-this.preloadedImages["addButton.gif"].src = "/images/gui/addButton.gif";
-this.preloadedImages["addButtonDisabled.gif"] = new Image(32,32);
-this.preloadedImages["addButtonDisabled.gif"].src = "/images/gui/addButtonDisabled.gif";
-this.preloadedImages["ajax-loader.gif"] = new Image(32,32);
-this.preloadedImages["ajax-loader.gif"].src = "/images/gui/ajax-loader.gif";
-this.preloadedImages["deleteButton.gif"] = new Image(32,32);
-this.preloadedImages["deleteButton.gif"].src = "/images/gui/deleteButton.gif";
-this.preloadedImages["deleteButtonDisabled.gif"] = new Image(32,32);
-this.preloadedImages["deleteButtonDisabled.gif"].src = "/images/gui/deleteButtonDisabled.gif";
-this.preloadedImages["groupBottomCenter.gif"] = new Image(32,32);
-this.preloadedImages["groupBottomCenter.gif"].src = "/images/gui/groupBottomCenter.gif";
-this.preloadedImages["groupFrameBottom.gif"] = new Image(32,32);
-this.preloadedImages["groupFrameBottom.gif"].src = "/images/gui/groupFrameBottom.gif";
-this.preloadedImages["groupFrameMiddle.gif"] = new Image(32,32);
-this.preloadedImages["groupFrameMiddle.gif"].src = "/images/gui/groupFrameMiddle.gif";
-this.preloadedImages["groupFrameTop.gif"] = new Image(32,32);
-this.preloadedImages["groupFrameTop.gif"].src = "/images/gui/groupFrameTop.gif";
-this.preloadedImages["groupLevel1BottomCenter.gif"] = new Image(32,32);
-this.preloadedImages["groupLevel1BottomCenter.gif"].src = "/images/gui/groupLevel1BottomCenter.gif";
-this.preloadedImages["groupLevel1BottomLeft.gif"] = new Image(32,32);
-this.preloadedImages["groupLevel1BottomLeft.gif"].src = "/images/gui/groupLevel1BottomLeft.gif";
-this.preloadedImages["groupLevel1BottomRight.gif"] = new Image(32,32);
-this.preloadedImages["groupLevel1BottomRight.gif"].src = "/images/gui/groupLevel1BottomRight.gif";
-this.preloadedImages["groupLevel1CenterLeft.gif"] = new Image(32,32);
-this.preloadedImages["groupLevel1CenterLeft.gif"].src = "/images/gui/groupLevel1CenterLeft.gif";
-this.preloadedImages["groupLevel1CenterRight.gif"] = new Image(32,32);
-this.preloadedImages["groupLevel1CenterRight.gif"].src = "/images/gui/groupLevel1CenterRight.gif";
-this.preloadedImages["groupLevel1TopCenter.gif"] = new Image(32,32);
-this.preloadedImages["groupLevel1TopCenter.gif"].src = "/images/gui/groupLevel1TopCenter.gif";
-this.preloadedImages["groupLevel1TopLeft.gif"] = new Image(32,32);
-this.preloadedImages["groupLevel1TopLeft.gif"].src = "/images/gui/groupLevel1TopLeft.gif";
-this.preloadedImages["groupLevel1TopRight.gif"] = new Image(32,32);
-this.preloadedImages["groupLevel1TopRight.gif"].src = "/images/gui/groupLevel1TopRight.gif";
-this.preloadedImages["iconBarBackground.gif"] = new Image(32,32);
-this.preloadedImages["iconBarBackground.gif"].src = "/images/gui/iconBarBackground.gif";
-this.preloadedImages["iconBarSelected.gif"] = new Image(32,32);
-this.preloadedImages["iconBarSelected.gif"].src = "/images/gui/iconBarSelected.gif";
-this.preloadedImages["iconBarSelectedLeft.gif"] = new Image(32,32);
-this.preloadedImages["iconBarSelectedLeft.gif"].src = "/images/gui/iconBarSelectedLeft.gif";
-this.preloadedImages["iconBarSelectedMiddle.gif"] = new Image(32,32);
-this.preloadedImages["iconBarSelectedMiddle.gif"].src = "/images/gui/iconBarSelectedMiddle.gif";
-this.preloadedImages["iconBarSelectedRight.gif"] = new Image(32,32);
-this.preloadedImages["iconBarSelectedRight.gif"].src = "/images/gui/iconBarSelectedRight.gif";
-this.preloadedImages["level1_bc.gif"] = new Image(32,32);
-this.preloadedImages["level1_bc.gif"].src = "/images/gui/level1_bc.gif";
-this.preloadedImages["level1_cbl.png"] = new Image(32,32);
-this.preloadedImages["level1_cbl.png"].src = "/images/gui/level1_cbl.png";
-this.preloadedImages["level1_cbr.png"] = new Image(32,32);
-this.preloadedImages["level1_cbr.png"].src = "/images/gui/level1_cbr.png";
-this.preloadedImages["level1_center_left.gif"] = new Image(32,32);
-this.preloadedImages["level1_center_left.gif"].src = "/images/gui/level1_center_left.gif";
-this.preloadedImages["level1_center_right.gif"] = new Image(32,32);
-this.preloadedImages["level1_center_right.gif"].src = "/images/gui/level1_center_right.gif";
-this.preloadedImages["level1_ctc.png"] = new Image(32,32);
-this.preloadedImages["level1_ctc.png"].src = "/images/gui/level1_ctc.png";
-this.preloadedImages["level1_ctl.png"] = new Image(32,32);
-this.preloadedImages["level1_ctl.png"].src = "/images/gui/level1_ctl.png";
-this.preloadedImages["level1_ctr.png"] = new Image(32,32);
-this.preloadedImages["level1_ctr.png"].src = "/images/gui/level1_ctr.png";
-this.preloadedImages["level1_top_middle.gif"] = new Image(32,32);
-this.preloadedImages["level1_top_middle.gif"].src = "/images/gui/level1_top_middle.gif";
-this.preloadedImages["tab_delimiter.gif"] = new Image(32,32);
-this.preloadedImages["tab_delimiter.gif"].src = "/images/gui/tab_delimiter.gif";
-this.preloadedImages["tab_delimiter_selected.gif"] = new Image(32,32);
-this.preloadedImages["tab_delimiter_selected.gif"].src = "/images/gui/tab_delimiter_selected.gif";
-this.preloadedImages["tab_end.gif"] = new Image(32,32);
-this.preloadedImages["tab_end.gif"].src = "/images/gui/tab_end.gif";
-this.preloadedImages["tab_end_selected.gif"] = new Image(32,32);
-this.preloadedImages["tab_end_selected.gif"].src = "/images/gui/tab_end_selected.gif";
-this.preloadedImages["tab_fill.gif"] = new Image(32,32);
-this.preloadedImages["tab_fill.gif"].src = "/images/gui/tab_fill.gif";
-this.preloadedImages["tab_hlite.gif"] = new Image(32,32);
-this.preloadedImages["tab_hlite.gif"].src = "/images/gui/tab_hlite.gif";
-this.preloadedImages["tab_start.gif"] = new Image(32,32);
-this.preloadedImages["tab_start.gif"].src = "/images/gui/tab_start.gif";
-this.preloadedImages["tab_start_selected.gif"] = new Image(32,32);
-this.preloadedImages["tab_start_selected.gif"].src = "/images/gui/tab_start_selected.gif";
-this.preloadedImages["throbber_small.gif"] = new Image(32,32);
-this.preloadedImages["throbber_small.gif"].src = "/images/gui/throbber_small.gif";
-this.preloadedImages["zoomspin"] = new Image(32,32);
-this.preloadedImages["zoomspin"].src = "/images/gui/zoomspin";
-this.preloadedImages["error_bomb.png"] = new Image(32,32);
-this.preloadedImages["error_bomb.png"].src = "/images/gui/error_bomb.png";
-this.preloadedImages["crow.png"] = new Image(32,32);
-this.preloadedImages["crow.png"].src = "/images/gui/crow.png";
-this.preloadedImages["newTrobber.gif"] = new Image(32,32);
-this.preloadedImages["newTrobber.gif"].src = "/images/gui/newTrobber.gif";
-this.preloadedImages["buttonCenter.png"] = new Image(32,32);
-this.preloadedImages["buttonCenter.png"].src = "/images/gui/buttonCenter.png";
-this.preloadedImages["buttonLeft.png"] = new Image(32,32);
-this.preloadedImages["buttonLeft.png"].src = "/images/gui/buttonLeft.png";
-this.preloadedImages["buttonRight.png"] = new Image(32,32);
-this.preloadedImages["buttonRight.png"].src = "/images/gui/buttonRight.png";
-this.preloadedImages["checkbox.png"] = new Image(32,32);
-this.preloadedImages["checkbox.png"].src = "/images/gui/checkbox.png";
-this.preloadedImages["closeButton.gif"] = new Image(32,32);
-this.preloadedImages["closeButton.gif"].src = "/images/gui/closeButton.gif";
-this.preloadedImages["gridview_title_bg.png"] = new Image(32,32);
-this.preloadedImages["gridview_title_bg.png"].src = "/images/gui/gridview_title_bg.png";
-this.preloadedImages["loginBackground.png"] = new Image(32,32);
-this.preloadedImages["loginBackground.png"].src = "/images/gui/loginBackground.png";
-this.preloadedImages["loginHouse.png"] = new Image(32,32);
-this.preloadedImages["loginHouse.png"].src = "/images/gui/loginHouse.png";
-this.preloadedImages["loginOpenPanelLogo.png"] = new Image(32,32);
-this.preloadedImages["loginOpenPanelLogo.png"].src = "/images/gui/loginOpenPanelLogo.png";
-this.preloadedImages["mid.png"] = new Image(32,32);
-this.preloadedImages["mid.png"].src = "/images/gui/mid.png";
-this.preloadedImages["modalBottom.png"] = new Image(32,32);
-this.preloadedImages["modalBottom.png"].src = "/images/gui/modalBottom.png";
-this.preloadedImages["modalMiddle.png"] = new Image(32,32);
-this.preloadedImages["modalMiddle.png"].src = "/images/gui/modalMiddle.png";
-this.preloadedImages["modalTop.png"] = new Image(32,32);
-this.preloadedImages["modalTop.png"].src = "/images/gui/modalTop.png";
-this.preloadedImages["newThrobber.gif"] = new Image(32,32);
-this.preloadedImages["newThrobber.gif"].src = "/images/gui/newThrobber.gif";
-this.preloadedImages["select.png"] = new Image(32,32);
-this.preloadedImages["select.png"].src = "/images/gui/select.png";
-this.preloadedImages["selected.png"] = new Image(32,32);
-this.preloadedImages["selected.png"].src = "/images/gui/selected.png";
-this.preloadedImages["shadowBottom.png"] = new Image(32,32);
-this.preloadedImages["shadowBottom.png"].src = "/images/gui/shadowBottom.png";
-this.preloadedImages["shadowBottom.psd"] = new Image(32,32);
-this.preloadedImages["shadowBottom.psd"].src = "/images/gui/shadowBottom.psd";
-this.preloadedImages["shadowIconBar.png"] = new Image(32,32);
-this.preloadedImages["shadowIconBar.png"].src = "/images/gui/shadowIconBar.png";
-this.preloadedImages["shadowLeft.png"] = new Image(32,32);
-this.preloadedImages["shadowLeft.png"].src = "/images/gui/shadowLeft.png";
-this.preloadedImages["shadowRight.png"] = new Image(32,32);
-this.preloadedImages["shadowRight.png"].src = "/images/gui/shadowRight.png";
-this.preloadedImages["shadowTop.png"] = new Image(32,32);
-this.preloadedImages["shadowTop.png"].src = "/images/gui/shadowTop.png";
-this.preloadedImages["sky.jpg"] = new Image(32,32);
-this.preloadedImages["sky.jpg"].src = "/images/gui/sky.jpg";
-this.preloadedImages["trees.jpg"] = new Image(32,32);
-this.preloadedImages["trees.jpg"].src = "/images/gui/trees.jpg";
-this.preloadedImages["windowBottom.png"] = new Image(32,32);
-this.preloadedImages["windowBottom.png"].src = "/images/gui/windowBottom.png";
-this.preloadedImages["windowBottomLeft.png"] = new Image(32,32);
-this.preloadedImages["windowBottomLeft.png"].src = "/images/gui/windowBottomLeft.png";
-this.preloadedImages["windowBottomRight.png"] = new Image(32,32);
-this.preloadedImages["windowBottomRight.png"].src = "/images/gui/windowBottomRight.png";
-this.preloadedImages["windowLeft.png"] = new Image(32,32);
-this.preloadedImages["windowLeft.png"].src = "/images/gui/windowLeft.png";
-this.preloadedImages["windowRight.png"] = new Image(32,32);
-this.preloadedImages["windowRight.png"].src = "/images/gui/windowRight.png";
-this.preloadedImages["windowTop.png"] = new Image(32,32);
-this.preloadedImages["windowTop.png"].src = "/images/gui/windowTop.png";
-this.preloadedImages["windowTopLeft.png"] = new Image(32,32);
-this.preloadedImages["windowTopLeft.png"].src = "/images/gui/windowTopLeft.png";
-this.preloadedImages["windowTopRight.png"] = new Image(32,32);
-this.preloadedImages["windowTopRight.png"].src = "/images/gui/windowTopRight.png";
-this.preloadedImages["selected2.png"] = new Image(32,32);
-this.preloadedImages["selected2.png"].src = "/images/gui/selected2.png";
-this.preloadedImages["gridview_title_bg2.png"] = new Image(32,32);
-this.preloadedImages["gridview_title_bg2.png"].src = "/images/gui/gridview_title_bg2.png";
-this.preloadedImages["itemlistbottom.png"] = new Image(32,32);
-this.preloadedImages["itemlistbottom.png"].src = "/images/gui/itemlistbottom.png";
-this.preloadedImages["savebutton.png"] = new Image(32,32);
-this.preloadedImages["savebutton.png"].src = "/images/gui/savebutton.png";
-this.preloadedImages["listAddButton.png"] = new Image(32,32);
-this.preloadedImages["listAddButton.png"].src = "/images/gui/listAddButton.png";
-this.preloadedImages["listAddButtonDisabled.png"] = new Image(32,32);
-this.preloadedImages["listAddButtonDisabled.png"].src = "/images/gui/listAddButtonDisabled.png";
-this.preloadedImages["listDeleteButton.png"] = new Image(32,32);
-this.preloadedImages["listDeleteButton.png"].src = "/images/gui/listDeleteButton.png";
-this.preloadedImages["listDeleteButtonDisabled.png"] = new Image(32,32);
-this.preloadedImages["listDeleteButtonDisabled.png"].src = "/images/gui/listDeleteButtonDisabled.png";
-this.preloadedImages["welcome_blog.png"] = new Image(32,32);
-this.preloadedImages["welcome_blog.png"].src = "/images/gui/welcome_blog.png";
-this.preloadedImages["welcome_reportbug.png"] = new Image(32,32);
-this.preloadedImages["welcome_reportbug.png"].src = "/images/gui/welcome_reportbug.png";
-}
-
-  preloadImages();
-
-</script>
+	<script type="text/javascript" src="js/preloader.js"></script>
 	<script type="text/javascript" src="js/jquery-1.2.2.js"></script>
 	<script type="text/javascript" src="js/json.js"></script>
 	<script type="text/javascript" src="js/ext-2.0/adapter/ext/ext-base.js"></script>
@@ -324,10 +83,22 @@ this.preloadedImages["welcome_reportbug.png"].src = "/images/gui/welcome_reportb
 			console = { log: function(){} }
 		}
 
-		preloadImages();
+	</script>
+  	</head>
+	<body onload="startGUI()">
+		<div id="modalMessageDiv">
+			<div id="modalMessageDivTop"></div>
+			<div id="modalMessageContent"></div>
+			<div id="modalMessageDivBottom"></div>
+		</div>
+		<div id="app"></div>
+		<div id="modal"></div>
+	    <div id="modalLoadingDiv" class="modalLoadingDivLogin"></div>
+	    <script type="text/javascript">
+	    
+			preloadImages();
 		
-		$j(document).ready(
-			function() {
+			function startGUI() {
 				document.getElementById("app").style.visibility = "visible";
 				
 				Ext.BLANK_IMAGE_URL = '/images/ext/resources/images/default/s.gif';  // Ext 2.0
@@ -351,17 +122,6 @@ this.preloadedImages["welcome_reportbug.png"].src = "/images/gui/welcome_reportb
 				
 				
 			}
-		);
-	</script>
-  	</head>
-	<body>
-		<div id="modalMessageDiv">
-			<div id="modalMessageDivTop"></div>
-			<div id="modalMessageContent"></div>
-			<div id="modalMessageDivBottom"></div>
-		</div>
-		<div id="app"></div>
-		<div id="modal"></div>
-	    <div id="modalLoadingDiv" class="modalLoadingDivLogin"></div>
+	    
 		</body>
 </html>
