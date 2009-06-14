@@ -145,7 +145,7 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 			
 			tabDivElement.setWidth(this.tabWidth);
 			tabDivElement.setStyle("marginLeft", Math.round((this.tabWidth / -2)+98) + "px");
-			tabDivElement.setStyle("left", "53%");
+			tabDivElement.setStyle("left", "50%");
 			
 
 		}
