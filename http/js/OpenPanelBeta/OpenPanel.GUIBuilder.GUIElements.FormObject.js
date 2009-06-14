@@ -238,7 +238,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 					this.createMethods(actualOpenCoreObject);
 						
 					if(actualOpenCoreObject.singleton == true){
-						//console.log("singleton, create create and delete");
+						console.log("singleton, create create and delete");
 						this.createCreateOption(false, true, this.fieldsDiv);
 						this.createDeleteOption(this.fieldsDiv);
 					} else {
