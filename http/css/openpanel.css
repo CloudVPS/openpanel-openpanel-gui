@@ -25,6 +25,8 @@ td {
 	left: 50%;
 	margin-top: -61px;
 	margin-left: -43px;
+	width: 87px;
+	height: 122px;
 	background-image: url(/iamges/gui/crow.png);
 	visibility: visible;
 }
