@@ -29,6 +29,7 @@ td {
 	height: 122px;
 	background-image: url(/images/gui/crow.png);
 	visibility: visible;
+	opacity: 0.5;
 }
 
 #prespinnerDiv {
