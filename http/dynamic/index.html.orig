@@ -1,35 +1,26 @@
-<table width="100%">
-  <tr>
-    <td width="2%">&nbsp;</td>
-    <td width="25%" valign="top">
+<div style="float:left; width: 320px; margin-left: 16px;">
 <center>
   <img src="/images/welcomelogo.png"/><br/>
   <b>The Open Source Control Panel Alternative</b><br/><br/><hr/>
   Released under the GNU General Public License v2<br/>
-  Copyright &copy; 2008 <b><font color="#F08121">Panel</font>Six</b> V.O.F. Rotterdam<br/>
+  Copyright &copy; 2008 PanelSix V.O.F. Rotterdam<br/>
   <br/>
   <small>JP Wesselink, Peter van Dijk, Carlos de Boer Ver Voorn,<br/>
   Pim van Riezen, Danny van der Meeren</small>
   <br/>
   <hr/>
   <br/>
-  <table border="0"><tr>
-    <td>
-      <a href="http://bugtracker.openpanel.com/" target="_new"><img src="/images/forward_small.png" border="0"></a>
-    </td>
-    <td>Report Bug</td>
-    <td width="24">&nbsp;</td>
-    <td>
-      <a href="http://blog.openpanel.com/" target="_new"><img src="/images/forward_small.png" border="0"></a>
-    </td>
-    <td>Development Blog</td>
-
-  </table>
 </center>
-</td>
-<td width="71%" valign="top" align="right">
-    <img src="/images/alpha_barn.jpg">
-</td>
-<td width="2%">&nbsp;</td>
-</tr></table>
+</div>
 
+<div style="position: fixed; bottom: 45px; left: 50%; margin-left: -440px;">
+<table border="0"><tr>
+  <td>
+	<a href="http://bugtracker.openpanel.com/" target="_new"><img src="/images/gui/welcome_reportbug.png" border="0"></a>
+  </td>
+  <td width="4">&nbsp;</td>
+  <td>
+	<a href="http://blog.openpanel.com/" target="_new"><img src="/images/gui/welcome_blog.png" border="0"></a>
+  </td>
+</table>
+</div>
