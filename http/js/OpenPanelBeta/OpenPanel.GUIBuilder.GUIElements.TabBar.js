@@ -98,6 +98,10 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 						tabSpan.onclick = function(){
 							OpenPanel.GUIBuilder.GUIElements.TabBar.click(this.getAttribute("OC:Class"))
 						}
+						tabSpan.onmousedown = function(){
+							OpenPanel.GUIBuilder.GUIElements.TabBar.pushItem(this.getAttribute("OC:Class"))
+						}
+						
 						
 						this.itemElements[someObject.name] = tabSpan;
 						tabSpan.setAttribute("class", "tab");
@@ -180,7 +184,7 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 					if (virgin == true) {
 						virgin = false;
 						if (someItem == currentItemElement) {
-							this.tabStart.setAttribute("class", "tabStartSelected");
+							this.tabStart.setAttribute("class", "tabStartPushed");
 							this.setTabStartSelected(this.tabStart);
 						} else {
 							this.tabStart.setAttribute("class", "tabStart");
@@ -220,6 +224,46 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 		}
 	},
 	
+	pushItem: function(className){
+		if(className != undefined && this.itemElements[className]!=undefined){
+			var currentItemElement = this.itemElements[className];
+			var virgin = true;
+			for(var key in this.itemElements){
+				var someItem = this.itemElements[key];
+				if (typeof(someItem) == "object") {
+					if (virgin == true) {
+						virgin = false;
+						if (someItem == currentItemElement) {
+							this.tabStart.setAttribute("class", "tabStartPushed");
+							this.setTabStartPushed(this.tabStart);
+						}
+					}
+					
+					if (someItem == currentItemElement) {
+						someItem.setAttribute("class", "tabPushed");
+						this.setTabPushed(someItem);
+					}
+					this.setDelimiterClass(someItem, false);
+				}
+			}
+			
+			for(var key in this.itemElements){
+				var someItem = this.itemElements[key];
+				if(someItem == currentItemElement){
+					this.setDelimiterPushed(someItem);
+				}
+			}
+			if(someItem != undefined){
+				if(someItem == currentItemElement){
+					// is last
+					this.tabEnd.setAttribute("class", "tabEndPushed");
+					this.setTabEndPushed(this.tabEnd);
+				}
+			} 
+		}
+	},
+	
+	
 	disable : function(){
 		for(var key in this.itemElements){
 			var tabSpan = this.itemElements[key];
@@ -231,6 +275,17 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 				}
 				
 			}
+		}
+	},
+	
+	setDelimiterPushed : function(tabElement){
+		if (tabElement.leftDelimiter != undefined){
+			tabElement.leftDelimiter.setAttribute("class", "tabDelimiterPushed");
+			this.setTabDelimiterPushed(tabElement.leftDelimiter);
+		}
+		if (tabElement.rightDelimiter != undefined){
+			tabElement.rightDelimiter.setAttribute("class", "tabDelimiterPushed");
+			this.setTabDelimiterSelected(tabElement.rightDelimiter);
 		}
 	},
 	
@@ -302,7 +357,7 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 		obj.style.height = "21px";
 		obj.style.width = "1px";
 		obj.style.cursor = "default";
-	},		
+	},	
 	
 	setTabDelimiterSelected: function(obj) {
 		obj.style.backgroundImage = "url(/images/gui/tab_delimiter_selected.gif)";
@@ -311,8 +366,22 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 		obj.style.cursor = "default";
 	},	
 	
+	setTabDelimiterPushed: function(obj) {
+		obj.style.backgroundImage = "url(/images/gui/tab_delimiter_pushed.gif)";
+		obj.style.height = "21px";
+		obj.style.width = "1px";
+		obj.style.cursor = "default";
+	},	
+	
 	setTabStartSelected: function(obj) {
 		obj.style.backgroundImage = "url(/images/gui/tab_start_selected.gif)";
+		obj.style.height = "21px";
+		obj.style.width = "10px";
+		obj.style.cursor = "default";
+	},
+	
+	setTabStartPushed: function(obj) {
+		obj.style.backgroundImage = "url(/images/gui/tab_start_pushed.gif)";
 		obj.style.height = "21px";
 		obj.style.width = "10px";
 		obj.style.cursor = "default";
@@ -334,8 +403,24 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 		obj.style.cursor = "default";
 	},
 
+	setTabPushed: function(obj) {
+		obj.style.backgroundImage = "url(/images/gui/tab_pushed.gif)";
+		obj.style.paddingLeft = "8px";
+		obj.style.paddingRight = "8px";
+		obj.style.lineHeight = "21px";
+		obj.style.height = "21px";
+		obj.style.cursor = "default";
+	},
+
 	setTabEndSelected: function(obj){
 		obj.style.backgroundImage = "url(/images/gui/tab_end_selected.gif)";
+		obj.style.height = "21px";
+		obj.style.width = "10px";
+		obj.style.cursor = "default";
+	},
+	
+	setTabEndPushed: function(obj){
+		obj.style.backgroundImage = "url(/images/gui/tab_end_pushed.gif)";
 		obj.style.height = "21px";
 		obj.style.width = "10px";
 		obj.style.cursor = "default";
