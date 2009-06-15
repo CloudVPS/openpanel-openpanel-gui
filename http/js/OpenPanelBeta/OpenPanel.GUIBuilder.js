@@ -322,6 +322,6 @@ OpenPanel.GUIBuilder = {
 			right.className = "buttonRight";
 			center.className = "buttonCenter";
 		}
-		button.onmouseout();
+		button.onmouseup();
 	}
 }
