@@ -124,7 +124,6 @@ html > body #saveButtonHolder {
 	width: 900px;
 	bottom: 69px;
 	border-bottom: 1px solid #444444;
-	background-image: url(/images/welcomebg.jpg);
 	background-color: #e8e8e8;
 	overflow-y: auto;
 }
