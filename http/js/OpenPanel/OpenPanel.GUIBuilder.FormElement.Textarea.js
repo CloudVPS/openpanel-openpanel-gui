@@ -104,11 +104,11 @@ OpenPanel.GUIBuilder.FormElement.Textarea.prototype = {
 				this.hasValue = true;
 				this.setStyle();
 				if (this.inputElement != undefined && this.inputElement.value != value) {
-					this.inputElement.innerHTML = value;
+					this.inputElement.value = value;
 				}
 				this.validate();
 			} else {
-				this.inputElement.innerHTML = value;
+				this.inputElement.value = value;
 			}
 		} else {
 			this.value = null;
