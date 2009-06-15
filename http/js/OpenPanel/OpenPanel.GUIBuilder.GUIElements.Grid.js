@@ -175,7 +175,8 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 				col.className = "gridViewColumn";
 				col.style.width = "" + this.sizes[i] + "px";
 				var value = values[this.keys[i]];
-				col.innerHTML = value!=undefined?value:"";
+				var textNode = document.createTextNode(value!=undefined?value:"");
+				col.appendChild(textNode);
 				row.appendChild(col);
 			}
 			
