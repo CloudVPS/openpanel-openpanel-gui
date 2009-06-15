@@ -72,15 +72,15 @@ OpenPanel.GUIBuilder = {
 						type : "String",
 						description : "Username",
 						textwidth: 20,
-						example : "enter your username",
-						required : true
+						example : "",
+						required : false
 					},
 					password : {	
 						type : "Password",
 						description : "Password",
 						textwidth: 20,
-						example : "enter enter",
-						required : true
+						example : "",
+						required : false
 					}
 				}
 			},
