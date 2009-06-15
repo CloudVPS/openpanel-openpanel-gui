@@ -308,15 +308,16 @@ OpenPanel.GUIBuilder = {
 		tr.appendChild(center);
 		tr.appendChild(right);
 		center.appendChild(txt);
+		center.stye.cursor = "default";
 		button.appendChild(t);
 		
-		button.onmouseover = button.onfocus = function(){
+		button.onmousedown = function(){
 			left.className = "buttonLeftOver";
 			right.className = "buttonRightOver";
 			center.className = "buttonCenterOver";
 		}
 	
-		button.onmouseout = button.onblur = function(){
+		button.onmouseup = function(){
 			left.className = "buttonLeft";
 			right.className = "buttonRight";
 			center.className = "buttonCenter";
