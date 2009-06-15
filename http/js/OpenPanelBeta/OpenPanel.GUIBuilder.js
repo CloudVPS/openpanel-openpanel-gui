@@ -308,7 +308,7 @@ OpenPanel.GUIBuilder = {
 		tr.appendChild(center);
 		tr.appendChild(right);
 		center.appendChild(txt);
-		center.stye.cursor = "default";
+		center.style.cursor = "default";
 		button.appendChild(t);
 		
 		button.onmousedown = function(){
