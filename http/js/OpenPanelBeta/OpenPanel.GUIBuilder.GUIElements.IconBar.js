@@ -135,7 +135,7 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 						iconLi.setAttribute("OC:iconname", "" + iconName);
 						iconLi.onmousedown = function() {
 							var icon = this.getAttribute ("OC:iconname");
-							var img document.getElementById ("icon." + icon);
+							var img = document.getElementById ("icon." + icon);
 							if (img != undefined)
 							{
 								img.src = "/images/icons/down/" + icon;
@@ -143,7 +143,7 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 						}
 						iconLi.onmouseup = function() {
 							var icon = this.getAttribute ("OC:iconname");
-							var img document.getElementById ("icon." + icon);
+							var img = document.getElementById ("icon." + icon);
 							if (img != undefined)
 							{
 								img.src = "/images/icons/down/" + icon;
