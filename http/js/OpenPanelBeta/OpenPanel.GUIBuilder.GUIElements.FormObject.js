@@ -704,6 +704,17 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		clearDiv.style.cssText = "clear:both;";
 		targetDiv.appendChild(clearDiv);
 		$j("#firstForm_SingleColumnFormRenderer input")[0].focus();
+		OpenPanel.KeyboardHandler.add ("esc", function(){
+			hook.fields = undefined;
+			OpenPanel.KeyboardHandler.remove ("esc");
+			OpenPanel.KeyboardHandler.remove ("enter");
+			OpenPanel.GUIBuilder.deletePopUp();
+		}
+		OpenPanel.KeyboardHandler.add ("enter", function(){
+			OpenPanel.KeyboarHandler.remove ("esc");
+			OpenPanel.KeyboarHandler.remove ("enter");
+			hook.fields.submit();
+		}
 	},
 	
 	
