@@ -146,7 +146,7 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 							var img = document.getElementById ("icon." + icon);
 							if (img != undefined)
 							{
-								img.src = "/images/icons/down/" + icon;
+								img.src = "/images/icons/" + icon;
 							}
 						}
 						tdMain.appendChild(cl);
@@ -210,8 +210,7 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 						} else {
 							iconLi.onclick = function() {
 								this.onmouseup();
-								childObject.onclick();
-							}
+								childObject.onclick;
 						}
 						
 						this.itemElements[childObject.name] = iconLi;
