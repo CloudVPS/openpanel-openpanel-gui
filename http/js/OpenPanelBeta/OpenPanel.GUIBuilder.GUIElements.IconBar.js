@@ -210,7 +210,8 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 						} else {
 							iconLi.onclick = function() {
 								this.onmouseup();
-								childObject.onclick;
+								childObject.onclick();
+							}
 						}
 						
 						this.itemElements[childObject.name] = iconLi;
