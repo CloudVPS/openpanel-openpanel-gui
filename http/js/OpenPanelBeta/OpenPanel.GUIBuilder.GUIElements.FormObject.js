@@ -449,11 +449,13 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		} else {
 			if (this.controller.dataManager.checkQuotum(this.openCoreObject.name) == true) {
 				
-				var createOne = document.createElement("span");
+				var createOne;
 				if (textOnly == true) {
-					createOne.innerHTML = "<b>Click here to create one.</b>";
-					createOne.setAttribute("class", "createOneSpan");
+					createOne = document.createElement("div");
+					createOne.innerHTML = "Create " + openCoreObject.title;
+					this.controller.guiBuilder.renderButton (createOne);
 				} else {
+					createOne = document.createElement("span");
 					var addButton = document.createElement("div");
 					var addButtonClass = displayOnly==true?"addButtonDisabled":"addButton";
 					addButton.setAttribute("class", addButtonClass);
