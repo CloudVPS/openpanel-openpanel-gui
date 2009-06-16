@@ -53,18 +53,29 @@ OpenPanel.GUIBuilder.FormElement.Base.prototype = {
 			this.labelElement.innerHTML = "";
 		} else {
 			this.labelElement = document.createElement("div");
+			this.labelElement.onclick = function() { }
+			this.labelElement.onmousedown = function() { }
 		}
 		if (this.hidelabel)
 		{
-			this.labelElement.innerHTML = "&nbsp;";
+			var textNode = document.createTextNode ("&nbsp;");
+			this.labelEement.appendChild (textNode);
+			this.labelElement.style.paddingLeft = "0px";
+			this.labelElement.style.width = "4px";
 			return this.labelElement;
 		}
+		
+		var labelString = this.description;
+		
 		this.labelElement.innerHTML = this.description;
 		if(this.form.hideAsterisks == false && this.hideAsterisk == false){
 			if(this.readOnly == false && this.form.isCreate == true){
-				this.labelElement.innerHTML+= this.required == true?" *":"";
+				labelString += this.required == true?" *":"";
 			}
 		}
+		labelString += ":";
+		var textNode = document.createTextNode (labelString);
+		this.labelElement.appendChild (textNode);
 		this.labelElement.innerHTML+=":";
 		this.labelElement.className = "labelElement";
 		return this.labelElement;
