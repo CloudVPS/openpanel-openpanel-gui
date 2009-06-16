@@ -433,6 +433,7 @@ html > body #saveButtonHolder {
 #iconBar table TD {
 	text-align:center;
 	vertical-align:top;
+	cursor:default;
 }
 
 #iconbarText{
