@@ -53,9 +53,10 @@ OpenPanel.GUIBuilder.FormElement.Base.prototype = {
 			this.labelElement.innerHTML = "";
 		} else {
 			this.labelElement = document.createElement("div");
-			this.labelElement.onclick = function() { }
-			this.labelElement.onmousedown = function() { }
 		}
+		this.labelElement.onclick = function() { return true; }
+		this.labelElement.onmousedown = function() { return true; }
+		this.labelElement.style.cursor = "default";
 		if (this.hidelabel)
 		{
 			var textNode = document.createTextNode ("");
