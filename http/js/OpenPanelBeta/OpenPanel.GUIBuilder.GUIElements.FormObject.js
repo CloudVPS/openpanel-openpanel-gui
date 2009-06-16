@@ -708,13 +708,11 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 			hook.fields = undefined;
 			OpenPanel.KeyboardHandler.remove ("esc");
 			OpenPanel.KeyboardHandler.remove ("enter");
-			OpenPanel.GUIBuilder.deletePopUp();
-		}
+			OpenPanel.GUIBuilder.deletePopUp();});
 		OpenPanel.KeyboardHandler.add ("enter", function(){
 			OpenPanel.KeyboarHandler.remove ("esc");
 			OpenPanel.KeyboarHandler.remove ("enter");
-			hook.fields.submit();
-		}
+			hook.fields.submit();});
 	},
 	
 	
