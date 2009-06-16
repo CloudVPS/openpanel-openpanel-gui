@@ -497,7 +497,7 @@ html > body > #iconbarIcon, #iconbarText{
 }
 
 .classDescription, .classIcon {
-	cursor: pointer;
+	cursor: default;
 	text-align: center;
 }
 
