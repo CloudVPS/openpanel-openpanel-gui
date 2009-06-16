@@ -498,7 +498,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 						var explanationElement = document.createElement("div");
 						explanationElement.className = "explanation";
 						createOne.appendChild(explanationElement);
-						explanationElement.innerHTML = "<br>"+this.openCoreObject.classInfo["class"].explanation;
+						explanationElement.innerHTML = "<br>"+this.openCoreObject.classInfo["class"].explanation+"<br>";
 						this.gridDiv.appendChild(explanationElement);
 					}	
 				}
