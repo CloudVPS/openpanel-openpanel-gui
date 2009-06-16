@@ -62,7 +62,7 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 		var parameters = this.openCoreObject.getClassInfo().structure.parameters;
 		var createObject = {};
 		var classInfo = this.openCoreObject.getClassInfo();
-		
+
 		for(var key in parameters){
 			var parameter = parameters[key];
 			if (!(key=="id" && classInfo["class"].indexing=="auto") && parameter.gridhide!=true) {
@@ -70,7 +70,7 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 			}
 		}
 		this.grid = new OpenPanel.GUIBuilder.GUIElements.Grid();
-		this.grid.create(this.gridDiv,createObject,600, classInfo.gridheight);
+		this.grid.create(this.gridDiv,createObject,600, classInfo["class"].gridheight);
       	this.grid.setGrid (instances);
 		this.grid.render = function(){ }
 	},
