@@ -128,16 +128,16 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 						trElement.appendChild(tdMain);
 						
 						var cl = document.createElement("DIV");
+						var iconName = "" + childObject.classInfo["class"].uuid + ".png";
 						cl.id = 'iconbarIcon';
 						cl.setAttribute("class", "classIcon");
+						cl.setAttribute("xiconname", "" + iconName);
 						cl.innerHTML = "<img src=\"/images/icons/"+ iconName + "\"/><br\>";
 						cl.onmousedown = function() {
-							var iconName = "" + childObject.classInfo["class"].uuid + ".png";
-							this.innerHTML = "<img src=\"/images/icons/down/" + iconName + "\"/><br\>";
+							this.innerHTML = "<img src=\"/images/icons/down/" + this.xiconname + "\"/><br\>";
 						}
 						cl.onmouseup = function() {
-							var iconName = "" + childObject.classInfo["class"].uuid + ".png";
-							this.innerHTML = "<img src=\"/images/icons/"+ iconName + "\"/><br\>";
+							this.innerHTML = "<img src=\"/images/icons/"+ this.xiconname + "\"/><br\>";
 						}
 						tdMain.appendChild(cl);
 						
