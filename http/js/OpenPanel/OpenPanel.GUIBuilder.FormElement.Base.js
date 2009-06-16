@@ -59,7 +59,7 @@ OpenPanel.GUIBuilder.FormElement.Base.prototype = {
 		if (this.hidelabel)
 		{
 			var textNode = document.createTextNode ("&nbsp;");
-			this.labelEement.appendChild (textNode);
+			this.labelElement.appendChild (textNode);
 			this.labelElement.style.paddingLeft = "0px";
 			this.labelElement.style.width = "4px";
 			return this.labelElement;
