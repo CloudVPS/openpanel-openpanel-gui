@@ -712,7 +712,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		OpenPanel.KeyboardHandler.add ("enter", function(){
 			OpenPanel.KeyboarHandler.remove ("esc");
 			OpenPanel.KeyboarHandler.remove ("enter");
-			hook.fields.submit();});
+			hook.fields.submit();}, {'disable_in_input':true});
 	},
 	
 	
