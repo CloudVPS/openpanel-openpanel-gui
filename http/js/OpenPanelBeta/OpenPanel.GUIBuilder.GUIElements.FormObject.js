@@ -452,7 +452,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 				var createOne;
 				if (textOnly == true) {
 					createOne = document.createElement("div");
-					createOne.innerHTML = "Create " + openCoreObject.title;
+					createOne.innerHTML = "Create " + this.openCoreObject.title;
 					this.controller.guiBuilder.renderButton (createOne);
 				} else {
 					createOne = document.createElement("span");
