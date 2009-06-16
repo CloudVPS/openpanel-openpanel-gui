@@ -703,6 +703,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		var clearDiv = document.createElement("div");
 		clearDiv.style.cssText = "clear:both;";
 		targetDiv.appendChild(clearDiv);
+		$j("#firstForm_SingleColumnFormRenderer input")[0].focus();
 	},
 	
 	
