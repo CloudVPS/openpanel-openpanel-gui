@@ -43,6 +43,8 @@ OpenPanel.GUIBuilder.SingleColumnFormRenderer.prototype = {
 					label.innerHTML = "&nbsp;";
 				}
 				label.className = "labelElement";
+				label.onclick = function() { return false; }
+				label.onmousedown = function() { return false; }
 			}
 			var field = formElement.renderField();
 			
