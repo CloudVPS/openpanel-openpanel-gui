@@ -131,13 +131,23 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 						var iconName = "" + childObject.classInfo["class"].uuid + ".png";
 						cl.id = 'iconbarIcon';
 						cl.setAttribute("class", "classIcon");
-						cl.setAttribute("OC:iconname", "" + iconName);
-						cl.innerHTML = "<img src=\"/images/icons/"+ iconName + "\"/><br\>";
-						cl.onmousedown = function() {
-							this.innerHTML = "<img src=\"/images/icons/down/" + this.getAttribute('OC:iconname') + "\"/><br\>";
+						cl.innerHTML = "<img id=\"icon." + iconName + "\" src=\"/images/icons/"+ iconName + "\"/><br\>";
+						iconLi.setAttribute("OC:iconname", "" + iconName);
+						iconLi.onmousedown = function() {
+							var icon = this.getAttribute ("OC:iconname");
+							var img document.getElementById ("icon." + icon);
+							if (img != undefined)
+							{
+								img.src = "/images/icons/down/" + icon;
+							}
 						}
-						cl.onmouseup = function() {
-							this.innerHTML = "<img src=\"/images/icons/"+ this.getAttribute('OC:iconname') + "\"/><br\>";
+						iconLi.onmouseup = function() {
+							var icon = this.getAttribute ("OC:iconname");
+							var img document.getElementById ("icon." + icon);
+							if (img != undefined)
+							{
+								img.src = "/images/icons/down/" + icon;
+							}
 						}
 						tdMain.appendChild(cl);
 						
