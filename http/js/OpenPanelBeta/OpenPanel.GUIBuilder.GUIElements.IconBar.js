@@ -130,7 +130,7 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 						var cl = document.createElement("DIV");
 						cl.id = 'iconbarIcon';
 						cl.setAttribute("class", "classIcon");
-						var iconName = "" + childObject.classInfo["class"].uuid + ".png;
+						var iconName = "" + childObject.classInfo["class"].uuid + ".png";
 						cl.innerHTML = "<img src=\"/images/icons/"+ iconName + "\"/><br\>";
 						cl.onmousedown = function() {
 							this.innerHTML = "<img src=\"/images/icons/down/" + iconName + "\"/><br\>";
