@@ -53,6 +53,7 @@ OpenPanel.GUIBuilder.FormElement.Base.prototype = {
 			this.labelElement.innerHTML = "";
 		} else {
 			this.labelElement = document.createElement("div");
+			this.labelElement.className = "labelElement";
 		}
 		this.labelElement.onclick = function() { return true; }
 		this.labelElement.onmousedown = function() { return true; }
@@ -76,7 +77,6 @@ OpenPanel.GUIBuilder.FormElement.Base.prototype = {
 		labelString += ":";
 		var textNode = document.createTextNode (labelString);
 		this.labelElement.appendChild (textNode);
-		this.labelElement.className = "labelElement";
 		return this.labelElement;
 	},
 	
