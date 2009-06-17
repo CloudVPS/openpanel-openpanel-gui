@@ -280,7 +280,7 @@ OpenPanel.GUIBuilder = {
 		this.goToAnchor(this.lastAnchor);
 	},
 	
-	renderButton : function(el){
+	renderButton : function(el,isdeflt){
 		var buttonText = el.innerHTML;
 		el.innerHTML = "";
 		var button = document.createElement("div");
@@ -311,16 +311,34 @@ OpenPanel.GUIBuilder = {
 		center.style.cursor = "default";
 		button.appendChild(t);
 		
-		button.onmousedown = function(){
-			left.className = "buttonLeftOver";
-			right.className = "buttonRightOver";
-			center.className = "buttonCenterOver";
+		var renderDefaultButton = (isdflt!=undefined)?isdflt:false;
+		
+		if (renderDefaultButton)
+		{
+			button.onmouseup = function(){
+				left.className = "buttonLeftOver";
+				right.className = "buttonRightOver";
+				center.className = "buttonCenterOver";
+			}
+		
+			button.onmousedown = function(){
+				left.className = "buttonLeft";
+				right.className = "buttonRight";
+				center.className = "buttonCenter";
 		}
-	
-		button.onmouseup = function(){
-			left.className = "buttonLeft";
-			right.className = "buttonRight";
-			center.className = "buttonCenter";
+		else
+		{
+			button.onmousedown = function(){
+				left.className = "buttonLeftOver";
+				right.className = "buttonRightOver";
+				center.className = "buttonCenterOver";
+			}
+		
+			button.onmouseup = function(){
+				left.className = "buttonLeft";
+				right.className = "buttonRight";
+				center.className = "buttonCenter";
+			}
 		}
 		button.onmouseup();
 	}

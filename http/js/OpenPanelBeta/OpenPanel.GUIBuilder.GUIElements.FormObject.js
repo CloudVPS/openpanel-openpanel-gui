@@ -680,10 +680,11 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		this.fields.build(true);
 		
 		var d = document.createElement("div");
+		d.setAttribute ("id", "modalSaveButton");
 		d.style.cssText = "float: right;padding-top: 11px; padding-left:12px;";
 		d.appendChild(document.createTextNode("Save"));
 		targetDiv.appendChild(d);
-		this.controller.guiBuilder.renderButton(d);
+		this.controller.guiBuilder.renderButton(d,true);
 		var hook = this;
 		d.onclick = function(){
 			OpenPanel.KeyboardHandler.clearCancel();
@@ -692,6 +693,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		}
 		
 		var d = document.createElement("div");
+		d.setAttribute ("id", "modalCancelButton");
 		d.style.cssText = "float: right;padding-top: 11px;";
 		d.appendChild(document.createTextNode("Cancel"));
 		d.onclick = function(){
@@ -710,11 +712,15 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		var firstInput = $j("#firstForm_SingleColumnFormRenderer input")[0];
 		if (firstInput != undefined) firstInput.focus();
 		OpenPanel.KeyboardHandler.setCancel (function(){
+			var b = $j("#modalCancelButton");
+			if (b != undefined) b.onmousedown();
 			hook.fields = undefined;
 			OpenPanel.KeyboardHandler.clearOk();
 			OpenPanel.KeyboardHandler.clearCancel();
 			OpenPanel.GUIBuilder.deletePopUp();});
 		OpenPanel.KeyboardHandler.setOk (function(){
+			var b = $j("#modalOkButton");
+			if (b != undefined) b.onmousedown();
 			OpenPanel.KeyboardHandler.clearOk();
 			OpenPanel.KeyboardHandler.clearCancel();
 			hook.fields.submit();});
