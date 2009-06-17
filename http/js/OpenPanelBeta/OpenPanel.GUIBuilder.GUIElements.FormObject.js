@@ -711,12 +711,12 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		if (firstInput != undefined) firstInput.focus();
 		OpenPanel.KeyboardHandler.setCancel (function(){
 			hook.fields = undefined;
-			OpenPanel.KeyboardHandler.remove ("esc");
-			OpenPanel.KeyboardHandler.remove ("enter");
+			OpenPanel.KeyboardHandler.clearOk();
+			OpenPanel.KeyboardHandler.clearCancel();
 			OpenPanel.GUIBuilder.deletePopUp();});
 		OpenPanel.KeyboardHandler.setOk (function(){
-			OpenPanel.KeyboardHandler.remove ("esc");
-			OpenPanel.KeyboardHandler.remove ("enter");
+			OpenPanel.KeyboardHandler.clearOk();
+			OpenPanel.KeyboardHandler.clearCancel();
 			hook.fields.submit();});
 	},
 	
