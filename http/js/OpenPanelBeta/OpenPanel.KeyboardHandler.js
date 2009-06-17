@@ -14,7 +14,7 @@ OpenPanel.KeyboardHandler = {
 	{
 		var hook = this;
 		this.Shortcuts.add ("esc",function(){hook.cancelfunc();});
-		this.Shortcuts.add ("enter",function(){console.log('enter'); hook.okfunc();},{'disable_in_input':true});
+		this.Shortcuts.add ("enter",function(){console.log('enter'); hook.okfunc();},{'disable_in_input':false});
 		this.initialized = true;
 	},
 	
