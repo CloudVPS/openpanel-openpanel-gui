@@ -692,6 +692,8 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 			hook.fields.submit();
 		}
 		
+		var saveButton = d;
+		
 		var d = document.createElement("div");
 		d.setAttribute ("id", "modalCancelButton");
 		d.style.cssText = "float: right;padding-top: 11px;";
@@ -706,21 +708,21 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		this.controller.guiBuilder.renderButton(d);
 		targetDiv.appendChild(d);
 		
+		var cancelButton = d;
+		
 		var clearDiv = document.createElement("div");
 		clearDiv.style.cssText = "clear:both;";
 		targetDiv.appendChild(clearDiv);
 		var firstInput = $j("#firstForm_SingleColumnFormRenderer input")[0];
 		if (firstInput != undefined) firstInput.focus();
 		OpenPanel.KeyboardHandler.setCancel (function(){
-			var b = $j("#modalCancelButton");
-			if (b != undefined) {console.log(b); b.mousedown();}
+			cancelButton.onmousedown();
 			hook.fields = undefined;
 			OpenPanel.KeyboardHandler.clearOk();
 			OpenPanel.KeyboardHandler.clearCancel();
 			OpenPanel.GUIBuilder.deletePopUp();});
 		OpenPanel.KeyboardHandler.setOk (function(){
-			var b = $j("#modalSaveButton");
-			if (b != undefined) b.mousedown();
+			saveButton.onmousedown();
 			OpenPanel.KeyboardHandler.clearOk();
 			OpenPanel.KeyboardHandler.clearCancel();
 			hook.fields.submit();});
