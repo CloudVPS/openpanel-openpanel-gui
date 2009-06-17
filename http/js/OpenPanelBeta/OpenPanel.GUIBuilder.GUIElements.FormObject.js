@@ -713,14 +713,14 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		if (firstInput != undefined) firstInput.focus();
 		OpenPanel.KeyboardHandler.setCancel (function(){
 			var b = $j("#modalCancelButton");
-			if (b != undefined) {console.log(b); b.childNodes[0].onmousedown();}
+			if (b != undefined) {console.log(b); b.mousedown();}
 			hook.fields = undefined;
 			OpenPanel.KeyboardHandler.clearOk();
 			OpenPanel.KeyboardHandler.clearCancel();
 			OpenPanel.GUIBuilder.deletePopUp();});
 		OpenPanel.KeyboardHandler.setOk (function(){
 			var b = $j("#modalOkButton");
-			if (b != undefined) b.childNodes[0].onmousedown();
+			if (b != undefined) b.mousedown();
 			OpenPanel.KeyboardHandler.clearOk();
 			OpenPanel.KeyboardHandler.clearCancel();
 			hook.fields.submit();});
