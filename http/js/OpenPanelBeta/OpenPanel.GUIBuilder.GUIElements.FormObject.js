@@ -719,7 +719,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 			OpenPanel.KeyboardHandler.clearCancel();
 			OpenPanel.GUIBuilder.deletePopUp();});
 		OpenPanel.KeyboardHandler.setOk (function(){
-			var b = $j("#modalOkButton");
+			var b = $j("#modalSaveButton");
 			if (b != undefined) b.mousedown();
 			OpenPanel.KeyboardHandler.clearOk();
 			OpenPanel.KeyboardHandler.clearCancel();
