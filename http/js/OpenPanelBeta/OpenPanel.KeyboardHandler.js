@@ -8,7 +8,7 @@
 OpenPanel.KeyboardHandler = {
 	cancelfunc: {},
 	okfunc: {},
-	initialized: false;
+	initialized: false,
 	
 	init: function()
 	{
