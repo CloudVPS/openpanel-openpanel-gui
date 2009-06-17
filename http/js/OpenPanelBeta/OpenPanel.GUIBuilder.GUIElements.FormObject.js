@@ -717,13 +717,15 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		if (firstInput != undefined) firstInput.focus();
 		OpenPanel.KeyboardHandler.setCancel (function(){
 			console.log (cancelButton);
-			cancelButton.onclick();
+			var b = cancelButton.childNodes[0];
+			if (b!=undefined) b.onmousedown();
 			hook.fields = undefined;
 			OpenPanel.KeyboardHandler.clearOk();
 			OpenPanel.KeyboardHandler.clearCancel();
 			OpenPanel.GUIBuilder.deletePopUp();});
 		OpenPanel.KeyboardHandler.setOk (function(){
-			saveButton.onclick();
+			var b = saveButton.childNodes[0];
+			if (b!=undefined) b.onmousedown();
 			OpenPanel.KeyboardHandler.clearOk();
 			OpenPanel.KeyboardHandler.clearCancel();
 			hook.fields.submit();});
