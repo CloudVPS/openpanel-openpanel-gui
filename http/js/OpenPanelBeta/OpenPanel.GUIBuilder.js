@@ -311,7 +311,7 @@ OpenPanel.GUIBuilder = {
 		center.style.cursor = "default";
 		button.appendChild(t);
 		
-		var renderDefaultButton = (isdflt!=undefined)?isdflt:false;
+		var renderDefaultButton = (isdeflt!=undefined)?isdeflt:false;
 		
 		if (renderDefaultButton)
 		{
