@@ -4,7 +4,46 @@
  * By Binny V A
  * License : BSD
  */
+ 
 OpenPanel.KeyboardHandler = {
+	cancelfunc: {},
+	okfunc: {},
+	initialized: false;
+	
+	init: function()
+	{
+		var hook = this;
+		this.Shortcuts.add ("esc",function(){hook.cancelfunc();});
+		this.Shortcuts.add ("enter",function(){console.log('enter'); hook.okfunc();},{'disable_in_input':true});
+		this.initialized = true;
+	}
+	
+	setCancel: function (callback)
+	{
+		if (! this.initialized) this.init ();
+		this.cancelfunc = callback;
+	},
+	
+	setOk : function (callback)
+	{
+		if (! this.initialized) this.init ();
+		this.okfunc = callback;
+	},
+	
+	clearCancel: function()
+	{
+		if (! this.initialized) this.init ();
+		this.cancelfunc = function() {}
+	},
+	
+	clearOk: function()
+	{
+		if (! this.initialized) this.init ();
+		this.okfunc = function() {}
+	},
+}
+ 
+OpenPanel.KeyboardHandler.Shortcuts = {
 	'all_shortcuts':{},//All the shortcuts are stored in this array
 	'add': function(shortcut_combination,callback,opt) {
 		//Provide a set of default options

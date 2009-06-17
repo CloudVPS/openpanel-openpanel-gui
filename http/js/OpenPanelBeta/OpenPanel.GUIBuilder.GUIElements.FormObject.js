@@ -686,8 +686,8 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		this.controller.guiBuilder.renderButton(d);
 		var hook = this;
 		d.onclick = function(){
-			OpenPanel.KeyboardHandler.remove ("esc");
-			OpenPanel.KeyboardHandler.remove ("enter");
+			OpenPanel.KeyboardHandler.clearCancel();
+			OpenPanel.KeyboardHandler.clearOk();
 			hook.fields.submit();
 		}
 		
@@ -695,8 +695,8 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		d.style.cssText = "float: right;padding-top: 11px;";
 		d.appendChild(document.createTextNode("Cancel"));
 		d.onclick = function(){
-			OpenPanel.KeyboardHandler.remove ("esc");
-			OpenPanel.KeyboardHandler.remove ("enter");
+			OpenPanel.KeyboardHandler.clearCancel();
+			OpenPanel.KeyboardHandler.clearOk();
 			hook.fields = undefined;
 			OpenPanel.GUIBuilder.deletePopUp();
 			//targetDiv.parentNode.parentNode.removeChild(targetDiv.parentNode);
@@ -709,15 +709,15 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		targetDiv.appendChild(clearDiv);
 		var firstInput = $j("#firstForm_SingleColumnFormRenderer input")[0];
 		if (firstInput != undefined) firstInput.focus();
-		OpenPanel.KeyboardHandler.add ("esc", function(){
+		OpenPanel.KeyboardHandler.setCancel (function(){
 			hook.fields = undefined;
 			OpenPanel.KeyboardHandler.remove ("esc");
 			OpenPanel.KeyboardHandler.remove ("enter");
 			OpenPanel.GUIBuilder.deletePopUp();});
-		OpenPanel.KeyboardHandler.add ("enter", function(){
+		OpenPanel.KeyboardHandler.setOk (function(){
 			OpenPanel.KeyboardHandler.remove ("esc");
 			OpenPanel.KeyboardHandler.remove ("enter");
-			hook.fields.submit();}, {'disable_in_input':true});
+			hook.fields.submit();});
 	},
 	
 	
