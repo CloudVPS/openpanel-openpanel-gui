@@ -716,6 +716,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		var firstInput = $j("#firstForm_SingleColumnFormRenderer input")[0];
 		if (firstInput != undefined) firstInput.focus();
 		OpenPanel.KeyboardHandler.setCancel (function(){
+			console.log (cancelButton);
 			cancelButton.onmousedown();
 			hook.fields = undefined;
 			OpenPanel.KeyboardHandler.clearOk();
