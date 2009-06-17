@@ -325,6 +325,7 @@ OpenPanel.GUIBuilder = {
 				left.className = "buttonLeft";
 				right.className = "buttonRight";
 				center.className = "buttonCenter";
+			}
 		}
 		else
 		{
