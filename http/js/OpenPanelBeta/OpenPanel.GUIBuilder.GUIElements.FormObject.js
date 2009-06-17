@@ -707,7 +707,8 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		var clearDiv = document.createElement("div");
 		clearDiv.style.cssText = "clear:both;";
 		targetDiv.appendChild(clearDiv);
-		$j("#firstForm_SingleColumnFormRenderer input")[0].focus();
+		var firstInput = $j("#firstForm_SingleColumnFormRenderer input")[0];
+		if (firstInput != undefined) firstInput.focus();
 		OpenPanel.KeyboardHandler.add ("esc", function(){
 			hook.fields = undefined;
 			OpenPanel.KeyboardHandler.remove ("esc");
