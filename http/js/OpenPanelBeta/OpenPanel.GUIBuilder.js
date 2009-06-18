@@ -302,7 +302,7 @@ OpenPanel.GUIBuilder = {
 		var center = document.createElement("td");
 		var right = document.createElement("td");
 		var txtDiv = document.createElement("div");
-		txtDiv.class = "buttonText";
+		txtDiv.className = "buttonText";
 		var txt = document.createTextNode(buttonText);
 		txtDiv.appendChild (txt);
 		t.appendChild(tb);
