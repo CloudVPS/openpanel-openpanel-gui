@@ -454,7 +454,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 				if (textOnly == true) {
 					createOne = document.createElement("div");
 					createOne.innerHTML = "Set Up " + this.openCoreObject.title;
-					this.controller.guiBuilder.renderButton (createOne);
+					this.controller.guiBuilder.renderButton (createOne,false,true);
 				} else {
 					createOne = document.createElement("span");
 					var addButton = document.createElement("div");
@@ -647,7 +647,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 			for (var key in methods) {
 				var knopje = document.createElement("div");
 				knopje.innerHTML = methods[key].description;
-				this.controller.guiBuilder.renderButton(knopje);
+				this.controller.guiBuilder.renderButton(knopje,false,true);
 				contentDiv.appendChild(knopje);
 				knopje.onclick = function(){
 					hook.controller.action( 
