@@ -301,13 +301,16 @@ OpenPanel.GUIBuilder = {
 		var left = document.createElement("td");
 		var center = document.createElement("td");
 		var right = document.createElement("td");
+		var txtDiv = document.createElement("div");
+		txtDiv.class = "buttonText";
 		var txt = document.createTextNode(buttonText);
+		txtDiv.appendChild (txt);
 		t.appendChild(tb);
 		tb.appendChild(tr);
 		tr.appendChild(left);
 		tr.appendChild(center);
 		tr.appendChild(right);
-		center.appendChild(txt);
+		center.appendChild(txtDiv);
 		center.style.cursor = "default";
 		button.appendChild(t);
 		
