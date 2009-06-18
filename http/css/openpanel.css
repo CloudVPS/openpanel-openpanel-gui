@@ -903,9 +903,9 @@ li.tabDisabled {
 }
 
 #saveButton .buttonLeftOver {
-	background-image: none;
-	width: 0px;
-	height: 20px;
+	background: url(/images/gui/toolButtonLeft.png) no-repeat 0 -0px;
+	width: 14px;
+	height: 24px;
 }
 
 .buttonCenterOver {
@@ -932,16 +932,18 @@ li.tabDisabled {
 	margin-top: -3px;
 }
 
-.formButtonCenterOver > .guiButtonText {
+.formButtonCenterOver .guiButtonText {
 	margin-top: -3px;
 }
 
 #saveButton .buttonCenterOver {
-	margin-top: 2px;
-	background: url(/images/gui/savebutton.png) no-repeat 0 0;
-	height: 20px;
-	width: 69px;
-	font-size: 1px;
+	background: url(/images/gui/toolButtonCenter.png) no-repeat 0 0;
+	height: 23px;
+	font-family: Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
+	font-size: 11px;
+	padding-left: 8px;
+	padding-right: 8px;
+	padding-bottom: 2px;
 }
 
 .buttonRightOver {
@@ -957,9 +959,9 @@ li.tabDisabled {
 }
 
 #saveButton .buttonRightOver {
-	background-image: none;
-	height: 20px;
-	width: 0px;
+	background: url(/images/gui/toolButtonRight.png) no-repeat 0 0;
+	width: 14px;
+	height: 24px;
 }
 
 .generatedButton {

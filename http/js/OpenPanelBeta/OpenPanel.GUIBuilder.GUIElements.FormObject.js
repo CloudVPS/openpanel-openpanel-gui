@@ -342,8 +342,13 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		this.isUpdateable = isUpdateable;
 	},
 	
-	createMultiCreateOptionNew : function(){
-			
+	createMultiCreateOption : function(textOnly){
+		
+		if ((textOnly==undefined)||(textOnly==false))
+		{
+			this.createMultiCreateOptionOld();
+			return;
+		}
 		var metaObjects = this.controller.dataManager.getOpenCoreObjectsByMetaName(this.openCoreObject.name);
 		var available = {};
 		var canAdd = false;
@@ -359,20 +364,40 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 			}
 		}
 		
-		if(canAdd == true){
-			var createMultiple = document.createElement("button");
-			createMultiple.setAttribute("type", "button");
-			createMultiple.className = "createMultiple";
-			createMultiple.onmousedown = function(){
-				this.className = "createMultipleClick";
+		var tB = document.createElement("table");
+		tB.border = 0;
+		tB.cellPadding = 0;
+		tB.cellSpacing = 0;
+		tB.style.paddingTop = "10px";
+		var tBD = document.createElement ("tbody");
+		tB.appendChild(tBD);
+		var tR = document.createElement ("tr");
+		tBD.appendChild(tR);
+		
+		if (canAdd == true) {
+			for (var key in available) {
+				var metaObject = available[key];
+				var tD = document.createElement ("td");
+				tD.style.paddingRight = "10px";
+				var bdiv = document.createElement("div");
+				bdiv.innerHTML = "Set Up " + metaObject.title;
+				this.controller.guiBuilder.renderButton (bdiv,false,true);
+				bdiv.openCoreObject = metaObject;
+				var hook = this;
+				bdiv.onclick = function(){
+						hook.controller.action({
+							command: "ShowCreateInstanceFromFormObjectMeta",
+							formObject: hook,
+							openCoreObject: this.openCoreObject,
+							parentUUID: hook.parentUUID,
+							formObjectHolder: hook.formBuilder.formObjectHolder
+						});
+					}
+				tD.appendChild(bdiv);
+				tR.appendChild(tD);
 			}
-			
-			createMultiple.onmouseup = function(){
-				this.className = "createMultiple";
-			}
-			
-			var hook = this;
-			this.gridDiv.appendChild(createMultiple);
+			this.gridDiv.appendChild(tB);
+
 			
 			/*
 			for(var key in available){
@@ -387,7 +412,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		}
 	},
 	
-	createMultiCreateOption : function(){
+	createMultiCreateOptionOld : function(){
 			
 		var metaObjects = this.controller.dataManager.getOpenCoreObjectsByMetaName(this.openCoreObject.name);
 		var available = {};
@@ -453,6 +478,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 				var createOne;
 				if (textOnly == true) {
 					createOne = document.createElement("div");
+					createOne.style.paddingTop = "10px";
 					createOne.innerHTML = "Set Up " + this.openCoreObject.title;
 					this.controller.guiBuilder.renderButton (createOne,false,true);
 				} else {
@@ -493,11 +519,12 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 				*/
 				
 				if(textOnly == true){
-					if(this.openCoreObject.classInfo["class"].explanation != undefined){
+					var expln = this.openCoreObject.classInfo["class"].explanation;
+					if((expln != undefined)&&(expln != "")){
 						var explanationElement = document.createElement("div");
 						explanationElement.className = "explanation";
 						createOne.appendChild(explanationElement);
-						explanationElement.innerHTML = "<br>"+this.openCoreObject.classInfo["class"].explanation+"<br>";
+						explanationElement.innerHTML = "<br>"+expln;
 						this.gridDiv.appendChild(explanationElement);
 					}	
 				}
@@ -681,7 +708,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		var d = document.createElement("div");
 		d.setAttribute ("id", "modalSaveButton");
 		d.style.cssText = "float: right;padding-top: 11px; padding-left:12px;";
-		d.appendChild(document.createTextNode("Save"));
+		d.appendChild(document.createTextNode("Create"));
 		targetDiv.appendChild(d);
 		this.controller.guiBuilder.renderButton(d,true);
 		var hook = this;

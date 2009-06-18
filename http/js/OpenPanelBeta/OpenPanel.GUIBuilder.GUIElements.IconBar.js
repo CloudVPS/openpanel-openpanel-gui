@@ -94,13 +94,15 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 			};
 			*/
 			
+			var xcounter = 0;
+			
 			for(var key in sortedChildren){
 				var childObject = sortedChildren[key];
 				if (typeof(childObject) == "object") {
 					if (key != "spacer") {
 						var iconLi = document.createElement("td");
 						iconHolder.appendChild(iconLi);
-						iconLi.setAttribute("id", childObject.description);
+						iconLi.setAttribute("id", childObject.uuid);
 						iconLi.setAttribute("valign", "top");
 						
 						var tableElement = document.createElement("table");
@@ -208,6 +210,20 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 							}
 						} else {
 							iconLi.onclick = childObject.onclick;
+						}
+						
+						if (xcounter<10)
+						{
+							function mkclosure(x)
+							{
+								var li = x;
+								return function() {console.log(li); li.onclick();}
+							}
+							
+							var keystr = "alt+" + xcounter;
+							xcounter++;
+							console.log ("Setting keyboard handler " + keystr);
+							OpenPanel.KeyboardHandler.Shortcuts.add (keystr, mkclosure(iconLi));
 						}
 						
 						this.itemElements[childObject.name] = iconLi;
