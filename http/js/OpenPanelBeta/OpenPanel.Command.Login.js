@@ -14,6 +14,7 @@ OpenPanel.Command.Login  = {
 	loginDone : function(data, callBackArguments){
 		var actionObject = callBackArguments;
 		if(callBackArguments.header.errorid == 0){
+			OpenPanel.KeyboardHandler.init();
 			var rootObject = new OpenCore.DataManager.OpenCoreObject({}, "ROOT");
 			this.controller.currentUser = actionObject.callBackArguments.userName; // que? this is wrong
 			this.buildMainArea();

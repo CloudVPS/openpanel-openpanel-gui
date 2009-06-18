@@ -928,11 +928,11 @@ li.tabDisabled {
 	padding-bottom: 2px;
 }
 
-.guiButtonText {
+.formButtonCenter .guiButtonText {
 	margin-top: -3px;
 }
 
-td.formButtonCenterOver > .buttonText {
+.formButtonCenterOver > .guiButtonText {
 	margin-top: -3px;
 }
 
