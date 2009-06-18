@@ -41,6 +41,11 @@ OpenPanel.GUIBuilder.FormElement.Bool.prototype = {
 		}
 	},
 	
+	getValue : function() {
+		if (this.value != undefined) return this.value;
+		return false;
+	},
+	
 	enable : function(){
 		this.selectElement.removeAttribute("disabled");
 	},

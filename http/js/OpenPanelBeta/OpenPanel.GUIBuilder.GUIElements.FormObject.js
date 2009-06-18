@@ -716,19 +716,36 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		var firstInput = $j("#firstForm_SingleColumnFormRenderer input")[0];
 		if (firstInput != undefined) firstInput.focus();
 		OpenPanel.KeyboardHandler.setCancel (function(){
-			console.log (cancelButton);
 			var b = cancelButton.childNodes[0];
 			if (b!=undefined) b.onmousedown();
-			hook.fields = undefined;
-			OpenPanel.KeyboardHandler.clearOk();
-			OpenPanel.KeyboardHandler.clearCancel();
-			OpenPanel.GUIBuilder.deletePopUp();});
+			setTimeout (function() {
+				hook.fields = undefined;
+				OpenPanel.KeyboardHandler.clearOk();
+				OpenPanel.KeyboardHandler.clearCancel();
+				OpenPanel.GUIBuilder.deletePopUp();
+			},50);
+		});
 		OpenPanel.KeyboardHandler.setOk (function(){
 			var b = saveButton.childNodes[0];
 			if (b!=undefined) b.onmousedown();
-			OpenPanel.KeyboardHandler.clearOk();
-			OpenPanel.KeyboardHandler.clearCancel();
-			hook.fields.submit();});
+			setTimeout (function() {
+				if (b!=undefined)
+				{
+					b.onmouseup();
+					setTimeout (function() {
+						OpenPanel.KeyboardHandler.clearOk();
+						OpenPanel.KeyboardHandler.clearCancel();
+						hook.fields.submit();
+					},200);
+				}
+				else
+				{
+					OpenPanel.KeyboardHandler.clearOk();
+					OpenPanel.KeyboardHandler.clearCancel();
+					hook.fields.submit();
+				}
+			},50);
+		});
 	},
 	
 	
