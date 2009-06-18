@@ -15,6 +15,10 @@ OpenPanel.KeyboardHandler = {
 		var hook = this;
 		this.Shortcuts.add ("esc",function(){hook.cancelfunc();});
 		this.Shortcuts.add ("enter",function(){console.log('enter'); hook.okfunc();},{'disable_in_input':false});
+		this.Shortcuts.add ("Meta+n",function(){
+			var bt document.getElementById("itemListAddButton");
+			if (bt != undefined) bt.onclick();
+		}
 		this.initialized = true;
 	},
 	

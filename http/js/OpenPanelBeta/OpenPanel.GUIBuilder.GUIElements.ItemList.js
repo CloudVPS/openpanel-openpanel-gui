@@ -91,6 +91,7 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 					
 					// create create button
 					createButton.setAttribute("class", "addButton");
+					createButton.setAttribute("id", "itemListAddButton");
 					var hook = this;
 					createButton.onclick = function(){
 						hook.createInstance();
