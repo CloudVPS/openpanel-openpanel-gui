@@ -18,7 +18,7 @@ OpenPanel.KeyboardHandler = {
 		this.Shortcuts.add ("Meta+n",function(){
 			var bt document.getElementById("itemListAddButton");
 			if (bt != undefined) bt.onclick();
-		}
+			});
 		this.initialized = true;
 	},
 	
