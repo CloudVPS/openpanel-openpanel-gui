@@ -317,7 +317,6 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 			
 					// no instances, show create new instance
 					//console.log("no instances");
-					console.log (this.openCoreObject);
 					var msg = this.openCoreObject.classInfo["class"].emptytext;
 					if (msg==undefined) msg = "No objects found";
 					var pElement = document.createElement("p");
