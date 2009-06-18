@@ -817,8 +817,16 @@ li.tabDisabled {
 .windowButtonHolder {
 	text-align: right;
 }
+
 .buttonLeft {
 	background: url(/images/gui/buttonLeft.png) no-repeat 0 -24px;
+	width: 14px;
+	height: 24px;
+	cursor: default;
+}
+
+.formButtonLeft {
+	background: url(/images/gui/formButtonLeft.png) no-repeat 0 -24px;
 	width: 14px;
 	height: 24px;
 	cursor: default;
@@ -842,6 +850,18 @@ li.tabDisabled {
 	cursor: default;
 }
 
+.formButtonCenter {
+	background: url(/images/gui/formButtonCenter.png) repeat-x 0 -24px;
+	height: 23px;
+	font-size: 11px;
+	color: #000000;
+	padding-left: 8px;
+	padding-right: 8px;
+	padding-bottom: 2px;
+	font-family: Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
+	cursor: default;
+}
+
 #saveButton .buttonCenter {
 	padding-top: 2px;
 	background: url(/images/gui/savebutton.png) no-repeat 0 0;
@@ -857,6 +877,13 @@ li.tabDisabled {
 	cursor: default;
 }
 
+.formButtonRight {
+	background: url(/images/gui/formButtonRight.png) no-repeat 0 -24px;
+	width: 14px;
+	height: 24px;
+	cursor: default;
+}
+
 #saveButton .buttonRight {
 	background-image: none;
 	height: 20px;
@@ -865,6 +892,12 @@ li.tabDisabled {
 
 .buttonLeftOver {
 	background: url(/images/gui/buttonLeft.png) no-repeat 0 -0px;
+	width: 14px;
+	height: 24px;
+}
+
+.formButtonLeftOver {
+	background: url(/images/gui/formButtonLeft.png) no-repeat 0 -0px;
 	width: 14px;
 	height: 24px;
 }
@@ -885,6 +918,16 @@ li.tabDisabled {
 	padding-bottom: 2px;
 }
 
+.formButtonCenterOver {
+	background: url(/images/gui/formButtonCenter.png) repeat-x 0 0px;
+	height: 23px;
+	font-family: Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
+	font-size: 11px;
+	padding-left: 8px;
+	padding-right: 8px;
+	padding-bottom: 2px;
+}
+
 #saveButton .buttonCenterOver {
 	margin-top: 2px;
 	background: url(/images/gui/savebutton.png) no-repeat 0 0;
@@ -895,6 +938,12 @@ li.tabDisabled {
 
 .buttonRightOver {
 	background: url(/images/gui/buttonRight.png) no-repeat 0 0;
+	width: 14px;
+	height: 24px;
+}
+
+.formButtonRightOver {
+	background: url(/images/gui/formButtonRight.png) no-repeat 0 0;
 	width: 14px;
 	height: 24px;
 }

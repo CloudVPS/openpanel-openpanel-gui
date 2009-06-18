@@ -280,7 +280,7 @@ OpenPanel.GUIBuilder = {
 		this.goToAnchor(this.lastAnchor);
 	},
 	
-	renderButton : function(el,isdeflt){
+	renderButton : function(el,isdeflt,issmall){
 		var buttonText = el.innerHTML;
 		el.innerHTML = "";
 		var button = document.createElement("div");
@@ -312,33 +312,45 @@ OpenPanel.GUIBuilder = {
 		button.appendChild(t);
 		
 		var renderDefaultButton = (isdeflt!=undefined)?isdeflt:false;
+		var renderSmallerButton = (issmall!=undefined)?issmall:false;
+		
+		var bL = "buttonLeft";
+		var bR = "buttonRight";
+		var bC = "buttonCenter";
+		
+		if (renderSmallerButton)
+		{
+			bL = "formButtonLeft";
+			bR = "formButtonRight";
+			bC = "formButtonCenter";
+		}
 		
 		if (renderDefaultButton)
 		{
 			button.onmouseup = function(){
-				left.className = "buttonLeftOver";
-				right.className = "buttonRightOver";
-				center.className = "buttonCenterOver";
+				left.className = bL + "Over";
+				right.className = bR + "Over";
+				center.className = bC + "Over";
 			}
 		
 			button.onmousedown = function(){
-				left.className = "buttonLeft";
-				right.className = "buttonRight";
-				center.className = "buttonCenter";
+				left.className = bL;
+				right.className = bR;
+				center.className = bC;
 			}
 		}
 		else
 		{
 			button.onmousedown = function(){
-				left.className = "buttonLeftOver";
-				right.className = "buttonRightOver";
-				center.className = "buttonCenterOver";
+				left.className = bL + "Over";
+				right.className = bR + "Over";
+				center.className = bC + "Over";
 			}
 		
 			button.onmouseup = function(){
-				left.className = "buttonLeft";
-				right.className = "buttonRight";
-				center.className = "buttonCenter";
+				left.className = bL;
+				right.className = bR;
+				center.className = bC;
 			}
 		}
 		button.onmouseup();
