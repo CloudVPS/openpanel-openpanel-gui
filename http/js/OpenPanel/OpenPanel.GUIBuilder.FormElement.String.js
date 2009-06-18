@@ -16,7 +16,14 @@ OpenPanel.GUIBuilder.FormElement.String.prototype = {
 			this.inputElement.setAttribute("type", "text");
 			this.inputElement.setAttribute("name", this.name);
 			this.inputElement.setAttribute("id", this.name);
-			this.inputElement.setAttribute("value", "");
+			if (this.value != undefined)
+			{
+				this.inputElement.setAttribute("value", this.value);
+			}
+			else
+			{
+				this.inputElement.setAttribute("value", "");
+			}
 			this.inputElement.setAttribute("tabIndex", OpenPanel.GUIBuilder.FormElement.Base.getNextTabIndex());
 			this.setStyle();
 			var hook = this;
