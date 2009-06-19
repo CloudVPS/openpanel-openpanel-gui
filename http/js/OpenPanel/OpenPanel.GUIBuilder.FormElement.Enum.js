@@ -46,6 +46,10 @@ OpenPanel.GUIBuilder.FormElement.Enum.prototype = {
 	},
 	
 	getValue : function(){
+		if (this.selectElement != undefined)
+		{
+			this.value = this.selectElement.value;
+		}
 		return this.value;
 	},
 	
