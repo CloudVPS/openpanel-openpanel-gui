@@ -5,6 +5,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 		this.keys = ["item"];
 		this.totalWidth = 301;
 		this.haveActiveSelection = false;
+		this.focusCatcher = {};
 	}
 	
 	/// Bind an OpenPanelGrid object to a DOM node.
@@ -23,6 +24,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			this.keys = new Array();
 			this.rowsByID = new Array();
 			this.selectedImage = "url(/images/gui/selected.png)";
+			this.selectedImageUnfocused = "url(/images/gui/selectedu.png)";
 			this.selectedColor = "#000000";
 			this.selectedWeight = "normal";
 			this.titleImage = "url(/images/gui/gridview_title_bg.png)";
@@ -31,6 +33,8 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			this.borderLeft = "#888888";
 			this.contentBorderTop = "0px";
 			this.selectedShadow = "";
+			this.focus = false;
+			this.selectedDOMNode = {};
 			
 			var tabWidthWeight = 0;
 			var count = 0;
@@ -72,6 +76,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 				{
 					color = "#d0d7e2";
 					this.selectedImage = "url(/images/gui/selected2.png)";
+					this.selectedImageUnfocused = "url(/images/gui/selected2u.png)";
 					this.selectedColor = "#ffffff";
 					this.selectedWeight = "bold";
 					this.titleImage = "url(/images/gui/gridview_title_bg2.png)";
@@ -106,6 +111,22 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 				gridViewNode.style.marginLeft = marginleft + "px";
 				gridViewNode.style.bottom = "" + bottom + "px";
 			}
+			
+			this.focusCatcher = document.createElement("input");
+			this.focusCatcher.style.opacity = "0.0";
+			this.focusCatcher.style.width = "0px";
+			this.focusCatcher.style.height = "0px";
+			
+			var self = this;
+			this.focusCatcher.onFocus = function() {
+				self.setFocus(true);
+			}
+			this.focusCatcher.onBlur = function() {
+				self.setFocus(false);
+			}
+			
+			gridViewNode.appendChild (this.focusCatcher);
+			
 			var gridViewTitle = document.createElement("div");
 			gridViewTitle.className = "gridViewTitle";
 			gridViewTitle.style.width = "" + this.totalWidth + "px";
@@ -191,7 +212,20 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 		/// Internal click-handler.
 		handleClick: function(domobject, id, values) {
 			this.selectedObject = domobject;
+			this.focusCatcher.focus();
 			this.onclick(id, values);
+		},
+		
+		setFocus: function(newval) {
+			if (! this.haveActiveSelection) return;
+			if (newval)
+			{
+				this.selectedObject.style.background = this.selectedImage;
+			}
+			else
+			{
+				this.selectedObject.style.background = this.selectedImageUnfocused;
+			}
 		},
 		
 		/// Set the grid contents from a two dimensional dictionary
