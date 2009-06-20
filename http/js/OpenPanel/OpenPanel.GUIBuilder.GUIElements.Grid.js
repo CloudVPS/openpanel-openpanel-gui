@@ -113,19 +113,20 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			}
 			
 			this.focusCatcher = document.createElement("input");
+			this.focusCatcher.setAttribute("tabIndex", OpenPanel.GUIBuilder.FormElement.Base.getNextTabIndex());
 			this.focusCatcher.style.opacity = "0.0";
 			this.focusCatcher.style.width = "0px";
 			this.focusCatcher.style.height = "0px";
+			this.focusCatcher.style.padding = "0px";
+			this.focusCatcher.style.margin = "0px";
 			
 			var self = this;
-			this.focusCatcher.onFocus = function() {
+			this.focusCatcher.onfocus = function() {
 				self.setFocus(true);
 			}
-			this.focusCatcher.onBlur = function() {
+			this.focusCatcher.onblur = function() {
 				self.setFocus(false);
 			}
-			
-			gridViewNode.appendChild (this.focusCatcher);
 			
 			var gridViewTitle = document.createElement("div");
 			gridViewTitle.className = "gridViewTitle";
@@ -164,6 +165,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 				gridViewTitle.appendChild(gridViewTitleItem);
 			}
 			
+			parent.appendChild (this.focusCatcher);
 			parent.appendChild(gridViewNode);
 		},
 		
