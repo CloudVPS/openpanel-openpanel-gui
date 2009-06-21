@@ -61,6 +61,7 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 				
 				this.renderG(this.gridDiv, items);
 				this.renderButtons(this.buttonsDiv);
+				
 				if(this.currentInstance != undefined){
 					this.highliteItem(this.currentInstance.uuid);
 				}

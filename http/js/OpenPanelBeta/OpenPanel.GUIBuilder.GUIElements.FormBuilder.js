@@ -49,6 +49,9 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 		this.rootFormObject.setTargetDiv(this.formObjectHolder);
 		this.rootFormObject.setController(this.controller);
 		this.rootFormObject.setFormBuilder(this);
+		
+		alert ('ohai');
+		
 		this.rootFormObject.build();
 	},
 	
