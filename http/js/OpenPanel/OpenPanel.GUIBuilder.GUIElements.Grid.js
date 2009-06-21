@@ -102,9 +102,15 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 				}
 			}
 			
+			this.valueReplacements = new Array();
+
 			for (var ki in def) {
 				this.headers[i] = def[ki][0];
 				this.sizes[i] = parseInt(def[ki][1] * tabWidthWeight);
+				if (def[ki].length > 2)
+				{
+					this.valueReplacements[i] = def[ki][2];
+				}
 				this.keys[i] = ki;
 				i++;
 			}
@@ -246,6 +252,13 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 				col.className = "gridViewColumn";
 				col.style.width = "" + this.sizes[i] + "px";
 				var value = values[this.keys[i]];
+				if ((value != undefined) && (this.valueReplacements[i] != undefined))
+				{
+					if (this.valueReplacements[i][value] != undefined)
+					{
+						value - this.valueReplacements[i][value];
+					}
+				}
 				var textNode = document.createTextNode(value!=undefined?value:"");
 				col.appendChild(textNode);
 				row.appendChild(col);
