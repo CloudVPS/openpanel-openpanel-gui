@@ -66,7 +66,16 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 		for(var key in parameters){
 			var parameter = parameters[key];
 			if (!(key=="id" && classInfo["class"].indexing=="auto") && parameter.gridhide!=true) {
-				createObject[key] = new Array(key, parameter.gridwidth != undefined ? parameter.gridwidth : 10);
+				var label = key;
+				var param = classInfo.structure.parameters[key];
+				if (param != undefined) {
+					if ((param.gridlabel != undefined) && (param.gridlabel != "")) {
+						label = param.gridlabel;
+					} else if (param.title != undefined) {
+						label = param.title;
+					}
+				}
+				createObject[key] = new Array(label, parameter.gridwidth != undefined ? parameter.gridwidth : 10);
 			}
 		}
 		this.grid = new OpenPanel.GUIBuilder.GUIElements.Grid();
