@@ -248,19 +248,29 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			}
 			
 			for (i = 0; i < this.sizes.length; ++i) {
+				var useInnerHTML = false;
 				var col = document.createElement("div");
 				col.className = "gridViewColumn";
 				col.style.width = "" + this.sizes[i] + "px";
-				var value = values[this.keys[i]];
+				var value = "" + values[this.keys[i]];
 				if ((value != undefined) && (this.valueReplacements[i] != undefined))
 				{
 					if (this.valueReplacements[i][value] != undefined)
 					{
-						value - this.valueReplacements[i][value];
+						value = this.valueReplacements[i][value];
+						useInnerHTML = true;
 					}
 				}
-				var textNode = document.createTextNode(value!=undefined?value:"");
-				col.appendChild(textNode);
+				
+				if (! useInnerHTML)
+				{
+					var textNode = document.createTextNode(value!=undefined?value:"");
+					col.appendChild(textNode);
+				}
+				else
+				{
+					col.innerHTML = value;
+				}
 				row.appendChild(col);
 			}
 			
