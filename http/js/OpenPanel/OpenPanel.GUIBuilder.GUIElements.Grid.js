@@ -139,6 +139,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 				self.setFocus(true);
 			}
 			this.focusCatcher.onblur = function() {
+				console.log ("Onblur");
 				self.setFocus(false);
 			}
 			this.focusCatcher.onkeydown = function(ev) {
