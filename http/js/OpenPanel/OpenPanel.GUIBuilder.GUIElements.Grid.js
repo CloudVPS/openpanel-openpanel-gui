@@ -248,7 +248,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 		/// Internal click-handler.
 		handleClick: function(domobject, id, values, index) {
 			var scrollpos = this.contents.scrollTop;
-			var itempos = domobject.offsetTop;
+			var itempos = 17 * index;
 			
 			if (itempos < scrollpos) this.contents.scrollTop = itempos;
 			else if (itempos > (scrollpos + (this.height - 32)))
