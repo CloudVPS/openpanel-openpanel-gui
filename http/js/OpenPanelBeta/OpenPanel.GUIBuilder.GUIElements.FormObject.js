@@ -198,7 +198,6 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 					);
 			break;
 			case "getInstancesByParentUUIDDone":
-				console.log ("getInstancesByParentUUIDDone");
 				this.instances = this.openCoreObject.instances;
 				if (this.instances != undefined && typeof(this.openCoreObject.getFirstInstance()) == "object") {
 				// there are instances
@@ -286,8 +285,6 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 							}
 						}
 
-						console.log ("getInstancesByParentUUIDDone 2");
-
 						if(this.openCoreObject.meta == true){
 							// list objects
 							
@@ -309,13 +306,10 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 						}
 						
 						
-						console.log ("getInstancesByParentUUIDDone 3");
-
 						if(OpenPanel.GUIBuilder.getLastAnchor() == this.openCoreObject.name){
 							OpenPanel.GUIBuilder.goToLastAnchor();
 						}
 
-						console.log ("getInstancesByParentUUIDDone 4");
 					}
 					
 					this.createFields(actualOpenCoreObject, actualInstance, "", this.fieldsDiv);
@@ -820,7 +814,6 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		// this.childFormObjects.push(childFormObject);
 		childFormObject.setOpenCoreObject(openCoreObject);
 		childFormObject.setParentFormObject(this);
-		console.log ("createChildFormObject");
 		childFormObject.setParentUUID(parentUUID);
 		childFormObject.setTargetDiv(targetDiv);
 		childFormObject.setController(controller);
