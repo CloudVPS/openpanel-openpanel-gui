@@ -766,7 +766,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 					b.onmouseup();
 					b.style.opacity="0.50";
 					var c = cancelButton.childNodes[0];
-					if (b!=undefined) b.style.opacity="0.50";
+					if (c!=undefined) c.style.opacity="0.50";
 					setTimeout (function() {
 						OpenPanel.KeyboardHandler.clearOk();
 						OpenPanel.KeyboardHandler.clearCancel();

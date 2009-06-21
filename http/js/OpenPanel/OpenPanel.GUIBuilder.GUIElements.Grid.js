@@ -27,6 +27,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			this.keys = new Array();
 			this.rowsByID = new Array();
 			this.rowKeys = new Array();
+			this.rowKeysBySelectionText = new Array();
 			this.selectedImage = "url(/images/gui/selected.png)";
 			this.selectedImageUnfocused = "url(/images/gui/selectedu.png)";
 			this.selectedColor = "#ffffff";
@@ -40,6 +41,10 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			this.selectedShadow = "";
 			this.focusOnClick = true;
 			this.height = height;
+			this.keyboardSelectionText = "";
+			this.keyboardSelectionTimer = {};
+			this.keyboardSelectionTimerActive = false;
+			this.ignoreNextKey = false;
 			
 			this.selectedIndex = -1;
 			this.count = 0;
@@ -137,10 +142,35 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 				self.setFocus(false);
 			}
 			this.focusCatcher.onkeydown = function(ev) {
+				if (ev.ctrlKey || ev.shiftKey || ev.altKey || ev.metaKey) return true;
 				if (ev.which == 38) self.moveSelectionUp();
 				else if (ev.which == 40) self.moveSelectionDown();
 				else if (ev.which == 13) return true;
-				else return true;
+				else
+				{
+					var key = String.fromCharCode (ev.which);
+					if ((key >= '.') && (key <= 'z'))
+					{
+						if (self.keyboardSelectionTimerActive)
+						{
+							clearTimeout (self.keyboardSelectionTimer);
+							self.keyboardSelectionTimerActive = false;
+						}
+						
+						self.keyboardSelectionText += key;
+						
+						self.keyboardSelectionTimerActive = true;
+						self.keyboardSelectionTimer = setTimeout (
+							function() {
+								self.keyboardSelectionText = "";
+								self.keyboardSelectionTimerActive = false;
+							}, 1500);
+						
+						self.selectFromString (self.keyboardSelectionText);
+						self.setFocus (true);
+					}
+					else return true;
+				}
 				return false;
 			}
 			
@@ -224,6 +254,25 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			this.contents.appendChild(row);
 			this.rowsByID[id] = row;
 			this.rowKeys[index] = id;
+			
+			var selectionText = values[this.keys[0]];
+			if (selectionText != undefined)
+			{
+				this.rowKeysBySelectionText[selectionText] = id;
+			}
+		},
+		
+		selectFromString: function(selectedText) {
+			var seltext = selectedText.toLowerCase();
+			if (seltext.length == 0) return;
+			for (key in this.rowKeysBySelectionText) {
+				var slice = key.slice (0, seltext.length);
+				if (slice == seltext) {
+					var rowkey = this.rowKeysBySelectionText[key];
+					this.rowsByID[rowkey].onclick();
+					break;
+				}
+			}
 		},
 		
 		moveSelectionUp: function() {
