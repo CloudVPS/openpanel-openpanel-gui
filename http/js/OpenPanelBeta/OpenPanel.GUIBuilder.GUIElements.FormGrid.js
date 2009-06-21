@@ -78,7 +78,7 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 				}
 				if (parameter.type == 'bool')
 				{
-					createObject[key] = new Array(label, parameter.gridwidth != undefined ? parameter.gridwidth : 10, {'true':"&#1003;","false":"-"});
+					createObject[key] = new Array(label, parameter.gridwidth != undefined ? parameter.gridwidth : 10, {'true':'<img src="/images/gui/checkmark.png">',"false":"-"});
 				}
 				else
 				{
