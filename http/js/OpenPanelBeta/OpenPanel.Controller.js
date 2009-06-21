@@ -134,6 +134,7 @@ OpenPanel.Controller = {
 	
 	ping : function(){
 		this.dataManager.getRecordsAsync("ping", undefined, OpenPanel.Controller, "pingDone", {}, true);
+		this.pingTimeoutHandler = setTimeout("OpenPanel.Controller.ping()", 60000);
 	},
 	
 	pingDone : function(callBackArguments){

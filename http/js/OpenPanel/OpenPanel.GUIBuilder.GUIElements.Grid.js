@@ -312,9 +312,11 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 				}
 			}
 			
+			var doonclick = true;
+			if (this.selectedObject == domobject) doonclick = false;
 			this.selectedObject = domobject;
 			this.selectedIndex = index;
-			this.onclick(id, values);
+			if (doonclick) this.onclick(id, values);
 			if (this.focusOnClick) this.focusCatcher.focus();
 		},
 		
