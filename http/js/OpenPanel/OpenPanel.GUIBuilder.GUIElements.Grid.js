@@ -5,7 +5,10 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 		this.keys = ["item"];
 		this.totalWidth = 301;
 		this.haveActiveSelection = false;
+		this.selectedIndex = -1;
 		this.focusCatcher = {};
+		this.count = 0;
+		this.focusOnClick = true;
 	}
 	
 	/// Bind an OpenPanelGrid object to a DOM node.
@@ -23,9 +26,11 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			this.headers = new Array();
 			this.keys = new Array();
 			this.rowsByID = new Array();
+			this.rowKeys = new Array();
 			this.selectedImage = "url(/images/gui/selected.png)";
 			this.selectedImageUnfocused = "url(/images/gui/selectedu.png)";
-			this.selectedColor = "#000000";
+			this.selectedColor = "#ffffff";
+			this.selectedColorUnfocused = "#000000";
 			this.selectedWeight = "normal";
 			this.titleImage = "url(/images/gui/gridview_title_bg.png)";
 			this.titleBorderBottom = "#666666";
@@ -33,8 +38,11 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			this.borderLeft = "#888888";
 			this.contentBorderTop = "0px";
 			this.selectedShadow = "";
-			this.focus = false;
-			this.selectedDOMNode = {};
+			this.focusOnClick = true;
+			this.height = height;
+			
+			this.selectedIndex = -1;
+			this.count = 0;
 			
 			var tabWidthWeight = 0;
 			var count = 0;
@@ -78,6 +86,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 					this.selectedImage = "url(/images/gui/selected2.png)";
 					this.selectedImageUnfocused = "url(/images/gui/selected2u.png)";
 					this.selectedColor = "#ffffff";
+					this.selectedColorUnfocused = "#ffffff";
 					this.selectedWeight = "bold";
 					this.titleImage = "url(/images/gui/gridview_title_bg2.png)";
 					this.titleBorderBottom = "#444444";
@@ -127,6 +136,13 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			this.focusCatcher.onblur = function() {
 				self.setFocus(false);
 			}
+			this.focusCatcher.onkeydown = function(ev) {
+				if (ev.which == 38) self.moveSelectionUp();
+				else if (ev.which == 40) self.moveSelectionDown();
+				else if (ev.which == 13) return true;
+				else return true;
+				return false;
+			}
 			
 			var gridViewTitle = document.createElement("div");
 			gridViewTitle.className = "gridViewTitle";
@@ -175,6 +191,8 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 		addGridLine: function(id, values) {
 			var i = 0;
 			var self = this;
+			this.count++;
+			var index = this.count -1;
 			var row = document.createElement("div");
 			row.className = "gridViewRow";
 			row.style.width = "" + (this.totalWidth) + "px";
@@ -185,12 +203,12 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 					self.selectedObject.style.fontWeight = "normal";
 					self.selectedObject.style.textShadow = "";
 				}
-				this.style.background = self.selectedImage;
-				this.style.color = self.selectedColor;
+				this.style.background = self.selectedImageUnfocused;
+				this.style.color = self.selectedColorUnfocused;
 				this.style.fontWeight = self.selectedWeight;
 				this.style.textShadow = self.selectedShadow;
 				self.haveActiveSelection = true;
-				self.handleClick(this, id, values);
+				self.handleClick(this, id, values, index);
 			}
 			
 			for (i = 0; i < this.sizes.length; ++i) {
@@ -205,6 +223,22 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			
 			this.contents.appendChild(row);
 			this.rowsByID[id] = row;
+			this.rowKeys[index] = id;
+		},
+		
+		moveSelectionUp: function() {
+			if (! this.haveActiveSelection) return;
+			if (this.selectedIndex < 1) return;
+			
+			this.rowsByID[this.rowKeys[this.selectedIndex-1]].onclick();
+			this.setFocus (true);
+		},
+
+		moveSelectionDown: function() {
+			if (! this.haveActiveSelection) return;
+			if (this.selectedIndex >= (this.count-1)) return;
+			this.rowsByID[this.rowKeys[this.selectedIndex+1]].onclick();
+			this.setFocus (true);
 		},
 		
 		/// Default onclick handler.
@@ -212,10 +246,27 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 		},
 		
 		/// Internal click-handler.
-		handleClick: function(domobject, id, values) {
+		handleClick: function(domobject, id, values, index) {
+			var scrollpos = this.contents.scrollTop;
+			var itempos = domobject.offsetTop;
+			
+			if (itempos < scrollpos) this.contents.scrollTop = itempos;
+			else if (itempos > (scrollpos + (this.height - 32)))
+			{
+				if (itempos > (this.height-32))
+				{
+					this.contents.scrollTop = itempos - (this.height-32);
+				}
+				else
+				{
+					this.contents.scrollTop = 0;
+				}
+			}
+			
 			this.selectedObject = domobject;
-			this.focusCatcher.focus();
+			this.selectedIndex = index;
 			this.onclick(id, values);
+			if (this.focusOnClick) this.focusCatcher.focus();
 		},
 		
 		setFocus: function(newval) {
@@ -223,10 +274,12 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			if (newval)
 			{
 				this.selectedObject.style.background = this.selectedImage;
+				this.selectedObject.style.color = this.selectedColor;
 			}
 			else
 			{
 				this.selectedObject.style.background = this.selectedImageUnfocused;
+				this.selectedObject.style.color = this.selectedColorUnfocused;
 			}
 		},
 		
@@ -248,8 +301,10 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			var oldonclick = this.onclick;
 			this.onclick = function() {
 			};
+			this.focusOnClick = false;
 			this.rowsByID[id].onclick();
 			this.onclick = oldonclick;
+			this.focusOnClick = true;
 		}
 	}
   

@@ -233,9 +233,6 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 					if (actualOpenCoreObject.canUpdate == true) {
 						this.setIsUpdateable(true);
 					}
-					//console.log("actualOpenCoreObject", actualOpenCoreObject.name);
-					this.createFields(actualOpenCoreObject, actualInstance, "", this.fieldsDiv);
-					this.createMethods(actualOpenCoreObject);
 						
 					if(actualOpenCoreObject.singleton == true){
 						//console.log("singleton, create create and delete");
@@ -312,6 +309,10 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 							OpenPanel.GUIBuilder.goToLastAnchor();
 						}
 					}
+					
+					this.createFields(actualOpenCoreObject, actualInstance, "", this.fieldsDiv);
+					this.createMethods(actualOpenCoreObject);
+						
 				} else {
 					
 			
@@ -705,7 +706,10 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		this.fields.setCallBackCommand(callBackCommand, optionalCallBackObject);
 		this.fields.build(true);
 		
-		var d = document.createElement("div");
+		var saveButton = document.createElement("div");
+		var cancelButton = document.createElement("div");
+		
+		var d = saveButton;
 		d.setAttribute ("id", "modalSaveButton");
 		d.style.cssText = "float: right;padding-top: 11px; padding-left:12px;";
 		d.appendChild(document.createTextNode("Create"));
@@ -715,18 +719,20 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		d.onclick = function(){
 			OpenPanel.KeyboardHandler.clearCancel();
 			OpenPanel.KeyboardHandler.clearOk();
+			saveButton.style.opacity = "0.50";
+			cancelButton.style.opacity = "0.50";
 			hook.fields.submit();
 		}
 		
-		var saveButton = d;
-		
-		var d = document.createElement("div");
+		var d = cancelButton;
 		d.setAttribute ("id", "modalCancelButton");
 		d.style.cssText = "float: right;padding-top: 11px;";
 		d.appendChild(document.createTextNode("Cancel"));
 		d.onclick = function(){
 			OpenPanel.KeyboardHandler.clearCancel();
 			OpenPanel.KeyboardHandler.clearOk();
+			saveButton.style.opacity = "0.50";
+			cancelButton.style.opacity = "0.50";
 			hook.fields = undefined;
 			OpenPanel.GUIBuilder.deletePopUp();
 			//targetDiv.parentNode.parentNode.removeChild(targetDiv.parentNode);
@@ -758,6 +764,9 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 				if (b!=undefined)
 				{
 					b.onmouseup();
+					b.style.opacity="0.50";
+					var c = cancelButton.childNodes[0];
+					if (b!=undefined) b.style.opacity="0.50";
 					setTimeout (function() {
 						OpenPanel.KeyboardHandler.clearOk();
 						OpenPanel.KeyboardHandler.clearCancel();
