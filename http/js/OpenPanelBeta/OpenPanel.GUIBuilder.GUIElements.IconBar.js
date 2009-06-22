@@ -217,12 +217,11 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 							function mkclosure(x)
 							{
 								var li = x;
-								return function() {console.log(li); li.onclick();}
+								return function() {li.onclick();}
 							}
 							
 							var keystr = "alt+" + xcounter;
 							xcounter++;
-							console.log ("Setting keyboard handler " + keystr);
 							OpenPanel.KeyboardHandler.Shortcuts.add (keystr, mkclosure(iconLi));
 						}
 						

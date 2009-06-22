@@ -115,7 +115,7 @@ OpenPanel.GUIBuilder.FormElement.Integer.prototype = {
 	},
 	
 	getValue : function(){
-		return this.hasValue == true?this.value:"";
+		return this.hasValue == true?this.value:0;
 	},
 	
 	validate : function(){

@@ -10,11 +10,8 @@ OpenPanel.GUIBuilder.FormElement.Bool.prototype = {
 		this.checkboxElement.setAttribute("type", "checkbox");
 		this.checkboxElement.className = "checkboxElement";
 		this.checkboxElement.setAttribute("tabIndex", OpenPanel.GUIBuilder.FormElement.Base.getNextTabIndex());
-		console.log ("Bool.renderInputElement");
-		console.log (this.value);
 		if ((this.value != undefined) && ((this.value == true)||(this.value == "true"))) {
 			this.checkboxElement.setAttribute("checked", "true");
-			console.log ("checked off");
 		}
 		divElement.appendChild(this.checkboxElement);
 		if(this.readOnly == false){

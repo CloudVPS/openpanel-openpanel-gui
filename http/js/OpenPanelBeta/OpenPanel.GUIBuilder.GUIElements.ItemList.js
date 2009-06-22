@@ -193,8 +193,6 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 	},
 	
 	takeFocus : function() {
-		console.log ("ItemList.takeFocus");
-		console.log (this.grid);
 		if (this.grid != undefined) this.grid.takeFocus();
 	},
 	
