@@ -110,8 +110,8 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 						tabSpan.setAttribute("class", "tab");
 						this.setTab(tabSpan);
 
-						tabIndexes[someObject.name] = counter;
-						tabIds[counter++] = someObject.name;
+						this.tabIndexes[someObject.name] = counter;
+						this.tabIds[counter++] = someObject.name;
 					}
 				}
 			}
