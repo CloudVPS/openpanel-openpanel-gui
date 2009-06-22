@@ -112,10 +112,6 @@ OpenPanel.GUIBuilder.FormElement.Integer.prototype = {
 			this.value = "0";
 			this.hasValue = false;
 			this.validate();
-			if (this.readOnly == false)
-			{
-				this.inputElement.value = "0";
-			}
 		}
 	},
 	
