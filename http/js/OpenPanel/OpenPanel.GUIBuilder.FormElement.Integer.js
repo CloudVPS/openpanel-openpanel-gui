@@ -127,11 +127,9 @@ OpenPanel.GUIBuilder.FormElement.Integer.prototype = {
 		var isValid = true;
 		if (this.readOnly == false) {
 			var integerString = this.value + "";
-			if (this.regExp != undefined && this.regExp != "") {
-				if (integerString != "" && integerString != undefined) {
-					if (!integerString.match(this.regExp)) {
-						isValid = false;
-					}
+			if (integerString != "") {
+				if (isNaN(parseInt(integerString,10))) {
+					isValid = false;
 				}
 			}
 			
