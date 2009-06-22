@@ -359,6 +359,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 		},
 		
 		takeFocus: function() {
+			console.log ("Grid.takeFocus");
 			this.focusCatcher.focus();
 		},
 		
