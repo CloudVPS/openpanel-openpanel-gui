@@ -10,7 +10,7 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 	iconBarTitleElement : {},
 	itemIds: {},
 	itemIndexes: {},
-	selectedItemId = "",
+	selectedItemId: "",
 	
 	build : function(){
 		
