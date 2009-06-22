@@ -25,6 +25,12 @@ OpenPanel.KeyboardHandler = {
 		this.Shortcuts.add ("Meta+right",function(){
 			OpenPanel.GUIBuilder.GUIElements.TabBar.nextTab();
 			});
+		this.Shortcuts.add ("Meta+up",function(){
+			OpenPanel.GUIBuilder.GUIElements.IconBar.previousItem();
+			});
+		this.Shortcuts.add ("Meta+down",function(){
+			OpenPanel.GUIBuilder.GUIElements.IconBar.nextItem();
+			});
 		this.initialized = true;
 	},
 	

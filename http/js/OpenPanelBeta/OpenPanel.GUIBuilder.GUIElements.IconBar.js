@@ -8,6 +8,9 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 	itemElements: {},
 	controller: {},
 	iconBarTitleElement : {},
+	itemIds: {},
+	itemIndexes: {},
+	selectedItemId = "",
 	
 	build : function(){
 		
@@ -212,19 +215,8 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 							iconLi.onclick = childObject.onclick;
 						}
 						
-						if (xcounter<10)
-						{
-							function mkclosure(x)
-							{
-								var li = x;
-								return function() {li.onclick();}
-							}
-							
-							var keystr = "alt+" + xcounter;
-							xcounter++;
-							OpenPanel.KeyboardHandler.Shortcuts.add (keystr, mkclosure(iconLi));
-						}
-						
+						itemIndexes[childObject.name] = xcounter;
+						itemIds[xcounter++] = childObjects.name;
 						this.itemElements[childObject.name] = iconLi;
 					} else {
 						var iconLi = document.createElement("td");
@@ -244,6 +236,7 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 	},
 	
 	click: function(childObject){
+		this.selectedItemId = childObject.name;
 		this.setTitle(childObject.title);
 		if (childObject.name != undefined) {
 			if (this.itemElements[childObject.name] != undefined) {
@@ -257,6 +250,34 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 		}
 	},
 	
+	nextItem: function() {
+		if (this.selectedItemId != "") {
+			var index = this.itemIndexes[this.selectedItemId];
+			if (index != undefined) {
+				if ((index+1) >= this.itemIds.length) return;
+				var itemid = this.itemIds[index+1];
+				if (itemid != undefined) {
+					var elm = this.itemElements[itemid];
+					if (elm != undefined) elm.onclick();
+				}
+			}
+		}
+	},
+	
+	previousItem: function() {
+		if (this.selectedItemId != "") {
+			var index = this.itemIndexes[this.selectedItemId];
+			if ((index != undefined)&&(index>0)) {
+				if (index >= this.itemIds.length) return;
+				var itemid = this.itemIds[index-1];
+				if (itemid != undefined) {
+					var elm = this.itemElements[itemid];
+					if (elm != undefined) elm.onclick();
+				}
+			}
+		}
+	},
+
 	highliteItem: function(className){
 		if(className != undefined && this.itemElements[className]!=undefined){
 			var currentItemElement = this.itemElements[className];
