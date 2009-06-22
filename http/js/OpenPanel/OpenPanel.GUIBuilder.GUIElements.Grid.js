@@ -290,6 +290,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			if (this.nextLineTakesFocus == true)
 			{
 				this.focusCatcher.focus();
+				setFocus(true);
 				this.nextLineTakesFocus = false;
 			}
 		},
