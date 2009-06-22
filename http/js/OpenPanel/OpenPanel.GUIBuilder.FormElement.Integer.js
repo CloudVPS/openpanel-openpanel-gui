@@ -96,15 +96,13 @@ OpenPanel.GUIBuilder.FormElement.Integer.prototype = {
 	},
 	
 	setValue : function(value){
-		console.log ("Integer.setValue");
-		console.log (value);
 		if (value != undefined && value!="") {
 			this.value = value;
 			if (this.readOnly == false) {
 				this.hasValue = true;
 				this.setStyle();
 				if (this.inputElement != undefined && this.inputElement.value != value) {
-					this.inputElement.value = value;
+					this.inputElement.value = "" + value;
 				}
 				this.validate();
 			} else {
@@ -114,6 +112,10 @@ OpenPanel.GUIBuilder.FormElement.Integer.prototype = {
 			this.value = "0";
 			this.hasValue = false;
 			this.validate();
+			if (this.readOnly == false)
+			{
+				this.inputElement.value = "0";
+			}
 		}
 	},
 	
