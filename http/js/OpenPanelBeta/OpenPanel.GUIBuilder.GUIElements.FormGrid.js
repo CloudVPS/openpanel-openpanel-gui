@@ -67,8 +67,6 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 			var parameter = parameters[key];
 			if (!(key=="id" && classInfo["class"].indexing=="auto") && parameter.gridhide!=true) {
 				var label = key;
-				console.log ("gridParam");
-				console.log (parameter);
 				if ((parameter.gridlabel != undefined) && (parameter.gridlabel != "")) {
 					label = parameter.gridlabel;
 				} else if (parameter.title != undefined) {
