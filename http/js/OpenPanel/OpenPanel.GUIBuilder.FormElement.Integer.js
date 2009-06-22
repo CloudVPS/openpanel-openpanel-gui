@@ -96,20 +96,21 @@ OpenPanel.GUIBuilder.FormElement.Integer.prototype = {
 	},
 	
 	setValue : function(value){
-		if (value != undefined && value!="") {
+		if (value != undefined && value!=="") {
 			this.value = value;
 			if (this.readOnly == false) {
 				this.hasValue = true;
 				this.setStyle();
-				if (this.inputElement != undefined && this.inputElement.value != value) {
-					this.inputElement.value = "" + value;
+				var valueString = "" + value;
+				if (this.inputElement.value != valueString) {
+					this.inputElement.value = valueString;
 				}
 				this.validate();
 			} else {
 				this.inputElement.innerHTML = value;
 			}
 		} else {
-			this.value = "0";
+			this.value = "";
 			this.hasValue = false;
 			this.validate();
 		}
