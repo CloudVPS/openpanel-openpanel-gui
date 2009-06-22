@@ -1,4 +1,5 @@
 OpenPanel.GUIBuilder.FormElement.Integer = function(name, form, initObject){
+	console.log ("FormElement.Integer");
 	OpenPanel.GUIBuilder.FormElement.Base.inherit(this, name, form, initObject);
 	this.textwidth = initObject.textwidth || 30;
 	this.inputElement;
