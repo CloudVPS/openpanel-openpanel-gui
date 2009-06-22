@@ -108,14 +108,14 @@ OpenPanel.GUIBuilder.FormElement.Integer.prototype = {
 				this.inputElement.innerHTML = value;
 			}
 		} else {
-			this.value = 0;
+			this.value = "0";
 			this.hasValue = false;
 			this.validate();
 		}
 	},
 	
 	getValue : function(){
-		return this.hasValue == true?this.value:0;
+		return this.hasValue == true?this.value:"0";
 	},
 	
 	validate : function(){
