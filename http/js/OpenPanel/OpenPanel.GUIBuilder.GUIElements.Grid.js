@@ -252,12 +252,13 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 				var col = document.createElement("div");
 				col.className = "gridViewColumn";
 				col.style.width = "" + this.sizes[i] + "px";
-				var value = "" + values[this.keys[i]];
+				var value = values[this.keys[i]];
 				if ((value != undefined) && (this.valueReplacements[i] != undefined))
 				{
-					if (this.valueReplacements[i][value] != undefined)
+					var v = "" + value;
+					if (this.valueReplacements[i][v] != undefined)
 					{
-						value = this.valueReplacements[i][value];
+						value = this.valueReplacements[i][v];
 						useInnerHTML = true;
 					}
 				}
