@@ -9,6 +9,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 		this.focusCatcher = {};
 		this.count = 0;
 		this.focusOnClick = true;
+		this.nextLineTakesFocus = false;
 	}
 	
 	/// Bind an OpenPanelGrid object to a DOM node.
@@ -44,6 +45,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			this.keyboardSelectionText = "";
 			this.keyboardSelectionTimer = {};
 			this.keyboardSelectionTimerActive = false;
+			this.nextLineTakesFocus = false;
 			this.ignoreNextKey = false;
 			
 			this.selectedIndex = -1;
@@ -284,6 +286,12 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			{
 				this.rowKeysBySelectionText[selectionText] = id;
 			}
+			
+			if (this.nextLineTakesFocus == true)
+			{
+				this.focusCatcher.focus();
+				this.nextLineTakesFocus = false;
+			}
 		},
 		
 		selectFromString: function(selectedText) {
@@ -360,8 +368,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 		
 		takeFocus: function() {
 			console.log ("Grid.takeFocus");
-			this.focusCatcher.focus();
-			setFocus(true);
+			this.nextLineTakesFocus = true;
 		},
 		
 		/// Set the grid contents from a two dimensional dictionary
