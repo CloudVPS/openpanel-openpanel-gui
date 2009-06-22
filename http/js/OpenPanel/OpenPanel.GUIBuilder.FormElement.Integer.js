@@ -18,7 +18,7 @@ OpenPanel.GUIBuilder.FormElement.Integer.prototype = {
 			this.inputElement.setAttribute("value", "");
 			this.inputElement.setAttribute("tabIndex", OpenPanel.GUIBuilder.FormElement.Base.getNextTabIndex());
 			this.setStyle();
-			this.value = "0";
+			this.value = "";
 			var hook = this;
 			this.inputElement.onkeyup = this.inputElement.onkeydown = function() {
 				hook.setValue(this.value);
@@ -89,7 +89,7 @@ OpenPanel.GUIBuilder.FormElement.Integer.prototype = {
 	},
 	
 	resetValue : function(){
-		this.value = "0";
+		this.value = "";
 		this.hasValue = false;
 		this.setHint();
 		this.setValidity(true);
@@ -117,7 +117,7 @@ OpenPanel.GUIBuilder.FormElement.Integer.prototype = {
 	},
 	
 	getValue : function(){
-		return this.hasValue == true?this.value:"0";
+		return this.hasValue == true?this.value:"";
 	},
 	
 	validate : function(){
