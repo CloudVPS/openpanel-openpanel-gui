@@ -9,12 +9,16 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 	openCoreObjects : [],
 	tabStart : {},
 	tabEnd : {},
+	tabIds: {},
+	tabIndexes : {},
+	selectedTabId : "",
 	tabWidth : 0,
 	
 	build : function(){
 		this.tabWidth = 0;
 		this.targetDiv.innerHTML = "";
-		
+		this.tabIds = {};
+		this.tabIndexes = {};
 		
 		this.itemElements = {};
 		
@@ -84,7 +88,7 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 				}
 			}
 			
-			
+			var counter = 0;
 			
 			for (var key in sortedChildren) {
 				var someObject = sortedChildren[key];
@@ -102,10 +106,12 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 							OpenPanel.GUIBuilder.GUIElements.TabBar.pushItem(this.getAttribute("OC:Class"))
 						}
 						
-						
 						this.itemElements[someObject.name] = tabSpan;
 						tabSpan.setAttribute("class", "tab");
 						this.setTab(tabSpan);
+
+						tabIndexes[someObject.name] = counter;
+						tabIds[counter++] = someObject.name;
 					}
 				}
 			}
@@ -174,8 +180,37 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 		}
 	},
 	
+	nextTab: function() {
+		if (this.selectedTabId != "") {
+			var index = this.tabIndexes[this.selectedTabId];
+			if (index != undefined) {
+				if ((index+1) >= this.tabIds.length) return;
+				var tabid = this.tabIds[index+1];
+				if (tabid != undefined) {
+					var elm = this.itemElements[tabid];
+					if (elm != undefined) elm.onclick();
+				}
+			}
+		}
+	},
+	
+	previousTab: function() {
+		if (this.selectedTabId != "") {
+			var index = this.tabIndexes[this.selectedTabId];
+			if ((index != undefined)&&(index>0) {
+				if ((index) >= this.tabIds.length) return;
+				var tabid = this.tabIds[index-1];
+				if (tabid != undefined) {
+					var elm = this.itemElements[tabid];
+					if (elm != undefined) elm.onclick();
+				}
+			}
+		}
+	},
+	
 	highliteItem: function(className){
 		if(className != undefined && this.itemElements[className]!=undefined){
+			this.selectedTabId = className;
 			var currentItemElement = this.itemElements[className];
 			var virgin = true;
 			for(var key in this.itemElements){

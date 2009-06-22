@@ -19,6 +19,12 @@ OpenPanel.KeyboardHandler = {
 			var bt = document.getElementById("itemListAddButton");
 			if (bt != undefined) bt.onclick();
 			});
+		this.Shortcuts.add ("Meta+left",function(){
+			OpenPanel.GUIBuilder.GUIElements.TabBar.previousTab();
+			});
+		this.Shortcuts.add ("Meta+right",function(){
+			OpenPanel.GUIBuilder.GUIElements.TabBar.nextTab();
+			});
 		this.initialized = true;
 	},
 	
