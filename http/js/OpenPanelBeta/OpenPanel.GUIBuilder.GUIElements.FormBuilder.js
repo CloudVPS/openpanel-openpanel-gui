@@ -84,6 +84,7 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 			if(formObject.parentFormObject!=undefined) {
 				this.finishLayout(formObject.parentFormObject);
 			}
+			$j("input")[0].focus();
 		}
 		
 		// resetting formObjectHolders height for overflow
