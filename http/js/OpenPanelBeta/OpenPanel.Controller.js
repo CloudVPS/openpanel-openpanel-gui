@@ -89,6 +89,7 @@ OpenPanel.Controller = {
 	iconBarClick : function(openCoreObject) {
 		this.guiBuilder.GUIElements.ItemList.setOpenCoreObject(openCoreObject);
 		this.guiBuilder.GUIElements.ItemList.build();
+		this.guiBuilder.GUIElements.ItemList.takeFocus();
 		this.tabBarClick(openCoreObject);
 	},
 	
@@ -117,6 +118,7 @@ OpenPanel.Controller = {
 			this.guiBuilder.GUIElements.TabBar.disable();
 			this.guiBuilder.GUIElements.FormBuilder.clean();
 		}
+		this.guiBuilder.GUIElements.ItemList.takeFocus();
 	},
 	
 	initializePing : function(){

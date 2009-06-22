@@ -358,6 +358,10 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			}
 		},
 		
+		takeFocus: function() {
+			this.focusCatcher.focus();
+		},
+		
 		/// Set the grid contents from a two dimensional dictionary
 		/// in the format {rowid:{colid:value,colid:value}}.
 		setGrid: function(dict) {

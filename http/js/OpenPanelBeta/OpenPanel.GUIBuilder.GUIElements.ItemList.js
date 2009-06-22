@@ -192,6 +192,10 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 		}
 	},
 	
+	takeFocus : function() {
+		if (this.grid != undefined) this.grid.takeFocus();
+	},
+	
 	renderG : function(targetDiv, instances){
 		this.grid = new OpenPanel.GUIBuilder.GUIElements.Grid();
 		var parameters = this.openCoreObject.getClassInfo().structure.parameters;
