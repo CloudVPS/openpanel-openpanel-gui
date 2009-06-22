@@ -66,6 +66,7 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 					name : "Welcome",
 					onclick : function()
 					{
+						hook.selectedItemId = "Welcome";
 						hook.controller.action({command: "Welcome"});
 					}
 			};
@@ -236,7 +237,6 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 	},
 	
 	click: function(childObject){
-		this.selectedItemId = childObject.name;
 		this.setTitle(childObject.title);
 		if (childObject.name != undefined) {
 			if (this.itemElements[childObject.name] != undefined) {
@@ -281,6 +281,7 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 	highliteItem: function(className){
 		if(className != undefined && this.itemElements[className]!=undefined){
 			var currentItemElement = this.itemElements[className];
+			this.selectedItemId = className;
 				
 			for(var key in this.itemElements){
 				if(this.itemElements[key] == currentItemElement){
