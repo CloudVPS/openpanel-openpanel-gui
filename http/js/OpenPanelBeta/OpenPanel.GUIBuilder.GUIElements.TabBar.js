@@ -197,7 +197,7 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 	previousTab: function() {
 		if (this.selectedTabId != "") {
 			var index = this.tabIndexes[this.selectedTabId];
-			if ((index != undefined)&&(index>0) {
+			if ((index != undefined)&&(index>0)) {
 				if ((index) >= this.tabIds.length) return;
 				var tabid = this.tabIds[index-1];
 				if (tabid != undefined) {
