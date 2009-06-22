@@ -95,7 +95,7 @@ OpenPanel.GUIBuilder.FormElement.Integer.prototype = {
 	},
 	
 	setValue : function(value){
-		if (value != undefined && value!="" || value == 0) {
+		if (value != undefined && value!="") {
 			this.value = value;
 			if (this.readOnly == false) {
 				this.hasValue = true;
@@ -108,7 +108,7 @@ OpenPanel.GUIBuilder.FormElement.Integer.prototype = {
 				this.inputElement.innerHTML = value;
 			}
 		} else {
-			this.value = null;
+			this.value = 0;
 			this.hasValue = false;
 			this.validate();
 		}
