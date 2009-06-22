@@ -215,8 +215,8 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 							iconLi.onclick = childObject.onclick;
 						}
 						
-						itemIndexes[childObject.name] = xcounter;
-						itemIds[xcounter++] = childObjects.name;
+						this.itemIndexes[childObject.name] = xcounter;
+						this.itemIds[xcounter++] = childObject.name;
 						this.itemElements[childObject.name] = iconLi;
 					} else {
 						var iconLi = document.createElement("td");
