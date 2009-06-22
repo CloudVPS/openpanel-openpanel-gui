@@ -1,5 +1,4 @@
 OpenPanel.GUIBuilder.FormElement.Integer = function(name, form, initObject){
-	console.log ("FormElement.Integer");
 	OpenPanel.GUIBuilder.FormElement.Base.inherit(this, name, form, initObject);
 	this.textwidth = initObject.textwidth || 30;
 	this.inputElement;
@@ -97,6 +96,8 @@ OpenPanel.GUIBuilder.FormElement.Integer.prototype = {
 	},
 	
 	setValue : function(value){
+		console.log ("Integer.setValue");
+		console.log (value);
 		if (value != undefined && value!="") {
 			this.value = value;
 			if (this.readOnly == false) {
