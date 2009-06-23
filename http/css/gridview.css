@@ -1,10 +1,10 @@
 .gridView {
 	overflow: hidden;
 	border-width: 1px;
-	border-top: 1px solid #444444;
-	border-left: 1px solid #888888;
-	border-right: 1px solid #666666;
-	border-bottom: 1px solid #aaaaaa;
+	border-top: 1px solid #898989;
+	border-left: 1px solid #b8b8b8;
+	border-right: 1px solid #b8b8b8;
+	border-bottom: 1px solid #b8b8b8;
 	background-color: #f8f8f8;
 }
 
