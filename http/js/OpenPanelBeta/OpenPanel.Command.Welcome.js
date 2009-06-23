@@ -15,9 +15,9 @@ OpenPanel.Command.Welcome = {
 		fullWindowAreaDiv.style.visibility = "visible";
 		this.controller.guiBuilder.loadTemplate("dynamic/", "welcomeDivHolder");
 		
-		var holder = $j("#welcomeLogoHolder");
+		var holder = $j("#welcomeLogoHolder")[0];
 		if (holder != undefined) {
-			var logo = $("#welcomeLogo");
+			var logo = $j("#welcomeLogo")[0];
 			var h = this.pageHeight();
 			var curWidth = logo.width;
 			var curHeight = logo.height;
@@ -32,7 +32,7 @@ OpenPanel.Command.Welcome = {
 				width = curWidth * (height / curHeight);
 				holder.style.width = width;
 				holder.style.height = height;
-				holder.style.marginLeft = width/2;
+				holder.style.marginLeft = "-" + (width/2) + "px";
 				logo.width = width;
 				logo.height = height;
 			}
@@ -41,7 +41,7 @@ OpenPanel.Command.Welcome = {
 		this.controller.guiBuilder.GUIElements.IconBar.highliteItem("Welcome");
 		this.controller.guiBuilder.GUIElements.IconBar.setTitle("Welcome");
 		this.controller.guiBuilder.GUIElements.FormBuilder.setSaveButtonVisibility(false);
-	}
+	},
 
 	pageHeight: function() {
 		if (window.innerHeight != null) return window.innerHeight;
@@ -50,5 +50,5 @@ OpenPanel.Command.Welcome = {
 		}
 		if (document.body != null) return document.body.clientHeight;
 		return 500;
-	};
+	}
 }

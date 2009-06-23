@@ -36,12 +36,12 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.setGuiBuilder = function(guiBuilder)
  
 OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
   	
-	build: function(){
+	build: function(isroot){
 		// divs maken
 		if (this.openCoreObject != undefined) {
 			this.init();
 			this.targetDiv.innerHTML = "";
-			this.createDivs();
+			this.createDivs(isroot);
 			if (this.openCoreObject.classInfo == undefined || (this.openCoreObject.classInfo != undefined && this.openCoreObject.classInfo.info == undefined) || (this.openCoreObject.classInfo.info != undefined && this.openCoreObject.classInfo.info.parent == undefined)) {
 				this.createTopLevelForm();
 			} else {
@@ -66,14 +66,16 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		this.childFormObjects = {};
 	},
 	
-	createDivs : function(){
-		var nameDiv = document.createElement("div");
-		
-		nameDiv.innerHTML = this.openCoreObject.title;
-		nameDiv.setAttribute("class", "nameDiv");
-		
-		this.targetDiv.appendChild(nameDiv);
-		
+	createDivs : function(isroot){
+		if (isroot != true) {
+			var nameDiv = document.createElement("div");
+			
+			nameDiv.innerHTML = this.openCoreObject.title;
+			nameDiv.setAttribute("class", "nameDiv");
+			
+			this.targetDiv.appendChild(nameDiv);
+		}
+			
 		this.gridDiv = document.createElement("div");
 		this.gridDiv.setAttribute("id", this.openCoreObject.name + ":grid");
 		this.gridDiv.setAttribute("class", "formGrid");
