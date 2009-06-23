@@ -322,11 +322,11 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			if (! this.haveActiveSelection) return;
 			if (newval)
 			{
-				this.selectedObject.className = this.rowClassSelectedUnfocused;
+				this.selectedObject.className = this.rowClassSelected;
 			}
 			else
 			{
-				this.selectedObject.className = this.rowClassSelected;
+				this.selectedObject.className = this.rowClassSelectedUnfocused;
 			}
 		},
 		
