@@ -195,7 +195,7 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 	takeFocus : function() {
 		if (this.openCoreObject.singleton == false) this.grid.takeFocus();
 		else {
-			$j("input")[0].focus();
+			setTimeout(function() {var e=$j("input")[0]; if (e!=undefined) e.focus()}, 50);
 		}
 	},
 	
