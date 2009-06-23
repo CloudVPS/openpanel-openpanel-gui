@@ -15,14 +15,14 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 	fullWindowOverlayDiv : {},
 	setFocusOnReady: false,
 	
-	build: function() {
+	build: function(focusOnReady) {
 		if (this.fullWindowOverlayDiv != undefined)
 		{
 			this.fullWindowOverlayDiv.style.visibility = "hidden";
 		}
 		this.targetDiv.innerHTML = "";
 		this.isUpdateable = false;
-		this.setFocusOnReady = true;
+		if (focusOnReady != undefined) this.setFocusOnReady = focusOnReady;
 		
 		this.formObjectHolder = document.createElement("div");
 		this.formObjectHolder.setAttribute("id", "formObjectHolder");
