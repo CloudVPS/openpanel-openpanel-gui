@@ -61,14 +61,14 @@
 	background: url(/images/gui/selected.png);
 	color: #ffffff;
 	font-weight: normal;
-	font-shadow: none;
+	text-shadow: none;
 }
 
 .gridViewRowSelectedUnfocused {
 	background: url(/images/gui/selectedu.png);
 	color: #000000;
 	font-weight: normal;
-	font-shadow: none;
+	text-shadow: none;
 }
 
 .itemGridView {
@@ -132,17 +132,17 @@
 }
 
 .itemGridViewRowSelected {
-	background: url(/images/gui/selected.png);
+	background: url(/images/gui/selected2.png);
 	color: #ffffff;
 	font-weight: bold;
-	font-shadow: #102040 0px 0px 2px;
+	text-shadow: #102040 0px 0px 2px;
 }
 
 .itemGridViewRowSelectedUnfocused {
-	background: url(/images/gui/selectedu.png);
+	background: url(/images/gui/selected2u.png);
 	color: #000000;
 	font-weight: bold;
-	font-shadow: #102040 0px 0px 2px;
+	text-shadow: #102040 0px 0px 2px;
 }
 
 
