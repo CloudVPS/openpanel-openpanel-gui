@@ -101,7 +101,7 @@
 			<div id="modalMessageContent"></div>
 			<div id="modalMessageDivBottom"></div>
 		</div>
-		<div id="app"></div>
+		<div id="app" class="activeBrowserWindow"></div>
 		<div id="modal"></div>
 	    <div id="modalLoadingDiv" class="modalLoadingDivLogin"></div>
 	    <script type="text/javascript">
@@ -137,10 +137,12 @@
 			}
 			
 			window.onblur = function() {
+				console.log ("blur");
 				document.getElementById("app").className = "inactiveBrowserWindow";
 			}
 			
 			window.onfocus = function() {
+				console.log ("focus");
 				document.getElementById("app").className = "activeBrowserWindow";
 			}
 	    </script>
