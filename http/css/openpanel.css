@@ -560,7 +560,7 @@ html > body > #iconbarIcon, #iconbarText{
 	font-size: 12px;
 }
 
-li.tab, li.tabSelected, li.tabStart ,li.tabStartSelected ,li.tabEnd ,li.tabEndSelected, li.tabDelimiter, li.tabDelimiterSelected, li.tabDisabled {
+li.tab, li.tabSelected, li.tabPushed, li.tabStart ,li.tabStartSelected ,li.tabEnd ,li.tabEndSelected, li.tabDelimiter, li.tabDelimiterSelected, li.tabDelimiterPushed, li.tabDisabled {
 	margin: 0px 0px 0px 0px;
 	padding: 0px 0px 0px 0px;
 	height: 21px;
@@ -575,10 +575,11 @@ li.tabDelimiterSelected {
 }
 li.tab, li.tabDisabled {
 	background-image: url(/images/gui/tab_fill.gif);
-	padding-left: 5px;
-	padding-right: 5px;
+	padding-left: 8px;
+	padding-right: 8px;
 	height:21px;
 	line-height:21px;
+	cursor:default;
 }
 
 #tabStart, li.tabStart
@@ -591,10 +592,20 @@ li.tab, li.tabDisabled {
 
 .tabSelected {
 	background-image: url(/images/gui/tab_hlite.gif);
-	padding-left: 5px;
-	padding-right: 5px;
+	padding-left: 8px;
+	padding-right: 8px;
 	height:21px;
 	line-height:21px;
+	cursor:default;
+}
+
+.tabPushed {
+	background-image: url(/images/gui/tab_pushed.gif);
+	padding-left: 8px;
+	padding-right: 8px;
+	height:21px;
+	line-height:21px;
+	cursor:default;
 }
 
 #tabStart.tabStartSelected, .tabStartSelected {
@@ -639,12 +650,22 @@ li.tabDisabled {
 	padding-left: 1px;
 	height:21px;
 	width:1px;
+	cursor:default;
 }
 
 .tabDelimiterSelected {
 	background-image: url(/images/gui/tab_delimiter_selected.gif);
 	padding-left: 1px;
 	height:21px;
+	width: 1px;
+	cursor: default;
+}
+
+.tabDelimiterPushed {
+	background-image: url(/images/gui/tab_delimiter_pushed.gif);
+	height:21px;
+	width: 1px;
+	cursor: default;
 }
 
 .grid, .fields {
