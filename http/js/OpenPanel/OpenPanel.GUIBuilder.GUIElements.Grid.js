@@ -333,9 +333,6 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 		},
 		
 		takeFocus: function() {
-			console.log ("Grid.takeFocus");
-			var self=this;
-			setTimeout (function() {self.focusCatcher.focus();}, 100);
 		},
 		
 		/// Set the grid contents from a two dimensional dictionary
