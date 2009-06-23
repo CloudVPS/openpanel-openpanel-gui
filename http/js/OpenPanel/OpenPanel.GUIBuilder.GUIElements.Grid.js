@@ -327,23 +327,14 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 		
 		setFocus: function(newval) {
 			this.focused = newval;
-			console.log ("Grid.setFocus: " + newval);
-			console.log ("haveActiveSelection: " + this.haveActiveSelection);
-			console.log (this.selectedObject);
 			if (! this.haveActiveSelection) return;
 			if (newval == true)
 			{
-				console.log ("newval==true");
 				this.selectedObject.className = this.rowClassSelected;
-				console.log (this.selectedObject);
-				console.log (this.selectedObject.className);
 			}
 			else
 			{
-				console.log ("newval!=true");
 				this.selectedObject.className = this.rowClassSelectedUnfocused;
-				console.log (this.selectedObject);
-				console.log (this.selectedObject.className);
 			}
 		},
 		

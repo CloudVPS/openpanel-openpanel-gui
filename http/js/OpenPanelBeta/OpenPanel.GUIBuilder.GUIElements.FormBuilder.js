@@ -100,9 +100,6 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 		
 		if (this.setFocusOnReady != 0) {
 			var e;
-			console.log ("focusOnReady " + this.setFocusOnReady);
-			console.log (this.openCoreObject);
-			
 			var singleton = false;
 			var parent = this.openCoreObject.parent;
 			if (parent != undefined) singleton = parent.singleton;
@@ -113,8 +110,7 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 			} else {
 				e = $j("input")[0];
 			}
-			console.log (e);
-			if (e != undefined) e.focus();
+			if ((e != undefined) && (e.type == "text")) e.focus();
 			this.setFocusOnReady = 0;
 		}
 	},	
