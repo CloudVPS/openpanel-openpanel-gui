@@ -8,6 +8,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 		this.selectedIndex = -1;
 		this.focusCatcher = {};
 		this.count = 0;
+		this.focused = false;
 		this.focusOnClick = true;
 	}
 	
@@ -217,7 +218,11 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 				if (self.haveActiveSelection == true) {
 					self.selectedObject.className = self.rowClass;
 				}
-				this.className = self.rowClassSelectedUnfocused;
+				if (self.focused) {
+					this.className = self.rowClassSelected;
+				} else {
+					this.className = self.rowClassSelectedUnfocused;
+				}
 				self.haveActiveSelection = true;
 				self.handleClick(this, id, values, index);
 			}
@@ -321,14 +326,24 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 		},
 		
 		setFocus: function(newval) {
+			this.focused = newval;
+			console.log ("Grid.setFocus: " + newval);
+			console.log ("haveActiveSelection: " + this.haveActiveSelection);
+			console.log (this.selectedObject);
 			if (! this.haveActiveSelection) return;
-			if (newval)
+			if (newval == true)
 			{
+				console.log ("newval==true");
 				this.selectedObject.className = this.rowClassSelected;
+				console.log (this.selectedObject);
+				console.log (this.selectedObject.className);
 			}
 			else
 			{
+				console.log ("newval!=true");
 				this.selectedObject.className = this.rowClassSelectedUnfocused;
+				console.log (this.selectedObject);
+				console.log (this.selectedObject.className);
 			}
 		},
 		
