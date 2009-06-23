@@ -13,7 +13,9 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 	isUpdateable : false,
 	lastCreatedFormObject : {},
 	fullWindowOverlayDiv : {},
-	setFocusOnReady: false,
+	FOCUS_FORM: 1,
+	FOCUS_ITEMLIST: 2,
+	setFocusOnReady: 0,
 	
 	build: function(focusOnReady) {
 		if (this.fullWindowOverlayDiv != undefined)
@@ -96,20 +98,20 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 			mainAreaFormElement.style.height = formObjectHolderElement.style.height;
 		}
 		
-		if (this.setFocusOnReady == true) {
-			this.setFocusOnReady = false;
+		if (this.setFocusOnReady != 0) {
 			var e;
 			console.log ("focusOnReady");
 			console.log (this.openCoreObject);
-			if (this.openCoreObject.singleton == true) {
+			if (this.openCoreObject.parent!=undefined &&
+				this.openCoreObject.parent.singleton == false &&
+				this.setFocusOnReady == FOCUS_FORM) {
 				e = $j("input")[1];
-				console.log ("input.1");
-				console.log (e);
 				if (e == undefined) e = $j("input")[0];
 			} else {
 				e = $j("input")[0];
 			}
 			if (e != undefined) e.focus();
+			this.setFocusOnReady = 0;
 		}
 	},	
 	
