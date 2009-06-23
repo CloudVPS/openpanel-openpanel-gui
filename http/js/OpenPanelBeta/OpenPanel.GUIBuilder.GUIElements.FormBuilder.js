@@ -13,6 +13,7 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 	isUpdateable : false,
 	lastCreatedFormObject : {},
 	fullWindowOverlayDiv : {},
+	setFocusOnReady: false;
 	
 	build: function() {
 		if (this.fullWindowOverlayDiv != undefined)
@@ -21,6 +22,7 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 		}
 		this.targetDiv.innerHTML = "";
 		this.isUpdateable = false;
+		this.setFocusOnReady = true;
 		
 		this.formObjectHolder = document.createElement("div");
 		this.formObjectHolder.setAttribute("id", "formObjectHolder");
@@ -50,8 +52,7 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 		this.rootFormObject.setController(this.controller);
 		this.rootFormObject.setFormBuilder(this);
 		
-		this.rootFormObject.build();
-		var e=$j("input")[0]; console.log (e); if (e!=undefined) e.focus();
+		this.rootFormObject.build(true);
 	},
 	
 	setSaveButtonVisibility : function(isVisible){
@@ -94,7 +95,12 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 			var mainAreaFormElement = document.getElementById('mainAreaForm');
 			mainAreaFormElement.style.height = formObjectHolderElement.style.height;
 		}
-
+		
+		if (this.setFocusOnReady == true) {
+			this.setFocusOnReady = false;
+			var e = $j("input")[0];
+			if (e != undefined) e.focus();
+		}
 	},	
 	
 	setIsUpdateable : function(isUpdateable){
