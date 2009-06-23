@@ -10,6 +10,7 @@ OpenPanel.Command.ClickTabBarItem  = {
 			this.controller.guiBuilder.GUIElements.FormBuilder.setOpenCoreObject(openCoreObject);
 			this.controller.guiBuilder.GUIElements.FormBuilder.setOpenCoreParentUUID(this.controller.currentRootClassInstance.uuid);
 			this.controller.guiBuilder.GUIElements.FormBuilder.build();
+			setTimeout(function() {$j("input")[0].focus()}, 50);
 		}
 	}
 	
