@@ -67,6 +67,7 @@
 
 .inactiveBrowserWindow .gridViewRowSelected {
 	background: url(/images/gui/selectedu.png);
+	color: #000000;
 }
 
 .gridViewRowSelectedUnfocused {

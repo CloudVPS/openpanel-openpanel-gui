@@ -78,7 +78,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			this.totalWidth = width;
 			var i = 0;
 			
-			if (liststyle == "itunes")
+			if (liststyle == "itemlist")
 			{
 				this.gridClass = "itemGridView";
 				this.contentsClass = "itemGridViewContents";
