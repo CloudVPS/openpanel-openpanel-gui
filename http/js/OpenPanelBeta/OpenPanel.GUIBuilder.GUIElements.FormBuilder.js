@@ -101,6 +101,8 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 			var e;
 			if (this.openCoreObject.singleton == true) {
 				e = $j("input")[1];
+				console.log ("input.1");
+				console.log (e);
 				if (e == undefined) e = $j("input")[0];
 			} else {
 				e = $j("input")[0];
