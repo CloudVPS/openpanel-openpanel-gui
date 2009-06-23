@@ -505,7 +505,7 @@ html > body > #iconbarIcon, #iconbarText{
 }
 
 .inactiveBrowserWindow .selected .iconTdMain {
-	background-image: url(/images/gui/iconBarSelectedMiddleInactive.gif);
+	background-image: url(/images/gui/iconBarSelectedMiddleInactive.png);
 }
 
 .classIcon {
