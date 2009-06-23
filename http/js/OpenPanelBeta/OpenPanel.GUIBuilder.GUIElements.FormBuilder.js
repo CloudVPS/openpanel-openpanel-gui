@@ -51,6 +51,7 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 		this.rootFormObject.setFormBuilder(this);
 		
 		this.rootFormObject.build();
+		var e=$j("input")[0]; console.log (e); if (e!=undefined) e.focus();
 	},
 	
 	setSaveButtonVisibility : function(isVisible){
