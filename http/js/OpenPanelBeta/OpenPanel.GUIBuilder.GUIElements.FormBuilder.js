@@ -98,7 +98,13 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 		
 		if (this.setFocusOnReady == true) {
 			this.setFocusOnReady = false;
-			var e = $j("input")[0];
+			var e;
+			if (this.openCoreObject.singleton == true) {
+				e = $j("input")[1];
+				if (e == undefined) e = $j("input")[0];
+			} else {
+				e = $j("input")[0];
+			}
 			if (e != undefined) e.focus();
 		}
 	},	
