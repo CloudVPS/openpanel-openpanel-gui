@@ -619,6 +619,14 @@ li.tabPushed {
 	cursor:default;
 }
 
+.inactiveBrowserWindow li.tabStartSelected {
+	background-image: url(/images/gui/tab_start_pushed.gif);
+}
+
+.inactiveBrowserWindow #tabStart.tabStartSelected {
+	background-image: url(/images/gui/tab_start_pushed.gif);
+}
+
 #tabStart.tabStartPushed, li.tabStartPushed {
 	background-image: url(/images/gui/tab_start_pushed.gif);
 	height:21px;
@@ -658,6 +666,10 @@ li.tabEndSelected {
 	height:21px;
 	width:10px;
 	cursor: default;
+}
+
+.inactiveBrowserWindow li.tabEndSelected {
+	background-image: url(/images/gui/tab_end_pushed.gif);
 }
 
 li.tabEndPushed {

@@ -28,16 +28,16 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			this.rowsByID = new Array();
 			this.rowKeys = new Array();
 			this.rowKeysBySelectionText = new Array();
-			this.selectedImage = "url(/images/gui/selected.png)";
-			this.selectedImageUnfocused = "url(/images/gui/selectedu.png)";
-			this.selectedColor = "#ffffff";
-			this.selectedColorUnfocused = "#000000";
-			this.selectedWeight = "normal";
-			this.titleImage = "url(/images/gui/gridview_title_bg.png)";
-			this.titleBorderBottom = "#666666";
-			this.borderRight = "#666666";
-			this.borderLeft = "#888888";
-			this.contentBorderTop = "0px";
+			
+			this.gridClass = "gridView";
+			this.contentsClass = "gridViewContents";
+			this.rowClass = "gridViewRow";
+			this.rowClassSelected = "gridViewRowSelected";
+			this.rowClassSelectedUnfocused = "gridViewRowSelectedUnfocused";
+			this.columnClass = "gridViewColumn";
+			this.titleClass = "gridViewTitle";
+			this.titleItemClass = "gridViewTitleItem";
+			
 			this.selectedShadow = "";
 			this.focusOnClick = true;
 			this.height = height;
@@ -78,28 +78,16 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			this.totalWidth = width;
 			var i = 0;
 			
-			var color;
-			if (typeof(liststyle) == 'undefined')
+			if (liststyle == "itunes")
 			{
-				color = "#f8f8f8";
-			}
-			else
-			{
-				if (liststyle == "itunes")
-				{
-					color = "#d0d7e2";
-					this.selectedImage = "url(/images/gui/selected2.png)";
-					this.selectedImageUnfocused = "url(/images/gui/selected2u.png)";
-					this.selectedColor = "#ffffff";
-					this.selectedColorUnfocused = "#ffffff";
-					this.selectedWeight = "bold";
-					this.titleImage = "url(/images/gui/gridview_title_bg2.png)";
-					this.titleBorderBottom = "#444444";
-					this.selectedShadow = "#102040 0px 0px 2px";
-					this.contentBorderTop = "1px solid #444444";
-					this.borderRight = "#444444";
-					this.borderLeft = "#c0c7d2";
-				}
+				this.gridClass = "itemGridView";
+				this.contentsClass = "itemGridViewContents";
+				this.rowClass = "itemGridViewRow";
+				this.rowClassSelected = "itemGridViewRowSelected";
+				this.rowClassSelectedUnfocused = "itemGridViewRowSelectedUnfocused";
+				this.columnClass = "itemGridViewColumn";
+				this.titleClass = "itemGridViewTitle";
+				this.titleItemClass = "itemGridViewTitleItem";
 			}
 			
 			this.valueReplacements = new Array();
@@ -116,12 +104,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			}
 			
 			var gridViewNode = document.createElement("div");
-			gridViewNode.className = "gridView";
-			gridViewNode.style.backgroundColor = color;
-			gridViewNode.style.width = "" + this.totalWidth + "px";
-			gridViewNode.style.borderBottomColor = this.titleBorderBottom;
-			gridViewNode.style.borderRightColor = this.borderRight;
-			gridViewNode.style.borderLeftColor = this.borderLeft;
+			gridViewNode.className = this.gridClass;;
 			if (height) {
 				gridViewNode.style.height = "" + height + "px";
 			} else {
@@ -181,18 +164,14 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			}
 			
 			var gridViewTitle = document.createElement("div");
-			gridViewTitle.className = "gridViewTitle";
+			gridViewTitle.className = this.titleClass;
 			gridViewTitle.style.width = "" + this.totalWidth + "px";
-			gridViewTitle.style.backgroundImage = this.titleImage;
-			gridViewTitle.style.borderBottomColor = this.titleBorderBottom;
 			gridViewNode.appendChild(gridViewTitle);
 			
 			if (this.sizes.length == 1) this.totalWidth += 1;
 			
 			var gridViewContents = document.createElement("div");
-			gridViewContents.className = "gridViewContents";
-			gridViewContents.style.borderTop = this.contentBorderTop;
-			gridViewContents.style.width = "" + this.totalWidth + "px";
+			gridViewContents.className = this.contentsClass;
 			if (height) {
 				gridViewContents.style.height = "" + (height - 15) + "px";
 			} else {
@@ -211,7 +190,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 				if (i == (this.sizes.length - 1)) sz += 5;
 				
 				var gridViewTitleItem = document.createElement("div");
-				gridViewTitleItem.className = "gridViewTitleItem";
+				gridViewTitleItem.className = this.titleItemClass;
 				gridViewTitleItem.style.width = "" + sz + "px";
 				gridViewTitleItem.innerHTML = this.headers[i];
 				gridViewTitle.appendChild(gridViewTitleItem);
@@ -230,19 +209,13 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			this.count++;
 			var index = this.count -1;
 			var row = document.createElement("div");
-			row.className = "gridViewRow";
+			row.className = this.rowClass;
 			row.style.width = "" + (this.totalWidth) + "px";
 			row.onclick = function() {
 				if (self.haveActiveSelection == true) {
-					self.selectedObject.style.background = "";
-					self.selectedObject.style.color = "#000000";
-					self.selectedObject.style.fontWeight = "normal";
-					self.selectedObject.style.textShadow = "";
+					self.selectedObject.className = self.rowClass;
 				}
-				this.style.background = self.selectedImageUnfocused;
-				this.style.color = self.selectedColorUnfocused;
-				this.style.fontWeight = self.selectedWeight;
-				this.style.textShadow = self.selectedShadow;
+				this.className = self.rowClassSelectedUnfocused;
 				self.haveActiveSelection = true;
 				self.handleClick(this, id, values, index);
 			}
@@ -250,7 +223,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			for (i = 0; i < this.sizes.length; ++i) {
 				var useInnerHTML = false;
 				var col = document.createElement("div");
-				col.className = "gridViewColumn";
+				col.className = this.columnClass;
 				col.style.width = "" + this.sizes[i] + "px";
 				var value = values[this.keys[i]];
 				if ((value != undefined) && (this.valueReplacements[i] != undefined))
@@ -349,13 +322,11 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			if (! this.haveActiveSelection) return;
 			if (newval)
 			{
-				this.selectedObject.style.background = this.selectedImage;
-				this.selectedObject.style.color = this.selectedColor;
+				this.selectedObject.className = this.rowClassSelectedUnfocused;
 			}
 			else
 			{
-				this.selectedObject.style.background = this.selectedImageUnfocused;
-				this.selectedObject.style.color = this.selectedColorUnfocused;
+				this.selectedObject.className = this.rowClassSelected;
 			}
 		},
 		
