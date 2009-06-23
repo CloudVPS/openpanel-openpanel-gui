@@ -560,7 +560,7 @@ html > body > #iconbarIcon, #iconbarText{
 	font-size: 12px;
 }
 
-li.tab, li.tabSelected, li.tabPushed, li.tabStart ,li.tabStartSelected ,li.tabEnd ,li.tabEndSelected, li.tabDelimiter, li.tabDelimiterSelected, li.tabDelimiterPushed, li.tabDisabled {
+li.tab, li.tabSelected, li.tabPushed, li.tabStart ,li.tabStartSelected, li.tabStartPushed ,li.tabEnd ,li.tabEndSelected, li.tabEndPushed, li.tabDelimiter, li.tabDelimiterSelected, li.tabDelimiterPushed, li.tabDisabled {
 	margin: 0px 0px 0px 0px;
 	padding: 0px 0px 0px 0px;
 	height: 21px;
@@ -584,13 +584,13 @@ li.tab, li.tabDisabled {
 
 #tabStart, li.tabStart
 {
-	background-image:none;
-	background: url(/images/gui/tab_start.gif);
+	background-image: url(/images/gui/tab_start.gif);
 	width:10px;
 	height:21px;
+	cursor:default;
 }
 
-.tabSelected {
+li.tabSelected {
 	background-image: url(/images/gui/tab_hlite.gif);
 	padding-left: 8px;
 	padding-right: 8px;
@@ -599,7 +599,11 @@ li.tab, li.tabDisabled {
 	cursor:default;
 }
 
-.tabPushed {
+.inactiveBrowserWindow li.tabSelected {
+	background-image: url(/images/gui/tab_pushed.gif);
+}
+
+li.tabPushed {
 	background-image: url(/images/gui/tab_pushed.gif);
 	padding-left: 8px;
 	padding-right: 8px;
@@ -608,17 +612,25 @@ li.tab, li.tabDisabled {
 	cursor:default;
 }
 
-#tabStart.tabStartSelected, .tabStartSelected {
+#tabStart.tabStartSelected, li.tabStartSelected {
 	background-image: url(/images/gui/tab_start_selected.gif);
 	height:21px;
 	width:10px;
+	cursor:default;
+}
+
+#tabStart.tabStartPushed, li.tabStartPushed {
+	background-image: url(/images/gui/tab_start_pushed.gif);
+	height:21px;
+	width:10px;
+	cursor:default;
 }
 
 li.tabDisabled {
 	cursor: default;
 }
 
-.tabDisabled {
+li.tabDisabled {
 	color: #808080;
 }
 
@@ -631,18 +643,28 @@ li.tabDisabled {
 	background-image: url(/images/gui/tab_start.gif);
 	height:21px;
 	width:10px;
+	cursor: default;
 }
 
-.tabEnd {
+li.tabEnd {
 	background-image: url(/images/gui/tab_end.gif);
 	height:21px;
 	width:10px;
+	cursor: default;
 }
 
-.tabEndSelected {
+li.tabEndSelected {
 	background-image: url(/images/gui/tab_end_selected.gif);
 	height:21px;
 	width:10px;
+	cursor: default;
+}
+
+li.tabEndPushed {
+	background-image: url(/images/gui/tab_end_pushed.gif);
+	height:21px;
+	width:10px;
+	cursor: default;
 }
 
 .tabDelimiter {

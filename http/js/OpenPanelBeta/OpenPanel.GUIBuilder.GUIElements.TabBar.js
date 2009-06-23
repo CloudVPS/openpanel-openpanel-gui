@@ -402,45 +402,27 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 	},	
 	
 	setTabStart: function(obj) {
-		obj.style.backgroundImage = "url(/images/gui/tab_start.gif)";
-		obj.style.height = "21px";
-		obj.style.width = "10px";
-		obj.style.cursor = "default";
+		obj.className = "tabStart";
 	},	
 	
 	setTabStartSelected: function(obj) {
-		obj.style.backgroundImage = "url(/images/gui/tab_start_selected.gif)";
-		obj.style.height = "21px";
-		obj.style.width = "10px";
-		obj.style.cursor = "default";
+		obj.className = "tabStartSelected";
 	},
 	
 	setTabStartPushed: function(obj) {
-		obj.style.backgroundImage = "url(/images/gui/tab_start_pushed.gif)";
-		obj.style.height = "21px";
-		obj.style.width = "10px";
-		obj.style.cursor = "default";
+		obj.className = "tabStartPushed";
 	},
 	
 	setTabEnd: function(obj) {
-		obj.style.backgroundImage = "url(/images/gui/tab_end.gif)";
-		obj.style.height = "21px";
-		obj.style.width = "10px";
-		obj.style.cursor = "default";
+		obj.className = "tabEnd";
 	},
 	
 	setTabEndSelected: function(obj){
-		obj.style.backgroundImage = "url(/images/gui/tab_end_selected.gif)";
-		obj.style.height = "21px";
-		obj.style.width = "10px";
-		obj.style.cursor = "default";
+		obj.className = "tabEndSelected";
 	},
 	
 	setTabEndPushed: function(obj){
-		obj.style.backgroundImage = "url(/images/gui/tab_end_pushed.gif)";
-		obj.style.height = "21px";
-		obj.style.width = "10px";
-		obj.style.cursor = "default";
+		obj.className = "tabEndPushed";
 	},
 	
 	setTabDisabled: function(obj) {
