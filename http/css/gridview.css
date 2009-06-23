@@ -146,7 +146,7 @@
 }
 
 
-.gridViewColumn {
+.gridViewColumn, .itemGridViewColumn {
 	float: left;
 	height: 17px;
 	padding-left: 4px;
