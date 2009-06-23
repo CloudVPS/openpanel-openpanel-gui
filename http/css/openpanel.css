@@ -465,6 +465,10 @@ html > body > #iconbarIcon, #iconbarText{
 	font-size: 13px;
 }
 
+.inactiveBrowserWindow #iconBarTitle {
+	color: #444444;
+}
+
 .iconHolder {
 	padding-left: 7px;
 	padding-right: 7px;

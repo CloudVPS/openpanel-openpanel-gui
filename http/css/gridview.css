@@ -39,6 +39,7 @@
 	overflow-x: hidden;
 	overflow-y: auto;
 	background-color: #f8f8f8;
+	border-top: 0px;
 	border-right-color: #666666;
 	border-left-color: #888888;
 	border-bottom-color: #666666;
@@ -62,6 +63,10 @@
 	color: #ffffff;
 	font-weight: normal;
 	text-shadow: none;
+}
+
+.inactiveBrowserWindow .gridViewRowSelected {
+	background: url(/images/gui/selectedu.png);
 }
 
 .gridViewRowSelectedUnfocused {
@@ -119,7 +124,7 @@
 }
 
 .inactiveBrowserWindow .itemGridViewContents {
-	background-color: #e8e8e8;
+	background-color: #e2e4ec;
 }
 
 .itemGridViewRow, .itemGridViewRowSelected, .itemGridViewRowSelectedUnfocused {
@@ -130,7 +135,7 @@
 }
 
 .itemGridViewRow {
-	color: #d0d7e2;
+	color: #000000;
 	text-shadow: none;
 	font-weight: normal;
 }
@@ -140,6 +145,10 @@
 	color: #ffffff;
 	font-weight: bold;
 	text-shadow: #102040 0px 0px 2px;
+}
+
+.inactiveBrowserWindow .itemGridViewRowSelected {
+	background: url(/images/gui/selected2u.png);
 }
 
 .itemGridViewRowSelectedUnfocused {
