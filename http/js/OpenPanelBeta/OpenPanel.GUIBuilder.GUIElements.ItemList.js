@@ -193,7 +193,10 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 	},
 	
 	takeFocus : function() {
-		if (this.grid != undefined) this.grid.takeFocus();
+		if (this.openCoreObject.singleton == false) this.grid.takeFocus();
+		else {
+			$j("input")[0].focus();
+		}
 	},
 	
 	renderG : function(targetDiv, instances){
