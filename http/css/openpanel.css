@@ -93,6 +93,10 @@ label { font: 11px Arial, Helvetica, sans-serif; }
 	border-bottom: 1px solid #222222;
 }
 
+.inactiveBrowserWindow #saveButtonHolder {
+	background-image: url(/images/gui/itemlistbottomInactive.png);
+}
+
 html > body #saveButtonHolder {
 	padding-right:0px;
 	width: 900px;
@@ -675,6 +679,10 @@ li.tabDisabled {
 	position: fixed;
 	width: 970px;
 	height: 99px;
+}
+
+.inactiveBrowserWindow #shadowTop {
+	background-image: url(/images/gui/shadowIconBarInactive.png);
 }
 
 #shadowLeft {

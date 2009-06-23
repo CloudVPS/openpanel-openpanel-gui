@@ -135,6 +135,14 @@
 				
 				
 			}
+			
+			window.onblur = function() {
+				document.getElementById("app").className = "inactiveBrowserWindow";
+			}
+			
+			window.onfocus = function() {
+				document.getElementById("app").className = "activeBrowserWindow";
+			}
 	    </script>
 		</body>
 </html>
