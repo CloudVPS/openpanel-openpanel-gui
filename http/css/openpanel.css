@@ -496,6 +496,18 @@ html > body > #iconbarIcon, #iconbarText{
 	background-image: url(/images/gui/iconBarSelectedMiddle.gif);
 }
 
+.inactiveBrowserWindow .selected .iconTdLeft {
+	background-image: url(/images/gui/iconBarSelectedLeftInactive.gif);	
+}
+
+.inactiveBrowserWindow .selected .iconTdRight {
+	background-image: url(/images/gui/iconBarSelectedRightInactive.gif);	
+}
+
+.inactiveBrowserWindow .selected .iconTdMain {
+	background-image: url(/images/gui/iconBarSelectedMiddleInactive.gif);
+}
+
 .classIcon {
 	padding-top: 17px;
 }
