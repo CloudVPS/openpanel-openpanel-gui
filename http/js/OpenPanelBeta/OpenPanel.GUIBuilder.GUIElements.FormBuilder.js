@@ -13,7 +13,7 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 	isUpdateable : false,
 	lastCreatedFormObject : {},
 	fullWindowOverlayDiv : {},
-	setFocusOnReady: false;
+	setFocusOnReady: false,
 	
 	build: function() {
 		if (this.fullWindowOverlayDiv != undefined)
