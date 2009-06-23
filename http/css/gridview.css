@@ -115,7 +115,11 @@
 	border-top: 1px solid #444444;
 	border-right-color: #444444;
 	border-left-color: #c0c7d2;
-	border-bottom-color: #444444;
+	border-bottom: 1px solid #444444;
+}
+
+.inactiveBrowserWindow .itemGridViewContents {
+	background-color: #e8e8e8;
 }
 
 .itemGridViewRow, .itemGridViewRowSelected, .itemGridViewRowSelectedUnfocused {
@@ -140,7 +144,7 @@
 
 .itemGridViewRowSelectedUnfocused {
 	background: url(/images/gui/selected2u.png);
-	color: #000000;
+	color: #ffffff;
 	font-weight: bold;
 	text-shadow: #102040 0px 0px 2px;
 }

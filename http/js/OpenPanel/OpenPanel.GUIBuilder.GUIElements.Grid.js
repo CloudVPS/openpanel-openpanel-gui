@@ -104,7 +104,8 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			}
 			
 			var gridViewNode = document.createElement("div");
-			gridViewNode.className = this.gridClass;;
+			gridViewNode.className = this.gridClass;
+			gridViewNode.style.width = "" + this.totalWidth + "px";
 			if (height) {
 				gridViewNode.style.height = "" + height + "px";
 			} else {
@@ -172,6 +173,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			
 			var gridViewContents = document.createElement("div");
 			gridViewContents.className = this.contentsClass;
+			gridViewContents.style.width = "" + this.totalWidth + "px";
 			if (height) {
 				gridViewContents.style.height = "" + (height - 15) + "px";
 			} else {
