@@ -22,6 +22,15 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 	///            positioning, provide the top pixel offset here.
 	/// @param bottom The bottom pixel offset for p
   	OpenPanel.GUIBuilder.GUIElements.Grid.prototype = {
+  		createInline: function(pid, def, width, height) {
+  			create(pid, def, width, height);
+  		},
+  		createInlineWithButtons: function(pid, def, width, height) {
+  			create(pid, def, width, height, 0, 0, 0, "buttonlist");
+  		},
+  		createFixed: function(pid, def, width, top, bottom, marginleft) {
+  			create(pid, def, width, 0, top, bottom, marginleft, "itemlist");
+  		},
 		create: function(parentidorobj, def, width, height, top, bottom, marginleft,liststyle) {
 			this.sizes = new Array();
 			this.headers = new Array();
@@ -165,6 +174,9 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 				return false;
 			}
 			
+			var contentHeight = height - 14;
+			if (liststyle == "buttonlist") contentHeight -= 22;
+			
 			var gridViewTitle = document.createElement("div");
 			gridViewTitle.className = this.titleClass;
 			gridViewTitle.style.width = "" + this.totalWidth + "px";
@@ -176,7 +188,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			gridViewContents.className = this.contentsClass;
 			gridViewContents.style.width = "" + this.totalWidth + "px";
 			if (height) {
-				gridViewContents.style.height = "" + (height - 15) + "px";
+				gridViewContents.style.height = "" + (contentHeight) + "px";
 			} else {
 				gridViewContents.style.top = "" + (top + 16) + "px";
 				gridViewContents.style.position = "fixed";
@@ -187,6 +199,10 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			
 			this.contents = gridViewContents;
 			gridViewNode.appendChild(gridViewContents);
+			
+			if (liststyle == "buttonlist") {
+				this.renderButtons(gridViewNode);
+			}
 			
 			for (i = 0; i < this.sizes.length; ++i) {
 				var sz = this.sizes[i];
@@ -265,6 +281,20 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 				this.rowKeysBySelectionText[selectionText] = id;
 			}
 			
+		},
+		
+		renderButtons: function(gridViewNode) {
+			var buttonArea = document.createElement("div");
+			buttonArea.className = "gridViewButtonArea";
+			gridViewNode.appendChild(buttonArea);
+			
+			var createButton = document.createElement("div");
+			createButton.className = "gridViewCreateButton";
+			buttonArea.appendChild(createButton);
+			
+			var deleteButton = document.createElement("div");
+			deleteButton.className = "gridViewDeleteButton";
+			buttonArea.appendChild(deleteButton);
 		},
 		
 		selectFromString: function(selectedText) {

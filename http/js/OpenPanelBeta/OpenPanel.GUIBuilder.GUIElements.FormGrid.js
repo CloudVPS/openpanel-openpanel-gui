@@ -85,7 +85,7 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 			}
 		}
 		this.grid = new OpenPanel.GUIBuilder.GUIElements.Grid();
-		this.grid.create(this.gridDiv,createObject,600, classInfo["class"].gridheight);
+		this.grid.createInlineWithButtons(this.gridDiv,createObject,600, classInfo["class"].gridheight);
       	this.grid.setGrid (instances);
 		this.grid.render = function(){ }
 	},
