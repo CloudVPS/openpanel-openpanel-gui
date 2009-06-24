@@ -13,6 +13,8 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 		this.menuCallbacks = {};
 		this.menuDiv = {};
 		this.createMenu = {};
+		this.createButtonDisabled = false;
+		this.deleteButtonDisabled = false;
 		this.createButtonCallback = function() {};
 		this.deleteButtonCallback = function() {};
 	}
@@ -295,6 +297,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			var self = this;
 			
 			this.createButton.onmousedown = this.createButton.onclick = this.createButton.ondblclick = function() {
+				if (self.createButtonDisabled) return false;
 				this.className = "gridViewCreateButtonPushed";
 				var btn = this;
 				setTimeout (function() { btn.className = "gridViewCreateButton"; }, 50);
@@ -314,9 +317,9 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			this.createMenu.itemData = itemData;
 			this.createMenu.build();
 			this.createMenu.onselect = function(id) {
-				if (this.menuCallbacks[id] != undefined)
-					this.menuCallbacks[id]();
 				console.log ("create: " + id);
+				if (self.menuCallbacks[id] != undefined)
+					self.menuCallbacks[id]();
 			}
 		},
 		
@@ -329,7 +332,6 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			var createButton = document.createElement("div");
 			createButton.className = "gridViewCreateButton";
 			buttonArea.appendChild(createButton);
-			
 			this.createButton = createButton;
 			
 			var self = this;
@@ -337,13 +339,16 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			var deleteButton = document.createElement("div");
 			deleteButton.className = "gridViewDeleteButton";
 			buttonArea.appendChild(deleteButton);
+			this.deleteButton = deleteButton;
 			
 			createButton.onmousedown = function() {
+				if (self.createButtonDisabled) return false;
 				this.className = "gridViewCreateButtonPushed";
 				return false;
 			}
 			
 			createButton.onclick = function() {
+				if (self.createButtonDisabled) return false;
 				self.createButtonCallback();
 			}
 			
@@ -353,6 +358,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			}
 			
 			deleteButton.onmousedown = function() {
+				if (self.deleteButtonDisabled) return false;
 				this.className = "gridViewDeleteButtonPushed";
 				return false;
 			}
@@ -363,11 +369,22 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			}
 			
 			deleteButton.onclick = function() {
+				if (self.deleteButtonDisabled) return false;
 				self.deleteButtonCallback();
 			}
 			
 			console.log ("renderButtons");
 			console.log (this);
+		},
+		
+		disableCreateButton: function() {
+			this.createButton.className = "gridViewCreateButtonDisabled";
+			this.createButtonDisabled = true;
+		},
+		
+		disableDeleteButton: function() {
+			this.deleteButton.className = "gridViewDeleteButtonDisabled";
+			this.deleteButtonDisabled = true;
 		},
 		
 		selectFromString: function(selectedText) {

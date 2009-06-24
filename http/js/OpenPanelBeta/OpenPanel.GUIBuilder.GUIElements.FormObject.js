@@ -437,13 +437,6 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		if(canAdd == true){
 			function mkcallback(hook,openCoreObject) {
 				return function() {
-					for(var i = 0;i<this.options.length;i++){
-						var option = this.options[i];
-						if(option.value == this.value){
-							var openCoreObject = option.openCoreObject;
-						}
-					}
-					
 					if(openCoreObject != undefined){
 						hook.controller.action({
 							command: "ShowCreateInstanceFromFormObjectMeta",
@@ -460,7 +453,8 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 			
 			for(var key in available){
 				var metaObject = available[key];
-				mdef[key] = mkcallback(this,metaObject);
+				var menukey = "Create " + metaObject.title;
+				mdef[menukey] = mkcallback(this,metaObject);
 			}
 			
 			this.setGridMenu (mdef);

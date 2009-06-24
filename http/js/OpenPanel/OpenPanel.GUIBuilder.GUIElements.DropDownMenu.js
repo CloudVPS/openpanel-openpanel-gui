@@ -12,26 +12,15 @@ OpenPanel.GUIBuilder.GUIElements.DropDownMenu = function() {
 
 OpenPanel.GUIBuilder.GUIElements.DropDownMenu.prototype = {
 	create: function(targetDiv,poffset) {
-		var offset = 0;
-		if (poffset != undefined) offset = poffset;
+		this.targetDiv = targetDiv;
+		this.offset = 0;
+		if (poffset != undefined) this.offset = poffset;
 			
 		this.menuDiv = document.createElement("div");
 		var self = this;
 		this.menuDiv.onmouseout = self.timedHide();
 		this.menuDiv.onmouseover = self.cancelHide();
 		this.menuDiv.className = "dropDownMenu";
-		
-		var x = this.getX(targetDiv);
-		var y = this.getY(targetDiv);
-		
-		console.log ("x: " + x + ", y: " + y);
-		
-		this.menuDiv.style.position = "fixed";
-		this.menuDiv.style.left = "" + (x + offset) + "px";
-		this.menuDiv.style.top = "" + (y -10) + "px";
-		
-		console.log (this.menuDiv.style.left);
-		console.log (this.menuDiv.style.top);
 		
 		this.visible = false;
 		targetDiv.appendChild (this.menuDiv);
@@ -52,7 +41,10 @@ OpenPanel.GUIBuilder.GUIElements.DropDownMenu.prototype = {
 		var el = xel;
 		var y = 0;
 		while (el != undefined) {
+			console.log ("getY y:" +y);
+			console.log (el);
 			y += el.offsetTop;
+			if (el.scrollTop) y-= el.scrollTop;
 			el = el.offsetParent;
 		}
 		return y;
@@ -144,7 +136,7 @@ OpenPanel.GUIBuilder.GUIElements.DropDownMenu.prototype = {
 				this.className = "dropDownMenuItemSelected";
 				var thistd = this;
 				setTimeout (function() {
-						thistd.className = "dropDownMenuitem";
+						thistd.className = "dropDownMenuItem";
 						setTimeout (function() {
 							thistd.className = "dropDownMenuItemSelected";
 							setTimeout (function() {
@@ -193,6 +185,18 @@ OpenPanel.GUIBuilder.GUIElements.DropDownMenu.prototype = {
 	
 	show: function() {
 		if (! this.visible) {
+			var x = this.getX(this.targetDiv);
+			var y = this.getY(this.targetDiv);
+			
+			console.log ("x: " + x + ", y: " + y);
+			
+			this.menuDiv.style.position = "fixed";
+			this.menuDiv.style.left = "" + (x + this.offset) + "px";
+			this.menuDiv.style.top = "" + (y -10) + "px";
+			
+			console.log (this.menuDiv.style.left);
+			console.log (this.menuDiv.style.top);
+			
 			if (this.selectedNode != undefined) {
 				this.selectedNode.className = "dropDownMenuItem";
 			}

@@ -85,7 +85,22 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 			}
 		}
 		this.grid = new OpenPanel.GUIBuilder.GUIElements.Grid();
-		this.grid.createInlineWithButtons(this.gridDiv,createObject,600, classInfo["class"].gridheight);
+		
+		if (this.openCoreObject.canDelete == false && this.openCoreObject.canCreate == false)
+		{
+			this.grid.createInline(this.gridDiv,createObject,600, classInfo["class"].gridheight);
+		}
+		else
+		{
+			this.grid.createInlineWithButtons(this.gridDiv,createObject,600, classInfo["class"].gridheight);
+			if (this.openCoreObject.canDelete == false) {
+				this.grid.disableDeleteButton();
+			}
+			if (this.openCoreObject.canCreate == false) {
+				this.grid.disableCreateButton();
+			}
+		}
+		
       	this.grid.setGrid (instances);
 		this.grid.render = function(){ }
 	},
@@ -96,6 +111,14 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 	
 	setMenu: function (mdef) {
 		this.grid.setMenu (mdef);
+	},
+	
+	disableCreateButton: function() {
+		this.grid.disableCreateButton();
+	},
+	
+	disableDeleteButton: function() {
+		this.grid.disableDeleteButton();
 	},
 	
 	setCreateCallback: function (fun) {
