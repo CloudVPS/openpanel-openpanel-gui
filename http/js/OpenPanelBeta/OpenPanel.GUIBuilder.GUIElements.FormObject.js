@@ -540,11 +540,12 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 				parentUUID: hook.parentUUID,
 				formObjectHolder : hook.formBuilder.formObjectHolder
 			});
+		}
 			
 		this.grid.setDeleteCallback (callbackfunc);
 	},
 	
-	getPreviousInstance : function(){
+	getPreviousInstance: function(){
 		var previousInstanceName = this.formBuilder.getInstance(this.openCoreObject.name);
 		var previousInstance = this.instances[previousInstanceName];
 		if(previousInstance!= undefined){

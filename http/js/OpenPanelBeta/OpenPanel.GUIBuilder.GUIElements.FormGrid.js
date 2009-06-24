@@ -98,11 +98,11 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 		this.grid.setMenu (mdef);
 	},
 	
-	setCreateCallback (fun) {
+	setCreateCallback: function (fun) {
 		this.grid.createButtonCallback = fun;
 	},
 	
-	setDeleteCallback (fun) {
+	setDeleteCallback: function (fun) {
 		this.grid.deleteButtonCallback = fun;
 	},
 	
