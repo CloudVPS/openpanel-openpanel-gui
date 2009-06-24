@@ -456,7 +456,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 				}
 			}
 			
-			var mdef;
+			var mdef = {};
 			
 			for(var key in available){
 				var metaObject = available[key];
