@@ -23,13 +23,13 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 	/// @param bottom The bottom pixel offset for p
   	OpenPanel.GUIBuilder.GUIElements.Grid.prototype = {
   		createInline: function(pid, def, width, height) {
-  			create(pid, def, width, height);
+  			this.create(pid, def, width, height);
   		},
   		createInlineWithButtons: function(pid, def, width, height) {
-  			create(pid, def, width, height, 0, 0, 0, "buttonlist");
+  			this.create(pid, def, width, height, 0, 0, 0, "buttonlist");
   		},
   		createFixed: function(pid, def, width, top, bottom, marginleft) {
-  			create(pid, def, width, 0, top, bottom, marginleft, "itemlist");
+  			this.create(pid, def, width, 0, top, bottom, marginleft, "itemlist");
   		},
 		create: function(parentidorobj, def, width, height, top, bottom, marginleft,liststyle) {
 			this.sizes = new Array();
