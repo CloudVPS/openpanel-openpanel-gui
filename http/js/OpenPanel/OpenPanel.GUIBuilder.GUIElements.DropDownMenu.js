@@ -20,9 +20,42 @@ OpenPanel.GUIBuilder.GUIElements.DropDownMenu.prototype = {
 		this.menuDiv.onmouseout = self.timedHide();
 		this.menuDiv.onmouseover = self.cancelHide();
 		this.menuDiv.className = "dropDownMenu";
-		this.menuDiv.style.left = "-" + offset + "px";
+		
+		var x = this.getX(targetDiv);
+		var y = this.getY(targetDiv);
+		
+		console.log ("x: " + x + ", y: " + y);
+		
+		this.menuDiv.style.position = "fixed";
+		this.menuDiv.style.left = "" + (x + offset) + "px";
+		this.menuDiv.style.top = "" + (y -10) + "px";
+		
+		console.log (this.menuDiv.style.left);
+		console.log (this.menuDiv.style.top);
+		
 		this.visible = false;
 		targetDiv.appendChild (this.menuDiv);
+	},
+	
+	getX: function(xel) {
+		var el = xel;
+		var x = 0;
+		while (el != undefined) {
+			console.log ("getX: " + el.offsetLeft);
+			x += el.offsetLeft;
+			el = el.offsetParent;
+		}
+		return x;
+	},
+	
+	getY: function(xel) {
+		var el = xel;
+		var y = 0;
+		while (el != undefined) {
+			y += el.offsetTop;
+			el = el.offsetParent;
+		}
+		return y;
 	},
 	
 	constructImageTD: function(width,height,src) {
@@ -37,7 +70,7 @@ OpenPanel.GUIBuilder.GUIElements.DropDownMenu.prototype = {
 			objImg.src = "/images/gui/" + src;
 			objTD.appendChild(objImg);
 		} else {
-			objTD.style.background = "url(" + src + ")";
+			objTD.style.background = "url(/images/gui/" + src + ")";
 			objTD.className = "dropDownMenuEdge";
 			objTD.fontSize = "1px";
 			objTD.innerHTML = "&nbsp;"

@@ -435,41 +435,35 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		}
 		
 		if(canAdd == true){
-			var createOne = document.createElement("span");
-			var hook = this;
-			this.gridDiv.appendChild(createOne);
-			var s = document.createElement("select");
-			var optionElement = document.createElement("option");
-			optionElement.appendChild(document.createTextNode("select..."));
-			s.appendChild(optionElement);
-			createOne.appendChild(s);	
-			s.onchange = function(){
-				for(var i = 0;i<this.options.length;i++){
-					var option = this.options[i];
-					if(option.value == this.value){
-						var openCoreObject = option.openCoreObject;
+			function mkcallback(hook,openCoreObject) {
+				return function() {
+					for(var i = 0;i<this.options.length;i++){
+						var option = this.options[i];
+						if(option.value == this.value){
+							var openCoreObject = option.openCoreObject;
+						}
 					}
-				}
-				
-				if(openCoreObject != undefined){
-					hook.controller.action({
-						command: "ShowCreateInstanceFromFormObjectMeta",
-						formObject : hook,
-						openCoreObject:openCoreObject,
-						parentUUID: hook.parentUUID,
-						formObjectHolder : hook.formBuilder.formObjectHolder
-					});
+					
+					if(openCoreObject != undefined){
+						hook.controller.action({
+							command: "ShowCreateInstanceFromFormObjectMeta",
+							formObject : hook,
+							openCoreObject:openCoreObject,
+							parentUUID: hook.parentUUID,
+							formObjectHolder : hook.formBuilder.formObjectHolder
+						});
+					}
 				}
 			}
 			
+			var mdef;
+			
 			for(var key in available){
 				var metaObject = available[key];
-				var optionElement = document.createElement("option");
-				optionElement.value = key;
-				optionElement.appendChild(document.createTextNode(key));
-				optionElement.openCoreObject = metaObject;
-				s.appendChild(optionElement);
+				mdef[key] = mkcallback(this,metaObject);
 			}
+			
+			this.setGridMenu (mdef);
 		}
 	},
 	
@@ -479,24 +473,8 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		
 		} else {
 			if (this.controller.dataManager.checkQuotum(this.openCoreObject.name) == true) {
-				
-				var createOne;
-				if (textOnly == true) {
-					createOne = document.createElement("div");
-					createOne.style.paddingTop = "10px";
-					createOne.innerHTML = "Set Up " + this.openCoreObject.title;
-					this.controller.guiBuilder.renderButton (createOne,false,true);
-				} else {
-					createOne = document.createElement("span");
-					var addButton = document.createElement("div");
-					var addButtonClass = displayOnly==true?"addButtonDisabled":"addButton";
-					addButton.setAttribute("class", addButtonClass);
-					createOne.appendChild(addButton);
-				}
 				var hook = this;
-				createOne.openCoreObject = this.openCoreObject;
-				if (displayOnly == undefined || displayOnly == false) {
-					createOne.onclick = function(){
+				var createfunc = function() {
 						hook.controller.action({
 							command: "ShowCreateInstanceFromFormObject",
 							formObject: hook,
@@ -504,13 +482,27 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 							parentUUID: hook.parentUUID,
 							formObjectHolder: hook.formBuilder.formObjectHolder
 						});
-						
-						//console.log("create Instance of " + hook.openCoreObject.name + " with parentUUID " + hook.parentUUID);
-						//console.log(hook);
-						//console.log(hook.formBuilder.formObjectHolder);
-						
 					}
+				
+				var createOne;
+				if (textOnly == true) {
+					createOne = document.createElement("div");
+					createOne.style.paddingTop = "10px";
+					createOne.innerHTML = "Set Up " + this.openCoreObject.title;
+					this.controller.guiBuilder.renderButton (createOne,false,true);
+					if (displayOnly == undefined || displayOnly == false) {
+						createOne.onclick = createfunc;
+					}
+					if(targetDiv == undefined){
+						this.gridDiv.appendChild(createOne);
+					} else {
+						targetDiv.appendChild(createOne);
+					}
+				} else {
+					this.grid.setCreateCallback(createfunc);
 				}
+				
+				createOne.openCoreObject = this.openCoreObject;
 				// quota debug stuff
 				q = document.createElement("ul");
 				createOne.appendChild(q);
@@ -534,25 +526,13 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 					}	
 				}
 				
-				if(targetDiv == undefined){
-					this.gridDiv.appendChild(createOne);
-				} else {
-					targetDiv.appendChild(createOne);
-				}
 			}
 		}
 	},
 	
 	createDeleteOption : function (targetDiv){
-		var deleteOne = document.createElement("span");
-		var deleteButton = document.createElement("div");
-		deleteButton.setAttribute("class", "deleteButton");
-		deleteOne.appendChild(deleteButton);
-		
 		var hook = this;
-		deleteOne.openCoreObject = this.openCoreObject;
-		
-		deleteOne.onclick = function(){
+		var callbackfunc = function(){
 			hook.controller.action({
 				command : "ShowDeleteInstanceFromFormObject",
 				formObject : hook,
@@ -561,19 +541,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 				formObjectHolder : hook.formBuilder.formObjectHolder
 			});
 			
-			//console.log("delete Instance of " + hook.openCoreObject.name + " with parentUUID " + hook.parentUUID);
-		}
-		
-		var clearDiv = document.createElement("div");
-		clearDiv.style.cssText = "clear: both;";
-		
-		if(targetDiv == undefined){
-			this.gridDiv.appendChild(deleteOne);
-			this.gridDiv.appendChild(clearDiv);
-		} else {
-			targetDiv.appendChild(deleteOne);
-			targetDiv.appendChild(clearDiv);
-		}
+		this.grid.setDeleteCallback (callbackfunc);
 	},
 	
 	getPreviousInstance : function(){
@@ -787,6 +755,9 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		});
 	},
 	
+	setGridMenu : function(mdef) {
+		this.grid.setMenu(mdef);
+	},
 	
 	createGrid : function(openCoreObject, instances, callBackCommand, targetDiv, optionalCallBackObject, instance){
 		this.grid = new OpenPanel.GUIBuilder.GUIElements.FormGrid();	

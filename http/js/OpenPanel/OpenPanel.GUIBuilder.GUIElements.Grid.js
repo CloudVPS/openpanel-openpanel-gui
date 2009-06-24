@@ -10,6 +10,11 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 		this.count = 0;
 		this.focused = false;
 		this.focusOnClick = true;
+		this.menuCallbacks = {};
+		this.menuDiv = {};
+		this.createMenu = {};
+		this.createButtonCallback = function() {};
+		this.deleteButtonCallback = function() {};
 	}
 	
 	/// Bind an OpenPanelGrid object to a DOM node.
@@ -200,10 +205,6 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			this.contents = gridViewContents;
 			gridViewNode.appendChild(gridViewContents);
 			
-			if (liststyle == "buttonlist") {
-				this.renderButtons(gridViewNode);
-			}
-			
 			for (i = 0; i < this.sizes.length; ++i) {
 				var sz = this.sizes[i];
 				if (i == (this.sizes.length - 1)) sz += 5;
@@ -217,6 +218,10 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			
 			parent.appendChild (this.focusCatcher);
 			parent.appendChild(gridViewNode);
+			if (liststyle == "buttonlist") {
+				this.renderButtons(gridViewNode);
+			}
+			
 		},
 		
 		/// Add a single selectable line
@@ -283,43 +288,86 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			
 		},
 		
+		setMenu: function(menudef) {
+			this.menuDiv = document.createElement("div");
+			this.buttonArea.appendChild(this.menuDiv);
+			
+			var self = this;
+			
+			this.createButton.onmousedown = this.createButton.onclick = this.createButton.ondblclick = function() {
+				this.className = "gridViewCreateButtonPushed";
+				var btn = this;
+				setTimeout (function() { btn.className = "gridViewCreateButton"; }, 50);
+				self.createMenu.show();
+				return false;
+			}
+
+			this.createMenu = new OpenPanel.GUIBuilder.GUIElements.DropDownMenu();
+			this.createMenu.create(this.menuDiv, -17);
+			
+			var itemData;
+			for (key in menudef) {
+				itemData[key] = key;
+				this.menuCallbacks[key] = menudef[key];
+			}
+			
+			this.createMenu.itemData = itemData;
+			this.createMenu.build();
+			this.createMenu.onselect = function(id) {
+				if (this.menuCallbacks[id] != undefined)
+					this.menuCallbacks[id]();
+				console.log ("create: " + id);
+			}
+		},
+		
 		renderButtons: function(gridViewNode) {
 			var buttonArea = document.createElement("div");
 			buttonArea.className = "gridViewButtonArea";
 			gridViewNode.appendChild(buttonArea);
+			this.buttonArea = buttonArea;
 			
 			var createButton = document.createElement("div");
 			createButton.className = "gridViewCreateButton";
 			buttonArea.appendChild(createButton);
 			
+			this.createButton = createButton;
+			
 			var self = this;
 			
-			createButton.onmousedown = createButton.onclick = createButton.ondblclick = function() {
+			var deleteButton = document.createElement("div");
+			deleteButton.className = "gridViewDeleteButton";
+			buttonArea.appendChild(deleteButton);
+			
+			createButton.onmousedown = function() {
 				this.className = "gridViewCreateButtonPushed";
-				self.createMenu.show();
 				return false;
+			}
+			
+			createButton.onclick = function() {
+				self.createButtonCallback();
 			}
 			
 			createButton.onmouseup = function() {
 				this.className = "gridViewCreateButton";
 				return false;
 			}
-						
-			var deleteButton = document.createElement("div");
-			deleteButton.className = "gridViewDeleteButton";
-			buttonArea.appendChild(deleteButton);
 			
-			this.menuDiv = document.createElement("div");
-			this.createMenu = new OpenPanel.GUIBuilder.GUIElements.DropDownMenu();
-			this.createMenu.create(this.menuDiv, -50);
-			this.createMenu.itemData = {
-					master:"Master DNS Domain",
-					slave:"Slave DNS Domain"
-				};
-			this.createMenu.build();
-			this.createMenu.onselect = function(id) {
-				console.log ("create: " + id);
+			deleteButton.onmousedown = function() {
+				this.className = "gridViewDeleteButtonPushed";
+				return false;
 			}
+			
+			deleteButton.onmouseup = function() {
+				this.className = "gridViewDeleteButton";
+				return false;
+			}
+			
+			deleteButton.onclick = function() {
+				self.deleteButtonCallback();
+			}
+			
+			console.log ("renderButtons");
+			console.log (this);
 		},
 		
 		selectFromString: function(selectedText) {

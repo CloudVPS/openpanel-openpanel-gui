@@ -44,9 +44,7 @@ td.label {
 }
 
 .dropDownMenu {
-	position: relative; 
-	left: -205px; 
-	top: -10px;
+	position: relative;
 	display: none;
 	cursor: default;
 	opacity: 0.92;

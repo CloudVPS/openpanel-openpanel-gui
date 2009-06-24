@@ -94,6 +94,18 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 		this.createG(instances);
 	},
 	
+	setMenu: function (mdef) {
+		this.grid.setMenu (mdef);
+	},
+	
+	setCreateCallback (fun) {
+		this.grid.createButtonCallback = fun;
+	},
+	
+	setDeleteCallback (fun) {
+		this.grid.deleteButtonCallback = fun;
+	},
+	
 	clickGridItem : function(id){
 		this.formObject.clickGridItem(this.instances[id]);
 	},
