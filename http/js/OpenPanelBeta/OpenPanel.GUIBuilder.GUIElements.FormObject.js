@@ -498,24 +498,10 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 					} else {
 						targetDiv.appendChild(createOne);
 					}
-				} else {
-					this.grid.setCreateCallback(createfunc);
-				}
-				
-				createOne.openCoreObject = this.openCoreObject;
-				// quota debug stuff
-				q = document.createElement("ul");
-				createOne.appendChild(q);
-				/*
-				var quotum = this.controller.dataManager.getQuotumByClassName(this.openCoreObject.name);
-				if (quotum != undefined) {
-					var li = document.createElement("li");
-					li.appendChild(document.createTextNode(">>quotum : " + this.openCoreObject.name + " " + quotum.quota));
-					q.appendChild(li);
-				}
-				*/
-				
-				if(textOnly == true){
+					createOne.openCoreObject = this.openCoreObject;
+					// quota debug stuff
+					q = document.createElement("ul");
+					createOne.appendChild(q);
 					var expln = this.openCoreObject.classInfo["class"].explanation;
 					if((expln != undefined)&&(expln != "")){
 						var explanationElement = document.createElement("div");
@@ -524,8 +510,18 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 						explanationElement.innerHTML = "<br>"+expln;
 						this.gridDiv.appendChild(explanationElement);
 					}	
+				} else {
+					this.grid.setCreateCallback(createfunc);
 				}
 				
+				/*
+				var quotum = this.controller.dataManager.getQuotumByClassName(this.openCoreObject.name);
+				if (quotum != undefined) {
+					var li = document.createElement("li");
+					li.appendChild(document.createTextNode(">>quotum : " + this.openCoreObject.name + " " + quotum.quota));
+					q.appendChild(li);
+				}
+				*/
 			}
 		}
 	},
