@@ -1,0 +1,82 @@
+td.label {
+	font-family: 'Lucida Grande'; font-size: 13px;
+	padding-right: 8px;
+}
+
+.dropDownButton {
+	display: block;
+	float: left;
+	width: 200px;
+	height: 19px;
+	margin-top: -1px;
+	margin-top: -2px;
+	cursor: default;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+}
+
+.dropDownButtonLeft {
+	float: left;
+	height: 22px;
+	width: 9px;
+	background: url(/images/gui/dropdown_button_left.png);
+}
+
+.dropDownButtonCenter {
+	float: left;
+	height: 20px; 
+	white-space: nowrap; 
+	background: url(/images/gui/dropdown_button_mid.png);
+	width: 150px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-family: 'Lucida Grande'; 
+	font-size: 13px; 
+	padding-top: 2px; 
+	padding-right: 8px;
+}
+
+.dropDownButtonRight {
+	float: left; 
+	height: 22px; 
+	width: 22px; 
+	background: url(/images/gui/dropdown_button_right.png);
+}
+
+.dropDownMenu {
+	position: relative; 
+	left: -205px; 
+	top: -10px;
+	display: none;
+	cursor: default;
+	opacity: 0.92;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+}
+
+.dropDownMenuItem, .dropDownMenuItemSelected {
+	padding-left: 8px;
+	padding-right: 8px;
+	border-left: 1px solid #959595;
+	border-right: 1px solid #959595;
+	font-family: 'Lucida Grande';
+	font-size: 13px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.dropDownMenuItem {
+	color: #000000;
+	background: url(/images/gui/menu_bg.png);
+}
+
+.dropDownMenuItemSelected {
+	color: #ffffff;
+	background: url(/images/gui/menu_selection.png);
+}
+
+.dropDownMenuEdge {
+	font-size: 1px;
+	background-repeat: repeat-x;
+}

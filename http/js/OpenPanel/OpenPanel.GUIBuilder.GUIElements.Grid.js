@@ -26,7 +26,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
   			this.create(pid, def, width, height);
   		},
   		createInlineWithButtons: function(pid, def, width, height) {
-  			this.create(pid, def, width, height, 0, 0, 0, "buttonlist");
+  			this.create(pid, def, width, height+22, 0, 0, 0, "buttonlist");
   		},
   		createFixed: function(pid, def, width, top, bottom, marginleft) {
   			this.create(pid, def, width, 0, top, bottom, marginleft, "itemlist");
@@ -174,7 +174,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 				return false;
 			}
 			
-			var contentHeight = height - 14;
+			var contentHeight = height - 15;
 			if (liststyle == "buttonlist") contentHeight -= 22;
 			
 			var gridViewTitle = document.createElement("div");
@@ -292,9 +292,34 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			createButton.className = "gridViewCreateButton";
 			buttonArea.appendChild(createButton);
 			
+			var self = this;
+			
+			createButton.onmousedown = createButton.onclick = createButton.ondblclick = function() {
+				this.className = "gridViewCreateButtonPushed";
+				self.createMenu.show();
+				return false;
+			}
+			
+			createButton.onmouseup = function() {
+				this.className = "gridViewCreateButton";
+				return false;
+			}
+						
 			var deleteButton = document.createElement("div");
 			deleteButton.className = "gridViewDeleteButton";
 			buttonArea.appendChild(deleteButton);
+			
+			this.menuDiv = document.createElement("div");
+			this.createMenu = new OpenPanel.GUIBuilder.GUIElements.DropDownMenu();
+			this.createMenu.create(this.menuDiv, -50);
+			this.createMenu.itemData = {
+					master:"Master DNS Domain",
+					slave:"Slave DNS Domain"
+				};
+			this.createMenu.build();
+			this.createMenu.onselect = function(id) {
+				console.log ("create: " + id);
+			}
 		},
 		
 		selectFromString: function(selectedText) {

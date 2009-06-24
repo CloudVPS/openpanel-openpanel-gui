@@ -12,7 +12,7 @@
 	height: 15px;
 	padding: 0px;
 	overflow: hidden;
-	background-image: url(/images/gui/gridview_title_bg.png);
+	background: url(/images/gui/gridview_title_bg.png);
 	border-bottom: 1px solid #666666;
 }
 
@@ -30,8 +30,11 @@
 
 .gridViewButtonArea {
 	height: 21px;
-	background-image: url(/images/gui/gridBottomMiddle.png);
-	border-top: 1px #a8a8a8;
+	padding: 0px;
+	background: url(/images/gui/gridBottomMiddle.png) repeat-x 0 0px;
+	border-top: 1px solid #a8a8a8;
+	border-bottom: 0px;
+	margin: 0px;
 }
 
 .gridViewCreateButton, .gridViewCreateButtonPushed, .gridViewCreateButtonDisabled, .gridViewDeleteButton, .gridViewDeleteButtonPushed, .gridViewDeleteButtonDisabled {
@@ -46,27 +49,27 @@
 }
 
 .gridViewCreateButton {
-	background-image: url(/images/gui/gridButtonCreate.png);
+	background: url(/images/gui/gridButtonCreate.png) no-repeat 0 0px;
 }
 
 .gridViewCreateButtonPushed {
-	background-image: url(/images/gui/gridButtonCreatePushed.png);
+	background: url(/images/gui/gridButtonCreatePushed.png) no-repeat 0 0px;
 }
 
 .gridViewCreateButtonDisabled {
-	background-image: url(/images/gui/gridButtonCreateDisabled.png);
+	background: url(/images/gui/gridButtonCreateDisabled.png) no-repeat 0 0px;
 }
 
 .gridViewDeleteButton {
-	background-image: url(/images/gui/gridButtonDelete.png);
+	background: url(/images/gui/gridButtonDelete.png) no-repeat 0 0px;
 }
 
 .gridViewDeleteButtonPushed {
-	background-image: url(/images/gui/gridButtonDeletePushed.png);
+	background: url(/images/gui/gridButtonDeletePushed.png) no-repeat 0 0px;
 }
 
 .gridViewDeleteButtonDisabled {
-	background-image: url(/images/gui/gridButtonDeleteDisabled.png);
+	background: url(/images/gui/gridButtonDeleteDisabled.png) no-repeat 0 0px;
 }
 
 .gridViewContents {
