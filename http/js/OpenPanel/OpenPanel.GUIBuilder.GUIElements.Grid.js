@@ -305,7 +305,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			this.createMenu = new OpenPanel.GUIBuilder.GUIElements.DropDownMenu();
 			this.createMenu.create(this.menuDiv, -17);
 			
-			var itemData;
+			var itemData = {};
 			for (key in menudef) {
 				itemData[key] = key;
 				this.menuCallbacks[key] = menudef[key];
