@@ -52,6 +52,10 @@
 	background: url(/images/gui/gridButtonCreate.png) no-repeat 0 0px;
 }
 
+.inactiveBrowserWindow .gridViewCreateButton {
+	background: url(/images/gui/gridButtonCreateDisabled.png) no-repeat 0 0px;
+}
+
 .gridViewCreateButtonPushed {
 	background: url(/images/gui/gridButtonCreatePushed.png) no-repeat 0 0px;
 }
@@ -62,6 +66,10 @@
 
 .gridViewDeleteButton {
 	background: url(/images/gui/gridButtonDelete.png) no-repeat 0 0px;
+}
+
+.inactiveBrowserWindow .gridViewDeleteButton {
+	background: url(/images/gui/gridButtonDeleteDisabled.png) no-repeat 0 0px;
 }
 
 .gridViewDeleteButtonPushed {

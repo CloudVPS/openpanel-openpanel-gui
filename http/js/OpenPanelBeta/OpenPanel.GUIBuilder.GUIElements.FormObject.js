@@ -131,6 +131,8 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 				} else {
 					//console.log("not singleton or can not delete");
 					targetDiv = this.fieldsDiv;
+					if (this.openCoreObject.singleton == false && this.openCoreObject.canDelete == false) {
+					}
 				}
 				
 				//console.log("create fields for " + this.openCoreObject.name + "  " + this.currentInstance.id);
@@ -266,6 +268,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 						// the grid should always be displayed with non meta values
 						//console.log("create Grid for " + this.openCoreObject.name);
 						//console.log(this.instances);
+						
 						this.createGrid(this.openCoreObject, this.instances, "callBackCommand", this.gridDiv, {}, this.currentInstance);
 						// here's where we have to check for meta stuff
 						
@@ -480,6 +483,18 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 				
 				var createOne;
 				if (textOnly == true) {
+					var expln = this.openCoreObject.classInfo["class"].explanation;
+					if((expln != undefined)&&(expln != "")){
+						var explanationElement = document.createElement("div");
+						explanationElement.className = "explanation";
+						explanationElement.innerHTML = "<br>"+expln;
+						if (targetDiv == undefined) {
+							this.gridDiv.appendChild(explanationElement);
+						} else {
+							targetDiv.appendChild(explanationEleement);
+						}
+					}	
+
 					createOne = document.createElement("div");
 					createOne.style.paddingTop = "10px";
 					createOne.innerHTML = "Set Up " + this.openCoreObject.title;
@@ -496,16 +511,9 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 					// quota debug stuff
 					q = document.createElement("ul");
 					createOne.appendChild(q);
-					var expln = this.openCoreObject.classInfo["class"].explanation;
-					if((expln != undefined)&&(expln != "")){
-						var explanationElement = document.createElement("div");
-						explanationElement.className = "explanation";
-						createOne.appendChild(explanationElement);
-						explanationElement.innerHTML = "<br>"+expln;
-						this.gridDiv.appendChild(explanationElement);
-					}	
+
 				} else {
-					this.grid.setCreateCallback(createfunc);
+					if (this.grid != undefined) this.grid.setCreateCallback(createfunc);
 				}
 				
 				/*
@@ -532,7 +540,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 			});
 		}
 			
-		this.grid.setDeleteCallback (callbackfunc);
+		if (this.grid != undefined) this.grid.setDeleteCallback (callbackfunc);
 	},
 	
 	getPreviousInstance: function(){

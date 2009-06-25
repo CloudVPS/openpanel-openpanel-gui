@@ -215,6 +215,14 @@ OpenPanel.GUIBuilder = {
 		
 		var groupHolder = document.createElement("div");
 		groupHolder.setAttribute("class", "groupHolder");
+		
+		var cdiv = document.createElement("div");
+		cdiv.style.paddingTop = "6px";
+		cdiv.style.paddingBottom = "12px";
+		groupHolder.appendChild (cdiv);
+		
+		return { groupHolder:groupHolder, contentDiv:cdiv };
+		/*
 		var table = document.createElement("table");
 		table.setAttribute("class", "groupTable");
 		table.setAttribute("cellpadding", "0");
@@ -261,7 +269,7 @@ OpenPanel.GUIBuilder = {
 			bottomRightTd.setAttribute("class", "groupBottomRight");
 			bottomTr.appendChild(bottomRightTd);
 			
-		return { groupHolder : groupHolder, contentDiv : centerMiddleTd}
+		return { groupHolder : groupHolder, contentDiv : centerMiddleTd} */
 		
 	},
 	

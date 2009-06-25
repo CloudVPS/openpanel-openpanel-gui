@@ -13,6 +13,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 		this.menuCallbacks = {};
 		this.menuDiv = {};
 		this.createMenu = {};
+		this.buttonArea = {};
 		this.createButtonDisabled = false;
 		this.deleteButtonDisabled = false;
 		this.createButtonCallback = function() {};
@@ -291,6 +292,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 		},
 		
 		setMenu: function(menudef) {
+			if (this.buttonArea.appendChild == undefined) return;
 			this.menuDiv = document.createElement("div");
 			this.buttonArea.appendChild(this.menuDiv);
 			
