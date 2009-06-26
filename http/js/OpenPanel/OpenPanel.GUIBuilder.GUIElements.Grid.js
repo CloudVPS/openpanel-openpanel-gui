@@ -19,7 +19,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 		this.deleteButtonDisabled = false;
 		this.createButtonCallback = function() {};
 		this.deleteButtonCallback = function() {};
-		this.iconImage = "";
+		this.iconImage = "/images/gui/404.png";
 	}
 	
 	/// Bind an OpenPanelGrid object to a DOM node.
