@@ -269,6 +269,10 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 						//console.log("create Grid for " + this.openCoreObject.name);
 						//console.log(this.instances);
 						
+						console.log ("createGrid: ");
+						console.log (this.instances);
+						console.log (this.openCoreObject);
+						
 						this.createGrid(this.openCoreObject, this.instances, "callBackCommand", this.gridDiv, {}, this.currentInstance);
 						// here's where we have to check for meta stuff
 						

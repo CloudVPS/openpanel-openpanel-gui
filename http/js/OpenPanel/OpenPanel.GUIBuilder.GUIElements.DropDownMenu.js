@@ -8,6 +8,9 @@ OpenPanel.GUIBuilder.GUIElements.DropDownMenu = function() {
 	this.closeTimer = {};
 	this.visible = false;
 	this.mouseUpValid = false;
+	this.menuHeight = 0;
+	this.xpos = 0;
+	this.ypos = 0;
 }
 
 OpenPanel.GUIBuilder.GUIElements.DropDownMenu.prototype = {
@@ -93,6 +96,7 @@ OpenPanel.GUIBuilder.GUIElements.DropDownMenu.prototype = {
 		objTR.appendChild (this.constructImageTD(16,11,"menu_top_right.png"));
 		
 		var isfirst = true;
+		this.menuHeight = 11;
 		
 		for (var key in this.itemData) {
 			var itemString = this.itemData[key];
@@ -100,6 +104,8 @@ OpenPanel.GUIBuilder.GUIElements.DropDownMenu.prototype = {
 			var objTR = document.createElement ("tr");
 			objTR.height = "18";
 			objTbody.appendChild (objTR);
+			
+			this.menuHeight += 18;
 			
 			if (isfirst) {
 				objTR.appendChild (this.constructImageTD(16,18,"menu_1st_left.png"));
@@ -179,6 +185,7 @@ OpenPanel.GUIBuilder.GUIElements.DropDownMenu.prototype = {
 		objTR.appendChild (this.constructImageTD(4,28,"menu_bot_mid_right.png"));
 		objTR.appendChild (this.constructImageTD(16,28,"menu_bot_right.png"));
 
+		this.menuHeight += 28;
 		
 		this.menuDiv.appendChild (objTable);
 	},
@@ -187,12 +194,19 @@ OpenPanel.GUIBuilder.GUIElements.DropDownMenu.prototype = {
 		if (! this.visible) {
 			var x = this.getX(this.targetDiv);
 			var y = this.getY(this.targetDiv);
+			var pageHeight = OpenPanel.GUIBuilder.pageHeight();
 			
-			console.log ("x: " + x + ", y: " + y);
+			this.xpos = x + this.offset;
+			this.ypos = y - 10;
 			
+			if ((this.ypos + menuHeight) > pageHeight)
+			{
+				this.ypos = pageHeight - menuHeight;
+			}
+		
 			this.menuDiv.style.position = "fixed";
-			this.menuDiv.style.left = "" + (x + this.offset) + "px";
-			this.menuDiv.style.top = "" + (y -10) + "px";
+			this.menuDiv.style.left = "" + this.xpos + "px";
+			this.menuDiv.style.top = "" + this.ypos + "px";
 			
 			console.log (this.menuDiv.style.left);
 			console.log (this.menuDiv.style.top);

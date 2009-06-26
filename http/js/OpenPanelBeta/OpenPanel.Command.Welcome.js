@@ -18,7 +18,7 @@ OpenPanel.Command.Welcome = {
 		var holder = $j("#welcomeLogoHolder")[0];
 		if (holder != undefined) {
 			var logo = $j("#welcomeLogo")[0];
-			var h = this.pageHeight();
+			var h = OpenPanel.GUIBuilder.pageHeight();
 			var curWidth = logo.width;
 			var curHeight = logo.height;
 			var height = curHeight;
@@ -43,12 +43,4 @@ OpenPanel.Command.Welcome = {
 		this.controller.guiBuilder.GUIElements.FormBuilder.setSaveButtonVisibility(false);
 	},
 
-	pageHeight: function() {
-		if (window.innerHeight != null) return window.innerHeight;
-		if (document.documentElement && document.documentElement.clientHeight) {
-			return document.documentElement.clientHeight;
-		}
-		if (document.body != null) return document.body.clientHeight;
-		return 500;
-	}
 }
