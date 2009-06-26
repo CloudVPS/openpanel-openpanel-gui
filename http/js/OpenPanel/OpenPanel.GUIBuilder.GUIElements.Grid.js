@@ -272,22 +272,26 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 				
 				if (this.listStyle == "itemlist") {
 					var icondiv = document.createElement("div");
-					icondiv.style.width = 16;
-					icondiv.style.height = 16;
+					icondiv.style.width = "16px";
+					icondiv.style.height = "16px";
 					icondiv.style.background = "url(/images/gui/itemlist_domain.png)";
 					icondiv.style.float = "left";
 					icondiv.style.marginTop = "1px";
-					col.appendChild(iconDiv);
-				}
-				
-				if (! useInnerHTML)
-				{
+					col.appendChild(icondiv);
+					var textdiv = document.createElement("div");
 					var textNode = document.createTextNode(value!=undefined?value:"");
-					col.appendChild(textNode);
-				}
-				else
-				{
-					col.innerHTML = value;
+					textdiv.appendChild (textNode);
+					col.appendChild (textdiv);
+				} else {
+					if (! useInnerHTML)
+					{
+						var textNode = document.createTextNode(value!=undefined?value:"");
+						col.appendChild(textNode);
+					}
+					else
+					{
+						col.innerHTML = value;
+					}
 				}
 				row.appendChild(col);
 			}
