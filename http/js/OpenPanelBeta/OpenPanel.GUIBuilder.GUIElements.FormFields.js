@@ -55,11 +55,13 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 						formParameters[parameterName] = {};
 					}
 					var parameter = parameters[parameterName];
+					parameter.hide = false;
 					if (this.isCreate == true) {
 						parameter.readOnly = false;
 					} else {
 						if (parameter.enabled == false || this.openCoreObject.canUpdate == false || parameterName == "id") {
 							parameter.readOnly = true;
+							if (parameterName == "id") parameter.hide = true;
 						} else {
 							parameter.readOnly = false;
 						}

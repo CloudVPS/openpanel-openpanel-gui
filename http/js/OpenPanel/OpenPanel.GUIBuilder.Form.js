@@ -17,6 +17,8 @@ OpenPanel.GUIBuilder.Form = function(name, data){
 			}
 			
 			var parameters = data.structure.parameters;
+			console.log ("form parameters: ");
+			console.log (parameters);
 			for (var parameterName in parameters) {
 				var parameter = parameters[parameterName];
 				if (parameter.hide == true) continue;
