@@ -12,6 +12,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 		this.focusOnClick = true;
 		this.menuCallbacks = {};
 		this.menuDiv = {};
+		this.listStyle = "normal";
 		this.createMenu = {};
 		this.buttonArea = {};
 		this.createButtonDisabled = false;
@@ -69,6 +70,8 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			
 			var tabWidthWeight = 0;
 			var count = 0;
+			
+			if (liststyle != undefined) this.listStyle = liststyle;
 			
 			for (var ki in def){
 				var w = def[ki][1];
@@ -265,6 +268,16 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 						value = this.valueReplacements[i][v];
 						useInnerHTML = true;
 					}
+				}
+				
+				if (this.listStyle == "itemlist") {
+					var icondiv = document.createElement("div");
+					icondiv.style.width = 16;
+					icondiv.style.height = 16;
+					icondiv.style.background = "url(/images/gui/itemlist_domain.png)";
+					icondiv.style.float = "left";
+					icondiv.style.marginTop = "1px";
+					col.appendChild(iconDiv);
 				}
 				
 				if (! useInnerHTML)

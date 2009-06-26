@@ -672,7 +672,6 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 						})
 					}
 			}
-			
 		}
 	},
 	createModalFields : function(openCoreObject, instance, callBackCommand, targetDiv, optionalCallBackObject){
