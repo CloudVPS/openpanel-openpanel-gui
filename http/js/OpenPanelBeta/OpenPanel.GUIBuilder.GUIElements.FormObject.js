@@ -67,15 +67,6 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 	},
 	
 	createDivs : function(isroot){
-		if (isroot != true) {
-			var nameDiv = document.createElement("div");
-			
-			nameDiv.innerHTML = this.openCoreObject.title;
-			nameDiv.setAttribute("class", "nameDiv");
-			
-			this.targetDiv.appendChild(nameDiv);
-		}
-			
 		this.gridDiv = document.createElement("div");
 		this.gridDiv.setAttribute("id", this.openCoreObject.name + ":grid");
 		this.gridDiv.setAttribute("class", "formGrid");
@@ -269,13 +260,15 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 						//console.log("create Grid for " + this.openCoreObject.name);
 						//console.log(this.instances);
 						
-						console.log ("createGrid: ");
-						console.log (this.instances);
-						console.log (this.openCoreObject);
+						var count = 0;
+						for (var key in this.instances) {
+							count++;
+							if (count>1) break;
+						}
 						
-						this.createGrid(this.openCoreObject, this.instances, "callBackCommand", this.gridDiv, {}, this.currentInstance);
-						// here's where we have to check for meta stuff
-						
+						if ((count!=1) || (! this.openCoreObject.classInfo["class"].hidegrid)) {
+							this.createGrid(this.openCoreObject, this.instances, "callBackCommand", this.gridDiv, {}, this.currentInstance);
+						}
 						
 						this.childFormObjects = [];
 						for(var childOpenCoreObjectName in actualOpenCoreObject.children){
@@ -430,6 +423,8 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		var available = {};
 		var canAdd = false;
 		var canAdds = {};
+		
+		if (this.grid == undefined) return;
 		
 		for(var i = 0;i<metaObjects.length;i++){
 			var metaObject = metaObjects[i];

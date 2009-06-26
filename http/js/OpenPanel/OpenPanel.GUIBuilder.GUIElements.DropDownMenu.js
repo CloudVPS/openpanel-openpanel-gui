@@ -199,9 +199,9 @@ OpenPanel.GUIBuilder.GUIElements.DropDownMenu.prototype = {
 			this.xpos = x + this.offset;
 			this.ypos = y - 10;
 			
-			if ((this.ypos + menuHeight) > pageHeight)
+			if ((this.ypos + this.menuHeight) > pageHeight)
 			{
-				this.ypos = pageHeight - menuHeight;
+				this.ypos = pageHeight - this.menuHeight;
 			}
 		
 			this.menuDiv.style.position = "fixed";
