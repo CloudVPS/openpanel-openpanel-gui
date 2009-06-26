@@ -76,6 +76,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		this.fieldsDiv = document.createElement("div");
 		this.fieldsDiv.setAttribute("id", this.openCoreObject.name + ":fields");
 		this.fieldsDiv.setAttribute("class", "formFields");
+		
 		this.targetDiv.appendChild(this.fieldsDiv);
 		
 		var anchorDiv = document.createElement("a");
@@ -316,22 +317,37 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 					
 					this.createFields(actualOpenCoreObject, actualInstance, "", this.fieldsDiv);
 					this.createMethods(actualOpenCoreObject);
+
+					var formmargin = this.openCoreObject.classInfo["class"].formmargin;
+					if (formmargin == undefined) formmargin = 0;
+					
+					console.log ("formmargin: " + formmargin);
+					
+					this.fieldsDiv.style.marginTop = "" + formmargin + "px";
 						
 				} else {
 					
+					this.gridDiv.style.paddingTop = "15px";
 			
 					// no instances, show create new instance
 					//console.log("no instances");
 					var msg = this.openCoreObject.classInfo["class"].emptytext;
 					if (msg==undefined) msg = "No objects found";
-					var pElement = document.createElement("p");
-					this.gridDiv.appendChild(document.createTextNode(msg));
 					if(this.openCoreObject.meta == true){
 						// list objects
+						this.gridDiv.appendChild(document.createTextNode(msg));
 						this.createMultiCreateOption(true);
 					} else {
+
+						this.gridDiv.appendChild(document.createTextNode(msg));
+						
+						var floater = document.createElement("div");
+						floater.style.float = "right";
+						floater.style.paddingRight = "30px";
+						this.gridDiv.appendChild (floater);
+
 						if (this.openCoreObject.canCreate == true) {
-							this.createCreateOption(true);
+							this.createCreateOption(true, false, floater);
 						}
 					}
 				}
@@ -490,12 +506,12 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 						if (targetDiv == undefined) {
 							this.gridDiv.appendChild(explanationElement);
 						} else {
-							targetDiv.appendChild(explanationEleement);
+							//targetDiv.appendChild(explanationElement);
 						}
 					}	
 
 					createOne = document.createElement("div");
-					createOne.style.paddingTop = "10px";
+					if (targetDiv == undefined) createOne.style.paddingTop = "10px";
 					createOne.innerHTML = "Set Up " + this.openCoreObject.title;
 					this.controller.guiBuilder.renderButton (createOne,false,true);
 					if (displayOnly == undefined || displayOnly == false) {
