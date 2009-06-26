@@ -217,8 +217,8 @@ OpenPanel.GUIBuilder = {
 		groupHolder.setAttribute("class", "groupHolder");
 		
 		var cdiv = document.createElement("div");
-		cdiv.style.paddingTop = "6px";
-		cdiv.style.paddingBottom = "12px";
+		cdiv.style.paddingTop = "4px";
+		cdiv.style.paddingBottom = "4px";
 		groupHolder.appendChild (cdiv);
 		
 		return { groupHolder:groupHolder, contentDiv:cdiv };
