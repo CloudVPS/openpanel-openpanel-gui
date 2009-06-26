@@ -277,8 +277,10 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 					icondiv.style.background = "url(/images/gui/itemlist_domain.png)";
 					icondiv.style.float = "left";
 					icondiv.style.marginTop = "1px";
+					icondiv.style.opacity = "0.5";
 					col.appendChild(icondiv);
 					var textdiv = document.createElement("div");
+					textdiv.style.paddingLeft = "4px";
 					var textNode = document.createTextNode(value!=undefined?value:"");
 					textdiv.appendChild (textNode);
 					col.appendChild (textdiv);
