@@ -181,8 +181,8 @@
 }
 
 .itemGridViewRow, .itemGridViewRowSelected, .itemGridViewRowSelectedUnfocused {
-	height: 18px;
-	line-height: 18px;
+	height: 20px;
+	line-height: 20px;
 	padding: 0px;
 	overflow: hidden;
 	text-overflow: ellipsis;

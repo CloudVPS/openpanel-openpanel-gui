@@ -19,6 +19,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 		this.deleteButtonDisabled = false;
 		this.createButtonCallback = function() {};
 		this.deleteButtonCallback = function() {};
+		this.iconImage = "";
 	}
 	
 	/// Bind an OpenPanelGrid object to a DOM node.
@@ -37,10 +38,10 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
   		createInlineWithButtons: function(pid, def, width, height) {
   			this.create(pid, def, width, height+22, 0, 0, 0, "buttonlist");
   		},
-  		createFixed: function(pid, def, width, top, bottom, marginleft) {
-  			this.create(pid, def, width, 0, top, bottom, marginleft, "itemlist");
+  		createFixed: function(pid, def, width, top, bottom, marginleft, iconimg) {
+  			this.create(pid, def, width, 0, top, bottom, marginleft, "itemlist", iconimg);
   		},
-		create: function(parentidorobj, def, width, height, top, bottom, marginleft,liststyle) {
+		create: function(parentidorobj, def, width, height, top, bottom, marginleft,liststyle, iconimg) {
 			this.sizes = new Array();
 			this.headers = new Array();
 			this.keys = new Array();
@@ -72,6 +73,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			var count = 0;
 			
 			if (liststyle != undefined) this.listStyle = liststyle;
+			if (iconimg != undefined) this.iconImage = iconimg;
 			
 			for (var ki in def){
 				var w = def[ki][1];
@@ -274,13 +276,13 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 					var icondiv = document.createElement("div");
 					icondiv.style.width = "16px";
 					icondiv.style.height = "16px";
-					icondiv.style.background = "url(/images/gui/itemlist_domain.png)";
+					icondiv.style.background = "url(" + this.iconImage + ")";
 					icondiv.style.float = "left";
-					icondiv.style.marginTop = "1px";
-					icondiv.style.opacity = "0.5";
+					icondiv.style.marginTop = "2px";
+					icondiv.style.opacity = "0.8";
 					col.appendChild(icondiv);
 					var textdiv = document.createElement("div");
-					textdiv.style.paddingLeft = "4px";
+					textdiv.style.marginLeft = "20px";
 					var textNode = document.createTextNode(value!=undefined?value:"");
 					textdiv.appendChild (textNode);
 					col.appendChild (textdiv);

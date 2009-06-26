@@ -213,6 +213,8 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 				data[key] = {id: instance.id};
 			}
 		}
+		
+		var icon = "/itemicon/" + this.openCoreObject.uuid + ".png";
       	
 		this.grid.create (this.gridDiv,createObject, 198, 0, 98, 69, -450, "itemlist");
       	this.grid.setGrid (instances);
