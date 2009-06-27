@@ -61,6 +61,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			this.selectedShadow = "";
 			this.focusOnClick = true;
 			this.height = height;
+			this.contentHeight = (liststyle == "buttonlist") ? height-22:height;
 			this.keyboardSelectionText = "";
 			this.keyboardSelectionTimer = {};
 			this.keyboardSelectionTimerActive = false;
@@ -457,11 +458,11 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			var itempos = 17 * index;
 			
 			if (itempos < scrollpos) this.contents.scrollTop = itempos;
-			else if (itempos > (scrollpos + (this.height - 32)))
+			else if (itempos > (scrollpos + (this.contentHeight - 32)))
 			{
-				if (itempos > (this.height-32))
+				if (itempos > (this.contentHeight-32))
 				{
-					this.contents.scrollTop = itempos - (this.height-32);
+					this.contents.scrollTop = itempos - (this.contentHeight-32);
 				}
 				else
 				{
