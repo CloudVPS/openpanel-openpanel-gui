@@ -214,7 +214,7 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 			}
 		}
 		
-		var icon = "/itemicon/" + this.openCoreObject.uuid + ".png";
+		var icon = "/images/itemicons/" + this.openCoreObject.uuid + ".png";
       	
 		this.grid.create (this.gridDiv,createObject, 198, 0, 98, 69, -450, "itemlist", icon);
       	this.grid.setGrid (instances);

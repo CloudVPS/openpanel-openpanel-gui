@@ -73,6 +73,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			var count = 0;
 			
 			if (liststyle != undefined) this.listStyle = liststyle;
+			else liststyle = "normal";
 			if (iconimg != undefined) this.iconImage = iconimg;
 			
 			for (var ki in def){
@@ -236,6 +237,8 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 		/// \param id The id of this line
 		/// \param values The dictionary with the columns.
 		addGridLine: function(id, values) {
+			console.log ("addGridLine");
+			console.log ([id,values]);
 			var i = 0;
 			var self = this;
 			this.count++;
@@ -272,31 +275,37 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 					}
 				}
 				
+				if (value == undefined || value == "") { 
+					value = useInnerHTML ? "&nbsp;" : " ";
+				}
+				
 				if (this.listStyle == "itemlist") {
 					var icondiv = document.createElement("div");
 					icondiv.style.width = "16px";
-					icondiv.style.height = "16px";
+					icondiv.style.height = "18px";
 					icondiv.style.background = "url(" + this.iconImage + ")";
+					icondiv.style.backgroundRepeat = "no-repeat";
 					icondiv.style.float = "left";
 					icondiv.style.marginTop = "2px";
 					icondiv.style.opacity = "0.8";
 					col.appendChild(icondiv);
 					var textdiv = document.createElement("div");
 					textdiv.style.marginLeft = "20px";
-					var textNode = document.createTextNode(value!=undefined?value:"");
+					var textNode = document.createTextNode(value!=undefined?value:" ");
 					textdiv.appendChild (textNode);
 					col.appendChild (textdiv);
 				} else {
 					if (! useInnerHTML)
 					{
-						var textNode = document.createTextNode(value!=undefined?value:"");
+						var textNode = document.createTextNode(value!=undefined?value:" ");
 						col.appendChild(textNode);
 					}
 					else
 					{
-						col.innerHTML = value;
+						col.innerHTML = value!=undefined?value:"&nbsp;";
 					}
 				}
+				console.log (col);
 				row.appendChild(col);
 			}
 			

@@ -70,6 +70,12 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		this.gridDiv = document.createElement("div");
 		this.gridDiv.setAttribute("id", this.openCoreObject.name + ":grid");
 		this.gridDiv.setAttribute("class", "formGrid");
+		
+		if (this.openCoreObject.classInfo["class"].gridmargin != undefined) {
+			var m = this.openCoreObject.classInfo["class"].gridmargin;
+			this.gridDiv.style.marginTop = "" + m + "px";
+		}
+		
 		this.targetDiv.appendChild(this.gridDiv);
 		
 		

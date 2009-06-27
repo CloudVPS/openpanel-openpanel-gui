@@ -217,11 +217,14 @@
 
 .gridViewColumn, .itemGridViewColumn {
 	float: left;
-	height: 17px;
 	padding-left: 4px;
 	padding-right: 1px;
 	font-size: 12px;
 	font-family: Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
 	overflow: hidden;
 	cursor: default;
+}
+
+.gridViewColumn {
+	height: 17px;
 }
