@@ -4,6 +4,20 @@ OpenPanel.GUIBuilder.FormElement.Bool = function(name, form, initObject){
 }
 
 OpenPanel.GUIBuilder.FormElement.Bool.prototype = {
+	renderLabel: function() {
+		if (this.labelElement != undefined) {
+			this.labelElement.innerHTML = "";
+		} else {
+			this.labelElement = document.createElement("div");
+			this.labelElement.className = "labelElement";
+		}
+		var textNode = document.createTextNode ("");
+		this.labelElement.appendChild (textNode);
+		this.labelElement.style.paddingLeft = "0px";
+		this.labelElement.style.width = "4px";
+		return this.labelElement;
+	},
+		
 	renderInputElement: function(){
 		var divElement = document.createElement("div");
 		this.checkboxElement = document.createElement("input");
@@ -23,6 +37,15 @@ OpenPanel.GUIBuilder.FormElement.Bool.prototype = {
 		} else {
 			this.checkboxElement.setAttribute("disabled", "true");
 		}
+		
+		if (! this.hidelabel) {
+			var suffixLabelElement = document.createElement ("div");
+			suffixLabelElement.className = "labelElement";
+			var suffixText = document.createTextNode (this.description);
+			suffixLabelElement.appendChild (suffixText);
+			divElement.appendChild (suffixLabelElement);
+		}
+		
 		return divElement;
 	},
 	
