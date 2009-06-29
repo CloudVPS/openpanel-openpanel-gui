@@ -219,12 +219,18 @@
 	float: left;
 	padding-left: 4px;
 	padding-right: 1px;
-	font-size: 12px;
 	font-family: Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
 	overflow: hidden;
 	cursor: default;
 }
 
+.itemGridViewColumn {
+	height: 20px;
+	line-height: 20px;
+	font-size: 11px;
+}
+
 .gridViewColumn {
 	height: 17px;
+	font-size: 12px;
 }
