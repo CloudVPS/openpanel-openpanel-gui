@@ -41,6 +41,7 @@ OpenPanel.GUIBuilder.FormElement.Bool.prototype = {
 		if (! this.hidelabel) {
 			var suffixLabelElement = document.createElement ("div");
 			suffixLabelElement.className = "labelElement";
+			suffixLabelElement.style.float = "left";
 			var suffixText = document.createTextNode (this.description);
 			suffixLabelElement.appendChild (suffixText);
 			divElement.appendChild (suffixLabelElement);
