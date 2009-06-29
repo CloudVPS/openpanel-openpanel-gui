@@ -43,6 +43,9 @@ OpenPanel.GUIBuilder.FormElement.Bool.prototype = {
 			var suffixLabelElement = document.createElement ("div");
 			suffixLabelElement.className = "labelElement";
 			suffixLabelElement.style.float = "left";
+			if (this.labelwidth != 0) {
+				suffixLabelElement.style.width = "" + this.labelwidth + "px";
+			}
 			var suffixText = document.createTextNode (this.description);
 			suffixLabelElement.appendChild (suffixText);
 			divElement.appendChild (suffixLabelElement);
