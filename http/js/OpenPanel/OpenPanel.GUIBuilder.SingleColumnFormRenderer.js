@@ -59,11 +59,19 @@ OpenPanel.GUIBuilder.SingleColumnFormRenderer.prototype = {
 					trow.appendChild(ttd);
 					this.tbodyElement.appendChild(trow);
 				}
-				var labelTD = document.createElement("td");
-				labelTD.className = "labelTd";
-				labelTD.setAttribute("valign", "top");
-				labelTD.appendChild(label);
+				
 				var fieldTD = document.createElement("td");
+
+				if (formElement.breakcolumn != true) {
+					var labelTD = document.createElement("td");
+					labelTD.className = "labelTd";
+					labelTD.setAttribute("valign", "top");
+					labelTD.appendChild(label);
+					row.appendChild(labelTD);
+				} else {
+					fieldTD.colSpan = 2;
+				}
+
 				var sameLineDiv = document.createElement("span");
 				fieldTD.appendChild(sameLineDiv);
 				var container = document.createElement("div");
@@ -71,7 +79,6 @@ OpenPanel.GUIBuilder.SingleColumnFormRenderer.prototype = {
 				container.appendChild(field);
 				
 				sameLineDiv.appendChild(container);
-				row.appendChild(labelTD);
 				row.appendChild(fieldTD);
 			} else {
 				var container = document.createElement("div");
