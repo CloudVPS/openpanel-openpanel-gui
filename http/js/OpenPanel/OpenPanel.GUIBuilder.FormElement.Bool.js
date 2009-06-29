@@ -22,6 +22,7 @@ OpenPanel.GUIBuilder.FormElement.Bool.prototype = {
 		var divElement = document.createElement("div");
 		this.checkboxElement = document.createElement("input");
 		this.checkboxElement.setAttribute("type", "checkbox");
+		this.checkboxElement.style.float = "left";
 		this.checkboxElement.className = "checkboxElement";
 		this.checkboxElement.setAttribute("tabIndex", OpenPanel.GUIBuilder.FormElement.Base.getNextTabIndex());
 		if ((this.value != undefined) && ((this.value == true)||(this.value == "true"))) {
