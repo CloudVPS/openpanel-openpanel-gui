@@ -9,6 +9,7 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 	openCoreObjects : [],
 	tabStart : {},
 	tabEnd : {},
+	firstObject: {},
 	tabIds: {},
 	tabIndexes : {},
 	selectedTabId : "",
@@ -112,6 +113,10 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 
 						this.tabIndexes[someObject.name] = counter;
 						this.tabIds[counter++] = someObject.name;
+						
+						if (counter == 1) {
+							this.firstObject = someObject;
+						}
 					}
 				}
 			}
@@ -368,7 +373,9 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 	},
 	
 	getFirstTabItem : function(){
-		
+		if (this.firstObject != undefined) {
+			return this.firstObject;
+		}
 		for(var i=0;i<this.openCoreObjects.length;i++){
 			if(this.openCoreObjects[i].name != undefined){
 				return this.openCoreObjects[i];
