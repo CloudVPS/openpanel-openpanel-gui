@@ -70,8 +70,10 @@ OpenCore.DataManager.OpenCoreObject.prototype = {
 	},
 	
 	getParameterCount : function(){
+		console.log ("getParameterCount (" + this.name + ")");
 		var i=0;
 		for(var key in this.classInfo.structure.parameters){
+			console.log ("    param " + i + ": " + key);
 			i++;
 		}	
 		
