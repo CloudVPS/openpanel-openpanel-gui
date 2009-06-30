@@ -238,8 +238,6 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 		/// \param id The id of this line
 		/// \param values The dictionary with the columns.
 		addGridLine: function(id, values) {
-			console.log ("addGridLine");
-			console.log ([id,values]);
 			var i = 0;
 			var self = this;
 			this.count++;
@@ -306,7 +304,6 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 						col.innerHTML = value!=undefined?value:"&nbsp;";
 					}
 				}
-				console.log (col);
 				row.appendChild(col);
 			}
 			
@@ -350,7 +347,6 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			this.createMenu.itemData = itemData;
 			this.createMenu.build();
 			this.createMenu.onselect = function(id) {
-				console.log ("create: " + id);
 				if (self.menuCallbacks[id] != undefined)
 					self.menuCallbacks[id]();
 			}
@@ -405,9 +401,6 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 				if (self.deleteButtonDisabled) return false;
 				self.deleteButtonCallback();
 			}
-			
-			console.log ("renderButtons");
-			console.log (this);
 		},
 		
 		disableCreateButton: function() {

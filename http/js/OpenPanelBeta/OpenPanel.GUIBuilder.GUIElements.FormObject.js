@@ -327,8 +327,6 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 					var formmargin = this.openCoreObject.classInfo["class"].formmargin;
 					if (formmargin == undefined) formmargin = 0;
 					
-					console.log ("formmargin: " + formmargin);
-					
 					this.fieldsDiv.style.marginTop = "" + formmargin + "px";
 						
 				} else {

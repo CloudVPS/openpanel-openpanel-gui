@@ -33,7 +33,6 @@ OpenPanel.GUIBuilder.GUIElements.DropDownMenu.prototype = {
 		var el = xel;
 		var x = 0;
 		while (el != undefined) {
-			console.log ("getX: " + el.offsetLeft);
 			x += el.offsetLeft;
 			el = el.offsetParent;
 		}
@@ -44,8 +43,6 @@ OpenPanel.GUIBuilder.GUIElements.DropDownMenu.prototype = {
 		var el = xel;
 		var y = 0;
 		while (el != undefined) {
-			console.log ("getY y:" +y);
-			console.log (el);
 			y += el.offsetTop;
 			if (el.scrollTop) y-= el.scrollTop;
 			el = el.offsetParent;
@@ -207,9 +204,6 @@ OpenPanel.GUIBuilder.GUIElements.DropDownMenu.prototype = {
 			this.menuDiv.style.position = "fixed";
 			this.menuDiv.style.left = "" + this.xpos + "px";
 			this.menuDiv.style.top = "" + this.ypos + "px";
-			
-			console.log (this.menuDiv.style.left);
-			console.log (this.menuDiv.style.top);
 			
 			if (this.selectedNode != undefined) {
 				this.selectedNode.className = "dropDownMenuItem";
