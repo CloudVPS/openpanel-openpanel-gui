@@ -289,7 +289,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 					icondiv.style.opacity = "0.8";
 					col.appendChild(icondiv);
 					var textdiv = document.createElement("div");
-					textdiv.style.marginLeft = "8px";
+					textdiv.style.marginLeft = "4px";
 					textdiv.style.cssFloat = "left";
 					var textNode = document.createTextNode(value!=undefined?value:" ");
 					textdiv.appendChild (textNode);
