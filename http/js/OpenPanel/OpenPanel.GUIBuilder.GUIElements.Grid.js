@@ -284,12 +284,13 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 					icondiv.style.height = "18px";
 					icondiv.style.background = "url(" + this.iconImage + ")";
 					icondiv.style.backgroundRepeat = "no-repeat";
-					icondiv.style.float = "left";
+					icondiv.style.cssFloat = "left";
 					icondiv.style.marginTop = "2px";
 					icondiv.style.opacity = "0.8";
 					col.appendChild(icondiv);
 					var textdiv = document.createElement("div");
-					textdiv.style.marginLeft = "20px";
+					textdiv.style.marginLeft = "8px";
+					textdiv.style.cssFloat = "left";
 					var textNode = document.createTextNode(value!=undefined?value:" ");
 					textdiv.appendChild (textNode);
 					col.appendChild (textdiv);
