@@ -29,13 +29,8 @@ OpenPanel.GUIBuilder = {
 			  dataType: "text"
 			}).responseText;
 		
-		var o = TrimPath.parseTemplate(f);
-		
 		this.targetDiv = targetDiv;
 		this.targetDiv.innerHTML = f;
-		/*o.process({ 
-			controller: this.controller 
-		});*/
 	},
 	
 	createPopUp : function(){

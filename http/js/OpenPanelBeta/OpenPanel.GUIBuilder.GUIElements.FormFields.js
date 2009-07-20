@@ -146,44 +146,6 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 		}
 	},
 	
-	createReference: function(fieldName, obj){
-		var item = {};
-		var referenceFields = [];
-		var references = this.formObject.controller.dataManager.getReferences(obj.refclass + "/" + obj.reflabel);
-		if(references!=undefined){
-			for(var referenceName in references){
-				var referenceField = [
-                  	referenceName,
-				   	references[referenceName]
-               ];
-			   
-			   referenceFields.push(referenceField);
-			}
-		}
-		
-		var store = new Ext.data.SimpleStore({
-		    fields: ["description", "metaid"],
-		    data : referenceFields
-			
-		});
-		var comboWithTooltip = new Ext.form.ComboBox({
-		    store: store,
-		    displayField: 'description',
-			fieldLabel: obj.description,
-			valueField: 'metaid',
-		    typeAhead: true,
-		    mode: 'local',
-		    triggerAction: 'all',
-		    emptyText:'Select ...',
-		    selectOnFocus:true,
-			name: fieldName,
-			forceSelection: true
-		});
-
-			
-		return comboWithTooltip;
-	},
-	
 	createTextField : function(fieldName, obj){
 		var item = {
 			xtype:'textfield',

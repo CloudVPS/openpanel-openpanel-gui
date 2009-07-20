@@ -1,7 +1,7 @@
 OpenPanel.Command.Init  = {
 	controller : {},
 	execute : function(actionObject){
-		if (Ext.isGecko || Ext.isSafari || 1) {
+		if (1) {
 			document.getElementById("modalLoadingDiv").className = "modalLoadingDivLogin";
 			this.controller.guiBuilder.hideModalMessageDiv();
 			this.controller.guiBuilder.loadTemplate("templates/login.html", "app");

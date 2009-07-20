@@ -55,11 +55,17 @@ OpenCore.RPC.RequestHandler = {
 			callBackArguments: callBackArguments
 		}
 		var hook = this;
-		Ext.Ajax.request({
+
+		jQuery.ajax({
 			url: hook.openCoreURL,
-			success: this.asynchronizedRequestReturn,
-			failure: this.asynchronizedRequestReturn,
-			jsonData: jQuery.toJSON(sendVarsObject),
+			type: "POST",
+			dataType: "json",
+			async: true,
+			data: jQuery.toJSON(sendVarsObject),
+			complete: function(xhr){
+				xhr.argument = arg;
+				hook.asynchronizedRequestReturn(xhr)
+			},
 			argument : arg
 		});
 	},
@@ -75,7 +81,7 @@ OpenCore.RPC.RequestHandler = {
 				var callBackObject = requestResult.argument.callBackObject;
 				var callBackFunction = requestResult.argument.callBackFunction;
 				var callBackArguments = requestResult.argument.callBackArguments;
-				callBackArguments.data = Ext.util.JSON.decode(requestResult.responseText);
+				callBackArguments.data = jQuery.parseJSON(requestResult.responseText);
 				
 				if (callBackFunction == undefined) {
 					throw Error("callBackFunction does not exist");

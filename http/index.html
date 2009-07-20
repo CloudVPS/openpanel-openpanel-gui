@@ -23,18 +23,12 @@
 	<script type="text/javascript" src="js/preloader.js"></script>
 	<script type="text/javascript" src="js/jquery-1.2.2.js"></script>
 	<script type="text/javascript" src="js/json.js"></script>
-	<script type="text/javascript" src="js/ext-2.0/adapter/ext/ext-base.js"></script>
-	<script type="text/javascript" src="js/ext-2.0/ext-all.js"></script>
-	<script type="text/javascript" src="js/ext-2.0/build/util/KeyMap-min.js"></script>
-	<script type="text/javascript" src="js/trimpath-template-1.0.38/trimpath-template-1.0.38.js"></script>
-	<script type="text/javascript" src="js/radiogroup.js"></script>	
 	<script type="text/javascript" src="js/OpenPanelBeta/OpenCore.js"></script>
 	<script type="text/javascript" src="js/OpenPanelBeta/OpenCore.RPC.js"></script>
 	<script type="text/javascript" src="js/OpenPanelBeta/OpenCore.DataManager.js"></script>
 	<script type="text/javascript" src="js/OpenPanelBeta/OpenCore.DataManager.OpenCoreObject.js"></script>
 	<script type="text/javascript" src="js/OpenPanelBeta/OpenCore.Debug.js"></script>
 	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.js"></script>
-	<script type="text/javascript" src="js/OpenPanelBeta/Styles.js"></script>
 	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.GUIBuilder.js"></script>
 	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.GUIBuilder.GUIElements.IconBar.js"></script>
 	<script type="text/javascript" src="js/OpenPanelBeta/OpenPanel.GUIBuilder.GUIElements.ItemList.js"></script>
@@ -114,11 +108,12 @@
 			preloadImages();
 		
 			function startGUI() {
+				
 				document.body.style.backgroundImage = "url(/images/gui/sky.jpg)";
 				document.getElementById("loaderDiv").style.visibility = "hidden";
 				document.getElementById("app").style.visibility = "visible";
 				
-				Ext.BLANK_IMAGE_URL = '/images/ext/resources/images/default/s.gif';  // Ext 2.0
+				//Ext.BLANK_IMAGE_URL = '/images/ext/resources/images/default/s.gif';  // Ext 2.0
 				
 				OpenCore.RPC.RequestHandler.setOpenCoreURL("/fake-opencore-proxy/json");
 				

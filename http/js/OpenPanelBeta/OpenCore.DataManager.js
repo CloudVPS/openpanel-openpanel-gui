@@ -52,6 +52,7 @@ OpenCore.DataManager = {
 			callBackFunction : callBackFunction,
 			callBackArguments : callBackArguments
 		}
+		
 		this.getRequestResultAsync(r, OpenCore.DataManager, "loginAsyncDone", callBackWrapper);
 	},
 	

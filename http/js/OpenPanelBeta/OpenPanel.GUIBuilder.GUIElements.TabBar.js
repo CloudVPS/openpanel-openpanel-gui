@@ -140,8 +140,9 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 						tabHolder.appendChild(delimiter);
 					}
 				}
-				var el = Ext.get(tabSpan.getAttribute("id"));
-				this.tabWidth += el.getWidth();
+				//var el = Ext.get(tabSpan.getAttribute("id"));
+				//this.tabWidth += el.getWidth();
+				this.tabWidth += 50;
 			}
 	
 			if (tabs.length > 0) {
@@ -156,11 +157,9 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 			this.setTabEnd(this.tabEnd);
 			tabHolder.appendChild(this.tabEnd);
 			
-			var tabDivElement = Ext.get("tabBarDiv");
-			
-			tabDivElement.setWidth(this.tabWidth + 30);
-			tabDivElement.setStyle("marginLeft", Math.round((this.tabWidth / -2)+98) + "px");
-			tabDivElement.setStyle("left", "50%");
+			var tabDivElement = document.getElementById("tabBarDiv"); //Ext.get("tabBarDiv");
+		
+			tabDivElement.style.cssText = "width: " + this.tabWidth + 30 + ";"; + "margin-left:" + Math.round((this.tabWidth / -2)+98) + "px" + ";" + "left:" + "50%" + ";";
 			
 
 		}
