@@ -24,7 +24,7 @@ OpenPanel.Command.Login  = {
 			
 		} else {
 			
-			//throw new OpenCoreError(callBackArguments.header.error, callBackArguments.header.errorid);
+			//throw new OpenCore.OpenCoreError(callBackArguments.header.error, callBackArguments.header.errorid);
 			this.controller.action({ command : "Init", msg: "login failed"})
 		}
 	},

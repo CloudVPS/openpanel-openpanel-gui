@@ -169,8 +169,8 @@ OpenPanel.GUIBuilder = {
 	showLoadingDiv : function(){
 		OpenPanel.GUIBuilder.enterModalMode();
 		var loadingDiv = document.getElementById("modalLoadingDiv");
-		Throbber.setTargetDiv(loadingDiv);
-		Throbber.start();
+		OpenPanel.GUIBuilder.Throbber.setTargetDiv(loadingDiv);
+		OpenPanel.GUIBuilder.Throbber.start();
 		loadingDiv.style.visibility = "visible";
 	},
 	
@@ -178,7 +178,7 @@ OpenPanel.GUIBuilder = {
 		OpenPanel.GUIBuilder.exitModalMode();
 		var loadingDiv = document.getElementById("modalLoadingDiv");
 		loadingDiv.style.visibility = "hidden";
-		Throbber.stop();
+		OpenPanel.GUIBuilder.Throbber.stop();
 	},
 	
 	onresize : function(){ 

@@ -1,1 +1,0 @@
-OpenPanel.GUIBuilder = {}

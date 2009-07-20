@@ -21,7 +21,7 @@ OpenPanel.Command.SaveFormDone  = {
 						errorString += actionObject.errors[i] + "<br/>";
 					}
 						
-					var e = new OpenCoreError(errorString);
+					var e = new OpenCore.OpenCoreError(errorString);
 					e.threaded = true;
 					e.errors = actionObject.errors;
 					throw e;

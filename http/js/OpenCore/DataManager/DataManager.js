@@ -396,12 +396,12 @@ OpenCore.DataManager = {
 				this.errorMessage = r.header.error;
 				
 				if(this.errorId!=0){
-					throw new OpenCoreError(r.header.error, r.header.errorid);
+					throw new OpenCore.OpenCoreError(r.header.error, r.header.errorid);
 					return;
 				}
 				return r;
 			} else {
-				throw new RPCError("No response");
+				throw new OpenCore.RPC.RPCError("No response");
 			}
 		
 	},

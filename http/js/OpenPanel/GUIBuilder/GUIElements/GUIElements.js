@@ -1,0 +1,2 @@
+OpenPanel.GUIBuilder.GUIElements = {};
+

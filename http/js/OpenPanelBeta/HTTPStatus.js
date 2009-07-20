@@ -1,7 +1,7 @@
 /**
  * @author jp
  */
-var HTTPStatus = {
+OpenCore.RPC.HTTPStatus = {
 	
 	lookup : {
 		100 : "Continue",
