@@ -226,7 +226,6 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 					}
 				}
 			}
-			
 		} else {
 			alert("OpenPanel.GUIBuilder.GUIElements.IconBar.build(openCoreObject) : openCoreObject is undefined");
 		}

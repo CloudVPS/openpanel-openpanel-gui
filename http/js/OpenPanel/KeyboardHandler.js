@@ -56,7 +56,7 @@ OpenPanel.KeyboardHandler = {
 	{
 		if (! this.initialized) this.init ();
 		this.okfunc = function() {}
-	},
+	}
 }
  
 OpenPanel.KeyboardHandler.Shortcuts = {
@@ -262,7 +262,7 @@ OpenPanel.KeyboardHandler.Shortcuts = {
 	},
 
 	//Remove the shortcut - just specify the shortcut and I will remove the binding
-	'remove':function(shortcut_combination) {
+	remove:function(shortcut_combination) {
 		shortcut_combination = shortcut_combination.toLowerCase();
 		var binding = this.all_shortcuts[shortcut_combination];
 		delete(this.all_shortcuts[shortcut_combination])

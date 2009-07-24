@@ -3,8 +3,6 @@
   <head>
   	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>OpenPanel beta</title>
-	<link rel="stylesheet" type="text/css" href="js/ext-2.0/resources/css/ext-all.css">
-	<link rel="stylesheet" type="text/css"  href="js/ext-2.0/resources/css/xtheme-macx.css">	
 	<link rel="stylesheet" type="text/css"	href="css/openpanel.css">
 	<link rel="stylesheet" type="text/css"	href="css/forms.css">
 	<link rel="stylesheet" type="text/css"	href="css/dropdown.css">
@@ -21,6 +19,7 @@
 		spinner.src = "/images/gui/prespinner.gif";
 	</script>
 	<script type="text/javascript" src="js/preloader.js"></script>
+	<script type="text/javascript" src="js/prototype-1.6.0.3.js"></script>
 	<script type="text/javascript" src="js/jquery-1.2.2.js"></script>
 	<script type="text/javascript" src="js/json.js"></script>
 	<script type="text/javascript" src="js/OpenCore/OpenCore.js"></script>
@@ -29,6 +28,7 @@
 	<script type="text/javascript" src="js/OpenCore/DataManager/OpenCoreObject.js"></script>
 	<script type="text/javascript" src="js/OpenCore/Debug.js"></script>
 	<script type="text/javascript" src="js/OpenPanel/OpenPanel.js"></script>
+	<script type="text/javascript" src="js/OpenPanel/KeyboardHandler.js"></script>
 	<script type="text/javascript" src="js/OpenPanel/Controller.js"></script>
 	<script type="text/javascript" src="js/OpenPanel/Command/Command.js"></script>
 	<script type="text/javascript" src="js/OpenPanel/Command/Init.js"></script>
@@ -51,7 +51,6 @@
 	<script type="text/javascript" src="js/OpenPanel/Command/ClickTabBarItem.js"></script>
 	<script type="text/javascript" src="js/OpenPanel/Command/ClickGridItem.js"></script>
 	<script type="text/javascript" src="js/OpenPanel/Command/InvokeMethod.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/KeyboardHandler.js"></script>
 	<script type="text/javascript" src="js/OpenPanel/GUIBuilder/GUIBuilder.js"></script>
 	<script type="text/javascript" src="js/OpenPanel/GUIBuilder/Throbber.js"></script>
 	<script type="text/javascript" src="js/OpenPanel/GUIBuilder/Form.js"></script>
@@ -102,10 +101,9 @@
 	    <input id="tabCycleCatcher" style="position:absolute; right:0px; bottom:0px; width: 0px; height: 0px; opacity: 1.0;"
 	    	   onfocus="recycleFocus();" tabindex="65535">
 	    <script type="text/javascript">
-			var $j = jQuery.noConflict();
-		
 			preloadImages();
-		
+			jQuery.noConflict();
+			
 			function startGUI() {
 				
 				document.body.style.backgroundImage = "url(/images/gui/sky.jpg)";
@@ -142,7 +140,7 @@
 			}
 			
 			function recycleFocus() {
-				var first = $j("input")[0];
+				var first = jQuery("input")[0];
 				if (first == undefined) return;
 				if (first.id == "tabCycleCatcher") return;
 				first.focus();

@@ -34,8 +34,22 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 		
 		var saveButton = document.getElementById("saveButton");
 		saveButton.innerHTML = "Save";
+		var hook = this;
+		this.controller.guiBuilder.renderButton(saveButton, undefined, undefined, false);
+		//this.createSaveButtonAction(saveButton);
 		
-		this.controller.guiBuilder.renderButton(saveButton);
+		this.rootFormObject = new OpenPanel.GUIBuilder.GUIElements.FormObject();
+		this.rootFormObject.setOpenCoreObject(this.openCoreObject);
+		this.rootFormObject.setParentUUID(this.parentUUID);
+		this.rootFormObject.setTargetDiv(this.formObjectHolder);
+		this.rootFormObject.setController(this.controller);
+		this.rootFormObject.setFormBuilder(this);
+		this.rootFormObject.setOnChangeHandler(function(that){hook.onChangeHandler(that)});
+		this.v = new Array();
+		this.rootFormObject.build(true);
+	},
+	
+	createSaveButtonAction : function(saveButton){
 		var hook = this;
 		saveButton.onclick = function() {
 			var transport = hook.getData();
@@ -46,15 +60,51 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 			};
 			hook.controller.action(actionObject);
 		}
+	},
+	
+	removeSaveButtonAction : function(saveButton){
+		saveButton.onclick = function(){};
+	},
+	
+	onChangeHandler : function(formElement){
+		//console.log("this.rootFormObject", this.rootFormObject.isLoading);
+		if(this.v == undefined) this.v = new Array();
+		if(formElement.initialValue != formElement.value){
+			//console.log(formElement.name + "-" + formElement.initialValue + "-" + formElement.value + ".");
+			var c = false;
+			for (var i = 0; i < this.v.length; i++) {
+				if (this.v[i] == formElement.name) {
+					c = true;
+				}			
+			}
+			
+			if (c == false) {
+				this.v.push(formElement.name);
+			}
+		} else {
+			for(var i = 0;i<this.v.length;i++){
+				if(this.v[i] == formElement.name){
+					this.v.splice(i,1);
+				}
+			}
+		}
+		//console.log(this.v);
+		this.setSaveButtonActive(this.v.length!=0);
 		
-		this.rootFormObject = new OpenPanel.GUIBuilder.GUIElements.FormObject();
-		this.rootFormObject.setOpenCoreObject(this.openCoreObject);
-		this.rootFormObject.setParentUUID(this.parentUUID);
-		this.rootFormObject.setTargetDiv(this.formObjectHolder);
-		this.rootFormObject.setController(this.controller);
-		this.rootFormObject.setFormBuilder(this);
-		
-		this.rootFormObject.build(true);
+		//this.setSaveButtonVisibility(this.v.length!=0);
+	},
+	
+	setSaveButtonActive : function(isActive){
+		if(isActive == true){
+			var saveButton = document.getElementById("saveButton");
+			saveButton.innerHTML = "Save";
+			this.controller.guiBuilder.renderButton(saveButton);
+			this.createSaveButtonAction(saveButton);
+		} else {
+			var saveButton = document.getElementById("saveButton");
+			saveButton.innerHTML = "Save1";
+			this.controller.guiBuilder.renderButton(saveButton, undefined, undefined, false);
+		}
 	},
 	
 	setSaveButtonVisibility : function(isVisible){
@@ -69,6 +119,7 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 			if(formObject.isUpdateable!= undefined && formObject.isUpdateable == true) {
 				this.isUpdateable = true;
 				this.setSaveButtonVisibility(true);
+				this.setSaveButtonActive(false);
 			}
 			var parameters = this.openCoreObject.getClassInfo().structure.parameters;
 			if(parameters!=undefined){
@@ -83,7 +134,8 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 				}
 			}
 			if(i==j){
-				this.setSaveButtonVisibility(false);	
+				this.setSaveButtonVisibility(false);
+				this.setSaveButtonActive(false);	
 			}
 			if(formObject.parentFormObject!=undefined) {
 				this.finishLayout(formObject.parentFormObject);
@@ -105,12 +157,15 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 			if (parent != undefined) singleton = parent.singleton;
 			
 			if (singleton == false && this.setFocusOnReady == this.FOCUS_FORM) {
-				e = $j("input")[1];
-				if (e == undefined) e = $j("input")[0];
+				e = $$("input")[1];
+				if (e == undefined) e = jQuery("input")[0];
 			} else {
-				e = $j("input")[0];
+				e = $$("input")[0];
 			}
-			if ((e != undefined) && (e.type == "text")) e.focus();
+			if ((e != undefined) && (e.type == "text")){
+				e.focus();
+			} 
+				
 			this.setFocusOnReady = 0;
 		}
 	},	

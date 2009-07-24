@@ -17,7 +17,7 @@ OpenPanel.GUIBuilder.FormElement.String.prototype = {
 		this.setValidity(true);
 	},
 	
-	setValue : function(value){
+	setValue : function(value, setInitialValue){
 		if (value != undefined && value!="" && value.length>0) {
 			this.value = value;
 			
@@ -25,7 +25,14 @@ OpenPanel.GUIBuilder.FormElement.String.prototype = {
 			this.value = null;
 			this.hasValue = false;
 		}
+
 		this.validate();
+		
+		if(setInitialValue == true){
+			this.initialValue == true;
+		}
+		
+		this.onChange();
 	},
 	
 	getValue : function(){

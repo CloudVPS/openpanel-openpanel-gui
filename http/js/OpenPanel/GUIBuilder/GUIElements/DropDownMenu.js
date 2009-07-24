@@ -21,10 +21,16 @@ OpenPanel.GUIBuilder.GUIElements.DropDownMenu.prototype = {
 			
 		this.menuDiv = document.createElement("div");
 		var self = this;
-		this.menuDiv.onmouseout = self.timedHide();
-		this.menuDiv.onmouseover = self.cancelHide();
-		this.menuDiv.className = "dropDownMenu";
 		
+		this.menuDiv.onmouseout = function(){
+			self.timedHide();
+		}
+		
+		this.menuDiv.onmouseover = function(){
+			self.cancelHide();
+		}
+		
+		this.menuDiv.className = "dropDownMenu";
 		this.visible = false;
 		targetDiv.appendChild (this.menuDiv);
 	},
@@ -118,6 +124,7 @@ OpenPanel.GUIBuilder.GUIElements.DropDownMenu.prototype = {
 			
 			itemTD.onmouseover = function() {
 				self.cancelHide();
+				this.isInside = true;
 				if (self.mouseUpValid) {
 					if (self.selectedNode != undefined) {
 						if (self.selectedNode === this) return;
@@ -128,9 +135,7 @@ OpenPanel.GUIBuilder.GUIElements.DropDownMenu.prototype = {
 				}
 			}
 			
-			itemTD.onmouseout = function() {
-				if (self.mouseUpValid) self.timedHide();
-			}
+			
 			
 			itemTD.onmouseup = itemTD.onclick = itemTD.ondblclick = function() {
 				self.cancelHide();

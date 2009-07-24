@@ -16,6 +16,7 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 	tabWidth : 0,
 	
 	build : function(){
+		
 		this.tabWidth = 0;
 		this.targetDiv.innerHTML = "";
 		this.tabIds = {};
@@ -32,12 +33,15 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 			tabHolder.setAttribute("class", "tabHolder");
 			tabHolder.setAttribute("id", "tabHolder");
 			this.targetDiv.appendChild(tabDiv);
+			var c = document.createElement("center");
 			tabDiv.appendChild(tabHolder);
 			this.tabStart = document.createElement("li");
 			this.tabStart.setAttribute("id", "tabStart");
 			this.tabStart.setAttribute("class", "tabStart");
 			this.tabStart.innerHTML = "&nbsp;";
 			tabHolder.appendChild(this.tabStart);
+			
+			this.tabWidth += $("tabStart").getDimensions().width;
 			
 			this.openCoreObjects = [];
 			
@@ -121,34 +125,29 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 				}
 			}
 			
-			
 			for (var i = 0; i < tabs.length; i++) {
 				var tabSpan = tabs[i];
-
 				tabHolder.appendChild(tabSpan);
 				if (tabs.length > 1) {
 					if (i == 0) {
 						var delimiter = this.createDelimiter();
 						tabSpan.rightDelimiter = delimiter;
 						tabHolder.appendChild(delimiter);
+						this.tabWidth += $(delimiter).getDimensions().width;
 					} else if (i == tabs.length - 1) {
 						tabSpan.leftDelimiter = delimiter;
+						this.tabWidth += $(delimiter).getDimensions().width;
 					} else {
 						tabSpan.leftDelimiter = delimiter;
 						var delimiter = this.createDelimiter();
 						tabSpan.rightDelimiter = delimiter;
 						tabHolder.appendChild(delimiter);
+						this.tabWidth += $(delimiter).getDimensions().width;
 					}
 				}
-				//var el = Ext.get(tabSpan.getAttribute("id"));
-				//this.tabWidth += el.getWidth();
-				this.tabWidth += 50;
+				this.tabWidth += $(tabSpan).getDimensions().width;
 			}
 	
-			if (tabs.length > 0) {
-				this.tabWidth += (tabs.length) * 4;
-			}
-			
 			this.tabEnd = document.createElement("li");
 			this.tabEnd.innerHTML = "&nbsp;";
 			this.tabEnd.setAttribute("id", "tabEnd");
@@ -156,12 +155,9 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 			
 			this.setTabEnd(this.tabEnd);
 			tabHolder.appendChild(this.tabEnd);
-			
-			var tabDivElement = document.getElementById("tabBarDiv"); //Ext.get("tabBarDiv");
-		
-			tabDivElement.style.cssText = "width: " + this.tabWidth + 30 + ";"; + "margin-left:" + Math.round((this.tabWidth / -2)+98) + "px" + ";" + "left:" + "50%" + ";";
-			
-
+			this.tabWidth += $(this.tabEnd).getDimensions().width;
+			var tabDivElement = document.getElementById("tabBarDiv");
+			tabDivElement.style.cssText = "width: " + (this.tabWidth) + "px; margin-left:" + (-this.tabWidth/2 + 90) + "px;left: 50%; position: fixed;";
 		}
 	},
 	

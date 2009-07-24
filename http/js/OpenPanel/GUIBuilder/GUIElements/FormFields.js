@@ -16,10 +16,15 @@ OpenPanel.GUIBuilder.GUIElements.FormFields = function(){
 	this.formItems = {};
 	this.items = [];
 	this.itemCount = 0;
+	this.onChangeHandler;
 }
 
 OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
-		
+	
+	setOnChangeHandler : function(onChangeHandler){
+		this.onChangeHandler = onChangeHandler;
+	},
+	
 	build : function(isCreate){
 		this.isCreate = isCreate != undefined?isCreate:false;
 		this.itemCount = 0;
@@ -104,7 +109,8 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 				enums : enumerations,
 				isCreate : this.isCreate
 			}
-			this.formPanel = new OpenPanel.GUIBuilder.Form("firstForm", data);
+			this.formPanel = new OpenPanel.GUIBuilder.Form("firstForm", data, this.onChangeHandler);
+			this.formPanel.setOwningObject(this);
 			this.formPanel.addRenderer(
 				new OpenPanel.GUIBuilder.SingleColumnFormRenderer({
 					name: "SingleColumnFormRenderer"

@@ -74,6 +74,12 @@ OpenPanel.GUIBuilder.FormElement.IPAddress.prototype = {
 			this.ipElements[i].value = this.values[i];
 			this.ipElements[i].onkeyup();
 		}
+		
+		if(setInitialValue == true){
+			this.initialValue == true;
+		}
+		
+		this.onChange();
 	},
 	
 	getValue : function(){

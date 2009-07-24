@@ -97,7 +97,7 @@ OpenPanel.GUIBuilder.FormElement.Textarea.prototype = {
 		this.setValidity(true);
 	},
 	
-	setValue : function(value){
+	setValue : function(value, setInitialValue){
 		if (value != undefined && value!="" && value.length>0) {
 			this.value = value;
 			if (this.readOnly == false) {
@@ -115,6 +115,12 @@ OpenPanel.GUIBuilder.FormElement.Textarea.prototype = {
 			this.hasValue = false;
 			this.validate();
 		}
+		
+		if(setInitialValue == true){
+			this.initialValue = this.value;
+		}
+		
+		this.onChange();
 	},
 	
 	getValue : function(){

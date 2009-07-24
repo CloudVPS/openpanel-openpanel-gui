@@ -32,18 +32,20 @@ OpenCore.RPC.RequestHandler = {
 	},
 	
 	synchronizedRequest : function(sendVarsObject){
-		var response = $j.ajax(
-			{ type: "POST",
-			  url: this.openCoreURL,
-			  async: false,
-			  dataType: "json",
-			  data: jQuery.toJSON(sendVarsObject)
-			}
-		);
+		
+		var response = new Ajax.Request(this.openCoreURL, {
+		  method: 'post',
+		  asynchronous: false,
+		  postBody: Object.toJSON(sendVarsObject),
+		  contentType: "application/json"
+		}).transport;
+		
 		var responseText = response.responseText;
+		
 		if(response.status != 200){
 			throw OpenCore.RPC.RPCError(OpenCore.RPC.HTTPStatus.getStatus(response.status), response.status);
 		}
+		
 		return responseText;
 	},
 	
@@ -58,18 +60,16 @@ OpenCore.RPC.RequestHandler = {
 			callBackArguments: callBackArguments
 		}
 		var hook = this;
-
-		jQuery.ajax({
-			url: hook.openCoreURL,
-			type: "POST",
-			dataType: "json",
-			async: true,
-			data: jQuery.toJSON(sendVarsObject),
-			complete: function(xhr){
-				xhr.argument = arg;
-				hook.asynchronizedRequestReturn(xhr)
-			},
-			argument : arg
+		
+		new Ajax.Request(hook.openCoreURL, {
+		  method: 'post',
+		  postBody: Object.toJSON(sendVarsObject),
+		  contentType: "application/json",
+		  onComplete : function(xhr){
+		  	xhr.argument = arg;
+		  	hook.asynchronizedRequestReturn(xhr);
+		  },
+		  argument: arg
 		});
 	},
 	
@@ -84,8 +84,8 @@ OpenCore.RPC.RequestHandler = {
 				var callBackObject = requestResult.argument.callBackObject;
 				var callBackFunction = requestResult.argument.callBackFunction;
 				var callBackArguments = requestResult.argument.callBackArguments;
-				callBackArguments.data = jQuery.parseJSON(requestResult.responseText);
-				
+				callBackArguments.data = requestResult.responseText.evalJSON();
+			
 				if (callBackFunction == undefined) {
 					throw Error("callBackFunction does not exist");
 					return;
@@ -106,9 +106,7 @@ OpenCore.RPC.RequestHandler = {
 	},
 	
 	startLoading : function(){ },
-	
 	doneLoading : function(){ }
-	
 }
 		 
 OpenCore.RPC.SendVars = function(){

@@ -87,6 +87,7 @@ OpenPanel.Controller = {
 	},
 	
 	iconBarClick : function(openCoreObject) {
+		
 		this.guiBuilder.GUIElements.ItemList.setOpenCoreObject(openCoreObject);
 		this.guiBuilder.GUIElements.ItemList.build();
 		this.guiBuilder.GUIElements.ItemList.takeFocus();
@@ -97,14 +98,15 @@ OpenPanel.Controller = {
 		
 		if (openCoreObject.getFirstInstance() != undefined) {
 			this.guiBuilder.GUIElements.TabBar.setOpenCoreObject(openCoreObject);
-		
 			this.guiBuilder.GUIElements.TabBar.build();	
 			var firstTabOpenCoreObject = this.guiBuilder.GUIElements.TabBar.getFirstTabItem();
+	
 			if (firstTabOpenCoreObject != undefined) {
 				this.guiBuilder.GUIElements.FormBuilder.setOpenCoreObject(firstTabOpenCoreObject);
 				this.guiBuilder.GUIElements.FormBuilder.setOpenCoreParentUUID(this.currentRootClassInstance.uuid);
 
 				this.guiBuilder.GUIElements.FormBuilder.build(2);
+
 				if (this.currentRootClassInstance != undefined) {
 					this.guiBuilder.GUIElements.ItemList.highliteItem(this.currentRootClassInstance.uuid);
 				}
@@ -214,9 +216,16 @@ OpenPanel.Controller = {
 				}
 			break;
 			
-			default:
-				var extraText = ", please try logging in again.";
 			case "RPCError":
+				var targetDiv = OpenPanel.GUIBuilder.createPopUp();
+				this.error = new Array();
+				for(var errorKey in e){
+					this.error.push([errorKey, e[errorKey]]);
+				}
+				this.displayError(targetDiv, extraText);
+			break;
+			default:
+				var extraText = ",asdasdplease try logging in again.";
 				var targetDiv = OpenPanel.GUIBuilder.createPopUp();
 				this.error = new Array();
 				for(var errorKey in e){

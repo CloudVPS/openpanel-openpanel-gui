@@ -22,7 +22,7 @@ OpenPanel.GUIBuilder.FormElement.Bool.prototype = {
 		var divElement = document.createElement("div");
 		this.checkboxElement = document.createElement("input");
 		this.checkboxElement.setAttribute("type", "checkbox");
-		this.checkboxElement.style.float = "left";
+		this.checkboxElement.style.cssFloat = "left";
 		this.checkboxElement.className = "checkboxElement";
 		this.checkboxElement.setAttribute("tabIndex", OpenPanel.GUIBuilder.FormElement.Base.getNextTabIndex());
 		if ((this.value != undefined) && ((this.value == true)||(this.value == "true"))) {
@@ -42,7 +42,7 @@ OpenPanel.GUIBuilder.FormElement.Bool.prototype = {
 		if (! this.hidelabel) {
 			var suffixLabelElement = document.createElement ("div");
 			suffixLabelElement.className = "labelElement";
-			suffixLabelElement.style.float = "left";
+			suffixLabelElement.style.cssFloat = "left";
 			if (this.labelwidth != 0) {
 				suffixLabelElement.style.width = "" + this.labelwidth + "px";
 			}
@@ -62,7 +62,8 @@ OpenPanel.GUIBuilder.FormElement.Bool.prototype = {
 		}
 	},
 	
-	setValue : function(value) {
+	setValue : function(value, setInitialValue) {
+		
 		if(value == true || value == "true"){
 			this.checkboxElement.setAttribute("checked", "true");
 			this.value = true;
@@ -70,6 +71,12 @@ OpenPanel.GUIBuilder.FormElement.Bool.prototype = {
 			this.checkboxElement.removeAttribute("checked");
 			this.value = false;
 		}
+		
+		if(setInitialValue == true){
+			this.initialValue = this.value;
+		}
+		
+		this.onChange();
 	},
 	
 	getValue : function() {

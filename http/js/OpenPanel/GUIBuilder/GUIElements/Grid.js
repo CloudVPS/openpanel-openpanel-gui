@@ -322,6 +322,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 		
 		setMenu: function(menudef) {
 			if (this.buttonArea.appendChild == undefined) return;
+			
 			this.menuDiv = document.createElement("div");
 			this.buttonArea.appendChild(this.menuDiv);
 			
@@ -335,8 +336,9 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 				self.createMenu.show();
 				return false;
 			}
-
+			
 			this.createMenu = new OpenPanel.GUIBuilder.GUIElements.DropDownMenu();
+
 			this.createMenu.create(this.menuDiv, -17);
 			
 			var itemData = {};

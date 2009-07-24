@@ -11,7 +11,8 @@ OpenPanel.GUIBuilder.FormElement.Base = function(name, form, initObject){
 	this.isFirstInGroup = false;
 	this.isActiveInGroup = false;
 	this.defaultValue = initObject["default"]?initObject["default"]:"";
-	this.value = this.defaultValue;
+	this.value = this.initialValue = this.defaultValue;
+	
 	this.required = initObject.required?initObject.required:false;
 	this.toolTip = initObject.tooltip?initObject.toolTip:null;
 	this.visible = initObject.visible?initObject.visible:true;
@@ -31,6 +32,7 @@ OpenPanel.GUIBuilder.FormElement.Base = function(name, form, initObject){
 	this.clickDivElement;
 	this.onFocusTarget;
 	this.onFocusFunction;
+	this.onChangeHandler = (initObject.onChangeHandler != undefined)?initObject.onChangeHandler:undefined;
 }
 
 OpenPanel.GUIBuilder.FormElement.Base.tabIndex = 0;
@@ -48,7 +50,6 @@ OpenPanel.GUIBuilder.FormElement.Base.inherit = function(target, name, form, ini
 }
 
 OpenPanel.GUIBuilder.FormElement.Base.prototype = {
-	
 	renderLabel : function(){
 		if (this.labelElement != undefined) {
 			this.labelElement.innerHTML = "";
@@ -192,7 +193,9 @@ OpenPanel.GUIBuilder.FormElement.Base.prototype = {
 		return document.createElement("div");	
 	},
 	
-	setValue : function(value){ this.value = value; },
+	setValue : function(value, setInitial){ this.value = value; if(setInitial == true){ this.initialValue = value;}},
+	
+	setInitialValue : function(value){ this.setValue(value, true);},
 	
 	getValue : function(){ return this.value; },
 	
@@ -224,7 +227,9 @@ OpenPanel.GUIBuilder.FormElement.Base.prototype = {
 	},
 	
 	onChange : function(){
-		this.form.groupedFormElementOnChange(this);
+		if(this.onChangeHandler != undefined){
+			this.onChangeHandler(this);
+		}
 	},
 	
 	focus : function(){ }, 

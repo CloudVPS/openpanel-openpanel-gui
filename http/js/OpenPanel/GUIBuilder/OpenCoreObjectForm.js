@@ -21,7 +21,6 @@ OpenPanel.GUIBuilder.OpenCoreObjectForm = function(name, className, isCreate){
 			if (this.openCoreObject == undefined) {
 				throw new Error("OpenCoreObject '" + this.className + "' does not exist");
 			}
-			
 			var parameters = this.openCoreObject.classInfo.structure.parameters;
 			
 			for (var parameterName in parameters) {

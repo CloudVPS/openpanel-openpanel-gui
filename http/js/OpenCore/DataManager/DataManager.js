@@ -389,8 +389,7 @@ OpenCore.DataManager = {
 	
 	getRequestResult: function(sendVars){
 		
-			var r = jQuery.parseJSON(this.rpc.RequestHandler.synchronizedRequest(sendVars));
-			
+			var r =this.rpc.RequestHandler.synchronizedRequest(sendVars).evalJSON();
 			if(r.header != undefined && r.header.errorid != undefined && r.header.error !=undefined){
 				this.errorId = r.header.errorid;
 				this.errorMessage = r.header.error;

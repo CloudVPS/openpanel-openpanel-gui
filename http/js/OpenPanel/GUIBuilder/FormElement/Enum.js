@@ -35,12 +35,9 @@ OpenPanel.GUIBuilder.FormElement.Enum.prototype = {
 		}
 		divElement.appendChild(this.selectElement);
 		
-		var a = false;
 		for(var key in this.enumSet){
-			if(a == false){
-				a = true;
-				this.setValue(key);
-			}
+			this.setValue(key, true);
+			break;
 		}
 		return divElement;
 	},
@@ -60,7 +57,7 @@ OpenPanel.GUIBuilder.FormElement.Enum.prototype = {
 		}
 	},
 	
-	setValue : function(value) {
+	setValue : function(value, setInitialValue) {
 		
 		if (this.readOnly == false) {
 			if (this.selectElement != undefined) {
@@ -73,6 +70,12 @@ OpenPanel.GUIBuilder.FormElement.Enum.prototype = {
 		}
 		this.hasValue = true;
 		this.value = value;
+		
+		if(setInitialValue == true){
+			this.initialValue = this.value;
+		}
+		
+		this.onChange();
 	},
 	
 	enable : function(){

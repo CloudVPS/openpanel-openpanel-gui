@@ -22,13 +22,12 @@ OpenPanel.GUIBuilder = {
 	},
 	
 	loadTemplateIntoDiv : function(templateName, targetDiv){
-		var f = $j.ajax(
-			{ type: "POST",
-			  url: templateName,
-			  async: false,
-			  dataType: "text"
-			}).responseText;
 		
+		var f = new Ajax.Request(templateName, {
+		  method: 'post',
+		  asynchronous: false
+		}).transport.responseText
+	
 		this.targetDiv = targetDiv;
 		this.targetDiv.innerHTML = f;
 	},
@@ -283,7 +282,7 @@ OpenPanel.GUIBuilder = {
 		this.goToAnchor(this.lastAnchor);
 	},
 	
-	renderButton : function(el,isdeflt,issmall){
+	renderButton : function(el, isdeflt, issmall, isDisabled){
 		var buttonText = el.innerHTML;
 		el.innerHTML = "";
 		var button = document.createElement("div");
@@ -324,15 +323,13 @@ OpenPanel.GUIBuilder = {
 		var bR = "buttonRight";
 		var bC = "buttonCenter";
 		
-		if (renderSmallerButton)
-		{
+		if (renderSmallerButton) {
 			bL = "formButtonLeft";
 			bR = "formButtonRight";
 			bC = "formButtonCenter";
 		}
 		
-		if (renderDefaultButton)
-		{
+		if (renderDefaultButton) {
 			button.onmouseup = function(){
 				left.className = bL + "Over";
 				right.className = bR + "Over";
@@ -344,9 +341,7 @@ OpenPanel.GUIBuilder = {
 				right.className = bR;
 				center.className = bC;
 			}
-		}
-		else
-		{
+		} else {
 			button.onmousedown = function(){
 				left.className = bL + "Over";
 				right.className = bR + "Over";
@@ -360,6 +355,10 @@ OpenPanel.GUIBuilder = {
 			}
 		}
 		button.onmouseup();
+		
+		if (isDisabled != undefined && isDisabled == false) {
+			button.setAttribute("disabled", "disabled");
+		}	
 	},
 
 	pageHeight: function() {
