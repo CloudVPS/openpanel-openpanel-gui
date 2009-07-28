@@ -45,7 +45,6 @@ OpenPanel.GUIBuilder.Form.prototype = {
 	focusOnFirstField : function(){
 		for(var i = 0;i<this.formElements.length;i++){
 			var formElement = this.formElements[i];
-			console.log(formElement);
 			if(formElement.canHasFocus == true){
 				formElement.focus();
 				break;

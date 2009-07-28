@@ -105,7 +105,7 @@ OpenPanel.Controller = {
 				this.guiBuilder.GUIElements.FormBuilder.setOpenCoreObject(firstTabOpenCoreObject);
 				this.guiBuilder.GUIElements.FormBuilder.setOpenCoreParentUUID(this.currentRootClassInstance.uuid);
 
-				this.guiBuilder.GUIElements.FormBuilder.build(2);
+				this.guiBuilder.GUIElements.FormBuilder.build();
 
 				if (this.currentRootClassInstance != undefined) {
 					this.guiBuilder.GUIElements.ItemList.highliteItem(this.currentRootClassInstance.uuid);
@@ -116,7 +116,7 @@ OpenPanel.Controller = {
 			}
 		} else {
 			this.guiBuilder.GUIElements.TabBar.setOpenCoreObject(openCoreObject);
-			this.guiBuilder.GUIElements.TabBar.build(1);
+			this.guiBuilder.GUIElements.TabBar.build();
 			this.guiBuilder.GUIElements.TabBar.disable();
 			this.guiBuilder.GUIElements.FormBuilder.clean();
 		}

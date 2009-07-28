@@ -17,14 +17,13 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 	FOCUS_ITEMLIST: 2,
 	setFocusOnReady: 0,
 	
-	build: function(focusOnReady) {
+	build: function() {
 		if (this.fullWindowOverlayDiv != undefined)
 		{
 			this.fullWindowOverlayDiv.style.visibility = "hidden";
 		}
 		this.targetDiv.innerHTML = "";
 		this.isUpdateable = false;
-		if (focusOnReady != undefined) this.setFocusOnReady = focusOnReady;
 		
 		this.formObjectHolder = document.createElement("div");
 		this.formObjectHolder.setAttribute("id", "formObjectHolder");
@@ -145,25 +144,6 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 			formObjectHolderElement.style.height = parseInt(formObjectHolderElement.offsetHeight) + 'px';
 			var mainAreaFormElement = document.getElementById('mainAreaForm');
 			mainAreaFormElement.style.height = formObjectHolderElement.style.height;
-		}
-		
-		if (this.setFocusOnReady != 0) {
-			var e;
-			var singleton = false;
-			var parent = this.openCoreObject.parent;
-			if (parent != undefined) singleton = parent.singleton;
-			
-			if (singleton == false && this.setFocusOnReady == this.FOCUS_FORM) {
-				e = $$("input")[1];
-				if (e == undefined) e = jQuery("input")[0];
-			} else {
-				e = $$("input")[0];
-			}
-			if ((e != undefined) && (e.type == "text")){
-				//e.focus();
-			} 
-				
-			this.setFocusOnReady = 0;
 		}
 	},	
 	
