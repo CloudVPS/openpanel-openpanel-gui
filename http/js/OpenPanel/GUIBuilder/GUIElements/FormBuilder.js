@@ -88,10 +88,7 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 				}
 			}
 		}
-		//console.log(this.v);
 		this.setSaveButtonActive(this.v.length!=0);
-		
-		//this.setSaveButtonVisibility(this.v.length!=0);
 	},
 	
 	setSaveButtonActive : function(isActive){

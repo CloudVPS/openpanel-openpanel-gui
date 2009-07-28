@@ -727,6 +727,32 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 			}
 		}
 	},
+	
+	createSaveButton : function(){
+		var hook = this;
+		var saveButton = document.createElement("div");
+		saveButton.setAttribute ("id", "modalSaveButton");
+		saveButton.style.cssText = "float: right;padding-top: 11px; padding-left:12px;";
+		saveButton.appendChild(document.createTextNode("Create"));
+		saveButton.onclick = function(){
+			OpenPanel.KeyboardHandler.clearCancel();
+			OpenPanel.KeyboardHandler.clearOk();
+			hook.fields.submit();
+		}
+		this.controller.guiBuilder.renderButton(saveButton,true);
+		
+		return saveButton;
+	},
+	
+	createDisabledSaveButton : function(){
+		var saveButton = document.createElement("div");
+		saveButton.setAttribute ("id", "modalSaveButton");
+		saveButton.style.cssText = "float: right;padding-top: 11px; padding-left:12px;";
+		saveButton.appendChild(document.createTextNode("Create"));
+		this.controller.guiBuilder.renderDisabledButton(saveButton, true);
+		return saveButton;
+	},
+	
 	createModalFields : function(openCoreObject, instance, callBackCommand, targetDiv, optionalCallBackObject){
 		
 		this.fields = new OpenPanel.GUIBuilder.GUIElements.FormFields();
@@ -740,31 +766,42 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		if(this.onChangeHandler!=undefined){
 			this.fields.setOnChangeHandler(this.onChangeHandler);
 		}
+		var hook = this;
+		var f = function(formElement){
+			var p = $("modalSaveButtonHolder");
+			if(p){
+				var modalSaveButton = $("modalSaveButton");
+				if(hook.fields.formPanel.validate()){
+					p.removeChild(modalSaveButton);
+					p.appendChild(hook.createSaveButton());
+				} else {
+					p.removeChild(modalSaveButton);
+					p.appendChild(hook.createDisabledSaveButton());
+				}
+			}
+		}
+		
+		this.fields.setOnChangeHandler(
+		f);
+		
 		if(optionalCallBackObject == undefined){
 			optionalCallBackObject = {};
 		}
 		
 		this.fields.setCallBackCommand(callBackCommand, optionalCallBackObject);
 		this.fields.build(true);
-		
+		var modalSaveButtonHolder = document.createElement("div");
+		modalSaveButtonHolder.setAttribute("id", "modalSaveButtonHolder");
+		targetDiv.appendChild(modalSaveButtonHolder);
 		var saveButton = document.createElement("div");
 		var cancelButton = document.createElement("div");
-		
-		var d = saveButton;
-		d.setAttribute ("id", "modalSaveButton");
-		d.style.cssText = "float: right;padding-top: 11px; padding-left:12px;";
-		d.appendChild(document.createTextNode("Create"));
-		targetDiv.appendChild(d);
-		this.controller.guiBuilder.renderButton(d,true);
 		var hook = this;
-		d.onclick = function(){
-			OpenPanel.KeyboardHandler.clearCancel();
-			OpenPanel.KeyboardHandler.clearOk();
-			saveButton.style.opacity = "0.50";
-			cancelButton.style.opacity = "0.50";
-			hook.fields.submit();
-		}
 		
+		var saveButton = this.createSaveButton();
+			
+		modalSaveButtonHolder.appendChild(saveButton);
+		f();
+			
 		var d = cancelButton;
 		d.setAttribute ("id", "modalCancelButton");
 		d.style.cssText = "float: right;padding-top: 11px;";
@@ -776,6 +813,9 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 			cancelButton.style.opacity = "0.50";
 			hook.fields = undefined;
 			OpenPanel.GUIBuilder.deletePopUp();
+			this.setAttribute("disabled", "true");
+			this.style.opacity("0.5");
+			this.onclick = function(){};
 			//targetDiv.parentNode.parentNode.removeChild(targetDiv.parentNode);
 		}
 		this.controller.guiBuilder.renderButton(d);
@@ -788,6 +828,13 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		targetDiv.appendChild(clearDiv);
 		var firstInput = $$("#firstForm_SingleColumnFormRenderer input")[0];
 		if (firstInput != undefined) firstInput.focus();
+		
+		
+		
+		
+		
+		
+		
 		OpenPanel.KeyboardHandler.setCancel (function(){
 			var b = cancelButton.childNodes[0];
 			if (b!=undefined) b.onmousedown();
@@ -824,6 +871,8 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		});
 	},
 	
+	
+	
 	setGridMenu : function(mdef) {
 		this.grid.setMenu(mdef);
 	},
@@ -843,7 +892,6 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 	},
 	
 	clickGridItem : function(instance){
-		//console.log("FormObject.clickGridItem", instance);
 		this.controller.action({
 			command : "ClickGridItem",
 			formObject : this,
@@ -868,12 +916,9 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 	
 	setOpenCoreObject : function(openCoreObject){
 		this.openCoreObject = openCoreObject;
-		//console.log("setOpenCoreObject");
-		//console.log(openCoreObject);
 	},
 	
 	setOnChangeHandler : function(onChangeHandler){
-		console.log("FormObject setOnChangeHandler", onChangeHandler);
 		this.onChangeHandler = onChangeHandler;
 	},
 	
@@ -894,10 +939,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		this.formBuilder.setLastCreatedFormObject(this);
 	},
 	
-	updateInstance: function(openCoreObject, instance, formData){
-		//console.log(this.openCoreObject.name);
-		//console.log(formData);
-	},
+	updateInstance: function(openCoreObject, instance, formData){ },
 	
 	createCreatePopUp : function(targetDiv, callBack){
 		var popUpDiv = this.guiBuilder.createPopUp();

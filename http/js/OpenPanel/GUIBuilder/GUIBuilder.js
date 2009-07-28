@@ -284,6 +284,7 @@ OpenPanel.GUIBuilder = {
 	},
 	
 	renderDisabledButton : function(el, isDefault, isSmall){
+		// crap code, needs refactoring
 		el.onpress = function(){}
 		
 		var buttonText = el.innerHTML;
@@ -308,7 +309,7 @@ OpenPanel.GUIBuilder = {
 		var center = document.createElement("td");
 		var right = document.createElement("td");
 		var txtDiv = document.createElement("div");
-		txtDiv.className = "disabledGuiButtonText";
+		
 		var txt = document.createTextNode(buttonText);
 		txtDiv.appendChild (txt);
 		t.appendChild(tb);
@@ -327,12 +328,21 @@ OpenPanel.GUIBuilder = {
 		var bR = "buttonRight";
 		var bC = "buttonCenter";
 		
-		left.className = bL;
-		right.className = bR;
-		center.className = bC;
+		if (renderDefaultButton) {
+			left.className = bL + "Over";
+			right.className = bR + "Over";
+			center.className = bC + "Over";
+			txtDiv.className = "disabledGuiButtonDefaultText";
+		} else {
+			txtDiv.className = "disabledGuiButtonText";
+			left.className = bL;
+			right.className = bR;
+			center.className = bC;
+		}
 	},
 	
 	renderButton : function(el, isDefault, isSmall){
+		// crap code, needs refactoring, ugly as f
 		var buttonText = el.innerHTML;
 		el.innerHTML = "";
 		var button = document.createElement("div");
