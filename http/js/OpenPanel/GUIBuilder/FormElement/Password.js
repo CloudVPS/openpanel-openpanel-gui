@@ -3,6 +3,7 @@ OpenPanel.GUIBuilder.FormElement.Password = function(name, form, initObject){
 	this.textwidth = initObject.textwidth || 30;
 	this.inputElement;
 	this.hasValue = false;
+	this.canHasFocus = true;
 	this.regExp = initObject.regexp?new RegExp(initObject.regexp):null;
 	this.example = initObject.example?initObject.example:null;
 	if(this.isCreate == false){

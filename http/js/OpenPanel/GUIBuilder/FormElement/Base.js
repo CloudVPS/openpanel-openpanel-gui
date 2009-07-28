@@ -32,6 +32,7 @@ OpenPanel.GUIBuilder.FormElement.Base = function(name, form, initObject){
 	this.clickDivElement;
 	this.onFocusTarget;
 	this.onFocusFunction;
+	this.canHasFocus = false;
 	this.onChangeHandler = (initObject.onChangeHandler != undefined)?initObject.onChangeHandler:undefined;
 }
 

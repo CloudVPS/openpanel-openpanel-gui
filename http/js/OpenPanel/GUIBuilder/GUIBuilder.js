@@ -24,10 +24,10 @@ OpenPanel.GUIBuilder = {
 	loadTemplateIntoDiv : function(templateName, targetDiv){
 		
 		var f = new Ajax.Request(templateName, {
-		  method: 'post',
+		  method: 'get',
 		  asynchronous: false
 		}).transport.responseText
-	
+		
 		this.targetDiv = targetDiv;
 		this.targetDiv.innerHTML = f;
 	},
@@ -332,7 +332,7 @@ OpenPanel.GUIBuilder = {
 			left.className = bL + "Over";
 			right.className = bR + "Over";
 			center.className = bC + "Over";
-			txtDiv.className = "disabledGuiButtonDefaultText";
+			txtDiv.className = "disabledGuiButtonText";
 		} else {
 			txtDiv.className = "disabledGuiButtonText";
 			left.className = bL;

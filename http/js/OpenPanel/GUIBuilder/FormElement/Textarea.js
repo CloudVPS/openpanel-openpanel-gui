@@ -4,6 +4,7 @@ OpenPanel.GUIBuilder.FormElement.Textarea = function(name, form, initObject){
 	this.rows = initObject.rows || 3;
 	this.inputElement;
 	this.hasValue = false;
+	this.canHasFocus = true;
 	this.regExp = initObject.regexp?new RegExp(initObject.regexp):null;
 	this.example = initObject.example?initObject.example:null;
 }

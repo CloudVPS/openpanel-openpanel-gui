@@ -3,6 +3,7 @@ OpenPanel.GUIBuilder.FormElement.String = function(name, form, initObject){
 	this.textwidth = initObject.textwidth || 30;
 	this.inputElement;
 	this.hasValue = false;
+	this.canHasFocus = true;
 	this.regExp = initObject.regexp?new RegExp(initObject.regexp):null;
 	if (form.isCreate) this.example = initObject.example?initObject.example:null;
 }

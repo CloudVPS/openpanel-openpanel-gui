@@ -42,6 +42,17 @@ OpenPanel.GUIBuilder.Form = function(name, data, onChangeHandler){
 OpenPanel.GUIBuilder.Form.prototype = {
 	forms: new Array(),
 	
+	focusOnFirstField : function(){
+		for(var i = 0;i<this.formElements.length;i++){
+			var formElement = this.formElements[i];
+			console.log(formElement);
+			if(formElement.canHasFocus == true){
+				formElement.focus();
+				break;
+			}
+		}
+	},
+	
 	onChange : function(formElement){
 		if(this.onChangeHandler!=undefined){
 			this.onChangeHandler();

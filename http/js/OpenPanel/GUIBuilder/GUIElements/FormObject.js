@@ -370,7 +370,6 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 	},
 	
 	startLoading : function(formObject){
-		console.log("startLoadinggggg " + this.openCoreObject.name);
 		this.isLoading = true;
 		if(this.formObjects == undefined) this.resetFormObjects();
 		var has = false;
@@ -387,7 +386,6 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 	},
 
 	doneLoading : function(formObject){
-		console.log("doneLoadinggggg " + this.openCoreObject.name);
 		if(this.formObjects == undefined) this.resetFormObjects();
 		for(var i = 0;i<this.formObjects.length;i++){
 			if(this.formObjects[i].openCoreObject.name == formObject.openCoreObject.name){
@@ -679,6 +677,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		this.fields.setOpenCoreObject(openCoreObject);
 		this.fields.setFormObject(this);
 		this.fields.setInstance(instance);
+		
 		if(optionalCallBackObject == undefined){
 			optionalCallBackObject = {};
 		}
@@ -688,6 +687,10 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 			this.fields.setOnChangeHandler(this.onChangeHandler);
 		}
 		this.fields.build();
+		
+		if(this.parentFormObject == undefined){
+			this.fields.formPanel.focusOnFirstField();
+		}
 	},
 	
 	createMethods : function(openCoreObject){

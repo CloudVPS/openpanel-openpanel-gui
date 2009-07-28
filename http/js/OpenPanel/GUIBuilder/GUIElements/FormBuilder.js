@@ -160,7 +160,7 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 				e = $$("input")[0];
 			}
 			if ((e != undefined) && (e.type == "text")){
-				e.focus();
+				//e.focus();
 			} 
 				
 			this.setFocusOnReady = 0;
