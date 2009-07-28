@@ -278,11 +278,61 @@ OpenPanel.GUIBuilder = {
 	getLastAnchor : function(){
 		return this.lastAnchor;
 	},
+	
 	goToLastAnchor : function(){
 		this.goToAnchor(this.lastAnchor);
 	},
 	
-	renderButton : function(el, isdeflt, issmall, isDisabled){
+	renderDisabledButton : function(el, isDefault, isSmall){
+		el.onpress = function(){}
+		
+		var buttonText = el.innerHTML;
+		el.innerHTML = "";
+		var button = document.createElement("div");
+		button.setAttribute("type", "submit");
+		button.setAttribute("disabled", "true");
+		button.className = "generatedButton";
+		el.appendChild(button);
+		
+		var t = document.createElement("table");
+		t.setAttribute("border", "0");
+		t.setAttribute("cellpadding", "0");
+		t.setAttribute("cellspacing", "0");
+		// IE7 is a fucking idiot
+		t.style.cssText="border-collapse: collapse";
+		var tb = document.createElement("tbody");
+		tb.style.cssText = "border: 0px;";
+		var tr = document.createElement("tr");
+		tr.style.cssText = "border: 0px;";
+		var left = document.createElement("td");
+		var center = document.createElement("td");
+		var right = document.createElement("td");
+		var txtDiv = document.createElement("div");
+		txtDiv.className = "disabledGuiButtonText";
+		var txt = document.createTextNode(buttonText);
+		txtDiv.appendChild (txt);
+		t.appendChild(tb);
+		tb.appendChild(tr);
+		tr.appendChild(left);
+		tr.appendChild(center);
+		tr.appendChild(right);
+		center.appendChild(txtDiv);
+		center.style.cursor = "default";
+		button.appendChild(t);
+		
+		var renderDefaultButton = (isDefault!=undefined)?isDefault:false;
+		var renderSmallerButton = (isSmall!=undefined)?isSmall:false;
+		
+		var bL = "buttonLeft";
+		var bR = "buttonRight";
+		var bC = "buttonCenter";
+		
+		left.className = bL;
+		right.className = bR;
+		center.className = bC;
+	},
+	
+	renderButton : function(el, isDefault, isSmall){
 		var buttonText = el.innerHTML;
 		el.innerHTML = "";
 		var button = document.createElement("div");
@@ -316,8 +366,8 @@ OpenPanel.GUIBuilder = {
 		center.style.cursor = "default";
 		button.appendChild(t);
 		
-		var renderDefaultButton = (isdeflt!=undefined)?isdeflt:false;
-		var renderSmallerButton = (issmall!=undefined)?issmall:false;
+		var renderDefaultButton = (isDefault!=undefined)?isDefault:false;
+		var renderSmallerButton = (isSmall!=undefined)?isSmall:false;
 		
 		var bL = "buttonLeft";
 		var bR = "buttonRight";
@@ -355,10 +405,6 @@ OpenPanel.GUIBuilder = {
 			}
 		}
 		button.onmouseup();
-		
-		if (isDisabled != undefined && isDisabled == false) {
-			button.setAttribute("disabled", "disabled");
-		}	
 	},
 
 	pageHeight: function() {

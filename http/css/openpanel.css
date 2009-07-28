@@ -1047,6 +1047,11 @@ li.tabEndPushed {
 	opacity: 0.5;
 }
 
+.disabledGuiButtonText {
+	opacity: 0.5;
+	margin-top: -3px;
+}
+
 #saveButton .buttonCenterOver {
 	background: url(/images/gui/toolButtonCenter.png) repeat-x 0 0px;
 	height: 23px;

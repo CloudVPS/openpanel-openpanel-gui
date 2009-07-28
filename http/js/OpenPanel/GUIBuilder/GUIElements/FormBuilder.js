@@ -102,8 +102,8 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 			this.createSaveButtonAction(saveButton);
 		} else {
 			var saveButton = document.getElementById("saveButton");
-			saveButton.innerHTML = "Save1";
-			this.controller.guiBuilder.renderButton(saveButton, undefined, undefined, false);
+			saveButton.innerHTML = "Save";
+			this.controller.guiBuilder.renderDisabledButton(saveButton);
 		}
 	},
 	
