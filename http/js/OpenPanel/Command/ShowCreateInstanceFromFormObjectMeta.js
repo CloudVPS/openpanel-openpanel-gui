@@ -10,4 +10,3 @@ OpenPanel.Command.ShowCreateInstanceFromFormObjectMeta  = {
 		}
 	}
 }
-

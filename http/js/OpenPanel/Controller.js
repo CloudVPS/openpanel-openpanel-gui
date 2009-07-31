@@ -222,64 +222,33 @@ OpenPanel.Controller = {
 				for(var errorKey in e){
 					this.error.push([errorKey, e[errorKey]]);
 				}
-				this.displayError(targetDiv, extraText);
+				OpenPanel.GUIBuilder.displayError(this.error, targetDiv, extraText);
 			break;
-			default:
-				var extraText = ",asdasdplease try logging in again.";
+			
+			case "InitError":
+				
 				var targetDiv = OpenPanel.GUIBuilder.createPopUp();
 				this.error = new Array();
 				for(var errorKey in e){
 					this.error.push([errorKey, e[errorKey]]);
 				}
-				this.displayError(targetDiv, extraText);
+				
+				OpenPanel.GUIBuilder.loadTemplateIntoDiv("/templates/browsers.html", targetDiv);
+				$("errorMessageExtra").innerHTML = "<b>" + e.description + "</b>";
+			break;
+			
+			default:
+				var extraText = "please try logging in again.";
+				var targetDiv = OpenPanel.GUIBuilder.createPopUp();
+				this.error = new Array();
+				for(var errorKey in e){
+					this.error.push([errorKey, e[errorKey]]);
+				}
+				OpenPanel.GUIBuilder.displayError(this.error, targetDiv, extraText);
 			break;
 		}
 	},
 	
-	displayError : function(targetDiv, extraText){
-		if(extraText == undefined){
-			extraText = "";
-		}
-		var bElement = document.createElement("b");
-		bElement.appendChild(document.createTextNode("Unrecoverable Error" + extraText));
-		targetDiv.appendChild(bElement);
-		
-		var tableElement = document.createElement("table");
-		tableElement.setAttribute("width", "410");
-		targetDiv.appendChild(tableElement);
-		var tbodyElement = document.createElement("tbody");
-		tableElement.appendChild(tbodyElement);
-		for (var i=0;i<this.error.length;i++) {
-			var errorCouple = this.error[i];
-			
-			var trElement = document.createElement("tr");
-			tbodyElement.appendChild(trElement);
-			
-			if(i==0) {
-				var tdBombElement = document.createElement("td");
-				tdBombElement.setAttribute("rowspan", this.error.length);
-				tdBombElement.setAttribute("valign", "top");
-				trElement.appendChild(tdBombElement);
-				
-				var imageElement = document.createElement("img");
-				imageElement.setAttribute("src", "/images/gui/error_bomb.png");
-				imageElement.setAttribute("alt", "Boom!");
-				tdBombElement.appendChild(imageElement)
-			}
-		
-			
-			var tdKeyElement = document.createElement("td");
-			tdKeyElement.setAttribute("valign", "top");
-			
-			tdKeyElement.appendChild(document.createTextNode(errorCouple[0]));
-			trElement.appendChild(tdKeyElement);
-			var tdValueElement = document.createElement("td");
-			tdValueElement.setAttribute("valign", "top");
-			tdValueElement.appendChild(document.createTextNode(errorCouple[1]));
-			trElement.appendChild(tdValueElement);
-			
-		}
-	},
 	
 	proceedAfterError : function(){
 		OpenPanel.GUIBuilder.hideModalMessageDiv();

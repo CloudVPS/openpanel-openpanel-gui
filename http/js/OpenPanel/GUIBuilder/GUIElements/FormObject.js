@@ -30,6 +30,7 @@
 	this.onChangeHandler;
 	this.isLoading = false;
 	this.formObjects;
+	this.focusOnFirstField = false;
 }
  
 OpenPanel.GUIBuilder.GUIElements.FormObject.setGuiBuilder = function(guiBuilder){
@@ -38,12 +39,15 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.setGuiBuilder = function(guiBuilder)
 
 OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
   	
-	build: function(isroot){
+	build: function(focusOnFirstField){
+		if(focusOnFirstField == true){
+			this.focusOnFirstField = focusOnFirstField;
+		}
 		// divs maken
 		if (this.openCoreObject != undefined) {
 			this.init();
 			this.targetDiv.innerHTML = "";
-			this.createDivs(isroot);
+			this.createDivs();
 			if (this.openCoreObject.classInfo == undefined || (this.openCoreObject.classInfo != undefined && this.openCoreObject.classInfo.info == undefined) || (this.openCoreObject.classInfo.info != undefined && this.openCoreObject.classInfo.info.parent == undefined)) {
 				this.createTopLevelForm();
 			} else {
@@ -58,7 +62,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		this.childFormObjects = {};
 	},
 	
-	createDivs : function(isroot){
+	createDivs : function(){
 		this.gridDiv = document.createElement("div");
 		this.gridDiv.setAttribute("id", this.openCoreObject.name + ":grid");
 		this.gridDiv.setAttribute("class", "formGrid");
@@ -110,9 +114,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 			
 			// UPDATE
 			if (this.openCoreObject.canUpdate == true) {
-					
 				this.setIsUpdateable(true);
-				//console.log("can update");
 				// alright, now we can display these fields
 				var targetDiv;
 				if (this.openCoreObject.singleton == true && this.openCoreObject.canDelete == true) {
@@ -130,9 +132,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 				
 				//console.log("create fields for " + this.openCoreObject.name + "  " + this.currentInstance.id);
 				//console.log(this.currentInstance);
-				
 			} else {
-				//console.log("can not update");
 				// not updateable yet able to show some info
 				if (this.openCoreObject.singleton == true && this.openCoreObject.canDelete == true) {
 					//console.log("is singleton and can delete");
@@ -394,7 +394,6 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		}
 		
 		if(this.formObjects.length == 0){
-			console.log("klaar met laden!!!");
 			this.isLoading = false;
 		}
 	},
@@ -639,7 +638,6 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		}
 		
 		if(actualOpenCoreObject!= undefined && actualOpenCoreObject.canUpdate == true){
-			//console.log("hi");
 			var formData = this.getFormData();
 			
 			if (formData != undefined) {
@@ -655,8 +653,6 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		for(var key in this.childFormObjects){
 			var childFormObject = this.childFormObjects[key];
 			if (typeof(childFormObject) == "object") {
-				//console.log("childFormObject", this.openCoreObject.name, childFormObject, childFormObject.openCoreObject.name);
-				//console.log("child: " + childFormObject.openCoreObject.name);
 				childFormObject.getData(transport);
 			}
 		}
@@ -687,10 +683,6 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 			this.fields.setOnChangeHandler(this.onChangeHandler);
 		}
 		this.fields.build();
-		
-		if(this.parentFormObject == undefined){
-			this.fields.formPanel.focusOnFirstField();
-		}
 	},
 	
 	createMethods : function(openCoreObject){
@@ -829,14 +821,10 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		var clearDiv = document.createElement("div");
 		clearDiv.style.cssText = "clear:both;";
 		targetDiv.appendChild(clearDiv);
-		var firstInput = $$("#firstForm_SingleColumnFormRenderer input")[0];
-		if (firstInput != undefined) firstInput.focus();
 		
-		
-		
-		
-		
-		
+		if(this.parentFormObject == undefined){
+			this.fields.formPanel.focusOnFirstField();
+		}
 		
 		OpenPanel.KeyboardHandler.setCancel (function(){
 			var b = cancelButton.childNodes[0];
@@ -979,5 +967,3 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		return formElements;
 	}
 }
- 
- 

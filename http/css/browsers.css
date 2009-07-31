@@ -1,0 +1,16 @@
+#browsers {
+	width: 100%;
+}
+
+#browsers table {
+	border: 0px;
+}
+
+.centered  {
+	text-align: center;
+}
+
+.centered a {
+	text-decoration: none;
+	color: #000000;
+}

@@ -11,5 +11,3 @@ OpenPanel.Command.InvokeMethod  = {
 		console.log(args);	
 	}
 }
-
-

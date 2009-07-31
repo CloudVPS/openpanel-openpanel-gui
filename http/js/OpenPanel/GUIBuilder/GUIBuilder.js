@@ -424,5 +424,50 @@ OpenPanel.GUIBuilder = {
 		}
 		if (document.body != null) return document.body.clientHeight;
 		return 500;
+	},
+	
+	displayError : function(error, targetDiv, extraText){
+		if(extraText == undefined){
+			extraText = "";
+		}
+		var bElement = document.createElement("b");
+		bElement.appendChild(document.createTextNode("Unrecoverable Error " + extraText));
+		
+		targetDiv.appendChild(bElement);
+		
+		var tableElement = document.createElement("table");
+		tableElement.setAttribute("width", "410");
+		targetDiv.appendChild(tableElement);
+		var tbodyElement = document.createElement("tbody");
+		tableElement.appendChild(tbodyElement);
+		for (var i=0;i<error.length;i++) {
+			var errorCouple = error[i];
+			
+			var trElement = document.createElement("tr");
+			tbodyElement.appendChild(trElement);
+			
+			if(i==0) {
+				var tdBombElement = document.createElement("td");
+				tdBombElement.setAttribute("rowspan", error.length);
+				tdBombElement.setAttribute("valign", "top");
+				trElement.appendChild(tdBombElement);
+				
+				var imageElement = document.createElement("img");
+				imageElement.setAttribute("src", "/images/gui/error_bomb.png");
+				imageElement.setAttribute("alt", "Boom!");
+				tdBombElement.appendChild(imageElement)
+			}
+		
+			
+			var tdKeyElement = document.createElement("td");
+			tdKeyElement.setAttribute("valign", "top");
+			
+			tdKeyElement.appendChild(document.createTextNode(errorCouple[0]));
+			trElement.appendChild(tdKeyElement);
+			var tdValueElement = document.createElement("td");
+			tdValueElement.setAttribute("valign", "top");
+			tdValueElement.appendChild(document.createTextNode(errorCouple[1]));
+			trElement.appendChild(tdValueElement);
+		}
 	}
 }
