@@ -14,7 +14,7 @@ OpenPanel.GUIBuilder.GUIElements.DropDownMenu = function() {
 }
 
 OpenPanel.GUIBuilder.GUIElements.DropDownMenu.prototype = {
-	create: function(targetDiv,poffset) {
+	create: function(targetDiv, poffset) {
 		this.targetDiv = targetDiv;
 		this.offset = 0;
 		if (poffset != undefined) this.offset = poffset;
@@ -32,7 +32,7 @@ OpenPanel.GUIBuilder.GUIElements.DropDownMenu.prototype = {
 		
 		this.menuDiv.className = "dropDownMenu";
 		this.visible = false;
-		targetDiv.appendChild (this.menuDiv);
+		targetDiv.appendChild(this.menuDiv);
 	},
 	
 	getX: function(xel) {
@@ -56,7 +56,7 @@ OpenPanel.GUIBuilder.GUIElements.DropDownMenu.prototype = {
 		return y;
 	},
 	
-	constructImageTD: function(width,height,src) {
+	constructImageTD: function(width, height, src) {
 		var objTD = document.createElement ("td");
 		if (width != 0) {
 			objTD.width = width;
@@ -79,24 +79,25 @@ OpenPanel.GUIBuilder.GUIElements.DropDownMenu.prototype = {
 	build: function() {
 		var self = this;
 		var objTable = document.createElement("table");
-		objTable.border = 0;
+		//objTable.border = 1;
+		objTable.style.width = "300px";
 		objTable.cellPadding = 0;
 		objTable.cellSpacing = 0;
 		
 		var objTbody = document.createElement("tbody");
-		objTable.appendChild (objTbody);
+		objTable.appendChild(objTbody);
 		
 		var objTR = document.createElement ("tr");
 		objTR.height = "11";
 		objTbody.appendChild (objTR);
 		
-		objTR.appendChild (this.constructImageTD(16,11,"menu_top_left.png"));
-		objTR.appendChild (this.constructImageTD(4,11,"menu_top_mid_left.png"));
-		objTR.appendChild (this.constructImageTD(12,11,"menu_top_mid.png"));
-		objTR.appendChild (this.constructImageTD(0,11,"menu_top_mid.png"));
-		objTR.appendChild (this.constructImageTD(12,11,"menu_top_mid.png"));
-		objTR.appendChild (this.constructImageTD(4,11,"menu_top_mid_right.png"));
-		objTR.appendChild (this.constructImageTD(16,11,"menu_top_right.png"));
+		objTR.appendChild(this.constructImageTD(16, 11, "menu_top_left.png"));
+		objTR.appendChild(this.constructImageTD(4, 11, "menu_top_mid_left.png"));
+		objTR.appendChild(this.constructImageTD(12, 11, "menu_top_mid.png"));
+		objTR.appendChild(this.constructImageTD(0, 11, "menu_top_mid.png"));
+		objTR.appendChild(this.constructImageTD(12, 11, "menu_top_mid.png"));
+		objTR.appendChild(this.constructImageTD(4, 11, "menu_top_mid_right.png"));
+		objTR.appendChild(this.constructImageTD(16, 11, "menu_top_right.png"));
 		
 		var isfirst = true;
 		this.menuHeight = 11;
@@ -106,21 +107,22 @@ OpenPanel.GUIBuilder.GUIElements.DropDownMenu.prototype = {
 			
 			var objTR = document.createElement ("tr");
 			objTR.height = "18";
+			
 			objTbody.appendChild (objTR);
 			
 			this.menuHeight += 18;
 			
 			if (isfirst) {
-				objTR.appendChild (this.constructImageTD(16,18,"menu_1st_left.png"));
+				objTR.appendChild(this.constructImageTD(16, 18, "menu_1st_left.png"));
 			} else {
-				objTR.appendChild (this.constructImageTD(16,18,"menu_mid_left.png"));
+				objTR.appendChild(this.constructImageTD(16 ,18 ,"menu_mid_left.png"));
 			}
 			
 			var itemTD = document.createElement ("td");
 			itemTD.colSpan = 5;
-			itemTD.className="dropDownMenuItem";
+			itemTD.className = "dropDownMenuItem";
 			itemTD.innerHTML = itemString;
-			itemTD.setAttribute ("menu:id",key);
+			itemTD.setAttribute("menu:id", key);
 			
 			itemTD.onmouseover = function() {
 				self.cancelHide();
@@ -134,8 +136,6 @@ OpenPanel.GUIBuilder.GUIElements.DropDownMenu.prototype = {
 					this.className = "dropDownMenuItemSelected";
 				}
 			}
-			
-			
 			
 			itemTD.onmouseup = itemTD.onclick = itemTD.ondblclick = function() {
 				self.cancelHide();
@@ -152,7 +152,7 @@ OpenPanel.GUIBuilder.GUIElements.DropDownMenu.prototype = {
 								setTimeout (function() {
 									self.hide();
 									if (self.selectedNode != undefined) {
-										self.onselect (self.selectedNode.getAttribute ("menu:id"));
+										self.onselect(self.selectedNode.getAttribute("menu:id"));
 									}
 								},50);
 							}, 80);
@@ -162,30 +162,30 @@ OpenPanel.GUIBuilder.GUIElements.DropDownMenu.prototype = {
 				return false;
 			}
 			
-			objTR.appendChild (itemTD);
+			objTR.appendChild(itemTD);
 			this.itemList[key] = itemTD;
 			
 			if (isfirst) {
-				objTR.appendChild (this.constructImageTD(16,18,"menu_1st_right.png"));
+				objTR.appendChild(this.constructImageTD(16, 18, "menu_1st_right.png"));
 			} else {
-				objTR.appendChild (this.constructImageTD(16,18,"menu_mid_right.png"));
+				objTR.appendChild(this.constructImageTD(16, 18, "menu_mid_right.png"));
 			}
 			
 			isfirst = false;
 		}
 
-		var objTR = document.createElement ("tr");
+		var objTR = document.createElement("tr");
 		objTR.height = 28;
-		objTbody.appendChild (objTR);
+		objTbody.appendChild(objTR);
 	
-		objTR.appendChild (this.constructImageTD(16,28,"menu_bot_left.png"));
-		objTR.appendChild (this.constructImageTD(4,28,"menu_bot_mid_left.png"));
-		objTR.appendChild (this.constructImageTD(12,28,"menu_bot_mid_midleft.png"));
-		objTR.appendChild (this.constructImageTD(0,28,"menu_bot_mid.png"));
+		objTR.appendChild(this.constructImageTD(16, 28, "menu_bot_left.png"));
+		objTR.appendChild(this.constructImageTD(4, 28, "menu_bot_mid_left.png"));
+		objTR.appendChild(this.constructImageTD(12 ,28, "menu_bot_mid_midleft.png"));
+		objTR.appendChild(this.constructImageTD(0, 28, "menu_bot_mid.png"));
 	
-		objTR.appendChild (this.constructImageTD(12,28,"menu_bot_mid_midright.png"));
-		objTR.appendChild (this.constructImageTD(4,28,"menu_bot_mid_right.png"));
-		objTR.appendChild (this.constructImageTD(16,28,"menu_bot_right.png"));
+		objTR.appendChild(this.constructImageTD(12, 28, "menu_bot_mid_midright.png"));
+		objTR.appendChild(this.constructImageTD(4, 28, "menu_bot_mid_right.png"));
+		objTR.appendChild(this.constructImageTD(16, 28, "menu_bot_right.png"));
 
 		this.menuHeight += 28;
 		

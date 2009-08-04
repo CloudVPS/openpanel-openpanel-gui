@@ -8,8 +8,6 @@ td.label {
 	float: left;
 	width: 200px;
 	height: 19px;
-	margin-top: -1px;
-	margin-top: -2px;
 	cursor: default;
 	-moz-user-select: none;
 	-khtml-user-select: none;
@@ -17,29 +15,28 @@ td.label {
 
 .dropDownButtonLeft {
 	float: left;
-	height: 22px;
-	width: 9px;
+	height: 18px;
+	width: 7px;
 	background: url(/images/gui/dropdown_button_left.png);
 }
 
 .dropDownButtonCenter {
 	float: left;
-	height: 20px; 
+	height: 18px; 
 	white-space: nowrap; 
 	background: url(/images/gui/dropdown_button_mid.png);
 	width: 150px;
 	overflow: hidden;
-	text-overflow: ellipsis;
 	font-family: 'Lucida Grande'; 
-	font-size: 13px; 
-	padding-top: 2px; 
+	font-size: 12px; 
+	padding-top: 0px; 
 	padding-right: 8px;
 }
 
 .dropDownButtonRight {
 	float: left; 
-	height: 22px; 
-	width: 22px; 
+	height: 18px; 
+	width: 18px; 
 	background: url(/images/gui/dropdown_button_right.png);
 }
 

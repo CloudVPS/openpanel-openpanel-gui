@@ -179,7 +179,6 @@ OpenPanel.GUIBuilder.Form.prototype = {
 	getValues : function(){
 		this.validate();
 		var results = new Object();
-		var l = 0;
 		for(var key in this.formElementMap){
 			var formElement = this.formElementMap[key];
 			if (formElement.readOnly == false) {
@@ -188,9 +187,8 @@ OpenPanel.GUIBuilder.Form.prototype = {
 					results[formElement.name] = value;
 				}
 			}
-			l++;
 		}
-		
+		console.log("results", results);
 		return results;
 	},
 	

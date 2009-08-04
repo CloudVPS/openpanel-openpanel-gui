@@ -12,7 +12,6 @@ OpenPanel.GUIBuilder = {
 	},
 	
 	loadTemplate : function(templateName, targetDivName){
-		
 		var targetDiv = document.getElementById(targetDivName);
 		if (targetDiv != undefined) {
 			OpenPanel.GUIBuilder.loadTemplateIntoDiv(templateName, targetDiv);	
@@ -22,7 +21,6 @@ OpenPanel.GUIBuilder = {
 	},
 	
 	loadTemplateIntoDiv : function(templateName, targetDiv){
-		
 		var f = new Ajax.Request(templateName, {
 		  method: 'get',
 		  asynchronous: false
