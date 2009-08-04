@@ -279,21 +279,39 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 				}
 				
 				if (this.listStyle == "itemlist") {
+					var outertable = document.createElement("table");
+					var outertbody = document.createElement("tbody");
+					outertable.border = "0";
+					outertable.cellSpacing = "0";
+					outertable.cellPadding = "0";
+					var outerdiv = document.createElement("tr");
+					outertable.appendChild(outertbody);
+					outertbody.appendChild(outerdiv);
+				
+					var icontd = document.createElement("td");	
 					var icondiv = document.createElement("div");
-					icondiv.style.width = "16px";
+					icontd.width = "20px";
+					icontd.vAlign="bottom";
 					icondiv.style.height = "18px";
+					icondiv.style.marginTop = "2px";
 					icondiv.style.background = "url(" + this.iconImage + ")";
 					icondiv.style.backgroundRepeat = "no-repeat";
-					icondiv.style.cssFloat = "left";
+					//icondiv.style.cssFloat = "left";
 					icondiv.style.marginTop = "2px";
 					icondiv.style.opacity = "0.8";
-					col.appendChild(icondiv);
-					var textdiv = document.createElement("div");
+					icontd.appendChild(icondiv);
+					outerdiv.appendChild(icontd);
+					var texttd = document.createElement("td");
+					var textdiv = document.createElement("td");
+					texttd.vAlign="top";
 					textdiv.style.marginLeft = "4px";
-					textdiv.style.cssFloat = "left";
+					textdiv.style.marginTop = "-2px";
 					var textNode = document.createTextNode(value!=undefined?value:" ");
 					textdiv.appendChild (textNode);
-					col.appendChild (textdiv);
+					texttd.appendChild (textdiv);
+					outerdiv.appendChild (textdiv);
+					col.appendChild (outertable);
+
 				} else {
 					if (! useInnerHTML)
 					{
