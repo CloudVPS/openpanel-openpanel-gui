@@ -9,20 +9,17 @@ dt {
 }
 
 dd a {
-	text-decoration: none;
+	color: #444;
 }
 
 .welcomeColumn {
-	position: fixed; 
 	width: 300px; 
-	left: 50%; 
 	top: 299px; 
 	bottom: 70px; 
-	overflow: hidden;
+	float: left;
 }
 	
 .welcomeLeft {
-	margin-left: -450px;
 	z-index: 100; 
 }
 
@@ -30,19 +27,21 @@ dd a {
 	margin-left: 30px;
 }
 
-.welcomeCenter {
-	margin-left: -150px; 
-}
-
-.welcomeCenter dl{
-	
-}
-
-.welcomeRight {
-	margin-left: 150px; 
-}
-
 .welcomeRight dl {
 	margin-right: 30px;
 }
 
+#welcomeArea {
+	position: fixed;
+	width: 900px;
+	top: 299px;
+	bottom: 70px;
+	left: 50%;
+	margin-left: -450px;
+	overflow: auto;
+}
+
+#welcomeArea td {
+	vertical-align: top;
+	width: 33%;
+}

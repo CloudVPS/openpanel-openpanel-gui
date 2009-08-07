@@ -230,14 +230,14 @@ html > body #saveButtonHolder {
 	position: fixed;
 	left: 50%;
 	margin-left: -140px;
-	top: 273px;
+	top: 278px;
 }
 
 #modalMessageDivTop {
 	background-image: url(/images/gui/modalTop.png);
 	height: 20px;
-
 }
+
 #modalMessageContent {
 	background-image: url(/images/gui/modalMiddle.png);
 	background-repeat: repeat-y;
@@ -1024,6 +1024,9 @@ li.tabEndPushed {
 	padding-bottom: 2px;
 }
 
+.guiButtonText {
+	white-space: nowrap;
+}
 .formButtonCenter .guiButtonText {
 	margin-top: -3px;
 }
