@@ -18,8 +18,8 @@
 		var spinner = new Image(32,32);
 		spinner.src = "/images/gui/prespinner.gif";
 	</script>
-	<script type="text/javascript" src="js/preloader.js"></script>
 	<script type="text/javascript" src="js/prototype-1.6.0.3.js"></script>
+	<script type="text/javascript" src="js/preloader.js"></script>
 	<script type="text/javascript" src="js/BrowserDetect.js"></script>
 	<script type="text/javascript" src="js/OpenCore/OpenCore.js"></script>
 	<script type="text/javascript" src="js/OpenCore/RPC.js"></script>
@@ -50,6 +50,7 @@
 	<script type="text/javascript" src="js/OpenPanel/Command/ClickTabBarItem.js"></script>
 	<script type="text/javascript" src="js/OpenPanel/Command/ClickGridItem.js"></script>
 	<script type="text/javascript" src="js/OpenPanel/Command/InvokeMethod.js"></script>
+	<script type="text/javascript" src="js/OpenPanel/Command/LoadTemplateIntoPopup.js"></script>
 	<script type="text/javascript" src="js/OpenPanel/GUIBuilder/GUIBuilder.js"></script>
 	<script type="text/javascript" src="js/OpenPanel/GUIBuilder/Throbber.js"></script>
 	<script type="text/javascript" src="js/OpenPanel/GUIBuilder/Form.js"></script>
@@ -82,10 +83,11 @@
 		if(typeof(console) != "object") {
 			console = { log: function(){} }
 		}
-
 	</script>
   	</head>
-	<body onload="startGUI()">
+	<body onload="init()">
+		<div id="mainAreaLeft">&nbsp;</div>
+	
 		<div id="loaderDiv">
 			<div id="prespinnerDiv"><img src="/images/gui/prespinner.gif"></div>
 		</div>
@@ -102,9 +104,10 @@
 	    <script type="text/javascript">
 			preloadImages();
 			
-			
-			function startGUI() {
+			function init() {
 				
+				///var scrollbar = new Control.ScrollBar('scrollbar_content','scrollbar_track');
+				//scrollbar.recalculateLayout();  
 				document.body.style.backgroundImage = "url(/images/gui/sky.jpg)";
 				document.getElementById("loaderDiv").style.visibility = "hidden";
 				document.getElementById("app").style.visibility = "visible";

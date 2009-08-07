@@ -236,6 +236,7 @@ html > body #saveButtonHolder {
 #modalMessageDivTop {
 	background-image: url(/images/gui/modalTop.png);
 	height: 20px;
+
 }
 #modalMessageContent {
 	background-image: url(/images/gui/modalMiddle.png);

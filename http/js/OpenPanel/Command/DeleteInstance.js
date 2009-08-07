@@ -1,7 +1,8 @@
 OpenPanel.Command.DeleteInstance  = {
 	controller : {},
 	execute : function(actionObject){
-		if(actionObject.openCoreObject != undefined && actionObject.instance != undefined) {
+		if(0 && actionObject.openCoreObject != undefined && actionObject.instance != undefined) {
+			
 			var actionObjectId = actionObject.instance.uuid;
 			var className = actionObject.openCoreObject.name;
 			var r = this.controller.dataManager.deleteInstance(className, actionObjectId);
@@ -17,5 +18,3 @@ OpenPanel.Command.DeleteInstance  = {
 		}
 	}
 }
-
-

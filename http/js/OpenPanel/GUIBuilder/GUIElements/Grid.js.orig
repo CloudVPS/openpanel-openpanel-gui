@@ -279,39 +279,25 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 				}
 				
 				if (this.listStyle == "itemlist") {
-					var outertable = document.createElement("table");
-					var outertbody = document.createElement("tbody");
-					outertable.border = "0";
-					outertable.cellSpacing = "0";
-					outertable.cellPadding = "0";
-					var outerdiv = document.createElement("tr");
-					outertable.appendChild(outertbody);
-					outertbody.appendChild(outerdiv);
-				
-					var icontd = document.createElement("td");	
 					var icondiv = document.createElement("div");
-					icontd.width = "20px";
-					icontd.vAlign="bottom";
+					icondiv.style.width = "16px";
 					icondiv.style.height = "18px";
-					icondiv.style.marginTop = "2px";
 					icondiv.style.background = "url(" + this.iconImage + ")";
 					icondiv.style.backgroundRepeat = "no-repeat";
-					//icondiv.style.cssFloat = "left";
+					icondiv.style.cssFloat = "left";
 					icondiv.style.marginTop = "2px";
-					icondiv.style.opacity = "0.8";
-					icontd.appendChild(icondiv);
-					outerdiv.appendChild(icontd);
-					var texttd = document.createElement("td");
-					var textdiv = document.createElement("td");
-					texttd.vAlign="top";
+					//icondiv.style.opacity = "0.8";
+					col.appendChild(icondiv);
+					var textdiv = document.createElement("div");
 					textdiv.style.marginLeft = "4px";
-					textdiv.style.marginTop = "-2px";
+					textdiv.style.cssFloat = "left";
 					var textNode = document.createTextNode(value!=undefined?value:" ");
 					textdiv.appendChild (textNode);
-					texttd.appendChild (textdiv);
-					outerdiv.appendChild (textdiv);
-					col.appendChild (outertable);
-
+					col.appendChild (textdiv);
+					textdiv.style.border = "1px solid #000";
+					var clearDiv = document.createElement("div");
+					clearDiv.style["clear"] = "both";
+					col.appendChild(clearDiv);
 				} else {
 					if (! useInnerHTML)
 					{

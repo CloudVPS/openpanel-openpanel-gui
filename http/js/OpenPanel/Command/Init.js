@@ -35,6 +35,7 @@ OpenPanel.Command.Init  = {
 	
 	browsers : {
 		"Firefox" : 3,
+		"Safari" : 4,
 		"Explorer" : 7,
 		"iCab" : 0
 	},

@@ -7,4 +7,3 @@ OpenPanel.Command.ShowCreateInstanceFromItemList  = {
 			"CreateInstanceFromItemList");
 	}
 }
-

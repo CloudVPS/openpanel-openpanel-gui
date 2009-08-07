@@ -21,10 +21,11 @@ OpenPanel.GUIBuilder = {
 	},
 	
 	loadTemplateIntoDiv : function(templateName, targetDiv){
-		var f = new Ajax.Request(templateName, {
+		var randomNumber = new String(Math.random()).substr(2);
+		var f = new Ajax.Request(templateName + "?" + randomNumber, {
 		  method: 'get',
 		  asynchronous: false
-		}).transport.responseText
+		}).transport.responseText;
 		
 		this.targetDiv = targetDiv;
 		this.targetDiv.innerHTML = f;

@@ -1,0 +1,48 @@
+dl {
+	margin: 0px 10px 10px 10px;
+}
+
+dt {
+	margin-top: 10px;
+	font-weight: bold;
+	font: 15px Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
+}
+
+dd a {
+	text-decoration: none;
+}
+
+.welcomeColumn {
+	position: fixed; 
+	width: 300px; 
+	left: 50%; 
+	top: 299px; 
+	bottom: 70px; 
+	overflow: hidden;
+}
+	
+.welcomeLeft {
+	margin-left: -450px;
+	z-index: 100; 
+}
+
+.welcomeLeft dl {
+	margin-left: 30px;
+}
+
+.welcomeCenter {
+	margin-left: -150px; 
+}
+
+.welcomeCenter dl{
+	
+}
+
+.welcomeRight {
+	margin-left: 150px; 
+}
+
+.welcomeRight dl {
+	margin-right: 30px;
+}
+
