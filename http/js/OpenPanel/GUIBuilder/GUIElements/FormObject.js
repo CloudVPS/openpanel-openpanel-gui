@@ -408,7 +408,8 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 	},
 	
 	createMultiCreateOption : function(textOnly){
-
+	
+		
 		
 		if ((textOnly==undefined)||(textOnly==false))
 		{
