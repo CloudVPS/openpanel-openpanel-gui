@@ -44,6 +44,7 @@ OpenPanel.Command.Init  = {
 		var version = this.browsers[BrowserDetect.browser];
 		var fail = false;
 		var failText = "";
+		/*
 		if(version!=undefined){
 			if(version == 0){
 				failText = "We're sorry to tell you that your browser is not supported.";
@@ -54,7 +55,7 @@ OpenPanel.Command.Init  = {
 					fail = true;	
 				}
 			}
-		}
+		} */
 						
 		return { fail : fail, failText : failText, version: version}
 	}
