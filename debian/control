@@ -7,5 +7,5 @@ Standards-Version: 3.7.2
 
 Package: openpanel-gui
 Architecture: any
-Depends: , openpanel-core (>= 0.8.3)
+Depends: openpanel-core (>= 0.8.3)
 Description: gui
