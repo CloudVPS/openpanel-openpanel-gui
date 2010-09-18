@@ -1,0 +1,1187 @@
+html,body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,p,blockquote,th,td{margin:0;padding:0;}
+img,body,html{border:0;}
+address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}
+ol,ul{list-style:none;}
+caption,th{text-align:left;}
+h1,h2,h3,h4,h5,h6{font-size:100%;}
+q:before,q:after{content:'';}
+
+.selectable {
+	-moz-user-select: text;
+	-khtml-user-select: text;
+}
+
+.unselectable {
+	-moz-user-select: none;
+	-khtml-user-select: none;
+}
+body {
+	background-image: url(/images/gui/loadingbackground.png);
+	background-repeat: repeat;
+	font: 13px Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
+	
+	overflow: hidden;
+}
+
+img, input {
+	behavior: url(/js/iepngfix/iepngfix.htc);
+}
+
+input[type="checkbox"] { margin-top: 5px; }
+
+small { 
+	font-size:9px; 
+}
+td {
+	font-size:11px; 
+}
+
+#loaderDiv {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin-top: -83px;
+	margin-left: -47px;
+	width: 87px;
+	height: 122px;
+	background-image: url(/images/gui/crow.png);
+	visibility: visible;
+	opacity: 0.35;
+}
+
+#prespinnerDiv {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin-top: 60px;
+	margin-left: -16px;
+	height: 19px;
+	width: 220px;
+}
+
+#loginForm {
+	-webkit-user-select:none;
+	-moz-user-select:none;
+}
+#loginDiv {
+	margin-top: 150px;
+	width: 290px;
+	margin-left: 5px;
+	height: 73px;
+	background: url("/images/gui/loginBackground.png") no-repeat 0 3px;	
+}
+
+#loginMessageDiv {
+	position: fixed;
+	left: 50%;
+	margin-left: -142px;
+	width: 240px;
+	height: 30px;
+	top: 282px;
+}
+
+#loginDiv .labelElement {
+	padding-left: 10px;	
+	width: 90px;
+}
+
+#loginDiv .labelElementError {
+	padding-left: 10px;	
+	width: 90px;
+}
+
+.disabledField {
+	border: 1px solid #e7e7e7; 
+	background: #e7e7e7;
+}
+
+label { font: 11px Arial, Helvetica, sans-serif; }
+
+.x-panel-footer {
+	background-color: #e7e7e7;
+}
+
+#saveButtonHolder {
+	bottom: 39px;
+	position: fixed;
+	background-image: url(/images/gui/itemlistbottom.png);
+	height: 29px;
+	padding-right:20px;
+	width: 900px;
+	margin-left: 50%;
+	left: -450px;
+	border-top: 1px solid #444444;
+	border-bottom: 1px solid #222222;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+}
+
+.inactiveBrowserWindow #saveButtonHolder {
+	background-image: url(/images/gui/itemlistbottomInactive.png);
+}
+
+html > body #saveButtonHolder {
+	padding-right:0px;
+	width: 900px;
+}
+
+#saveButton {
+	padding-top: 4px;
+	padding-right: 6px;
+	width: 70px;
+}
+
+#fullWindowArea {
+	margin-left: 50%;
+	left: -450px;
+	top: 97px;
+	position: fixed;
+	width: 900px;
+	bottom: 41px;
+	overflow: hidden;
+	visibility: hidden;
+}
+
+#welcomeDivHolder {
+	margin-left: 50%;
+	left: -450px;
+	top: 99px;
+	position: fixed;
+	font-size:11px;
+	width: 900px;
+	bottom: 69px;
+	border-bottom: 1px solid #444444;
+	background-color: #e8e8e8;
+	overflow-y: auto;
+}
+
+
+.groupHolder {
+	clear: both;
+}
+
+.groupTable {
+	border-collapse: collapse;
+	width: 601px;
+}
+
+.groupTopLeft {
+	background-image : url(/images/gui/groupLevel1TopLeft.gif);
+	width: 5px;
+	height: 5px;
+}
+
+.groupTopCenter {
+	background-image : url(/images/gui/groupLevel1TopCenter.gif);
+	height: 5px;	
+}
+
+.groupTopRight {
+	background-image: url(/images/gui/groupLevel1TopRight.gif);
+	width: 5px;
+	height: 5px;
+}
+
+.groupCenterLeft {
+	background-image : url(/images/gui/groupLevel1CenterLeft.gif);
+}
+
+.groupCenterMiddle {
+	
+}
+
+.groupCenterRight {
+	background-image : url(/images/gui/groupLevel1CenterRight.gif);
+	
+}
+
+.groupBottomLeft {
+	background-image : url(/images/gui/groupLevel1BottomLeft.gif);
+	width: 5px;
+	height: 5px;
+}
+
+.groupBottomMiddle {
+	background-image : url(/images/gui/groupLevel1BottomCenter.gif);
+	height: 5px;	
+}
+
+.groupBottomRight {
+	background-image : url(/images/gui/groupLevel1BottomRight.gif);
+}
+
+#modal {
+	position: absolute;
+	width: 650px;
+	z-index: 10000;
+	background-color: #000;
+	/* for IE */
+	filter:alpha(opacity=0);
+	/* CSS3 standard */
+	opacity:0.0;
+	visibility: hidden;
+}
+
+#modalMessageDiv {
+	top: 68px;
+	position: fixed;
+	z-index: 10001;
+	width: 700px;
+	padding-top: 20px;
+	left: 50%; 
+	margin-left: -350px;
+	visibility: hidden;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+}
+
+.modalLoadingDiv {
+	z-index: 1000000;
+	position: fixed;
+	left: 50%;
+	margin-left: 405px;
+	top: 54px;
+}
+
+.modalLoadingDivLogin {
+	position: fixed;
+	left: 50%;
+	margin-left: -140px;
+	top: 278px;
+}
+
+#modalMessageDivTop {
+	background-image: url(/images/gui/modalTop.png);
+	height: 20px;
+}
+
+#modalMessageContent {
+	background-image: url(/images/gui/modalMiddle.png);
+	background-repeat: repeat-y;
+	display: block;
+	vertical-align: top;
+	width: 700px;
+	padding-left: 42px;
+	padding-right: 42px;
+	
+}
+#modalMessageDivBottom {
+	background-image: url(/images/gui/modalBottom.png);
+	height: 30px;
+}
+
+.formFieldsButton {
+	position: absolute;
+	margin-bottom:-20px;
+}
+.addDeleteButtonHolder {
+	padding-top: 3px;
+}
+
+.addButton, .addButtonDisabled {
+	width: 23px;
+	height: 22px;
+	background-repeat: no-repeat;
+	float: left;
+}
+
+.addButton {
+	background-image: url(/images/gui/addButton.gif);
+	cursor: pointer;
+}
+
+.addButtonDisabled {
+	background-image: url(/images/gui/addButtonDisabled.gif);
+}
+
+#itemListButtons .addButton {
+	width: 26px;
+	height: 19px;
+	background-image: url(/images/gui/listAddButton.png);
+}
+
+#itemListButtons .addButtonDisabled {
+	width: 26px;
+	height: 19px;
+	background-image: url(/images/gui/listAddButtonDisabled.png);
+}
+
+.deleteButton, .deleteButtonDisabled {
+	width: 22px;
+	height: 22px;
+	background-repeat: no-repeat;
+	float: left;
+}
+
+.deleteButton {
+	background-image: url(/images/gui/deleteButton.gif);
+	cursor: pointer;
+	float: left;
+}
+
+.deleteButtonDisabled {
+	background-image: url(/images/gui/deleteButtonDisabled.gif);
+}
+
+#itemListButtons .deleteButton {
+	width: 25px;
+	height: 19px;
+	background-image: url(/images/gui/listDeleteButton.png);
+}
+
+#itemListButtons .deleteButtonDisabled {
+	width: 25px;
+	height: 19px;
+	background-image: url(/images/gui/listDeleteButtonDisabled.png);
+}
+
+#app {
+	top: 0px;
+	bottom: 0px;
+	height: auto;
+	width: 900px;
+	text-align: left;
+	visibility: hidden;
+}
+
+#mainBottom {
+	height: 21px;
+	width: 900px;
+	background-image: url(/images/gui/groupFrameBottom.png);
+	background-repeat: no-repeat;
+	text-align: right;
+	margin-left: 50%;
+	left: -450px;
+	bottom: 70px;
+	position: fixed;
+}
+
+.FormObject {
+	padding: 4px;
+	background-color: #e1e1e1;
+}
+
+.childFormObjects {
+	padding-top: 10px;
+}
+
+.nameDiv {
+	margin-bottom: 4px;
+	font-size: small;
+	border-bottom: 1px solid #b1b1b1;
+	padding-right: 10px;
+	width: 590px;
+}
+
+#menu {
+	width: 900px;
+	height: 40px;
+}
+
+#nav {
+	width: 200px;
+	height: 400px;
+}
+
+#mainArea {
+	width: 900px;
+	margin-left: 50%;
+	left: -450px;
+	top: 97px;
+	bottom: 50px;
+	width: 900px;
+	background-image: url(/images/gui/groupFrameMiddle.png);
+	overflow-y: hidden;
+	position: fixed;
+	z-index: -10;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+}
+
+#mainAreaLeft {
+	margin-right: 0px;
+	top: 145px;
+	bottom: 42px;
+	width: 220px;
+	margin-left: 50%;
+	left: -420px;
+	overflow-y: visible;
+	position: fixed;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+}
+
+#itemListArea {
+	top: 122px;
+	bottom: 80px;
+	width: 181px;
+	margin-left: -432px;
+	left: 50%;
+	overflow: hidden;
+	position: fixed;
+	z-index: 10;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+}
+
+#mainAreaRight {
+	top: 140px;
+	bottom: 94px;
+	width: 630px;
+	margin-left: 50%;
+	left: -209px;
+	overflow-y: auto;
+	position: fixed;
+	z-index: -100;
+}
+
+#mainAreaRight p {
+	padding-right:30px;
+}
+
+#debug {
+	font-size: 8px;
+	width: 200px;
+	visibility: hidden;
+}
+
+#debugList ul {
+	padding-left: 10px;
+	list-style-type: disc;
+}
+
+#iconBar {
+	top: 21px;
+	height: 78px;
+	width: 900px;
+	margin-left: 50%;
+	left: -450px;
+	font-size: 10px;
+	position: fixed;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+}
+
+#iconBar table { 
+	margin-left:1px;
+	border-collapse:collapse; 
+	height:78px;
+}
+
+#iconBar table TD {
+	text-align:center;
+	vertical-align:top;
+	cursor:default;
+}
+
+#iconbarText{
+	padding:0px 5px 0px 0px;
+	width: 100%;
+	white-space: nowrap;
+}
+
+#iconbarIcon{
+	padding: 30px 5px 0px 5px;
+}
+
+html > body > #iconbarIcon, #iconbarText{
+	padding:0px;
+}
+
+#iconBarTitle {
+	margin-left: 50%;
+	left: -450px;
+	width: 900px;
+	position: fixed;
+	text-align: center;
+	top: 25px;
+	z-index: 10;
+	font-size: 13px;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+}
+
+.itemListGrid {
+	-webkit-user-select:none;
+	-moz-user-select:none;
+}
+
+.inactiveBrowserWindow #iconBarTitle {
+	color: #444444;
+}
+
+.iconHolder {
+	padding-left: 7px;
+	padding-right: 7px;
+}
+
+.tableElement {
+	height: 78px;
+	padding-left: 5px;
+}
+
+.iconTdLeft, .iconTdRight {
+	background-repeat: repeat-x;
+	width: 4px;
+}
+.iconTdMain {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.selected .iconTdLeft {
+	background-image: url(/images/gui/iconBarSelectedLeft.gif);	
+}
+
+.selected .iconTdRight {
+	background-image: url(/images/gui/iconBarSelectedRight.gif);	
+}
+
+.selected .iconTdMain {
+	background-image: url(/images/gui/iconBarSelectedMiddle.gif);
+}
+
+.inactiveBrowserWindow .selected .iconTdLeft {
+	background-image: url(/images/gui/iconBarSelectedLeftInactive.gif);	
+}
+
+.inactiveBrowserWindow .selected .iconTdRight {
+	background-image: url(/images/gui/iconBarSelectedRightInactive.gif);	
+}
+
+.inactiveBrowserWindow .selected .iconTdMain {
+	background-image: url(/images/gui/iconBarSelectedMiddleInactive.png);
+}
+
+.classIcon {
+	padding-top: 17px;
+}
+
+.classDescription, .classIcon {
+	cursor: default;
+	text-align: center;
+}
+
+.classDescription {
+	padding-top: 2px;
+	height: 25px;
+	font-size:11px;
+	text-shadow: 0px 1px 1px #fff; 
+}
+
+#tabBar {
+	top: 99px;
+	margin-left: 50%;
+	left: -450px;
+	height: 37px;
+	width: 900px;
+	background-image: url(/images/gui/groupFrameTop.png);
+	background-repeat: no-repeat;
+	position: fixed;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+}
+
+
+
+#tabBar ul
+{
+	margin:0px;
+	padding:0px;
+	clear:both;
+	font-size:11px;	
+}
+
+#tabBarDiv {
+	width: 400px; 
+	padding-top: 13px;
+	/*height: 30px;*/
+	position: fixed;
+}
+
+.tabHolder {
+	list-style-type: none;
+}
+
+#tabHolder li {
+	display: inline;
+	float : left;
+	font-size: 12px;
+}
+
+li.tab, li.tabSelected, li.tabPushed, li.tabStart ,li.tabStartSelected, li.tabStartPushed ,li.tabEnd ,li.tabEndSelected, li.tabEndPushed, li.tabDelimiter, li.tabDelimiterSelected, li.tabDelimiterPushed, li.tabDisabled {
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+	height: 21px;
+	display: inline;
+	line-height: 21px;
+	cursor: pointer;
+	vertical-align: text-bottom;
+}
+
+li.tabDelimiterSelected {
+	width:1px;
+}
+li.tab, li.tabDisabled {
+	background-image: url(/images/gui/tab_fill.gif);
+	padding-left: 8px;
+	padding-right: 8px;
+	height:21px;
+	line-height:21px;
+	cursor:default;
+}
+
+#tabStart, li.tabStart
+{
+	background-image: url(/images/gui/tab_start.gif);
+	width:10px;
+	height:21px;
+	cursor:default;
+}
+
+li.tabSelected {
+	background-image: url(/images/gui/tab_hlite.gif);
+	padding-left: 8px;
+	padding-right: 8px;
+	height:21px;
+	line-height:21px;
+	cursor:default;
+}
+
+.inactiveBrowserWindow li.tabSelected {
+	background-image: url(/images/gui/tab_pushed.gif);
+}
+
+li.tabPushed {
+	background-image: url(/images/gui/tab_pushed.gif);
+	padding-left: 8px;
+	padding-right: 8px;
+	height:21px;
+	line-height:21px;
+	cursor:default;
+}
+
+#tabStart.tabStartSelected, li.tabStartSelected {
+	background-image: url(/images/gui/tab_start_selected.gif);
+	height:21px;
+	width:10px;
+	cursor:default;
+}
+
+.inactiveBrowserWindow li.tabStartSelected {
+	background-image: url(/images/gui/tab_start_pushed.gif);
+}
+
+.inactiveBrowserWindow #tabStart.tabStartSelected {
+	background-image: url(/images/gui/tab_start_pushed.gif);
+}
+
+#tabStart.tabStartPushed, li.tabStartPushed {
+	background-image: url(/images/gui/tab_start_pushed.gif);
+	height:21px;
+	width:10px;
+	cursor:default;
+}
+
+li.tabDisabled {
+	cursor: default;
+}
+
+li.tabDisabled {
+	color: #808080;
+}
+
+.tabStart, .tabStartSelected, .tabEnd, .tabEndSelected, .tabDisabled {
+	/*padding: 3px;*/
+	background-repeat: repeat-x;
+}
+
+.tabStart {
+	background-image: url(/images/gui/tab_start.gif);
+	height:21px;
+	width:10px;
+	cursor: default;
+}
+
+li.tabEnd {
+	background-image: url(/images/gui/tab_end.gif);
+	height:21px;
+	width:10px;
+	cursor: default;
+}
+
+li.tabEndSelected {
+	background-image: url(/images/gui/tab_end_selected.gif);
+	height:21px;
+	width:10px;
+	cursor: default;
+}
+
+.inactiveBrowserWindow li.tabEndSelected {
+	background-image: url(/images/gui/tab_end_pushed.gif);
+}
+
+li.tabEndPushed {
+	background-image: url(/images/gui/tab_end_pushed.gif);
+	height:21px;
+	width:10px;
+	cursor: default;
+}
+
+.tabDelimiter {
+	background-image: url(/images/gui/tab_delimiter.gif);
+	padding-left: 1px;
+	height:21px;
+	width:1px;
+	cursor:default;
+}
+
+.tabDelimiterSelected {
+	background-image: url(/images/gui/tab_delimiter_selected.gif);
+	padding-left: 1px;
+	height:21px;
+	width: 1px;
+	cursor: default;
+}
+
+.tabDelimiterPushed {
+	background-image: url(/images/gui/tab_delimiter_pushed.gif);
+	height:21px;
+	width: 1px;
+	cursor: default;
+}
+
+.grid, .fields {
+	padding-top: 4px;
+}
+
+.createOneSpan {
+	cursor: pointer;
+}
+
+#clickDivActive {
+	border: 2px solid #0F0;
+	display: block;
+	position: absolute;
+	top:0;
+	left:0; 
+	z-index: 1;
+	width: 100%;
+	height: 100%;
+}
+
+#clickDivInActive {
+	visibility: hidden;
+}
+
+#shadowBottom {
+	display: block;
+	background-image: url(/images/gui/shadowBottom.png);
+	bottom: 0px;
+	margin-left: 50%;
+	left: -485px;
+	position: fixed;
+	width: 970px;
+	height: 40px;
+}
+
+#shadowTop {
+	display: block;
+	background-image: url(/images/gui/shadowIconBar.png);
+	background-repeat: no-repeat;
+	top: 0px;
+	margin-left: 50%;
+	left: -485px;
+	position: fixed;
+	width: 970px;
+	height: 99px;
+}
+
+.inactiveBrowserWindow #shadowTop {
+	background-image: url(/images/gui/shadowIconBarInactive.png);
+}
+
+#shadowLeft {
+	display: block;
+	background-image: url(/images/gui/shadowLeft.png);
+	top: 99px;
+	bottom: 40px;
+	margin-left: 50%;
+	left: -486px;
+	position: fixed;
+	width: 36px;
+}
+
+#shadowRight {
+	display: block;
+	background-image: url(/images/gui/shadowRight.png);
+	top: 99px;
+	bottom: 40px;
+	margin-left: 50%;
+	left: 450px;
+	position: fixed;
+	width: 36px;
+}
+
+#close {
+	position: fixed;
+	display: block;
+	margin-left: 50%;
+	left: -443px;
+	top: 25px;
+	width: 14px;
+	height: 15px;
+	background: url(/images/gui/closeButton.gif) no-repeat 0 0;
+	z-index: 999;
+	text-decoration: none;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+}
+
+#bugButton, #bugButton a {
+	position: fixed;
+	bottom: 43px;
+	left: 50%;
+	margin-left: 352px;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+}
+
+#close:hover{
+	background-position: 0 -15px;
+}
+
+
+.windowTopLeft {
+	background: url(/images/gui/windowTopLeft.png) no-repeat 0 0;
+	width: 62px;
+	height: 48px;
+	position: fixed;
+	left: 50%;
+	margin-left: -212px;
+}
+
+.windowTop {
+	background: url(/images/gui/windowTop.png) repeat-x 0 0;
+	width: 300px;
+	height: 48px;
+	position: fixed;
+	left: 50%;
+	margin-left: -150px;
+}
+
+.windowTopRight {
+	background: url(/images/gui/windowTopRight.png) no-repeat 0 0;
+	width: 62px;
+	height: 48px;
+	position: fixed;
+	left: 50%;
+	margin-left: 150px;
+}
+
+.windowLeft {
+	background: url(/images/gui/windowLeft.png) repeat-y 0 0;
+	width: 62px;
+	height: 252px;
+	position: fixed;
+	left: 50%;
+	margin-left: -212px;
+	margin-top: 48px;
+}
+
+.windowCenter {
+	width: 300px;
+	height: 252px;
+	position: fixed;
+	left: 50%;
+	margin-left: -150px;
+	margin-top: 48px;
+	background-color: #e8e8e8;
+}
+
+.windowRight {
+	background: url(/images/gui/windowRight.png) repeat-y 0 0;
+	width: 62px;
+	height: 252px;
+	position: fixed;
+	left: 50%;
+	margin-left: 150px;
+	margin-top: 48px;
+}
+
+.windowBottomLeft {
+	background: url(/images/gui/windowBottomLeft.png) no-repeat 0 0;
+	width: 62px;
+	height: 78px;
+	position: fixed;
+	left: 50%;
+	margin-left: -212px;
+	margin-top: 300px;
+}
+
+.windowBottom {
+	background: url(/images/gui/windowBottom.png) repeat-x 0 0;
+	width: 300px;
+	height: 78px;
+	position: fixed;
+	left: 50%;
+	margin-left: -150px;
+	margin-top: 300px;
+}
+
+.windowBottomRight {
+	background: url(/images/gui/windowBottomRight.png) no-repeat 0 0;
+	width: 62px;
+	height: 78px;
+	position: fixed;
+	left: 50%;
+	margin-left: 150px;
+	margin-top: 300px;
+}
+
+.windowLogo {
+	background: url(/images/gui/loginOpenPanelLogo.png) no-repeat 0 0;
+	width: 167px;
+	height: 195px;
+	position: fixed;
+	left: 50%;
+	margin-left: -83px;
+	margin-top: 14px;
+}
+
+.windowButtonHolder {
+	text-align: right;
+}
+
+.buttonLeft {
+	background: url(/images/gui/buttonLeft.png) no-repeat 0 -24px;
+	width: 14px;
+	height: 24px;
+	cursor: default;
+}
+
+.formButtonLeft {
+	background: url(/images/gui/formButtonLeft.png) no-repeat 0 -24px;
+	width: 14px;
+	height: 24px;
+	cursor: default;
+}
+
+#saveButton .buttonLeft {
+	background: url(/images/gui/toolButtonLeft.png) no-repeat 0 -24px;
+	width: 14px;
+	height: 24px;
+	cursor: default;
+}
+
+.buttonCenter {
+	background: url(/images/gui/buttonCenter.png) repeat-x 0 -24px;
+	height: 23px;
+	font-size: 12px;
+	color: #000000;
+	padding-left: 8px;
+	padding-right: 8px;
+	padding-bottom: 2px;
+	font-family: Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
+	cursor: default;
+}
+
+.formButtonCenter {
+	background: url(/images/gui/formButtonCenter.png) repeat-x 0 -24px;
+	height: 23px;
+	font-size: 11px;
+	color: #000000;
+	padding-left: 8px;
+	padding-right: 8px;
+	padding-bottom: 2px;
+	font-family: Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
+	cursor: default;
+}
+
+#saveButton .buttonCenter {
+	background: url(/images/gui/toolButtonCenter.png) repeat-x 0 -24px;
+	height: 23px;
+	font-size: 11px;
+	color: #000000;
+	padding-left: 8px;
+	padding-right: 8px;
+	padding-bottom: 2px;
+	font-family: Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
+	cursor: default;
+}
+
+.buttonRight {
+	background: url(/images/gui/buttonRight.png) no-repeat 0 -24px;
+	width: 14px;
+	height: 24px;
+	cursor: default;
+}
+
+.formButtonRight {
+	background: url(/images/gui/formButtonRight.png) no-repeat 0 -24px;
+	width: 14px;
+	height: 24px;
+	cursor: default;
+}
+
+#saveButton .buttonRight {
+	background: url(/images/gui/toolButtonRight.png) no-repeat 0 -24px;
+	width: 14px;
+	height: 24px;
+	cursor: default;
+}
+
+.buttonLeftOver {
+	background: url(/images/gui/buttonLeft.png) no-repeat 0 -0px;
+	width: 14px;
+	height: 24px;
+}
+
+.formButtonLeftOver {
+	background: url(/images/gui/formButtonLeft.png) no-repeat 0 -0px;
+	width: 14px;
+	height: 24px;
+}
+
+#saveButton .buttonLeftOver {
+	background: url(/images/gui/toolButtonLeft.png) no-repeat 0 -0px;
+	width: 14px;
+	height: 24px;
+}
+
+.buttonCenterOver {
+	background: url(/images/gui/buttonCenter.png) repeat-x 0 0px;
+	height: 23px;
+	font-family: Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
+	font-size: 12px;
+	padding-left: 8px;
+	padding-right: 8px;
+	padding-bottom: 2px;
+}
+
+.formButtonCenterOver {
+	background: url(/images/gui/formButtonCenter.png) repeat-x 0 0px;
+	height: 23px;
+	font-family: Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
+	font-size: 11px;
+	padding-left: 8px;
+	padding-right: 8px;
+	padding-bottom: 2px;
+}
+
+.guiButtonText {
+	white-space: nowrap;
+}
+.formButtonCenter .guiButtonText {
+	margin-top: -3px;
+}
+
+.formButtonCenterOver .guiButtonText {
+	margin-top: -3px;
+}
+
+#saveButton .guiButtonText {
+	margin-top: -3px;
+}
+
+#saveButton .guiButtonText {
+	margin-top: -3px;
+}
+
+.inactiveBrowserWindow #saveButton .guiButtonText {
+	color: #888888;
+}
+
+.inactiveBrowserWindow .generatedButton {
+	opacity: 0.5;
+}
+
+.disabledGuiButtonText {
+	opacity: 0.5;
+	margin-top: -3px;
+}
+
+.disabledGuiButtonDefaultText {
+	opacity: 0.5;
+}
+
+#saveButton .buttonCenterOver {
+	background: url(/images/gui/toolButtonCenter.png) repeat-x 0 0px;
+	height: 23px;
+	font-family: Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
+	font-size: 11px;
+	padding-left: 8px;
+	padding-right: 8px;
+	padding-bottom: 2px;
+}
+
+.buttonRightOver {
+	background: url(/images/gui/buttonRight.png) no-repeat 0 0;
+	width: 14px;
+	height: 24px;
+}
+
+.formButtonRightOver {
+	background: url(/images/gui/formButtonRight.png) no-repeat 0 0;
+	width: 14px;
+	height: 24px;
+}
+
+#saveButton .buttonRightOver {
+	background: url(/images/gui/toolButtonRight.png) no-repeat 0 0;
+	width: 14px;
+	height: 24px;
+}
+
+.generatedButton {
+	text-decoration: none;
+	background: none;
+	padding-bottom: 2px;	
+	display: block;
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+}
+#loginButton {
+	background-color: #e8e8e8;
+	border: 0px;
+}
+
+.buttonCancel {
+	float: right;
+}
+
+.explanation {
+	font-size: 11px;
+	margin-bottom: 4px;
+}
+
+#popup {
+	width: 605px;
+}
+
+#itemListButtons {
+	position: fixed;
+	left: 50%;
+	margin-left: -450px;
+	padding-top: 3px;
+	padding-left: 6px;
+	bottom: 40px;
+	height: 27px;
+	width: 192px;
+}
+
+.createMultiple {
+	background: url(/images/gui/select.png) no-repeat 0 0;
+	width: 28px;
+	height: 22px;
+	float: left;
+	border: 0px;
+}
+
+.createMultipleClick {
+	background: url(/images/gui/select.png) no-repeat 0 -22px;
+	width: 28px;
+	height: 22px;
+	float: left;
+	border: 0px;
+}

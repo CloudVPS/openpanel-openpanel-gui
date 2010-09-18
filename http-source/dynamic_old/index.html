@@ -1,0 +1,85 @@
+<link rel="stylesheet" type="text/css"	href="css/welcome.css">
+<div id="welcomeLogoHolder" style="position: fixed; width: 900px; left: 50%; margin-left: -450px; top: 99px; height: 200px; overflow: hidden; background-color: #000; text-align: center;">
+  <a href="http://www.openpanel.org" target="new"><img id="welcomeLogo" src="/images/OpenPanelLogoBig.png" border="0"></a>
+</div>
+<div id="welcomeArea">
+	<table border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td width="300">
+				<dl>
+					<dt>Server</dt>
+					<dd>Linux something</dd>
+					
+					<dt>Uptime</dt>
+					<dd>3 days, 4 hours, etc.</dd>
+					
+					<dt>Domains</dt>
+					<dd>30 out of 40 in use</dd>
+					
+					<dt>Users</dt>
+					<dd>10 out of 20 in use</dd>
+					
+					<dt>Databases</dt>
+					<dd>4 out of 6 in use</dd>
+					
+					<dt>Disk usage</dt>
+					<dd>
+					<table border="0">
+						<tr><td>Filesystem</td><td>Size</td><td>Used</td><td>Avail</td><td>Capacity</td><td>Mount</td></tr>
+						<tr><td>/dev/ad0s1a</td><td>484M</td><td>38M</td><td>407M</td><td>9%</td><td>/</td></tr>
+						<tr><td>/devfs</td><td>1.0K</td><td>1.0K</td><td>0B</td><td>100%</td><td>/dev</td></tr>
+						<tr><td>/dev/ad0s1g</td><td>84G</td><td>55G</td><td>22G</td><td>72%</td><td>/home</td></tr>
+						<tr><td>/dev/ad0s1d</td><td>1.9G</td><td>23M</td><td>1.8G</td><td>1%</td><td>/tmp</td></tr>
+						<tr><td>/dev/ad0s1e</td><td>7.7G</td><td>1.8G</td><td>5.3G</td><td>25%</td><td>/usr</td></tr>
+					</table>
+				</dd>
+				</dl>
+			</td>
+			<td width="300">
+				<dl>
+					<dt>News</dt>
+					<dt>Development blog</dt>
+					<dd>item 1</dd>
+					<dd>item 1</dd>
+					<dd>item 1</dd>
+					<dd>item 1</dd>
+					<dd>item 1</dd>
+				
+					<dt>Last 5 forum posts</dt>
+					<dd>item 1</dd>
+					<dd>item 1</dd>
+					<dd>item 1</dd>
+					<dd>item 1</dd>
+					<dd>item 1</dd>
+				</dl>
+			</td>
+			
+			<td width="300">
+				<dl>
+					<dt>About OpenPanel</dt>
+					<dd><a href="#" onclick="OpenPanel.Controller.action({command: 'LoadTemplateIntoPopup', content: 'templates/license.html'});">License</a></dd>
+					<dd><a href="#" onclick="OpenPanel.Controller.action({command: 'LoadTemplateIntoPopup', content: 'templates/test.html'});">Load templates/test.html</a></dd>
+					<dt>IRC</dt>
+					<dd>Feel free to join #openpanel on <a href="irc://irc.oftc.net/openpanel" target="_new">OFTC</a> (irc.oftc.net). You can also connect with Mibbit by clicking <a href="http://widget.mibbit.com/?settings=4adbc5842d897ab9fc6fdc5aea595767&server=irc.oftc.net&channel=%23openpanel&autoConnect=true" target="_new">here</a></dd>
+					<dt>Twitter</dt>
+					<dd>
+						<div style="display: block; float:left"><a href="http://www.twitter.com/openpanel" target="_new"><img src="/images/twitterbird.png" border="0"/></a></div>
+						<div style="display: block; float:left; width: 200px;padding-left: 4px;"><a href="http://www.twitter.com/openpanel" target="_new">
+							Follow us now on Twitter and keep up to date with what's new!</a>
+						</div>
+						<div style="clear: both;"></div>
+					</dd>
+				</dl>
+			</td>
+		</tr>
+	</table>
+</div>
+<div id="bugButton">
+<table border="0">
+<tr>
+  <td>
+	<a href="http://bugtracker.openpanel.com/" target="_new"><img src="/images/gui/welcome_reportbug.png" border="0"></a>
+  </td>
+  <td width="4">&nbsp;</td>
+</table>
+</div>

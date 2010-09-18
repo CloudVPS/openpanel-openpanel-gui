@@ -1,0 +1,52 @@
+dl {
+	margin: 0px 10px 10px 10px;
+}
+
+dt {
+	margin-top: 10px;
+	font-weight: bold;
+	font: 15px Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
+}
+
+dd a {
+	color: #444;
+}
+
+#welcomeLogoHolder {
+	-webkit-user-select:none;
+	-moz-user-select:none;
+}
+	
+.welcomeColumn {
+	width: 300px; 
+	top: 299px; 
+	bottom: 70px; 
+	float: left;
+}
+	
+.welcomeLeft {
+	z-index: 100; 
+}
+
+.welcomeLeft dl {
+	margin-left: 30px;
+}
+
+.welcomeRight dl {
+	margin-right: 30px;
+}
+
+#welcomeArea {
+	position: fixed;
+	width: 900px;
+	top: 299px;
+	bottom: 70px;
+	left: 50%;
+	margin-left: -450px;
+	overflow: auto;
+}
+
+#welcomeArea td {
+	vertical-align: top;
+	width: 33%;
+}
