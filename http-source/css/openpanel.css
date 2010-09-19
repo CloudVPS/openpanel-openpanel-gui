@@ -6,6 +6,15 @@ caption,th{text-align:left;}
 h1,h2,h3,h4,h5,h6{font-size:100%;}
 q:before,q:after{content:'';}
 
+#tabCycleCatcher {
+	position:absolute;
+	right:0px;
+	bottom:0px;
+	width: 0px;
+	height: 0px;
+	opacity: 1.0; 
+}
+
 .selectable {
 	-moz-user-select: text;
 	-khtml-user-select: text;

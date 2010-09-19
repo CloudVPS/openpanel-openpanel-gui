@@ -1,6 +1,31 @@
 OpenPanel.Command.Init  = {
 	controller : {},
 	execute : function(actionObject){
+		
+		this.controller.guiBuilder.loadTemplate('templates/application.html', 'application');
+
+		$$('body').first().setStyle({
+			backgroundImage: 'url(/images/gui/sky.jpg)'
+		});
+
+		$('loaderDiv').setStyle({ visibility: 'hidden'});
+		$('app').setStyle({ visibility: 'visible'});
+		
+		$('tabCycleCatcher').observe('focus', function(){
+			var first = $$('input')[0];
+			if (first == undefined) return;
+			if (first.id == "tabCycleCatcher") return;
+			first.focus();
+		});
+
+		Event.observe(window, 'blur', function() {
+			$('app').removeClassName('activeBrowserWindow').addClassName('inactiveBrowserWindow');
+		});
+		
+		Event.observe(window,'focus', function() {
+			$('app').removeClassName('inactiveBrowserWindow').addClassName('activeBrowserWindow');
+		});
+		
 		var detected = this.detect();
 		if (detected.fail == false) {
 			document.getElementById("modalLoadingDiv").className = "modalLoadingDivLogin";
@@ -57,7 +82,7 @@ OpenPanel.Command.Init  = {
 			}
 		}
 						
-		return { fail : fail, failText : failText, version: version}
+		return { fail: fail, failText: failText, version: version }
 	}
 }
 

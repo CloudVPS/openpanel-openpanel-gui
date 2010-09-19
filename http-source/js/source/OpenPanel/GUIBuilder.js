@@ -102,13 +102,11 @@ OpenPanel.GUIBuilder = {
 		
 		var form = document.getElementById("loginForm");
 		
-	
 		formPanel.getElement("userName").focus();
-		//document.getElementById("userName").focus();
 		
 		var hook = this;
 		var onsubmit = function(){
-			var obj = { command : "Login"};
+			var obj = { command : "Login" };
 			var values = formPanel.getValues();
 			for(var key in values){
 				obj[key] = values[key];
@@ -125,17 +123,7 @@ OpenPanel.GUIBuilder = {
 			form.onsubmit = onsubmit; 
 			return false;
 		}
-		
-		//var buttonOk = document.getElementById("buttonOk");
-		//this.renderButton(buttonOk);
-		
-		/*form.onsubmit = function(){
-			alert('hi!!');
-			return false;
-		}*/
-		
 	},
-	
 	
 	enterModalMode : function(){
 		var modalDiv = document.getElementById("modal");

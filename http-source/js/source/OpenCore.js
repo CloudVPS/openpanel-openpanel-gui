@@ -8,14 +8,14 @@ var	OpenCore = {
 	Debug: {},
 	
 	OpenCoreError : function(message, errorCode){
-		var err = new Error(message)
+		var error = new Error(message)
 	    // take care of IE5/5.5
-	    if (!err.message) {
-	        err.message = message
+	    if (!error.message) {
+	    	error.message = message
 		}
 		
-		err.errorCode = errorCode!=undefined?errorCode:"";
-	    err.name = "OpenCoreError"
-	    return err;
+		error.errorCode = errorCode!=undefined?errorCode:"";
+		error.name = "OpenCoreError"
+	    return error;
 	}
 }

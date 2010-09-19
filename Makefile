@@ -22,3 +22,4 @@ minimize:
 	@echo Minimizing javascripts
 	@tools/compressJSDirectory http-source/js/source http/js/openpanel-compressed.js
 	
+	

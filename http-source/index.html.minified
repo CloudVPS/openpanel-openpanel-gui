@@ -7,14 +7,6 @@
 	<!--[if gte IE 7]>
 	<link rel="stylesheet" type="text/css"	href="css/openpanel.ie7.css">
 	<![endif]-->
-	<script type="text/javascript">
-		var bgimage = new Image(32,32);
-		bgimage.src = "/images/gui/loadingbackground.png";
-		var crowimage = new Image(32,32);
-		crowimage.src = "/images/gui/crow.png";
-		var spinner = new Image(32,32);
-		spinner.src = "/images/gui/prespinner.gif";
-	</script>
 	<script type="text/javascript" src="js/lib/prototype-1.6.1.js"></script>
 	<script type="text/javascript" src="js/lib/scriptaculous-1.8.3.js"></script>
 	<script type="text/javascript" src="js/lib/effects.js"></script>
@@ -22,69 +14,39 @@
 	<script type="text/javascript" src="js/preloader.js"></script>
 	<script type="text/javascript" src="js/lib/BrowserDetect.js"></script>
 	<script type="text/javascript" src="js/openpanel-compressed.js"></script>
-	
-	
 	<script type="text/javascript">
+		var bgimage = new Image(32,32);
+		bgimage.src = "/images/gui/loadingbackground.png";
+		var crowimage = new Image(32,32);
+		crowimage.src = "/images/gui/crow.png";
+		var spinner = new Image(32,32);
+		spinner.src = "/images/gui/prespinner.gif";
+		
 		if(typeof(console) != "object") {
 			console = { log: function(){} }
 		}
-	</script>
-  	</head>
-	<body>
-		<div id="mainAreaLeft">&nbsp;</div>
-	
-		<div id="loaderDiv">
-			<div id="prespinnerDiv"><img src="/images/gui/prespinner.gif"></div>
-		</div>
-		<div id="modalMessageDiv">
-			<div id="modalMessageDivTop"></div>
-			<div id="modalMessageContent"></div>
-			<div id="modalMessageDivBottom"></div>
-		</div>
-		<div id="app" class="activeBrowserWindow"></div>
-		<div id="modal"></div>
-	    <div id="modalLoadingDiv" class="modalLoadingDivLogin"></div>
-	    <input id="tabCycleCatcher" style="position:absolute; right:0px; bottom:0px; width: 0px; height: 0px; opacity: 1.0;"
-	    	   onfocus="recycleFocus();" tabindex="65535">
-	    <script type="text/javascript">
-			preloadImages();
-			Event.observe(window, 'load', function() {
-				document.body.style.backgroundImage = "url(/images/gui/sky.jpg)";
-				document.getElementById("loaderDiv").style.visibility = "hidden";
-				document.getElementById("app").style.visibility = "visible";
-				
-				OpenCore.RPC.RequestHandler.setOpenCoreURL("/fake-opencore-proxy/json");
-				
-				OpenCore.DataManager.setRPC(OpenCore.RPC);
-				OpenPanel.Controller.setDataManager(OpenCore.DataManager);
-				
-				OpenPanel.Controller.setGuiBuilder(OpenPanel.GUIBuilder);
-				OpenPanel.GUIBuilder.GUIElements.ItemList.setGuiBuilder(OpenPanel.GUIBuilder);
-				OpenPanel.GUIBuilder.GUIElements.ItemList.setController(OpenPanel.Controller);
-				OpenPanel.GUIBuilder.GUIElements.FormObject.setGuiBuilder(OpenPanel.GUIBuilder);
-				OpenCore.RPC.RequestHandler.startLoading = OpenPanel.GUIBuilder.showLoadingDiv;
-				OpenCore.RPC.RequestHandler.doneLoading = OpenPanel.GUIBuilder.hideLoadingDiv;
-				
-				OpenPanel.Controller.action( 
-				{
-					command: "Init" , userName: "openadmin", password: "foobar" 
-				});
+		
+		preloadImages();
+		
+		Event.observe(window, 'load', function() {
+			OpenCore.RPC.RequestHandler.setOpenCoreURL("/fake-opencore-proxy/json");
+			OpenCore.DataManager.setRPC(OpenCore.RPC);
+			OpenPanel.Controller.setDataManager(OpenCore.DataManager);
+			OpenPanel.Controller.setGuiBuilder(OpenPanel.GUIBuilder);
+			OpenPanel.GUIBuilder.GUIElements.ItemList.setGuiBuilder(OpenPanel.GUIBuilder);
+			OpenPanel.GUIBuilder.GUIElements.ItemList.setController(OpenPanel.Controller);
+			OpenPanel.GUIBuilder.GUIElements.FormObject.setGuiBuilder(OpenPanel.GUIBuilder);
+			OpenCore.RPC.RequestHandler.startLoading = OpenPanel.GUIBuilder.showLoadingDiv;
+			OpenCore.RPC.RequestHandler.doneLoading = OpenPanel.GUIBuilder.hideLoadingDiv;
+
+			OpenPanel.Controller.action( 
+			{
+				command: "Init", userName: "openadmin", password: "foobar" 
 			});
-			
-			window.onblur = function() {
-				document.getElementById("app").className = "inactiveBrowserWindow";
-			}
-			
-			window.onfocus = function() {
-				document.getElementById("app").className = "activeBrowserWindow";
-			}
-			
-			function recycleFocus() {
-				var first = jQuery("input")[0];
-				if (first == undefined) return;
-				if (first.id == "tabCycleCatcher") return;
-				first.focus();
-			}
-	    </script>
-		</body>
+		});
+		
+	</script>
+	</head>
+	<body id="application">
+	</body>
 </html>
