@@ -1,0 +1,489 @@
+body {
+	background-image: url(/images/gui/nothernlightsbg.jpg);
+	background-repeat: no-repeat;
+	font: 11px Arial, Helvetica, sans-serif;
+}
+
+img, input {
+	behavior: url(/js/iepngfix/iepngfix.htc);
+}
+small { font-size:9px; }
+td { font-size:11px; }
+
+.disabledField {
+	border: 1px solid #e7e7e7; 
+	background: #e7e7e7;
+}
+
+.x-panel-footer {
+	background-color: #e7e7e7;
+}
+#saveButtonHolder {
+	background-color : #eeeeee;
+	clear: both;
+	text-align: right;
+	height: 30px;
+	float: right;
+	padding-right:20px;
+}
+html > body #saveButtonHolder {
+	padding-right:0px;
+}
+
+#saveButton {
+	padding-right: 20px;
+	float: right;
+}
+
+#welcomeDivHolder {
+	margin-left: 25px;
+	margin-right: 25px;
+	font-size:11px;
+}
+
+
+.throbber {
+	background-repeat: no-repeat;
+	height: 50px;
+	width: 50px;
+}
+
+.groupHolder {
+	clear: both;
+}
+
+.groupTable {
+	border-collapse: collapse;
+}
+
+.groupTopLeft {
+	background-image : url(/images/gui/groupLevel1TopLeft.gif);
+	width: 5px;
+	height: 5px;
+}
+
+.groupTopCenter {
+	background-image : url(/images/gui/groupLevel1TopCenter.gif);
+	height: 5px;	
+}
+
+.groupTopRight {
+	background-image: url(/images/gui/groupLevel1TopRight.gif);
+	width: 5px;
+	height: 5px;
+}
+
+.groupCenterLeft {
+	background-image : url(/images/gui/groupLevel1CenterLeft.gif);
+}
+
+.groupCenterMiddle {
+	
+}
+
+.groupCenterRight {
+	background-image : url(/images/gui/groupLevel1CenterRight.gif);
+	
+}
+
+.groupBottomLeft {
+	background-image : url(/images/gui/groupLevel1BottomLeft.gif);
+	width: 5px;
+	height: 5px;
+}
+
+.groupBottomMiddle {
+	background-image : url(/images/gui/groupLevel1BottomCenter.gif);
+	height: 5px;	
+}
+
+.groupBottomRight {
+	background-image : url(/images/gui/groupLevel1BottomRight.gif);
+}
+
+#modal {
+	position: absolute;
+	width: 650px;
+	float:left;
+	z-index: 10000;
+	background-color: #000;
+	/* for IE */
+	filter:alpha(opacity=0);
+	/* CSS3 standard */
+	opacity:0.0;
+	visibility: hidden;
+}
+
+#modalMessageDiv {
+	clear:both;
+	z-index: 10001;
+	width: 650px;
+	padding-top: 20px;
+	background-color: #ededed;
+	position: absolute;
+	left: 50%; 
+	margin-top: 98px;
+	margin-left: -310px;
+	margin-bottom: 20px;
+	visibility: hidden;
+	/* for IE */
+	/* filter:alpha(opacity=80); */
+	/* CSS3 standard */
+	/*opacity:0.8;*/
+	visibility: hidden;
+	vertical-align:top;
+	border-left : 1px solid #d0d0d0;
+	border-right : 1px solid #d0d0d0;
+	border-bottom : 1px solid #d0d0d0;
+}
+
+#modalLoadingDiv {
+	z-index: 1000000;
+	margin-top: 200px;
+	width: 99%;
+	text-align: center;
+	visibility: hidden;
+	position: absolute;
+	height: 0px;
+}
+
+#modalMessageContent {
+	background-color: #ededed;
+	vertical-align: top;
+	margin-left : 20px;
+	margin-bottom : 10px;
+	width: 630px;
+}
+
+.formFieldsButton {
+	position: absolute;
+	margin-bottom:-20px;
+}
+.addDeleteButtonHolder {
+	padding-top: 5px;
+}
+
+.addButton, .addButtonDisabled {
+	width: 23px;
+	height: 22px;
+	background-repeat: no-repeat;
+	float: left;
+}
+
+.addButton {
+	background-image: url(/images/gui/addButton.gif);
+	cursor: pointer;
+}
+
+.addButtonDisabled {
+	background-image: url(/images/gui/addButtonDisabled.gif);
+}
+
+.deleteButton, .deleteButtonDisabled {
+	width: 22px;
+	height: 22px;
+	background-repeat: no-repeat;
+	float: left;
+}
+
+.deleteButton {
+	background-image: url(/images/gui/deleteButton.gif);
+	cursor: pointer;
+}
+
+.deleteButtonDisabled {
+	background-image: url(/images/gui/deleteButtonDisabled.gif);
+}
+
+#app {
+	width: 900px;
+	text-align: left;
+	padding-top: 20px;
+}
+
+#mainBottom {
+	height: 12px;
+	background-image: url(/images/gui/groupFrameBottom.gif);
+	background-repeat: no-repeat;
+	text-align: right;
+	padding-right: 20px;
+}
+
+.FormObject {
+	padding: 4px;
+	background-color: #e1e1e1;
+}
+
+.childFormObjects {
+	padding-top: 10px;
+}
+
+.nameDiv {
+	margin-bottom: 4px;
+	font-size: small;
+	border-bottom: 1px solid #b1b1b1;
+	padding-right: 10px;
+	width: 600px;
+}
+
+#menu {
+	width: 900px;
+	height: 40px;
+}
+
+#nav {
+	width: 200px;
+	height: 400px;
+}
+
+#mainArea {
+	width: 900px;
+	height: 400px;
+	background-image: url(/images/gui/groupFrameMiddle.gif);
+}
+
+#mainAreaLeft {
+	clear: both;
+	width: 220px;
+	height: 400px;
+	margin-left: 25px;
+	margin-right: 0px;
+	float: left;
+}
+
+#mainAreaRight {
+	width: 630px;
+	height: 400px;
+	float: left;
+	overflow-y:auto;
+}
+#mainAreaRight p
+{
+	padding-right:30px;
+}
+
+
+#debug {
+	font-size: 8px;
+	width: 200px;
+	visibility: hidden;
+}
+
+#debugList ul {
+	padding-left: 10px;
+	list-style-type: disc;
+}
+
+#iconBar {
+	height: 78px;
+	width: 900px;
+	font-size: 10px;
+	background-image: url(/images/gui/iconBarBackground.gif);
+	background-repeat: no-repeat;
+}
+
+/*#iconBar table { border-collapse:collapse; }*/
+
+.iconBarDiv {
+	
+}
+
+.iconBarTitle {
+	position: absolute;
+	width: 900px;
+	text-align: center;
+	padding-top: 5px;
+}
+
+.iconHolder {
+	padding-left: 7px;
+	padding-right: 7px;
+}
+
+.tableElement {
+	height: 78px;
+	padding-left: 5px;
+}
+
+
+.iconTdLeft, .iconTdRight {
+	background-repeat: repeat-x;
+	height: 78px;
+	width: 4px;
+}
+.iconTdMain {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.selected .iconTdLeft {
+	background-image: url(/images/gui/iconBarSelectedLeft.gif);	
+}
+
+.selected .iconTdRight {
+	background-image: url(/images/gui/iconBarSelectedRight.gif);	
+}
+
+.selected .iconTdMain {
+	background-image: url(/images/gui/iconBarSelectedMiddle.gif);
+}
+.classIcon {
+	padding-top: 17px;
+}
+.classDescription, .classIcon {
+	cursor: pointer;
+	text-align: center;
+}
+
+.classDescription {
+	padding-top: 2px;
+	height: 25px;
+	font-size:11px;
+}
+
+
+
+
+#tabBar {
+	clear: both;
+	height: 37px;
+	margin:0px;
+	padding:0px;
+	width: 900px;
+	background-image: url(/images/gui/groupFrameTop.gif);
+	background-repeat: no-repeat;
+}
+
+#tabBar ul
+{
+	margin:0px;
+	padding:0px;
+	clear:both;
+	font-size:11px;	
+}
+
+
+#tabBarDiv {
+	position: relative;
+	width: 400px; 
+	left: 50%; 
+	padding-top: 13px;
+	margin-left: -200px; 
+	/*height: 30px;*/
+}
+
+.tabHolder {
+	list-style-type: none;
+}
+
+#tabHolder li {
+	display: inline;
+	float : left;
+}
+
+
+li.tab, li.tabSelected, li.tabStart ,li.tabStartSelected ,li.tabEnd ,li.tabEndSelected, li.tabDelimiter, li.tabDelimiterSelected, li.tabDisabled {
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+	height: 21px;
+	display: inline;
+	line-height: 21px;
+	cursor: pointer;
+	vertical-align: text-bottom;
+}
+li.tabDelimiterSelected {
+width:1px;
+}
+li.tab, li.tabDisabled {
+	background-image: url(/images/gui/tab_fill.gif);
+	padding-left: 5px;
+	padding-right: 5px;
+	height:21px;
+	line-height:21px;
+}
+
+#tabStart, li.tabStart
+{
+	background-image:none;
+	background: url(/images/gui/tab_start.gif);
+	width:10px;
+	height:21px;
+}
+
+.tabSelected {
+	background-image: url(/images/gui/tab_hlite.gif);
+	padding-left: 5px;
+	padding-right: 5px;
+	height:21px;
+	line-height:21px;
+}
+
+
+#tabStart.tabStartSelected, .tabStartSelected {
+	background-image: url(/images/gui/tab_start_selected.gif);
+	height:21px;
+	width:10px;
+}
+
+li.tabDisabled {
+	cursor: default;
+}
+
+.tabDisabled {
+	color: #808080;
+}
+
+.tabStart, .tabStartSelected, .tabEnd, .tabEndSelected, .tabDisabled {
+	/*padding: 3px;*/
+	background-repeat: repeat-x;
+}
+
+.tabStart {
+	background-image: url(/images/gui/tab_start.gif);
+	height:21px;
+	width:10px;
+}
+
+
+
+.tabEnd {
+	background-image: url(/images/gui/tab_end.gif);
+	height:21px;
+	width:10px;
+}
+
+.tabEndSelected {
+	background-image: url(/images/gui/tab_end_selected.gif);
+	height:21px;
+	width:10px;
+}
+
+.tabDelimiter {
+	background-image: url(/images/gui/tab_delimiter.gif);
+	padding-left: 1px;
+	height:21px;
+	width:1px;
+}
+
+.tabDelimiterSelected {
+	background-image: url(/images/gui/tab_delimiter_selected.gif);
+	padding-left: 1px;
+	height:21px;
+}
+
+
+
+
+
+
+.grid, .fields {
+	padding-top: 8px;
+}
+
+.createOneSpan {
+	cursor: pointer;
+}
+
+.x-form-item *{
+	position: static !important;
+}
