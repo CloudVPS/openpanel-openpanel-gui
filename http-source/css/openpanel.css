@@ -1185,3 +1185,526 @@ li.tabEndPushed {
 	float: left;
 	border: 0px;
 }
+
+@CHARSET "UTF-8";
+
+.formColumn {
+	border: 1px solid #000;
+	background-color: #ff0000;
+}
+
+.elementContainer {
+	float: left;
+}
+
+.stringElement {
+	color: #000000;
+	font-size: 12px;
+}
+
+.stringElementHint {
+	color: #808080;
+	font-size: 12px;
+}
+
+.stringElementDisabled {
+	padding-top: 3px;
+	font-size: 12px;
+}
+
+.textareaElement {
+	color: #000000;
+	font-size: 12px;
+}
+
+.textareaElementHint {
+	color: #808080;
+	font-size: 12px;
+}
+
+.textareaElementDisabled {
+	padding-top: 3px;
+	font-size: 12px;
+}
+
+.checkboxElement {
+	border: 1px solid #000;
+	width: 20px;
+}
+
+.labelElement {
+	height: 12px;
+	color: #000000;
+	margin-top: 3px;
+	margin-left: 2px;
+	margin-right: 2px;
+	font-size: 12px;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+}
+
+.labelElementError {
+	height: 12px;
+	color: #E00000;
+	margin-top: 3px;
+	margin-left: 2px;
+	margin-right: 2px;
+	font-size: 12px;
+	
+}
+
+.radioElement {
+	width: 18px;
+	height: 18px;
+	float: left;
+	background-image: url(/images/radioButtons.gif);
+	background-position: 0px 0px;
+	background-repeat: no-repeat;
+}
+
+.radioElementUp {
+	width: 18px;
+	height: 18px;
+	float: left;background-image: url(/images/radioButtons.gif);
+	background-position: 0px 36px;
+}
+
+.radioElementActiveDown {
+	width: 18px;
+	height: 18px;
+	float: left;background-image: url(/images/radioButtons.gif);
+	background-position: 0px 18px;
+}
+
+.radioElementInActiveDown {
+	width: 18px;
+	height: 18px;
+	float: left;background-image: url(/images/radioButtons.gif);
+	background-position: 0px 54px;
+}
+
+.enumElement {
+	color: #000000;
+}
+
+.enumElementDisabled {
+	color: #a0a0a0;
+}
+
+.clickDivActive {
+	padding: 2px 2px 2px 2px;
+	display: block;
+	position: absolute;
+	top:0;
+	left:0; 
+	z-index: 1;
+	width: 100%;
+	height: 100%;
+}
+
+.clickDivInActive {
+	visibility: hidden;
+}
+
+.labelTd {
+	width: 30%;
+	white-space: nowrap;
+	text-align: right;
+	padding-right: 2px;
+	padding-left: 2px;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+}
+
+.formTable td {
+	padding-bottom: 4px;
+}
+
+
+.dropDownMenu table {
+	width: 300px;
+	padding: 0px;
+	margin: 0px;
+	border-spacing: 0px 0px;
+	border-collapse: collapse;
+}
+
+.dropdownTR {
+	height: 11px;
+}
+.dropDownMenu td {
+	padding-bottom: 0px;
+}
+
+td.label {
+	font-family: 'Lucida Grande'; font-size: 13px;
+	padding-right: 8px;
+}
+
+.dropDownButton {
+	display: block;
+	float: left;
+	width: 200px;
+	height: 19px;
+	cursor: default;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+}
+
+.dropDownButtonLeft {
+	float: left;
+	height: 18px;
+	width: 7px;
+	background: url(/images/gui/dropdown_button_left.png);
+}
+
+.dropDownButtonCenter {
+	float: left;
+	height: 17px; 
+	white-space: nowrap; 
+	background: url(/images/gui/dropdown_button_mid.png);
+	width: 150px;
+	overflow: hidden;
+	font-family: 'Lucida Grande'; 
+	font-size: 12px; 
+	padding-top: 1px; 
+	padding-bottom: 0px;
+	padding-right: 8px;
+}
+
+.dropDownButtonRight {
+	float: left; 
+	height: 18px; 
+	width: 18px; 
+	background: url(/images/gui/dropdown_button_right.png);
+}
+
+.dropDownMenu {
+	position: relative;
+	display: none;
+	cursor: default;
+	opacity: 0.92;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+}
+
+
+.dropDownMenuItem, .dropDownMenuItemSelected {
+	padding-left: 8px;
+	padding-right: 8px;
+	margin: 0px;
+	border-left: 1px solid #959595;
+	border-right: 1px solid #959595;
+	font-family: 'Lucida Grande';
+	font-size: 13px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.dropDownMenuItem {
+	color: #000000;
+	background: url(/images/gui/menu_bg.png);
+}
+
+.dropDownMenuItemSelected {
+	color: #ffffff;
+	background: url(/images/gui/menu_selection.png);
+}
+
+.dropDownMenuEdge {
+	font-size: 1px;
+	background-repeat: repeat-x;
+}
+
+.gridView {
+	overflow: hidden;
+	border-width: 1px;
+	border-top: 1px solid #909090;
+	border-left: 1px solid #a8a8a8;
+	border-right: 1px solid #a8a8a8;
+	border-bottom: 1px solid #a8a8a8;
+	background-color: #f8f8f8;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+}
+
+.gridViewTitle {
+	height: 15px;
+	padding: 0px;
+	overflow: hidden;
+	background: url(/images/gui/gridview_title_bg.png);
+	border-bottom: 1px solid #666666;
+}
+
+.gridViewTitleItem {
+	float: left;
+	height: 15px;
+	padding-left: 2px;
+	padding-right: 2px;
+	border-right: 1px solid #aaaaaa;
+	margin: 0px;
+	font-size: 12px;
+	font-family: Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
+	font-weight: bold;
+}
+
+.gridViewButtonArea {
+	height: 21px;
+	padding: 0px;
+	background: url(/images/gui/gridBottomMiddle.png) repeat-x 0 0px;
+	border-top: 1px solid #a8a8a8;
+	border-bottom: 0px;
+	margin: 0px;
+}
+
+.gridViewCreateButton, .gridViewCreateButtonPushed, .gridViewCreateButtonDisabled, .gridViewDeleteButton, .gridViewDeleteButtonPushed, .gridViewDeleteButtonDisabled {
+	float: left;
+	height: 21px;
+	width: 24px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
+	border-right: 1px solid #a8a8a8;
+}
+
+.gridViewCreateButton {
+	background: url(/images/gui/gridButtonCreate.png) no-repeat 0 0px;
+}
+
+.inactiveBrowserWindow .gridViewCreateButton {
+	background: url(/images/gui/gridButtonCreateDisabled.png) no-repeat 0 0px;
+}
+
+.gridViewCreateButtonPushed {
+	background: url(/images/gui/gridButtonCreatePushed.png) no-repeat 0 0px;
+}
+
+.gridViewCreateButtonDisabled {
+	background: url(/images/gui/gridButtonCreateDisabled.png) no-repeat 0 0px;
+}
+
+.gridViewDeleteButton {
+	background: url(/images/gui/gridButtonDelete.png) no-repeat 0 0px;
+}
+
+.inactiveBrowserWindow .gridViewDeleteButton {
+	background: url(/images/gui/gridButtonDeleteDisabled.png) no-repeat 0 0px;
+}
+
+.gridViewDeleteButtonPushed {
+	background: url(/images/gui/gridButtonDeletePushed.png) no-repeat 0 0px;
+}
+
+.gridViewDeleteButtonDisabled {
+	background: url(/images/gui/gridButtonDeleteDisabled.png) no-repeat 0 0px;
+}
+
+.gridViewContents {
+	top: 15px;
+	padding-top: 0px;
+	bottom: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	border-top: 1px solid #aaaaaa;
+	overflow: auto;
+	overflow-x: hidden;
+	overflow-y: auto;
+	background-color: #f8f8f8;
+	border-top: 0px;
+	border-right-color: #a8a8a8;
+	border-left-color: #a8a8a8;
+	border-bottom-color: #a8a8a8;
+}
+
+.gridViewRow, .gridViewRowSelected, .gridViewRowSelectedUnfocused {
+	height: 17px;
+	padding: 0px;
+	overflow: hidden;
+	cursor: default;
+}
+
+.gridViewRow {
+	color: #000000;
+	text-shadow: none;
+	font-weight: normal;
+}
+
+.gridViewRowSelected {
+	background: url(/images/gui/selected.png);
+	color: #ffffff;
+	font-weight: normal;
+	text-shadow: none;
+}
+
+.inactiveBrowserWindow .gridViewRowSelected {
+	background: url(/images/gui/selectedu.png);
+	color: #000000;
+}
+
+.gridViewRowSelectedUnfocused {
+	background: url(/images/gui/selectedu.png);
+	color: #000000;
+	font-weight: normal;
+	text-shadow: none;
+}
+
+.itemGridView {
+	overflow: hidden;
+	border-width: 1px;
+	border-top: 1px solid #444444;
+	border-left: 1px solid #888888;
+	border-right: 1px solid #666666;
+	border-bottom: 1px solid #444444;
+	background-color: #f8f8f8;
+}
+
+.itemGridViewTitle {
+	height: 15px;
+	padding: 0px;
+	overflow: hidden;
+	background-image: url(/images/gui/gridview_title_bg2.png);
+	border-bottom: 1px solid #aaaaaa;
+}
+
+.itemGridViewTitleItem {
+	float: left;
+	height: 15px;
+	padding-left: 2px;
+	padding-right: 2px;
+	border-right: 1px solid #aaaaaa;
+	margin: 0px;
+	font-size: 12px;
+	font-family: Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
+	font-weight: bold;
+}
+
+.itemGridViewContents {
+	top: 15px;
+	padding-top: 0px;
+	bottom: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	border-top: 1px solid #aaaaaa;
+	overflow: auto;
+	overflow-x: hidden;
+	overflow-y: auto;
+	background-color: #d0d7e2;
+	border-top: 1px solid #444444;
+	border-right-color: #444444;
+	border-left-color: #c0c7d2;
+	border-bottom: 1px solid #444444;
+}
+
+.inactiveBrowserWindow .itemGridViewContents {
+	background-color: #e5e6e2;
+}
+
+.itemGridViewRow, .itemGridViewRowSelected, .itemGridViewRowSelectedUnfocused {
+	height: 20px;
+	line-height: 20px;
+	padding: 0px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	cursor: default;
+}
+
+.itemGridViewRow {
+	color: #000000;
+	text-shadow: none;
+	font-weight: normal;
+}
+
+.itemGridViewRowSelected {
+	background: url(/images/gui/selected2.png);
+	color: #ffffff;
+	font-weight: bold;
+	text-shadow: #102040 0px 0px 2px;
+}
+
+.inactiveBrowserWindow .itemGridViewRowSelected {
+	background: url(/images/gui/selected2u.png);
+}
+
+.itemGridViewRowSelectedUnfocused {
+	background: url(/images/gui/selected2u.png);
+	color: #ffffff;
+	font-weight: bold;
+	text-shadow: #102040 0px 0px 2px;
+}
+
+
+.gridViewColumn, .itemGridViewColumn {
+	float: left;
+	padding-left: 4px;
+	padding-right: 1px;
+	font-family: Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
+	overflow: hidden;
+	cursor: default;
+}
+
+.itemGridViewColumn {
+	height: 20px;
+	line-height: 20px;
+	font-size: 11px;
+}
+
+.gridViewColumn {
+	height: 17px;
+	font-size: 12px;
+}
+
+dl {
+	margin: 0px 10px 10px 10px;
+}
+
+dt {
+	margin-top: 10px;
+	font-weight: bold;
+	font: 15px Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
+}
+
+dd a {
+	color: #444;
+}
+
+#welcomeLogoHolder {
+	-webkit-user-select:none;
+	-moz-user-select:none;
+}
+	
+.welcomeColumn {
+	width: 300px; 
+	top: 299px; 
+	bottom: 70px; 
+	float: left;
+}
+	
+.welcomeLeft {
+	z-index: 100; 
+}
+
+.welcomeLeft dl {
+	margin-left: 30px;
+}
+
+.welcomeRight dl {
+	margin-right: 30px;
+}
+
+#welcomeArea {
+	position: fixed;
+	width: 900px;
+	top: 299px;
+	bottom: 70px;
+	left: 50%;
+	margin-left: -450px;
+	overflow: auto;
+}
+
+#welcomeArea td {
+	vertical-align: top;
+	width: 33%;
+}
