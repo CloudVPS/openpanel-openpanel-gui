@@ -24,7 +24,7 @@ body {
 }
 
 img, input {
-	behavior: url(/js/iepngfix/iepngfix.htc);
+	behavior: url(/iepngfix/iepngfix.htc);
 }
 
 input[type="checkbox"] { margin-top: 5px; }

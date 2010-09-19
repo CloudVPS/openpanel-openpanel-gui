@@ -3,11 +3,11 @@
   <head>
   	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>OpenPanel beta</title>
-	<link rel="stylesheet" type="text/css"	href="css/openpanel.css">
-	<link rel="stylesheet" type="text/css"	href="css/forms.css">
-	<link rel="stylesheet" type="text/css"	href="css/dropdown.css">
-	<link rel="stylesheet" type="text/css"	href="css/gridview.css">
-	<link rel="stylesheet" type="text/css"	href="css/welcome.css">
+	<link rel="stylesheet" type="text/css"	href="css/source/openpanel.css">
+	<link rel="stylesheet" type="text/css"	href="css/source/forms.css">
+	<link rel="stylesheet" type="text/css"	href="css/source/dropdown.css">
+	<link rel="stylesheet" type="text/css"	href="css/source/gridview.css">
+	<link rel="stylesheet" type="text/css"	href="css/source/welcome.css">
 	<!--[if gte IE 7]>
 	<link rel="stylesheet" type="text/css"	href="css/openpanel.ie7.css">
 	<![endif]-->
@@ -25,64 +25,64 @@
 	<script type="text/javascript" src="js/lib/growl/growl.js"></script>
 	<script type="text/javascript" src="js/preloader.js"></script>
 	<script type="text/javascript" src="js/lib/BrowserDetect.js"></script>
-	<script type="text/javascript" src="js/OpenCore/OpenCore.js"></script>
-	<script type="text/javascript" src="js/OpenCore/RPC.js"></script>
-	<script type="text/javascript" src="js/OpenCore/DataManager/DataManager.js"></script>
-	<script type="text/javascript" src="js/OpenCore/DataManager/OpenCoreObject.js"></script>
-	<script type="text/javascript" src="js/OpenCore/Debug.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/OpenPanel.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/KeyboardHandler.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/Controller.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/Command/Command.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/Command/Init.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/Command/ShowDeleteInstance.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/Command/DeleteInstance.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/Command/ShowCreateInstanceFromItemList.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/Command/ShowCreateInstanceFromFormObject.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/Command/ShowCreateInstanceFromFormObjectMeta.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/Command/CreateInstanceFromFormObject.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/Command/CreateInstanceFromItemList.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/Command/ShowDeleteInstanceFromFormObject.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/Command/DeleteInstanceFromFormObject.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/Command/SaveForm.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/Command/SaveFormDone.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/Command/Login.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/Command/Logout.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/Command/Welcome.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/Command/BuildIconBar.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/Command/ClickIconBarItem.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/Command/ClickItemListItem.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/Command/ClickTabBarItem.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/Command/ClickGridItem.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/Command/InvokeMethod.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/Command/LoadTemplateIntoPopup.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/GUIBuilder/GUIBuilder.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/GUIBuilder/Throbber.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/GUIBuilder/Form.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/GUIBuilder/OpenCoreObjectForm.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/GUIBuilder/FormElement/FormElement.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/GUIBuilder/FormElement/Base.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/GUIBuilder/FormElement/Bool.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/GUIBuilder/FormElement/Textarea.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/GUIBuilder/FormElement/Enum.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/GUIBuilder/FormElement/Hidden.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/GUIBuilder/FormElement/IPAddress.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/GUIBuilder/FormElement/String.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/GUIBuilder/FormElement/Integer.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/GUIBuilder/FormElement/Password.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/GUIBuilder/FormElement/Reference.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/GUIBuilder/FormRenderer.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/GUIBuilder/SingleColumnFormRenderer.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/GUIBuilder/GUIElements/GUIElements.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/GUIBuilder/GUIElements/DropDownMenu.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/GUIBuilder/GUIElements/Grid.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/GUIBuilder/GUIElements/IconBar.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/GUIBuilder/GUIElements/ItemList.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/GUIBuilder/GUIElements/TabBar.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/GUIBuilder/GUIElements/FormBuilder.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/GUIBuilder/GUIElements/FormFields.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/GUIBuilder/GUIElements/FormGrid.js"></script>
-	<script type="text/javascript" src="js/OpenPanel/GUIBuilder/GUIElements/FormObject.js"></script>
+	<script type="text/javascript" src="js/source/OpenCore.js"></script>
+	<script type="text/javascript" src="js/source/OpenCore/RPC.js"></script>
+	<script type="text/javascript" src="js/source/OpenCore/DataManager.js"></script>
+	<script type="text/javascript" src="js/source/OpenCore/DataManager/OpenCoreObject.js"></script>
+	<script type="text/javascript" src="js/source/OpenCore/Debug.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/KeyboardHandler.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/Controller.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/Command.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/Command/Init.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/Command/ShowDeleteInstance.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/Command/DeleteInstance.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/Command/ShowCreateInstanceFromItemList.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/Command/ShowCreateInstanceFromFormObject.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/Command/ShowCreateInstanceFromFormObjectMeta.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/Command/CreateInstanceFromFormObject.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/Command/CreateInstanceFromItemList.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/Command/ShowDeleteInstanceFromFormObject.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/Command/DeleteInstanceFromFormObject.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/Command/SaveForm.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/Command/SaveFormDone.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/Command/Login.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/Command/Logout.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/Command/Welcome.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/Command/BuildIconBar.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/Command/ClickIconBarItem.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/Command/ClickItemListItem.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/Command/ClickTabBarItem.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/Command/ClickGridItem.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/Command/InvokeMethod.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/Command/LoadTemplateIntoPopup.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/GUIBuilder.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/GUIBuilder/Throbber.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/GUIBuilder/Form.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/GUIBuilder/OpenCoreObjectForm.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/GUIBuilder/FormElement.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/GUIBuilder/FormElement/Base.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/GUIBuilder/FormElement/Bool.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/GUIBuilder/FormElement/Textarea.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/GUIBuilder/FormElement/Enum.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/GUIBuilder/FormElement/Hidden.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/GUIBuilder/FormElement/IPAddress.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/GUIBuilder/FormElement/String.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/GUIBuilder/FormElement/Integer.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/GUIBuilder/FormElement/Password.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/GUIBuilder/FormElement/Reference.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/GUIBuilder/FormRenderer.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/GUIBuilder/SingleColumnFormRenderer.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/GUIBuilder/GUIElements.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/GUIBuilder/GUIElements/DropDownMenu.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/GUIBuilder/GUIElements/Grid.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/GUIBuilder/GUIElements/IconBar.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/GUIBuilder/GUIElements/ItemList.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/GUIBuilder/GUIElements/TabBar.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/GUIBuilder/GUIElements/FormBuilder.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/GUIBuilder/GUIElements/FormFields.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/GUIBuilder/GUIElements/FormGrid.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/GUIBuilder/GUIElements/FormObject.js"></script>
 	
 	<script type="text/javascript">
 		if(typeof(console) != "object") {

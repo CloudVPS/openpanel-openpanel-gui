@@ -1,5 +1,5 @@
 syntax: glob
 .*
 *~
-http/js/ext-2.0/docs*
-http/js/ext-2.0/examples*
+http
+
