@@ -3,7 +3,7 @@ OpenPanel.Command.Init  = {
 	execute : function(actionObject){
 		
 		this.controller.guiBuilder.loadTemplate('templates/application.html', 'application');
-
+		console.log(this.controller, this.controller.guiBuilder);
 		$$('body').first().setStyle({
 			backgroundImage: 'url(/images/gui/sky.jpg)'
 		});
