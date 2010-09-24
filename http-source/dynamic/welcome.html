@@ -1,0 +1,102 @@
+@section main
+
+<div id="welcomeLogoHolder" style="position: fixed; width: 900px; left: 50%; margin-left: -450px; top: 99px; height: 200px; overflow: hidden; background-color: #000; text-align: center;">
+  <a href="http://www.openpanel.org" target="new"><img id="welcomeLogo" src="/images/OpenPanelLogoBig.png" border="0"></a>
+</div>
+<div id="welcomeArea">
+	<table border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td width="300">
+				<dl>
+					<dt>Server</dt>
+					<dd><b>Kernel</b>: $os_name$ $os_release$</dd>
+					<dd><b>CPU</b>: $os_cpu$</dd>
+					<dd><b>OS</b>: $os_distro$</dd>
+					<dd><b>OpenPanel</b>: $openpanel_release$</dd>
+
+                    <dt>Performance</dt>
+                    @if $#uptime_days$ == 1
+                      <dd><b>Uptime</b>: 1 day, $uptime_hms$</dd>
+                    @else
+                      <dd><b>Uptime</b>: $#uptime_days$ days, $uptime_hms$</dd>
+                    @endif
+					<dd><b>LoadAverage</b>: $load_1$ $load_5$ $load_15$</dd>
+					<dt>Disk usage</dt>
+					<dd>
+					<table border="0">
+						<tr>
+							<td>Mountpoint</td>
+							<td align="right">Size</td>
+							<td> </td>
+							<td align="right">Capacity</td>
+						</tr>
+						@loop mounts
+						  <tr>
+						    <td>$mountpoint$</td>
+						    <td align="right">$size$G</td>
+						    <td align="right">$usage$%</td>
+						    <td>
+								<div style="margin: 0px; border: 1px solid #444444;">
+								  <table border="0" cellspacing="0" cellpadding="0" width="106" bgcolor="#a8a8a8">
+									<tr height="11">
+									  <td background="/images/progress.jpg" width="$#cpuwidth$"></td>
+									  <td background="/images/pgbgleft.jpg" width="6"></td>
+									  <td background="/images/pgbg.jpg" width="$#restwidth$"></td>
+									</tr>
+								  </table>
+								</div>
+						    </td>
+						  </tr>
+						@endloop
+					</table>
+				</dd>
+				</dl>
+			</td>
+			<td width="300">
+				<dl>
+					<dt>News</dt>
+					<dt>Development blog</dt>
+					@loop devrss
+
+					  <dd><a href="$url$">$title$</a></dd>
+
+					@endloop
+
+					<dt>Last 5 forum posts</dt>
+					@loop forumrss
+
+					  <dd><a href="$url$">$title$</a></dd>
+
+					@endloop
+				</dl>
+			</td>
+
+			<td width="300">
+				<dl>
+					<dt>About OpenPanel</dt>
+					<dd><a href="#" onclick="OpenPanel.Controller.action({command: 'LoadTemplateIntoPopup', content: 'templates/license.html'});">License</a></dd>
+					<dd><a href="#" onclick="OpenPanel.Controller.action({command: 'LoadTemplateIntoPopup', content: 'templates/test.html'});">Load templates/test.html</a></dd>
+					<dt>IRC</dt>
+					<dd>Feel free to join #openpanel on <a href="irc://irc.oftc.net/openpanel" target="_new">OFTC</a> (irc.oftc.net). You can also connect with Mibbit by clicking <a href="http://widget.mibbit.com/?settings=4adbc5842d897ab9fc6fdc5aea595767&server=irc.oftc.net&channel=%23openpanel&autoConnect=true" target="_new">here</a></dd>
+					<dt>Twitter</dt>
+					<dd>
+						<div style="display: block; float:left"><a href="http://www.twitter.com/openpanel" target="_new"><img src="/images/twitterbird.png" border="0"/></a></div>
+						<div style="display: block; float:left; width: 200px;padding-left: 4px;"><a href="http://www.twitter.com/openpanel" target="_new">
+							Follow us now on Twitter and keep up to date with what's new!</a>
+						</div>
+						<div style="clear: both;"></div>
+					</dd>
+				</dl>
+			</td>
+		</tr>
+	</table>
+</div>
+<div style="position: fixed; bottom: 43px; left: 50%; margin-left: 352px;">
+<table border="0">
+<tr>
+  <td>
+	<a href="http://bugtracker.openpanel.com/" target="_new"><img src="/images/gui/welcome_reportbug.png" border="0"></a>
+  </td>
+  <td width="4"> </td>
+</table>
+</div>
