@@ -13,7 +13,7 @@ OpenPanel.Command.Welcome = {
 		
 		fullWindowAreaDiv.appendChild(welcomeDivHolder);
 		fullWindowAreaDiv.style.visibility = "visible";
-		this.controller.guiBuilder.loadTemplate("dynamic/", "welcomeDivHolder");
+		this.controller.guiBuilder.loadTemplate("dynamic/welcome.html", "welcomeDivHolder");
 		this.controller.guiBuilder.GUIElements.IconBar.highliteItem("Welcome");
 		this.controller.guiBuilder.GUIElements.IconBar.setTitle("Welcome");
 		this.controller.guiBuilder.GUIElements.FormBuilder.setSaveButtonVisibility(false);
