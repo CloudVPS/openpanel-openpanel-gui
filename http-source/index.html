@@ -83,8 +83,6 @@
 			console = { log: function(){} }
 		}
 		
-		preloadImages();
-		
 		Event.observe(window, 'load', function() { 	 
 			OpenCore.RPC.RequestHandler.setOpenCoreURL("/fake-opencore-proxy/json");
 			OpenCore.DataManager.setRPC(OpenCore.RPC);
