@@ -11,7 +11,6 @@
 	<script type="text/javascript" src="js/lib/scriptaculous-1.8.3.js"></script>
 	<script type="text/javascript" src="js/lib/effects.js"></script>
 	<script type="text/javascript" src="js/lib/growl/growl.js"></script>
-	<script type="text/javascript" src="js/preloader.js"></script>
 	<script type="text/javascript" src="js/lib/BrowserDetect.js"></script>
 	<script type="text/javascript" src="js/source/OpenCore.js"></script>
 	<script type="text/javascript" src="js/source/OpenCore/RPC.js"></script>
@@ -86,7 +85,7 @@
 		
 		preloadImages();
 		
-		Event.observe(window, 'load', function() {
+		Event.observe(window, 'load', function() { 	 
 			OpenCore.RPC.RequestHandler.setOpenCoreURL("/fake-opencore-proxy/json");
 			OpenCore.DataManager.setRPC(OpenCore.RPC);
 			OpenPanel.Controller.setDataManager(OpenCore.DataManager);
