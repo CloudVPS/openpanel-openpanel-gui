@@ -13,28 +13,20 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 	selectedItemId: "",
 	
 	build : function(){
-		
-		this.targetDiv.innerHTML = "";
-	
+		this.targetDiv.update("");
 		this.itemElements = {};
 		if(this.openCoreObject != undefined){
-			var iconBarDiv = document.createElement("div");
-			iconBarDiv.setAttribute("class", "iconBarDiv");
 			
-			var iconHolderTable = document.createElement("table");
-			iconHolderTable.setAttribute("cellpadding", "0");
-			iconHolderTable.setAttribute("cellspacing", "0");
-			iconHolderTable.style.cssText="margin-left: 3px;";
-			
+			var iconBarDiv = new Element("div").addClassName("iconBarDiv");
+			var iconHolderTable = new Element("table").writeAttribute("cellpadding", 0).writeAttribute("cellspacing", 0).setStyle("margin-left: 3px;");
 			iconBarDiv.appendChild(iconHolderTable);
-			var iconHolderTBody = document.createElement("tbody");
+			
+			var iconHolderTBody = new Element("tbody");
 			iconHolderTable.appendChild(iconHolderTBody);
 			
-			var iconHolder = document.createElement("tr");
-			iconHolder.setAttribute("class", "iconHolder");
+			var iconHolder = new Element("tr").addClassName("iconHolder");
 			this.targetDiv.appendChild(iconBarDiv);
 			iconHolderTBody.appendChild(iconHolder);
-			
 			
 			var sortIndexes = {};
 			var sortIndexesToSort = [];
@@ -53,7 +45,6 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 			}
 			sortIndexesToSort.sort(function(a,b){return a-b;});
 						
-			
 			var sortedChildren = {};
 			sortedChildren["welcome"] = {
 					description: "Welcome",
@@ -64,6 +55,7 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 					},
 					title : "Welcome",
 					name : "Welcome",
+					imageSource : "/images/icons/crow.png",
 					onclick : function()
 					{
 						hook.selectedItemId = "Welcome";
@@ -77,134 +69,71 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 				}
 			}
 			
-			// add exit button
 			var hook = this;
-			/*
-			sortedChildren["spacer"] = { };
-			
-			sortedChildren["exit"] = {
-					description: "Exit",
-					classInfo: {
-						"class": {
-							uuid: "exit"
-						}
-					},
-					title : "Exit",
-					name : "name",
-					onclick : function()
-					{
-						hook.controller.action({command: "Logout"});
-					}
-			};
-			*/
-			
 			var xcounter = 0;
 			
 			for(var key in sortedChildren){
 				var childObject = sortedChildren[key];
 				if (typeof(childObject) == "object") {
 					if (key != "spacer") {
-						var iconLi = document.createElement("td");
+						var iconLi = new Element("td").writeAttribute("id", childObject.uuid).writeAttribute("valign", "top");
 						iconHolder.appendChild(iconLi);
-						iconLi.setAttribute("id", childObject.uuid);
-						iconLi.setAttribute("valign", "top");
 						
-						var tableElement = document.createElement("table");
-						tableElement.setAttribute("cellpadding", "0");
-						tableElement.setAttribute("cellspacing", "0");
-						tableElement.setAttribute("class", "iconTable");						
+						var tableElement = new Element("table").writeAttribute("cellpadding", "0").writeAttribute("cellspacing", "0").addClassName("iconTable");
 						iconLi.appendChild(tableElement);
 						
-						var tbodyElement = document.createElement("tbody");
+						var tbodyElement = new Element("tbody");
 						tableElement.appendChild(tbodyElement);
 						
-						var trElement = document.createElement("tr");
+						var trElement = new Element("tr");
 						tbodyElement.appendChild(trElement);
 						
-						var iconTdLeft = document.createElement("td");
-						iconTdLeft.id = "iconTdLeft";
-						iconTdLeft.setAttribute("class", "iconTdLeft");
-						iconTdLeft.innerHTML = "&nbsp;";
+						var iconTdLeft = new Element("td").addClassName("iconTdLeft").update("&nbsp;");
 						trElement.appendChild(iconTdLeft);
 						
-						var tdMain = document.createElement("td");
-						tdMain.id = "iconTdMain";
-						tdMain.setAttribute("class", "iconTdMain");
-						tdMain.setAttribute("valign", "top");
+						var tdMain = new Element("td").writeAttribute("id", "iconTdMain").writeAttribute("valign", "top").addClassName("iconTdMain");
 						trElement.appendChild(tdMain);
 						
-						var cl = document.createElement("DIV");
-						var iconName = "" + childObject.classInfo["class"].uuid + ".png";
-						cl.id = 'iconbarIcon';
-						cl.setAttribute("class", "classIcon");
-						cl.innerHTML = "<img id=\"icon." + iconName + "\" src=\"/images/icons/"+ iconName + "\"/><br\>";
-						iconLi.setAttribute("OC:iconname", "" + iconName);
+						var cl = new Element("div").addClassName("classIcon");
+						
+						var iconName = "";
+						var imageUrl = "";
+						var imageDownUrl = "";
+						if(childObject.imageSource!=undefined){
+							imageUrl = childObject.imageSource;
+							if(childObject.imageDownSource!=undefined){
+								imageDownUrl = childObject.imageDownSource;
+							} else {
+								imageDownUrl = "";
+							}
+						} else {
+							var iconName = "" + childObject.classInfo["class"].uuid + ".png";
+							imageUrl = "/dynamic/icons/"+ iconName;
+							imageDownUrl = "/dynamic/icons/down/"+ iconName;
+						}
+						
+						var iconImage = new Element("img").writeAttribute("id", "icon." + iconName).writeAttribute("src", imageUrl);
+						cl.appendChild(iconImage);
+						iconLi.iconImage = iconImage;
+						iconLi.imageUrl = imageUrl;
+						iconLi.imageDownUrl = imageDownUrl;
+						
 						iconLi.onmousedown = function() {
-							var icon = this.getAttribute ("OC:iconname");
-							var img = document.getElementById ("icon." + icon);
-							if (img != undefined)
-							{
-								img.src = "/images/icons/down/" + icon;
+							if(this.imageUrl!="" && this.imageDownUrl!=""){
+								this.iconImage.writeAttribute("src", this.imageDownUrl);
 							}
 						}
 						iconLi.onmouseup = function() {
-							var icon = this.getAttribute ("OC:iconname");
-							var img = document.getElementById ("icon." + icon);
-							if (img != undefined)
-							{
-								img.src = "/images/icons/" + icon;
+							if(this.imageUrl!="" && this.imageDownUrl!=""){
+								this.iconImage.writeAttribute("src", this.imageUrl);
 							}
 						}
 						tdMain.appendChild(cl);
 						
-						var cD = document.createElement("DIV");
-						cD.id = 'iconbarText';
-						cD.setAttribute("class", "classDescription");
-						cD.innerHTML = childObject.title;
+						var cD = new Element("div").addClassName("classDescription").update(childObject.title);
 						tdMain.appendChild(cD);
 
-						/*
-						
-						var centreTable = document.createElement("table");
-						centreTable.setAttribute("cellpadding", "0");
-						centreTable.setAttribute("cellspacing", "0");
-						
-						tdMain.appendChild(centreTable);
-						var centreTbody = document.createElement("tbody");
-						centreTable.appendChild(centreTbody);
-						var centreTr = document.createElement("tr");
-						centreTbody.appendChild(centreTr);
-						var centreTrBottom = document.createElement("tr");
-						centreTbody.appendChild(centreTrBottom);
-						
-						var classIcon = document.createElement("td");
-						
-						classIcon.setAttribute("class", "classIcon");
-						classIcon.setAttribute("align", "Center");
-						var imgElement = document.createElement("img");
-						imgElement.setAttribute("src", "/images/icons/" + childObject.classInfo["class"].uuid + ".png");
-						classIcon.innerHTML = "<img src=\"/images/icons/" + childObject.classInfo["class"].uuid + ".png\"/>";
-						centreTr.appendChild(classIcon);
-						
-						var classDescription = document.createElement("td");
-						classDescription.setAttribute("class", "classDescription");
-						classDescription.setAttribute("valign", "top");
-						
-						//classDescription.setAttribute("noWrap", "TRUE");
-						//classDescription.setAttribute("align", "Center");
-						centreTrBottom.appendChild(classDescription);
-						
-						
-						var title = childObject.title;
-						classDescription.appendChild(
-							document.createTextNode(title)
-						);
-						*/
-						
-						var iconTdRight = document.createElement("td");
-						iconTdRight.id = "iconTdRight";
-						iconTdRight.setAttribute("class", "iconTdRight");
-						iconTdRight.innerHTML = "&nbsp;";
+						var iconTdRight = new Element("td").addClassName("iconTdRight").update("&nbsp;");
 						trElement.appendChild(iconTdRight);
 						
 						if (childObject.onclick == undefined) {
@@ -220,8 +149,7 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 						this.itemIds[xcounter++] = childObject.name;
 						this.itemElements[childObject.name] = iconLi;
 					} else {
-						var iconLi = document.createElement("td");
-						iconLi.setAttribute("width", "100%");
+						var iconLi = new Element("td").writeAttribute("width", "100%");
 						iconHolder.appendChild(iconLi);
 					}
 				}
@@ -231,8 +159,14 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 		}
 	},
 	
+
+	update: function(openCoreObject){
+		this.highliteItem(openCoreObject.name);
+		this.setTitle(openCoreObject.title);
+	},
+	
 	setTitle : function(title){
-		document.getElementById("iconBarTitle").innerHTML = title;
+		$("iconBarTitle").update(title);
 	},
 	
 	click: function(childObject){
@@ -284,41 +218,9 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 				
 			for(var key in this.itemElements){
 				if(this.itemElements[key] == currentItemElement){
-					this.itemElements[key].setAttribute("class", "selected")
-					this.setHighLite(this.itemElements[key],'high');
+					this.itemElements[key].addClassName("selected");
 				} else {
-					this.itemElements[key].setAttribute("class", "");
-					this.setHighLite(this.itemElements[key],'low');
-				}
-			}
-		}
-	},
-	
-	
-	setHighLite: function(obj, state) {
-		if (typeof(obj) == "object") {
-			var someElement = document.getElementById(obj.id);
-			tdElement = someElement.getElementsByTagName("TD");
-			
-			for (var x in tdElement) {
-				if (x == "iconTdLeft") {
-					if (state == "high") {
-						tdElement[x].style.backgroundImage = "url(/images/gui/iconBarSelectedLeft.gif)";
-					} else {
-						tdElement[x].style.background = "none";
-					}
-				} else if (x == "iconTdRight") {
-					if (state == "high") {
-						tdElement[x].style.backgroundImage = "url(/images/gui/iconBarSelectedRight.gif)";
-					} else {
-						tdElement[x].style.background = "none";
-					}
-				} else if (x == "iconTdMain") {
-					if (state == "high") {
-						tdElement[x].style.backgroundImage = "url(/images/gui/iconBarSelectedMiddle.gif)";
-					} else {
-						tdElement[x].style.background = "none";
-					}
+					this.itemElements[key].removeClassName("selected");
 				}
 			}
 		}
@@ -329,7 +231,7 @@ OpenPanel.GUIBuilder.GUIElements.IconBar = {
 	},
 	
 	setTargetDivName : function(targetDivName){
-		var targetDiv = document.getElementById(targetDivName);
+		var targetDiv = $(targetDivName);
 		if(targetDiv != undefined){
 			this.targetDiv = targetDiv;
 		} else {
