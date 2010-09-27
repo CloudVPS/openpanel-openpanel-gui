@@ -3,7 +3,6 @@ OpenPanel.Command.Init  = {
 	execute : function(actionObject){
 		
 		this.controller.guiBuilder.loadTemplate('templates/application.html', 'application');
-		console.log(this.controller, this.controller.guiBuilder);
 		$$('body').first().setStyle({
 			backgroundImage: 'url(/images/gui/sky.jpg)'
 		});
@@ -28,10 +27,10 @@ OpenPanel.Command.Init  = {
 		
 		var detected = this.detect();
 		if (detected.fail == false) {
-			document.getElementById("modalLoadingDiv").className = "modalLoadingDivLogin";
+			$("modalLoadingDiv").className = "modalLoadingDivLogin";
 			this.controller.guiBuilder.hideModalMessageDiv();
 			this.controller.guiBuilder.loadTemplate("templates/login.html", "app");
-			this.controller.guiBuilder.renderLogin(document.getElementById("loginDiv"), actionObject);
+			this.controller.guiBuilder.GUIElements.LoginWindow.renderLogin(document.getElementById("loginDiv"), actionObject);
 			if(actionObject.msg != undefined){
 				document.getElementById("loginMessageDiv").innerHTML = actionObject.msg;
 			} else {
@@ -82,7 +81,11 @@ OpenPanel.Command.Init  = {
 			}
 		}
 						
-		return { fail: fail, failText: failText, version: version }
+		return { 
+			fail: fail,
+			failText: failText, 
+			version: version 
+		}
 	}
 }
 

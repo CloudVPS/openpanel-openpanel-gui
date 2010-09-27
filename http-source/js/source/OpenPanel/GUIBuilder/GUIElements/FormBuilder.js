@@ -34,7 +34,8 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 		var saveButton = document.getElementById("saveButton");
 		saveButton.innerHTML = "Save";
 		var hook = this;
-		this.controller.guiBuilder.renderButton(saveButton, undefined, undefined, false);
+		this.controller.guiBuilder.GUIElements.Button.renderButton(saveButton, undefined, undefined, false);
+
 		//this.createSaveButtonAction(saveButton);
 		
 		this.rootFormObject = new OpenPanel.GUIBuilder.GUIElements.FormObject();
@@ -94,7 +95,8 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 		if(isActive == true){
 			var saveButton = document.getElementById("saveButton");
 			saveButton.innerHTML = "Save";
-			this.controller.guiBuilder.renderButton(saveButton);
+			this.controller.guiBuilder.GUIElements.Button.renderButton(saveButton);
+
 			this.createSaveButtonAction(saveButton);
 		} else {
 			var saveButton = document.getElementById("saveButton");

@@ -16,7 +16,9 @@ OpenPanel.Command.DeleteInstance  = {
 				actionObject.openCoreObject.getInstances();
 				
 				this.controller.currentRootClassInstance 	= actionObject.openCoreObject.getFirstInstance();
+				
 				this.controller.iconBarClick(actionObject.openCoreObject);
+				
 				OpenPanel.GUIBuilder.growl(" ", "Successfully deleted " + actionObject.openCoreObject.description + " object" + objectIDString);
 				
 			} else {

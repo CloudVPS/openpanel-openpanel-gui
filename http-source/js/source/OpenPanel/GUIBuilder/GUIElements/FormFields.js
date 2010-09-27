@@ -232,4 +232,3 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 		}
 	}
 }
-

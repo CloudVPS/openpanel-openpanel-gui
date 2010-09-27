@@ -489,11 +489,7 @@ html > body #saveButtonHolder {
 	white-space: nowrap;
 }
 
-#iconbarIcon{
-	padding: 30px 5px 0px 5px;
-}
-
-html > body > #iconbarIcon, #iconbarText{
+html > body, #iconbarText{
 	padding:0px;
 }
 
@@ -563,7 +559,7 @@ html > body > #iconbarIcon, #iconbarText{
 }
 
 .classIcon {
-	padding-top: 17px;
+	padding: 30px 5px 0px 5px;
 }
 
 .classDescription, .classIcon {

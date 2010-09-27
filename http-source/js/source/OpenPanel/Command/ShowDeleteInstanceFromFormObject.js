@@ -17,8 +17,8 @@ OpenPanel.Command.ShowDeleteInstanceFromFormObject  = {
 		var modalDeleteButton = $("modalDeleteButton");
 		var modalCancelButton = $("modalCancelButton");
 		
-		this.controller.guiBuilder.renderButton(modalDeleteButton);
-		this.controller.guiBuilder.renderButton(modalCancelButton);
+		this.controller.guiBuilder.GUIElements.Button.renderButton(modalDeleteButton);
+		this.controller.guiBuilder.GUIElements.Button.renderButton(modalCancelButton);
 		var hook = this;
 		actionObject.command = "DeleteInstanceFromFormObject"; 
 		

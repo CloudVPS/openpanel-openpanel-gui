@@ -14,7 +14,6 @@ OpenCore.Debug = {
 		var elm = document.getElementById("debugList");
 		elm.innerHTML = "";
 		this.buildList(elm, OpenCore.DataManager.rootObject);
-		
 	},
 	
 	buildList: function (elm, obj){

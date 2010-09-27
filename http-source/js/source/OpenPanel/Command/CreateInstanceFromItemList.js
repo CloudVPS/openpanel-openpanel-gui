@@ -15,6 +15,7 @@ OpenPanel.Command.CreateInstanceFromItemList  = {
 				this.controller.currentRootClassInstance = openCoreObject.instances[actionObjectId];
 				
 				this.controller.iconBarClick(openCoreObject);
+				
 				this.controller.guiBuilder.deletePopUp();
 				this.controller.guiBuilder.GUIElements.ItemList.currentInstance = this.controller.currentRootClassInstance;
 				this.controller.guiBuilder.GUIElements.ItemList.highliteItem(this.controller.currentRootClassInstance.uuid);

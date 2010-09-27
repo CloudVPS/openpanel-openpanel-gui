@@ -450,7 +450,8 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 				tD.style.paddingRight = "10px";
 				var bdiv = document.createElement("div");
 				bdiv.innerHTML = "Set Up " + metaObject.title;
-				this.controller.guiBuilder.renderButton (bdiv,false,true);
+				this.controller.guiBuilder.GUIElements.Button.renderButton(bdiv,false,true);
+
 				bdiv.openCoreObject = metaObject;
 				var hook = this;
 				bdiv.onclick = function(){
@@ -561,7 +562,8 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 					createOne = document.createElement("div");
 					if (targetDiv == undefined) createOne.style.paddingTop = "10px";
 					createOne.innerHTML = "Set Up " + this.openCoreObject.title;
-					this.controller.guiBuilder.renderButton (createOne,false,true);
+					this.controller.guiBuilder.GUIElements.Button.renderButton(createOne,false,true);
+
 					if (displayOnly == undefined || displayOnly == false) {
 						createOne.onclick = createfunc;
 					}
@@ -711,7 +713,8 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 			for (var key in methods) {
 				var knopje = document.createElement("div");
 				knopje.innerHTML = methods[key].description;
-				this.controller.guiBuilder.renderButton(knopje,false,true);
+				this.controller.guiBuilder.GUIElements.Button.renderButton(knopje,false,true);
+
 				contentDiv.appendChild(knopje);
 				knopje.onclick = function(){
 					hook.controller.action( 
@@ -736,7 +739,8 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 			OpenPanel.KeyboardHandler.clearOk();
 			hook.fields.submit();
 		}
-		this.controller.guiBuilder.renderButton(saveButton,true);
+		this.controller.guiBuilder.GUIElements.Button.renderButton(saveButton,true);
+
 		
 		return saveButton;
 	},
@@ -815,7 +819,8 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 			this.onclick = function(){};
 			//targetDiv.parentNode.parentNode.removeChild(targetDiv.parentNode);
 		}
-		this.controller.guiBuilder.renderButton(d);
+		this.controller.guiBuilder.GUIElements.Button.renderButton(d);
+
 		targetDiv.appendChild(d);
 		
 		var cancelButton = d;

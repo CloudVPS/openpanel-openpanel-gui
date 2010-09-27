@@ -430,7 +430,5 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 	setTabDisabled: function(obj) {
 		return this.setTab(obj);
 	}
-	
-	
 }
 

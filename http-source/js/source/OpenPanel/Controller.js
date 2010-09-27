@@ -4,7 +4,6 @@
 OpenPanel.Controller = {
 	lastCommand: "",
 	lastArgumentObject: {},
-	
 	dataManager: {},
 	guiBuilder: {},
 	selectedRootInstance: "",
@@ -15,6 +14,7 @@ OpenPanel.Controller = {
 	currentUser : {},
 	
 	action: function(actionObject){
+		console.log("Command", actionObject);
 		try {
 			this.lastCommand = actionObject.command;
 			this.lastArgumentObject = actionObject;
@@ -24,15 +24,7 @@ OpenPanel.Controller = {
 			if(commandObject != undefined){
 				commandObject.controller = this;
 				commandObject.execute(actionObject);
-			} else {
-				// wut?
-				switch (actionObject.command) {
-					
-					default:
-					break;
-				}
 			}
-			//OpenCore.Debug.controllerDebug(this);
 		} catch (e) {
 			// errors are caught here
 			this.handleErrors(e);
@@ -55,6 +47,7 @@ OpenPanel.Controller = {
 	},
 	
 	showCreateInstance : function(openCoreObject, formObjectHolder, finishedAction){
+		console.log("!showCreateInstance");
 		var popUpDiv = this.guiBuilder.createPopUp();
 		var formObject = new OpenPanel.GUIBuilder.GUIElements.FormObject();
 		formObject.setOpenCoreObject(openCoreObject);
@@ -65,6 +58,7 @@ OpenPanel.Controller = {
 	},
 	
 	showCreateInstanceFromFormObject : function(formObject, formObjectHolder, finishedAction){
+		console.log("!showCreateInstanceFromFormObject");
 		var d = document.createElement("div");
 		
 		var popUpDiv = this.guiBuilder.createPopUp();
@@ -77,6 +71,7 @@ OpenPanel.Controller = {
 	},
 	
 	showCreateInstanceFromFormObjectMeta : function(formObject, openCoreObject, formObjectHolder, finishedAction) {
+		console.log("!showCreateInstanceFromFormObjectMeta");
 		var popUpDiv = this.guiBuilder.createPopUp();
 		var popupFormObject = new OpenPanel.GUIBuilder.GUIElements.FormObject();
 		popupFormObject.setOpenCoreObject(openCoreObject);
@@ -87,20 +82,26 @@ OpenPanel.Controller = {
 	},
 	
 	iconBarClick : function(openCoreObject) {
+		console.log("!iconBarClick");
+		// update item list
 		
 		this.guiBuilder.GUIElements.ItemList.setOpenCoreObject(openCoreObject);
 		this.guiBuilder.GUIElements.ItemList.build();
 		this.guiBuilder.GUIElements.ItemList.takeFocus();
+		
+		// click tab bar
 		this.tabBarClick(openCoreObject);
 	},
 	
 	tabBarClick : function(openCoreObject) {
-		
+		// populate tab bar
+		console.log("tabBarClick openCoreObject", openCoreObject);
 		if (openCoreObject.getFirstInstance() != undefined) {
+			// new TabBar(openCoreObject);
 			this.guiBuilder.GUIElements.TabBar.setOpenCoreObject(openCoreObject);
 			this.guiBuilder.GUIElements.TabBar.build();	
 			var firstTabOpenCoreObject = this.guiBuilder.GUIElements.TabBar.getFirstTabItem();
-	
+			
 			if (firstTabOpenCoreObject != undefined) {
 				this.guiBuilder.GUIElements.FormBuilder.setOpenCoreObject(firstTabOpenCoreObject);
 				this.guiBuilder.GUIElements.FormBuilder.setOpenCoreParentUUID(this.currentRootClassInstance.uuid);

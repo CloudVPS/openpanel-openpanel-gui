@@ -2,14 +2,14 @@ OpenPanel.Command.ClickIconBarItem  = {
 	controller : {},
 	clickedIconBarItem : {},
 	
-	execute : function(actionObject){
+	execute : function(actionObject) {
 		var openCoreObject = this.controller.dataManager.getOpenCoreObjectByName(actionObject.className);
+		
 		if(openCoreObject != undefined){
-			var test = document.getElementById("mainAreaLeft");
-			if (test == undefined) {
+			var mainAreaLeft = document.getElementById("mainAreaLeft");
+			if (mainAreaLeft == undefined) {
 				OpenPanel.Command.Login.buildMainArea();
-				this.controller.guiBuilder.GUIElements.IconBar.highliteItem(openCoreObject.name);
-				this.controller.guiBuilder.GUIElements.IconBar.setTitle(openCoreObject.title);
+				this.controller.guiBuilder.GUIElements.IconBar.update(openCoreObject);
 			}
 			openCoreObject.setHasFetchedInstances(false);
 			//var instances								= openCoreObject.getInstances();
@@ -17,7 +17,7 @@ OpenPanel.Command.ClickIconBarItem  = {
 			this.clickedIconBarItem = openCoreObject;
 		} else {
 			// errors here
-			throw new Error ("openCoreObject is undefined")
+			throw new Error("openCoreObject is undefined")
 		}
 	},
 	
@@ -25,6 +25,7 @@ OpenPanel.Command.ClickIconBarItem  = {
 		var mekker = openCoreObject.getFirstInstance();
 		this.controller.currentRootClass 			= openCoreObject;
 		this.controller.currentRootClassInstance 	= openCoreObject.getFirstInstance();
+		
 		this.controller.iconBarClick(openCoreObject);
 	}
 }
