@@ -67,7 +67,7 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 				}
 				
 			} else {
-				this.targetDiv.innerHTML = "<center><img src=\"/images/emblems/"+this.openCoreObject.uuid+".png\"/></center>";
+				this.targetDiv.innerHTML = "<center><img src=\"/dynamic/emblems/"+this.openCoreObject.uuid+".png\"/></center>";
 			}
 		} else {
 			alert("OpenPanel.GUIBuilder.GUIElements.ItemList.build(openCoreObject) : openCoreObject is undefined");
@@ -214,7 +214,7 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 			}
 		}
 		
-		var icon = "/images/itemicons/" + this.openCoreObject.uuid + ".png";
+		var icon = "/dynamic/itemicons/" + this.openCoreObject.uuid + ".png";
       	
 		this.grid.create (this.gridDiv,createObject, 198, 0, 98, 69, -450, "itemlist", icon);
       	this.grid.setGrid (instances);
