@@ -12,6 +12,7 @@ copy:
 	@cp -R http-source/js/lib http/js
 	@mkdir http/css
 	@cp http-source/css/openpanel.css http/css
+	@cp http-source/css/iconbar.css http/css
 	@cp http-source/css/openpanel.ie7.css http/css
 	@cp http-source/css/browsers.css http/css
 	@cp -R http-source/images-source http/images

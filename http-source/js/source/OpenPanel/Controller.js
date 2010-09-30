@@ -14,7 +14,6 @@ OpenPanel.Controller = {
 	currentUser : {},
 	
 	action: function(actionObject){
-		console.log("Command", actionObject);
 		try {
 			this.lastCommand = actionObject.command;
 			this.lastArgumentObject = actionObject;
@@ -82,7 +81,6 @@ OpenPanel.Controller = {
 	},
 	
 	iconBarClick : function(openCoreObject) {
-		console.log("!iconBarClick");
 		// update item list
 		
 		this.guiBuilder.GUIElements.ItemList.setOpenCoreObject(openCoreObject);
@@ -95,7 +93,6 @@ OpenPanel.Controller = {
 	
 	tabBarClick : function(openCoreObject) {
 		// populate tab bar
-		console.log("tabBarClick openCoreObject", openCoreObject);
 		if (openCoreObject.getFirstInstance() != undefined) {
 			// new TabBar(openCoreObject);
 			this.guiBuilder.GUIElements.TabBar.setOpenCoreObject(openCoreObject);

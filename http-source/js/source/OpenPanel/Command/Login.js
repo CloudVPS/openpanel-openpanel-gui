@@ -31,11 +31,12 @@ OpenPanel.Command.Login  = {
 		
 		document.getElementById("modalLoadingDiv").className = "modalLoadingDiv";
 		this.controller.guiBuilder.GUIElements.FormBuilder.setSaveButtonVisibility(false);
-		OpenPanel.GUIBuilder.GUIElements.IconBar.setTargetDivName("iconBar");
+		
 		OpenPanel.GUIBuilder.GUIElements.ItemList.setTargetDivName("itemListArea");
 		OpenPanel.GUIBuilder.GUIElements.TabBar.setTargetDivName("tabBar");
 		OpenPanel.GUIBuilder.GUIElements.FormBuilder.setTargetDivName("mainAreaForm");
 		OpenPanel.GUIBuilder.GUIElements.FormBuilder.setFullWindowOverlayDivName("fullWindowArea");
+		
 		//this.controller.dataManager.initializeQuotaObject();	
 		this.controller.action({command: "BuildIconBar"});
 	}

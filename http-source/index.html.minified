@@ -4,10 +4,12 @@
   	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>OpenPanel beta</title>
 	<link rel="stylesheet" type="text/css"	href="css/openpanel.css">
+	<link rel="stylesheet" type="text/css"	href="css/iconbar.css">
 	<!--[if gte IE 7]>
 	<link rel="stylesheet" type="text/css"	href="css/openpanel.ie7.css">
 	<![endif]-->
 	<script type="text/javascript" src="js/lib/prototype-1.6.1.js"></script>
+	<script type="text/javascript" src="js/lib/event.simulate.js"></script>
 	<script type="text/javascript" src="js/lib/scriptaculous-1.8.3.js"></script>
 	<script type="text/javascript" src="js/lib/effects.js"></script>
 	<script type="text/javascript" src="js/lib/growl/growl.js"></script>
