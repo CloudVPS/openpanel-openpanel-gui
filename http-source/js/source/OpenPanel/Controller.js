@@ -46,7 +46,6 @@ OpenPanel.Controller = {
 	},
 	
 	showCreateInstance : function(openCoreObject, formObjectHolder, finishedAction){
-		console.log("!showCreateInstance");
 		var popUpDiv = this.guiBuilder.createPopUp();
 		var formObject = new OpenPanel.GUIBuilder.GUIElements.FormObject();
 		formObject.setOpenCoreObject(openCoreObject);
@@ -57,7 +56,6 @@ OpenPanel.Controller = {
 	},
 	
 	showCreateInstanceFromFormObject : function(formObject, formObjectHolder, finishedAction){
-		console.log("!showCreateInstanceFromFormObject");
 		var d = document.createElement("div");
 		
 		var popUpDiv = this.guiBuilder.createPopUp();
@@ -70,7 +68,6 @@ OpenPanel.Controller = {
 	},
 	
 	showCreateInstanceFromFormObjectMeta : function(formObject, openCoreObject, formObjectHolder, finishedAction) {
-		console.log("!showCreateInstanceFromFormObjectMeta");
 		var popUpDiv = this.guiBuilder.createPopUp();
 		var popupFormObject = new OpenPanel.GUIBuilder.GUIElements.FormObject();
 		popupFormObject.setOpenCoreObject(openCoreObject);
