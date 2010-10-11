@@ -19,16 +19,16 @@ OpenPanel.GUIBuilder.GUIElements.DropDownMenu.prototype = {
 		this.offset = 0;
 		if (poffset != undefined) this.offset = poffset;
 			
-		this.menuDiv = document.createElement("div");
+		this.menuDiv = new Element("div");
 		var self = this;
 		
-		this.menuDiv.onmouseout = function(){
+		this.menuDiv.observe("mouseout", function(event){
 			self.timedHide();
-		}
+		});
 		
-		this.menuDiv.onmouseover = function(){
+		this.menuDiv.observe("mouseover", function(event){
 			self.cancelHide();
-		}
+		});
 		
 		this.menuDiv.className = "dropDownMenu";
 		this.visible = false;
@@ -36,16 +36,23 @@ OpenPanel.GUIBuilder.GUIElements.DropDownMenu.prototype = {
 	},
 	
 	getX: function(xel) {
+		var x = Element.viewportOffset(xel).left;
+		/*
+		
 		var el = xel;
 		var x = 0;
 		while (el != undefined) {
 			x += el.offsetLeft;
 			el = el.offsetParent;
 		}
+		*/
 		return x;
 	},
 	
 	getY: function(xel) {
+
+		var y = Element.viewportOffset(xel).top;
+		/*
 		var el = xel;
 		var y = 0;
 		while (el != undefined) {
@@ -53,6 +60,7 @@ OpenPanel.GUIBuilder.GUIElements.DropDownMenu.prototype = {
 			if (el.scrollTop) y-= el.scrollTop;
 			el = el.offsetParent;
 		}
+		*/
 		return y;
 	},
 	
@@ -122,8 +130,7 @@ OpenPanel.GUIBuilder.GUIElements.DropDownMenu.prototype = {
 			itemTD.className = "dropDownMenuItem";
 			itemTD.innerHTML = itemString;
 			itemTD.setAttribute("menu:id", key);
-			
-			itemTD.onmouseover = function() {
+			var mouseover = function() {
 				self.cancelHide();
 				this.isInside = true;
 				if (self.mouseUpValid) {
@@ -136,7 +143,9 @@ OpenPanel.GUIBuilder.GUIElements.DropDownMenu.prototype = {
 				}
 			}
 			
-			itemTD.onmouseup = itemTD.onclick = itemTD.ondblclick = function() {
+			itemTD.observe("mouseover", mouseover);
+			
+			var mouseup = function() {
 				self.cancelHide();
 				if (! self.mouseUpValid) return false;
 				self.mouseUpValid = false;
@@ -160,6 +169,10 @@ OpenPanel.GUIBuilder.GUIElements.DropDownMenu.prototype = {
 				
 				return false;
 			}
+			
+			//itemTD.onmouseup = itemTD.onclick = itemTD.ondblclick = 
+					
+			itemTD.observe("mouseup", mouseup);
 			
 			objTR.appendChild(itemTD);
 			this.itemList[key] = itemTD;
@@ -195,6 +208,7 @@ OpenPanel.GUIBuilder.GUIElements.DropDownMenu.prototype = {
 		if (! this.visible) {
 			var x = this.getX(this.targetDiv);
 			var y = this.getY(this.targetDiv);
+			
 			var pageHeight = OpenPanel.GUIBuilder.pageHeight();
 			
 			this.xpos = x + this.offset;
@@ -220,6 +234,7 @@ OpenPanel.GUIBuilder.GUIElements.DropDownMenu.prototype = {
 			}
 			this.visible = true;
 			this.menuDiv.style.display = "block";
+			
 			this.mouseUpValid = false;
 			var self = this;
 			setTimeout (function() { self.mouseUpValid=true; }, 200);
