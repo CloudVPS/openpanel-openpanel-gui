@@ -398,7 +398,6 @@ html > body #saveButtonHolder {
 	left: -450px;
 	top: 97px;
 	bottom: 50px;
-	width: 900px;
 	background-image: url(/images/gui/groupFrameMiddle.png);
 	overflow-y: hidden;
 	position: fixed;

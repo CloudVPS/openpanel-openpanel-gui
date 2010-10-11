@@ -24,6 +24,7 @@
 	<script type="text/javascript" src="js/source/OpenPanel/Controller.js"></script>
 	<script type="text/javascript" src="js/source/OpenPanel/Command.js"></script>
 	<script type="text/javascript" src="js/source/OpenPanel/Command/Init.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/Command/PreloadAssets.js"></script>
 	<script type="text/javascript" src="js/source/OpenPanel/Command/ShowDeleteInstance.js"></script>
 	<script type="text/javascript" src="js/source/OpenPanel/Command/DeleteInstance.js"></script>
 	<script type="text/javascript" src="js/source/OpenPanel/Command/ShowCreateInstanceFromItemList.js"></script>
@@ -91,12 +92,15 @@
 		crowimage.src = "/images/gui/crow.png";
 		var spinner = new Image(32,32);
 		spinner.src = "/images/gui/prespinner.gif";
-		
+
+	
 		if(typeof(console) != "object") {
 			console = { log: function(){} }
 		}
 		
-		Event.observe(window, 'load', function() { 	 
+		Event.observe(window, 'load', function() { 
+		
+				 
 			OpenCore.RPC.RequestHandler.setOpenCoreURL("/fake-opencore-proxy/json");
 			OpenCore.DataManager.setRPC(OpenCore.RPC);
 			OpenPanel.Controller.setDataManager(OpenCore.DataManager);
@@ -106,11 +110,20 @@
 			OpenPanel.GUIBuilder.GUIElements.FormObject.setGuiBuilder(OpenPanel.GUIBuilder);
 			OpenCore.RPC.RequestHandler.startLoading = OpenPanel.GUIBuilder.showLoadingDiv;
 			OpenCore.RPC.RequestHandler.doneLoading = OpenPanel.GUIBuilder.hideLoadingDiv;
-
+			
 			OpenPanel.Controller.action( 
+			{
+				command: "PreloadAssets",
+				nextAction : {
+					command: "Init", userName: "openadmin", password: "foobar" 
+				}
+			});
+			
+			/*OpenPanel.Controller.action( 
 			{
 				command: "Init", userName: "openadmin", password: "foobar" 
 			});
+			*/
 		});
 		
 	</script>
