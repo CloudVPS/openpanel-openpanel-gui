@@ -163,7 +163,6 @@ OpenCore.DataManager = {
 						shortname		: classInfo["class"].shortname
 					}
 				}
-				
 			}
 			this.classInfos["ROOT"] = rootClassInfo;
 		}
