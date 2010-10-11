@@ -52,7 +52,6 @@ OpenPanel.GUI.MenuIconBar.IconBarItem = Class.create(OpenPanel.GUI.Menu.Item, {
 		var imageDown = new Element("img").writeAttribute("src", this.iconDown);
 		centerIconDown.appendChild(imageDown);
 
-		
 		if(down){
 			centerIcon.hide();
 			centerIconDown.show();

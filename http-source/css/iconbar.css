@@ -30,6 +30,7 @@
 
 .OPIconBarItem .icon {
 	padding: 30px 5px 0px 5px;	
+	height: 30px;
 }
 
 .OPIconBarItem .description {
