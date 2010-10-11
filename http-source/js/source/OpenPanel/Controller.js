@@ -121,7 +121,7 @@ OpenPanel.Controller = {
 			this.guiBuilder.GUIElements.FormBuilder.clean();
 			//this.guiBuilder.GUIElements.FormBuilder.setOpenCoreObject(openCoreObject);
 			//this.guiBuilder.GUIElements.FormBuilder.build();
-			this.guiBuilder.GUIElements.FormBuilder.targetDiv.update("new!");
+			//this.guiBuilder.GUIElements.FormBuilder.targetDiv.update("new!");
 		}
 	},
 	
