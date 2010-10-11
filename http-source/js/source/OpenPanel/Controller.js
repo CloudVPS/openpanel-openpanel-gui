@@ -20,11 +20,16 @@ OpenPanel.Controller = {
 			var actionObject = this.lastArgumentObject;
 			var commandObject = OpenPanel.Command[actionObject.command];
 			
+			if(actionObject.nextAction){
+				commandObject.nextAction = actionObject.nextAction;
+			}
+			
 			if(commandObject != undefined){
 				commandObject.controller = this;
 				commandObject.execute(actionObject);
 			}
 		} catch (e) {
+			console.log(e);
 			// errors are caught here
 			this.handleErrors(e);
 		}
@@ -114,6 +119,9 @@ OpenPanel.Controller = {
 			this.guiBuilder.GUIElements.TabBar.build();
 			this.guiBuilder.GUIElements.TabBar.disable();
 			this.guiBuilder.GUIElements.FormBuilder.clean();
+			//this.guiBuilder.GUIElements.FormBuilder.setOpenCoreObject(openCoreObject);
+			//this.guiBuilder.GUIElements.FormBuilder.build();
+			this.guiBuilder.GUIElements.FormBuilder.targetDiv.update("new!");
 		}
 	},
 	
