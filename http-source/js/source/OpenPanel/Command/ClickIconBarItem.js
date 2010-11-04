@@ -9,7 +9,7 @@ OpenPanel.Command.ClickIconBarItem  = {
 			var mainAreaLeft = document.getElementById("mainAreaLeft");
 			if (mainAreaLeft == undefined) {
 				OpenPanel.Command.Login.buildMainArea();
-				this.controller.guiBuilder.GUIElements.IconBar.update(openCoreObject);
+				//this.controller.guiBuilder.GUIElements.IconBar.update(openCoreObject);
 			}
 			openCoreObject.setHasFetchedInstances(false);
 			//var instances								= openCoreObject.getInstances();

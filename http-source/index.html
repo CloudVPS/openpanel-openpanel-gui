@@ -2,12 +2,14 @@
 <html>
   <head>
   	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>OpenPanel beta</title>
+	<title>OpenPanel</title>
 	<link rel="stylesheet" type="text/css"	href="css/openpanel.css">
+	<link rel="stylesheet" type="text/css"	href="css/iconbar.css">
 	<!--[if gte IE 7]>
 	<link rel="stylesheet" type="text/css"	href="css/openpanel.ie7.css">
 	<![endif]-->
 	<script type="text/javascript" src="js/lib/prototype-1.6.1.js"></script>
+	<script type="text/javascript" src="js/lib/event.simulate.js"></script>
 	<script type="text/javascript" src="js/lib/scriptaculous-1.8.3.js"></script>
 	<script type="text/javascript" src="js/lib/effects.js"></script>
 	<script type="text/javascript" src="js/lib/growl/growl.js"></script>
@@ -22,6 +24,7 @@
 	<script type="text/javascript" src="js/source/OpenPanel/Controller.js"></script>
 	<script type="text/javascript" src="js/source/OpenPanel/Command.js"></script>
 	<script type="text/javascript" src="js/source/OpenPanel/Command/Init.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/Command/PreloadAssets.js"></script>
 	<script type="text/javascript" src="js/source/OpenPanel/Command/ShowDeleteInstance.js"></script>
 	<script type="text/javascript" src="js/source/OpenPanel/Command/DeleteInstance.js"></script>
 	<script type="text/javascript" src="js/source/OpenPanel/Command/ShowCreateInstanceFromItemList.js"></script>
@@ -60,12 +63,20 @@
 	<script type="text/javascript" src="js/source/OpenPanel/GUIBuilder/FormElement/Reference.js"></script>
 	<script type="text/javascript" src="js/source/OpenPanel/GUIBuilder/FormRenderer.js"></script>
 	<script type="text/javascript" src="js/source/OpenPanel/GUIBuilder/SingleColumnFormRenderer.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/GUI.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/GUI/Menu.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/GUI/Menu/BaseItem.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/GUI/Menu/Item.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/GUI/Menu/SpacerItem.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/GUI/MenuTabBar.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/GUI/MenuTabBar/TabBarItem.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/GUI/MenuIconBar.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/GUI/MenuIconBar/IconBarItem.js"></script>
+	<script type="text/javascript" src="js/source/OpenPanel/GUI/MenuIconBar/IconBarSpacerItem.js"></script>
 	<script type="text/javascript" src="js/source/OpenPanel/GUIBuilder/GUIElements.js"></script>
 	<script type="text/javascript" src="js/source/OpenPanel/GUIBuilder/GUIElements/DropDownMenu.js"></script>
 	<script type="text/javascript" src="js/source/OpenPanel/GUIBuilder/GUIElements/Grid.js"></script>
-	<script type="text/javascript" src="js/source/OpenPanel/GUIBuilder/GUIElements/IconBar.js"></script>
 	<script type="text/javascript" src="js/source/OpenPanel/GUIBuilder/GUIElements/ItemList.js"></script>
-	<script type="text/javascript" src="js/source/OpenPanel/GUIBuilder/GUIElements/TabBar2.js"></script>
 	<script type="text/javascript" src="js/source/OpenPanel/GUIBuilder/GUIElements/TabBar.js"></script>
 	<script type="text/javascript" src="js/source/OpenPanel/GUIBuilder/GUIElements/FormBuilder.js"></script>
 	<script type="text/javascript" src="js/source/OpenPanel/GUIBuilder/GUIElements/FormFields.js"></script>
@@ -81,12 +92,15 @@
 		crowimage.src = "/images/gui/crow.png";
 		var spinner = new Image(32,32);
 		spinner.src = "/images/gui/prespinner.gif";
-		
+
+	
 		if(typeof(console) != "object") {
 			console = { log: function(){} }
 		}
 		
-		Event.observe(window, 'load', function() { 	 
+		Event.observe(window, 'load', function() { 
+		
+				 
 			OpenCore.RPC.RequestHandler.setOpenCoreURL("/fake-opencore-proxy/json");
 			OpenCore.DataManager.setRPC(OpenCore.RPC);
 			OpenPanel.Controller.setDataManager(OpenCore.DataManager);
@@ -96,11 +110,20 @@
 			OpenPanel.GUIBuilder.GUIElements.FormObject.setGuiBuilder(OpenPanel.GUIBuilder);
 			OpenCore.RPC.RequestHandler.startLoading = OpenPanel.GUIBuilder.showLoadingDiv;
 			OpenCore.RPC.RequestHandler.doneLoading = OpenPanel.GUIBuilder.hideLoadingDiv;
-
+			
 			OpenPanel.Controller.action( 
+			{
+				command: "PreloadAssets",
+				nextAction : {
+					command: "Init", userName: "openadmin", password: "foobar" 
+				}
+			});
+			
+			/*OpenPanel.Controller.action( 
 			{
 				command: "Init", userName: "openadmin", password: "foobar" 
 			});
+			*/
 		});
 		
 	</script>

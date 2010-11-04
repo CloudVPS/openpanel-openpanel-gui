@@ -328,12 +328,15 @@ OpenPanel.GUIBuilder = {
 	},
 
 	pageHeight: function() {
+		return document.viewport.getHeight();
+/*
 		if (window.innerHeight != null) return window.innerHeight;
 		if (document.documentElement && document.documentElement.clientHeight) {
 			return document.documentElement.clientHeight;
 		}
 		if (document.body != null) return document.body.clientHeight;
 		return 500;
+		*/
 	},
 	
 	displayError : function(error, targetDiv, extraText){

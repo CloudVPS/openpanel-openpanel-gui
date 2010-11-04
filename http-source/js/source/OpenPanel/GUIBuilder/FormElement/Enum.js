@@ -8,23 +8,18 @@ OpenPanel.GUIBuilder.FormElement.Enum.prototype = {
 	setEnumSet : function(enumSet){
 		this.enumSet = {};
 		
-		/*if(this.required != true){
-			this.enumSet[undefined] = {
-				description: " none "
-			};
-		}*/
 		for(var key in enumSet){
 			this.enumSet[key] = enumSet[key];
 		}
 		this.selectElement;
 	},
 	
-	renderInputElement: function(){
+	renderWindowsDropDown: function(){
 		var divElement = document.createElement("div");
 		if(this.readOnly == false){
-			this.selectElement = document.createElement("div");
+			this.selectElement = new Element("select");
 			this.selectElement.setAttribute("tabIndex", OpenPanel.GUIBuilder.FormElement.Base.getNextTabIndex());
-			/*
+			
 			var hook = this;
 			this.selectElement.onchange = function(){
 				hook.setValue(this.value);
@@ -37,19 +32,46 @@ OpenPanel.GUIBuilder.FormElement.Enum.prototype = {
 				optionElement.appendChild(document.createTextNode(enumSetElement.description));
 				enumSetElement.index = i;
 				this.selectElement.appendChild(optionElement);
-			}*/
+			}
 		} else {
 			this.selectElement = document.createElement("div");
 			this.selectElement.className = "stringElementDisabled";
 			this.disable();
 		}
-		//var m = document.createElement("div");
-		//m.innerHTML = "SELECT";
-		//divElement.appendChild(m);
+		
+		divElement.appendChild(this.selectElement);
+		
+		for(var key in this.enumSet){
+			this.setValue(key, true);
+			break;
+		}	
+		
+
+		this.menuCallbacks = {};
+		var itemData = {};
+		
+		for (key in this.enumSet) {
+			itemData[key] = this.enumSet[key].description;
+			this.menuCallbacks[key] = this.enumSet[key];
+		}
+		
+		
+		
+		return divElement;
+	},
+	regularDropDown: function(){
+		var divElement = document.createElement("div");
+		if(this.readOnly == false){
+			this.selectElement = document.createElement("div");
+			this.selectElement.setAttribute("tabIndex", OpenPanel.GUIBuilder.FormElement.Base.getNextTabIndex());
+		} else {
+			this.selectElement = document.createElement("div");
+			this.selectElement.className = "stringElementDisabled";
+			this.disable();
+		}
+		
 		var hook = this;
-		//m.onclick = function(){
-		//	hook.createMenu.show();	
-		//}
+		
 		var dropDownButton = document.createElement("div");
 		dropDownButton.className = "dropDownButton";
 		
@@ -66,13 +88,15 @@ OpenPanel.GUIBuilder.FormElement.Enum.prototype = {
 		var menuLayer = document.createElement("div");
 		menuLayer.id = "menulayer";
 		
+		this.createMenu = new OpenPanel.GUIBuilder.GUIElements.DropDownMenu();
+		
 		dropDownButton.appendChild(btleft)
 		dropDownButton.appendChild(this.btmid);
 		dropDownButton.appendChild(btright);
 		dropDownButton.appendChild(menuLayer);
-		dropDownButton.onclick = function(){
+		dropDownButton.observe("mouseup", function(event){
 			hook.createMenu.show();
-		}
+		})
 		
 		this.selectElement.appendChild(dropDownButton);
 		divElement.appendChild(this.selectElement);
@@ -82,7 +106,6 @@ OpenPanel.GUIBuilder.FormElement.Enum.prototype = {
 			break;
 		}	
 		
-		this.createMenu = new OpenPanel.GUIBuilder.GUIElements.DropDownMenu();
 
 		this.createMenu.create(divElement, -17);
 		this.menuCallbacks = {};
@@ -100,6 +123,10 @@ OpenPanel.GUIBuilder.FormElement.Enum.prototype = {
 		}
 		
 		return divElement;
+	},
+	
+	renderInputElement: function(){
+		return this.renderWindowsDropDown();
 	},
 	
 	getValue : function(){
@@ -128,11 +155,10 @@ OpenPanel.GUIBuilder.FormElement.Enum.prototype = {
 			this.btmid.innerHTML = this.enumSet[value].description;
 		}
 		
-		
-		
 		if(value == "undefined"){
 			value = undefined;
 		}
+		
 		this.hasValue = true;
 		this.value = value;
 		if(setInitialValue == true){

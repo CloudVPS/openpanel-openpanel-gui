@@ -14,18 +14,22 @@ OpenPanel.Controller = {
 	currentUser : {},
 	
 	action: function(actionObject){
-		console.log("Command", actionObject);
 		try {
 			this.lastCommand = actionObject.command;
 			this.lastArgumentObject = actionObject;
 			var actionObject = this.lastArgumentObject;
 			var commandObject = OpenPanel.Command[actionObject.command];
 			
+			if(actionObject.nextAction){
+				commandObject.nextAction = actionObject.nextAction;
+			}
+			
 			if(commandObject != undefined){
 				commandObject.controller = this;
 				commandObject.execute(actionObject);
 			}
 		} catch (e) {
+			console.log(e);
 			// errors are caught here
 			this.handleErrors(e);
 		}
@@ -47,7 +51,6 @@ OpenPanel.Controller = {
 	},
 	
 	showCreateInstance : function(openCoreObject, formObjectHolder, finishedAction){
-		console.log("!showCreateInstance");
 		var popUpDiv = this.guiBuilder.createPopUp();
 		var formObject = new OpenPanel.GUIBuilder.GUIElements.FormObject();
 		formObject.setOpenCoreObject(openCoreObject);
@@ -58,7 +61,6 @@ OpenPanel.Controller = {
 	},
 	
 	showCreateInstanceFromFormObject : function(formObject, formObjectHolder, finishedAction){
-		console.log("!showCreateInstanceFromFormObject");
 		var d = document.createElement("div");
 		
 		var popUpDiv = this.guiBuilder.createPopUp();
@@ -71,7 +73,6 @@ OpenPanel.Controller = {
 	},
 	
 	showCreateInstanceFromFormObjectMeta : function(formObject, openCoreObject, formObjectHolder, finishedAction) {
-		console.log("!showCreateInstanceFromFormObjectMeta");
 		var popUpDiv = this.guiBuilder.createPopUp();
 		var popupFormObject = new OpenPanel.GUIBuilder.GUIElements.FormObject();
 		popupFormObject.setOpenCoreObject(openCoreObject);
@@ -82,7 +83,6 @@ OpenPanel.Controller = {
 	},
 	
 	iconBarClick : function(openCoreObject) {
-		console.log("!iconBarClick");
 		// update item list
 		
 		this.guiBuilder.GUIElements.ItemList.setOpenCoreObject(openCoreObject);
@@ -95,7 +95,6 @@ OpenPanel.Controller = {
 	
 	tabBarClick : function(openCoreObject) {
 		// populate tab bar
-		console.log("tabBarClick openCoreObject", openCoreObject);
 		if (openCoreObject.getFirstInstance() != undefined) {
 			// new TabBar(openCoreObject);
 			this.guiBuilder.GUIElements.TabBar.setOpenCoreObject(openCoreObject);
@@ -120,6 +119,9 @@ OpenPanel.Controller = {
 			this.guiBuilder.GUIElements.TabBar.build();
 			this.guiBuilder.GUIElements.TabBar.disable();
 			this.guiBuilder.GUIElements.FormBuilder.clean();
+			//this.guiBuilder.GUIElements.FormBuilder.setOpenCoreObject(openCoreObject);
+			//this.guiBuilder.GUIElements.FormBuilder.build();
+			//this.guiBuilder.GUIElements.FormBuilder.targetDiv.update("new!");
 		}
 	},
 	

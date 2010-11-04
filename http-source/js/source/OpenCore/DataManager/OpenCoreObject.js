@@ -33,6 +33,7 @@ OpenCore.DataManager.OpenCoreObject = function(parent, name){
 OpenCore.DataManager.OpenCoreObject.prototype = {
 	
 	init : function(parent, name){
+		
 		this.parent = parent;
 		this.name = name;
 		if(OpenCore.DataManager.OpenCoreObject.openCoreObjects == undefined){

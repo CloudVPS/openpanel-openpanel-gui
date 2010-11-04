@@ -1,0 +1,16 @@
+div.modalPopupTransparent {
+    filter: alpha(opacity=75);
+    -moz-opacity: .75;
+    background: #CCCCCC;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+div.modalPopupWindow {
+    position: absolute;
+    background-color: #FFFFFF;
+    border: 2px solid black;
+    padding: 8px;
+    text-align: left;
+}

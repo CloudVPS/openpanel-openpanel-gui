@@ -31,9 +31,9 @@ OpenPanel.GUIBuilder.FormElement.Bool.prototype = {
 		divElement.appendChild(this.checkboxElement);
 		if(this.readOnly == false){
 			var hook = this;
-			this.checkboxElement.onchange = function(){
+			this.checkboxElement.observe("click", function(event){
 				hook.setValue(this.checked);
-			}
+			});
 			this.checkboxElement.removeAttribute("disabled");
 		} else {
 			this.checkboxElement.setAttribute("disabled", "true");
@@ -74,7 +74,6 @@ OpenPanel.GUIBuilder.FormElement.Bool.prototype = {
 		if(setInitialValue == true){
 			this.initialValue = this.value;
 		}
-		
 		this.onChange();
 	},
 	

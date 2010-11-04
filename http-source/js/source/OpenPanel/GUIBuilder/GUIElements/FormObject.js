@@ -43,11 +43,12 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		if(focusOnFirstField == true){
 			this.focusOnFirstField = focusOnFirstField;
 		}
-		// divs maken
+		
 		if (this.openCoreObject != undefined) {
 			this.init();
 			this.targetDiv.innerHTML = "";
 			this.createDivs();
+			
 			if (this.openCoreObject.classInfo == undefined || (this.openCoreObject.classInfo != undefined && this.openCoreObject.classInfo.info == undefined) || (this.openCoreObject.classInfo.info != undefined && this.openCoreObject.classInfo.info.parent == undefined)) {
 				this.createTopLevelForm();
 			} else {
@@ -164,7 +165,6 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 				this.createCreateOption(true);
 			}
 		}
-		
 		this.formBuilder.setIsUpdateable(false);
 		this.getRootFormObject().doneLoading(this);
 		this.formBuilder.finishLayout(this);
@@ -173,6 +173,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 	createSubLevelFormAsync : function createSubLevelFormAsync(stateObject){
 		var state;
 		var passThrough;
+		
 		
 		if(stateObject!=undefined){
 			if(stateObject.state != undefined){
@@ -202,6 +203,9 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 					);
 			break;
 			case "getInstancesByParentUUIDDone":
+				
+
+				
 				this.instances = this.openCoreObject.instances;
 				if (this.instances != undefined && typeof(this.openCoreObject.getFirstInstance()) == "object") {
 				// there are instances
@@ -215,7 +219,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 					// now we have to figure out if the current opencore object is a meta object
 					var actualOpenCoreObject;
 					var actualInstance;
-					//console.log("currentInstance " + this.currentInstance);
+					
 					// get class name
 					var className = this.currentInstance["class"];
 					if (this.openCoreObject.name != className) {
@@ -409,11 +413,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 	},
 	
 	createMultiCreateOption : function(textOnly){
-	
-		
-		
-		if ((textOnly==undefined)||(textOnly==false))
-		{
+		if ((textOnly==undefined)||(textOnly==false)){
 			this.createMultiCreateOptionOld();
 			return;
 		}

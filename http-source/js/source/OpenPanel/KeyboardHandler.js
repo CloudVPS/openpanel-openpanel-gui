@@ -6,15 +6,15 @@
  */
  
 OpenPanel.KeyboardHandler = {
-	cancelfunc: {},
-	okfunc: {},
+	cancelfunc: function(){},
+	okfunc: function(){},
 	initialized: false,
 	
 	init: function()
 	{
 		var hook = this;
 		this.Shortcuts.add ("esc",function(){hook.cancelfunc();});
-		this.Shortcuts.add ("enter",function(){console.log('enter'); hook.okfunc();},{'disable_in_input':false});
+		this.Shortcuts.add ("enter",function(){hook.okfunc();},{'disable_in_input':false});
 		this.Shortcuts.add ("Meta+n",function(){
 			var bt = document.getElementById("itemListAddButton");
 			if (bt != undefined) bt.onclick();
@@ -26,10 +26,10 @@ OpenPanel.KeyboardHandler = {
 			OpenPanel.GUIBuilder.GUIElements.TabBar.nextTab();
 			});
 		this.Shortcuts.add ("Meta+up",function(){
-			OpenPanel.GUIBuilder.GUIElements.IconBar.previousItem();
+			OpenPanel.GUIBuilder.GUIElements.iconBar.previousItem();
 			});
 		this.Shortcuts.add ("Meta+down",function(){
-			OpenPanel.GUIBuilder.GUIElements.IconBar.nextItem();
+			OpenPanel.GUIBuilder.GUIElements.iconBar.nextItem();
 			});
 		this.initialized = true;
 	},

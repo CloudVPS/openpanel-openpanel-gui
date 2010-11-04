@@ -24,7 +24,7 @@ OpenCore.RPC.RPCError = function(message, status){
 }
 
 OpenCore.RPC.RequestHandler = {
-	openCoreURL	: "http://localhost:8888/fake-opencore-proxy/json",
+	openCoreURL	: "http://localhost/fake-opencore-proxy/json",
 	asynchronizedRequestCount : 0,
 	
 	setOpenCoreURL: function(openCoreURL){
@@ -69,7 +69,8 @@ OpenCore.RPC.RequestHandler = {
 		  	hook.asynchronizedRequestReturn(xhr);
 		  },
 		  onFailure : function(){
-			alert('failure');  
+			 xhr.argument = arg;
+			 hook.asynchronizedRequestReturn(xhr);
 		  },
 		  argument: arg
 		});
