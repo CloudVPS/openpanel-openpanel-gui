@@ -3,6 +3,7 @@
 
 BUILD_ROOT=$(CURDIR)/debian/tmp
 install:
+	make
 	rm -rf ${BUILD_ROOT}
 	mkdir -p ${BUILD_ROOT}/var/openpanel/
 	cp -r http ${BUILD_ROOT}/var/openpanel/
