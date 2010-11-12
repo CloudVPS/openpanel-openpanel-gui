@@ -68,10 +68,6 @@ td {
 	width: 220px;
 }
 
-#loginForm {
-	-webkit-user-select:none;
-	-moz-user-select:none;
-}
 #loginDiv {
 	margin-top: 150px;
 	width: 290px;
