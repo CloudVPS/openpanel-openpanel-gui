@@ -1,7 +1,6 @@
 OpenPanel.Command.PreloadAssets  = {
 	controller : {},
 	execute : function(actionObject){
-		
 		var url = "/dynamic/imagelist.json";
 		var that = this;
 		new Ajax.Request(url, {
