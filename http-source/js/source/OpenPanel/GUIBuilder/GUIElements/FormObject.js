@@ -332,6 +332,8 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 					if (formmargin == undefined) formmargin = 0;
 					
 					this.fieldsDiv.style.marginTop = "" + formmargin + "px";
+					
+					
 						
 				} else {
 					this.gridDiv.style.paddingTop = "15px";
@@ -687,6 +689,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 			this.fields.setOnChangeHandler(this.onChangeHandler);
 		}
 		this.fields.build();
+		
 	},
 	
 	createMethods : function(openCoreObject){
@@ -816,7 +819,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 			OpenPanel.GUIBuilder.deletePopUp();
 			this.setAttribute("disabled", "true");
 			this.style.opacity = "0.5";
-			this.onclick = function(){};
+			this.onclick = function(){ };
 			//targetDiv.parentNode.parentNode.removeChild(targetDiv.parentNode);
 		}
 		this.controller.guiBuilder.GUIElements.Button.renderButton(d);
@@ -843,29 +846,14 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 				OpenPanel.GUIBuilder.deletePopUp();
 			},50);
 		});
+		
 		OpenPanel.KeyboardHandler.setOk (function(){
-			var b = saveButton.childNodes[0];
-			if (b!=undefined) b.onmousedown();
-			setTimeout (function() {
-				if (b!=undefined)
-				{
-					b.onmouseup();
-					b.style.opacity="0.50";
-					var c = cancelButton.childNodes[0];
-					if (c!=undefined) c.style.opacity="0.50";
-					setTimeout (function() {
-						OpenPanel.KeyboardHandler.clearOk();
-						OpenPanel.KeyboardHandler.clearCancel();
-						hook.fields.submit();
-					},200);
-				}
-				else
-				{
-					OpenPanel.KeyboardHandler.clearOk();
-					OpenPanel.KeyboardHandler.clearCancel();
-					hook.fields.submit();
-				}
-			},50);
+			var isValid = hook.fields.formPanel.validate();
+			if(isValid === true){
+				//OpenPanel.KeyboardHandler.clearOk();
+				//OpenPanel.KeyboardHandler.clearCancel();
+				hook.fields.submit();
+			}
 		});
 	},
 	
