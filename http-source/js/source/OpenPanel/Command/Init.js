@@ -30,7 +30,8 @@ OpenPanel.Command.Init  = {
 			$("modalLoadingDiv").className = "modalLoadingDivLogin";
 			this.controller.guiBuilder.hideModalMessageDiv();
 			this.controller.guiBuilder.loadTemplate("templates/login.html", "app");
-			this.controller.guiBuilder.GUIElements.LoginWindow.renderLogin(document.getElementById("loginDiv"), actionObject);
+			
+			this.controller.guiBuilder.GUIElements.LoginWindow.renderLogin($("loginDiv"), actionObject);
 			if(actionObject.msg != undefined){
 				document.getElementById("loginMessageDiv").innerHTML = actionObject.msg;
 			} else {
