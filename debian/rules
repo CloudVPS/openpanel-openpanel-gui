@@ -18,7 +18,6 @@ binary-arch binary: build install
 	dh_installdeb -a
 	dh_compress -a
 	dh_fixperms -a
-	dh_shlibdeps -a
 	dh_gencontrol -a
 	dh_md5sums -a
 	dh_builddeb -a
