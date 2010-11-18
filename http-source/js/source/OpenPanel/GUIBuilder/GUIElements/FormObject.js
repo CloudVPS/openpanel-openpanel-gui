@@ -420,6 +420,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 			return;
 		}
 		
+		
 		var metaObjects = this.controller.dataManager.getOpenCoreObjectsByMetaName(this.openCoreObject.name);
 		var available = {};
 		var canAdd = false;
@@ -430,7 +431,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 			// get quota, compare, etc
 			canAdds[metaObject.name] = this.controller.dataManager.checkQuotum(metaObject.name);
 			if(this.controller.dataManager.checkQuotum(metaObject.name)){
-				available[metaObject.name] = metaObject;
+				available[metaObject.classInfo["class"].sortindex + "_" + metaObject.name] = metaObject;
 				canAdd = true;
 			}
 		}
@@ -446,7 +447,17 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		tBD.appendChild(tR);
 		
 		if (canAdd == true) {
+			var availableKeys = [];
+			
 			for (var key in available) {
+				availableKeys.push(key);
+			}
+			
+			availableKeys.alphanumSort(true);
+			
+			for(var i = 0;i<availableKeys.length;i++){
+				var key = availableKeys[i];
+				
 				var metaObject = available[key];
 				var tD = document.createElement ("td");
 				tD.style.paddingRight = "10px";
@@ -496,7 +507,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 				// get quota, compare, etc
 				canAdds[metaObject.name] = this.controller.dataManager.checkQuotum(metaObject.name);
 				if (this.controller.dataManager.checkQuotum(metaObject.name)) {
-					available[metaObject.name] = metaObject;
+					available[metaObject.classInfo["class"].sortindex + "_" + metaObject.name] = metaObject;
 					canAdd = true;
 				}
 			}
@@ -518,8 +529,16 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 				}
 				
 				var mdef = {};
+				var availableKeys = [];
 				
 				for (var key in available) {
+					availableKeys.push(key);
+				}
+				
+				availableKeys.alphanumSort(true);
+				
+				for(var i = 0;i<availableKeys.length;i++){
+					var key = availableKeys[i];
 					var metaObject = available[key];
 					var menukey = "Create " + metaObject.title;
 					mdef[menukey] = mkcallback(this, metaObject);
