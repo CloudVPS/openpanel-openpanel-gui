@@ -24,4 +24,9 @@ minimize:
 	@echo Minimizing javascripts
 	@tools/compressJSDirectory http-source/js/source http/js/openpanel-compressed.js
 	
-	
+install:
+	mkdir -p ${DESTDIR}/var/openpanel/
+	# perhaps fiddle with ownership?
+	cp -r http ${DESTDIR}/var/openpanel/
+	cp -r http-templates ${DESTDIR}/var/openpanel/
+
