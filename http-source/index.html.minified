@@ -48,5 +48,6 @@
 	</script>
 	</head>
 	<body id="application">
+		<div id="crow" style="text-align: center;margin-top: 150px;"><img src="/images/gui/crow.png"/></div>
 	</body>
 </html>
