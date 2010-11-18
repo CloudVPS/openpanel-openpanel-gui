@@ -6,7 +6,7 @@ Build-Depends: debhelper (>= 5), python (>= 2.5)
 Standards-Version: 3.7.2
 
 Package: openpanel-gui
-Architecture: any
+Architecture: all
 Depends: ${misc:Depends}
 Recommends: openpanel-core (>= 0.8.3)
 Conflicts: openpanel-core (<< 0.8.3)
