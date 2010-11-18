@@ -24,7 +24,7 @@ Gr0wl.Base = Class.create({
 	    this.image.setStyle('position:absolute;display:none');
 		Element.setOpacity(this.image, 0.0);
 		this.block = new Element('div');
-        this.block.setStyle('position:absolute;display:none;z-index:999;color:#fff;font: 12px/14px "Lucida Grande", Arial, Helvetica, Verdana, sans-serif;'+styles.div);
+        this.block.setStyle('position:absolute;display:none;z-index:100000000;color:#fff;font: 12px/14px "Lucida Grande", Arial, Helvetica, Verdana, sans-serif;'+styles.div);
 		this.block.setOpacity(0.0);
 		this.block.insert(new Element('h3').setStyle(styles.h3));
 		this.block.insert(new Element('p').setStyle(styles.p));
