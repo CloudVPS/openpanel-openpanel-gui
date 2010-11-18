@@ -41,7 +41,10 @@
 
 			OpenPanel.Controller.action( 
 			{
-				command: "Init", userName: "openadmin", password: "foobar" 
+				command: "PreloadAssets",
+				nextAction : {
+					command: "Init", userName: "openadmin", password: "foobar" 
+				}
 			});
 		});
 		
