@@ -203,6 +203,14 @@ OpenPanel.Controller = {
 					switch (e.errorCode) {
 					
 						case 12288:
+							alert("You have been logged out due to inactivity");
+							this.action({
+								command: "Init",
+								msg: e.message
+							})
+							OpenPanel.Controller.proceedAfterError();
+						break;
+							
 						case 8193:
 							
 							alert("error: " + e.message);
