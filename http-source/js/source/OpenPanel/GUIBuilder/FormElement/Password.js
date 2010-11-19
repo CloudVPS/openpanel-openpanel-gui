@@ -6,6 +6,7 @@ OpenPanel.GUIBuilder.FormElement.Password = function(name, form, initObject){
 	this.canHasFocus = true;
 	this.regExp = initObject.regexp?new RegExp(initObject.regexp):null;
 	this.example = initObject.example?initObject.example:null;
+	this.virgin = true;
 	if(this.isCreate == false){
 		this.required = false;
 	}
@@ -26,6 +27,7 @@ OpenPanel.GUIBuilder.FormElement.Password.prototype = {
 			var hook = this;
 			this.inputElement.onchange = this.inputElement.onkeyup = this.inputElement.onkeydown = function() {
 				hook.setValue(this.value);
+				hook.virgin = false;
 			}
 			
 			this.inputElement.onblur = function() {
@@ -130,23 +132,25 @@ OpenPanel.GUIBuilder.FormElement.Password.prototype = {
 	},
 	
 	validate : function(){
-		var isValid = true;
-		
-		if(this.regExp!=undefined && this.regExp !=""){
-			if(this.value!="" && this.value != undefined){
-				if(!this.value.match(this.regExp)){
+		if(this.virgin == false){
+			var isValid = true;
+			
+			if(this.regExp!=undefined && this.regExp !=""){
+				if(this.value!="" && this.value != undefined){
+					if(!this.value.match(this.regExp)){
+						isValid = false;
+					}
+				}
+			}
+			
+			if(this.required == true){
+				if(this.value=="" || this.value == undefined){
 					isValid = false;
 				}
 			}
+			
+			this.setValidity(isValid);
 		}
-		
-		if(this.required == true){
-			if(this.value=="" || this.value == undefined){
-				isValid = false;
-			}
-		}
-		
-		this.setValidity(isValid);
 		return this.isValid;
 	},
 	
