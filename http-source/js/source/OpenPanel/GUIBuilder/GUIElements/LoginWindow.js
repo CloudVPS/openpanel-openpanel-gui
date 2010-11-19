@@ -8,14 +8,14 @@ OpenPanel.GUIBuilder.GUIElements.LoginWindow = {
 						description : "Username",
 						textwidth: 20,
 						example : "",
-						required : false
+						required : true
 					},
 					password : {	
 						type : "Password",
 						description : "Password",
 						textwidth: 20,
 						example : "",
-						required : false
+						required : true
 					}
 				}
 			},
@@ -48,12 +48,17 @@ OpenPanel.GUIBuilder.GUIElements.LoginWindow = {
 		
 		var hook = this;
 		var onsubmit = function(){
-			var obj = { command : "Login" };
-			var values = formPanel.getValues();
-			for(var key in values){
-				obj[key] = values[key];
+			if(formPanel.validate() === true){
+				
+				var obj = { command : "Login" };
+				var values = formPanel.getValues();
+				for(var key in values){
+					obj[key] = values[key];
+				}
+				OpenPanel.Controller.action(obj);
+			} else {
+				
 			}
-			OpenPanel.Controller.action(obj);
 			return false;
 		}
 		try {
