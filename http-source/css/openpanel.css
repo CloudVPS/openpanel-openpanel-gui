@@ -21,14 +21,12 @@ q:before,q:after{content:'';}
 }
 
 .unselectable {
-	-moz-user-select: none;
-	-khtml-user-select: none;
+
 }
 body {
 	background-image: url(/images/gui/loadingbackground.png);
 	background-repeat: repeat;
 	font: 13px Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
-	
 	overflow: hidden;
 }
 
@@ -117,8 +115,6 @@ label { font: 11px Arial, Helvetica, sans-serif; }
 	left: -450px;
 	border-top: 1px solid #444444;
 	border-bottom: 1px solid #222222;
-	-webkit-user-select:none;
-	-moz-user-select:none;
 }
 
 .inactiveBrowserWindow #saveButtonHolder {
@@ -236,8 +232,6 @@ html > body #saveButtonHolder {
 	left: 50%; 
 	margin-left: -350px;
 	visibility: hidden;
-	-webkit-user-select:none;
-	-moz-user-select:none;
 }
 
 .modalLoadingDiv {
@@ -398,8 +392,6 @@ html > body #saveButtonHolder {
 	overflow-y: hidden;
 	position: fixed;
 	z-index: -10;
-	-webkit-user-select:none;
-	-moz-user-select:none;
 }
 
 #mainAreaLeft {
@@ -411,8 +403,6 @@ html > body #saveButtonHolder {
 	left: -420px;
 	overflow-y: visible;
 	position: fixed;
-	-webkit-user-select:none;
-	-moz-user-select:none;
 }
 
 #itemListArea {
