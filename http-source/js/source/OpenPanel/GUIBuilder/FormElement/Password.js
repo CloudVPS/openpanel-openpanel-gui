@@ -132,26 +132,35 @@ OpenPanel.GUIBuilder.FormElement.Password.prototype = {
 	},
 	
 	validate : function(){
-		if(this.virgin == false){
-			var isValid = true;
+		var isValid = true;
 			
-			if(this.regExp!=undefined && this.regExp !=""){
-				if(this.value!="" && this.value != undefined){
-					if(!this.value.match(this.regExp)){
-						isValid = false;
-					}
-				}
-			}
-			
-			if(this.required == true){
-				if(this.value=="" || this.value == undefined){
+		if(this.regExp!=undefined && this.regExp !=""){
+			if(this.value!="" && this.value != undefined){
+				if(!this.value.match(this.regExp)){
 					isValid = false;
 				}
 			}
-			
-			this.setValidity(isValid);
 		}
+		
+		if(this.required == true){
+			if(this.value=="" || this.value == undefined){
+				isValid = false;
+			}
+		}
+		
+		this.setValidity(isValid);
 		return this.isValid;
+	},
+	
+	setValidity : function(validity){
+		this.isValid = validity;
+		if (this.labelElement != undefined) {
+			if (this.isValid == true || this.virgin == true) {
+				this.labelElement.className = "labelElement";
+			} else {
+				this.labelElement.className = "labelElementError";
+			}
+		}
 	},
 	
 	enable : function(){
