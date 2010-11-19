@@ -28,7 +28,7 @@ OpenPanel.GUIBuilder.FormElement.String.prototype = {
 			this.inputElement.setAttribute("tabIndex", OpenPanel.GUIBuilder.FormElement.Base.getNextTabIndex());
 			this.setStyle();
 			var hook = this;
-			this.inputElement.onkeyup = this.inputElement.onkeydown = function() {
+			this.inputElement.onchange = this.inputElement.onkeyup = this.inputElement.onkeydown = function() {
 				hook.setValue(this.value);
 			}
 			
