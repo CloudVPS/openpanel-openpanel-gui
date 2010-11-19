@@ -186,7 +186,6 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		
 		switch(state){
 			case undefined:
-				console.log("register " + this.openCoreObject.name);
 				if(this.parentFormObject == undefined){
 					this.getRootFormObject().resetFormObjects();
 				}
@@ -752,7 +751,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 	
 	createSaveButton : function(){
 		var hook = this;
-		var saveButton = document.createElement("div");
+		saveButton = document.createElement("div");
 		saveButton.setAttribute ("id", "modalSaveButton");
 		saveButton.style.cssText = "float: right;padding-top: 11px; padding-left:12px;";
 		saveButton.appendChild(document.createTextNode("Create"));
@@ -769,7 +768,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 	
 	createDisabledSaveButton : function(){
 		var saveButton = document.createElement("div");
-		saveButton.setAttribute ("id", "modalSaveButton");
+		saveButton.setAttribute ("id", "modalDisabledSaveButton");
 		saveButton.style.cssText = "float: right;padding-top: 11px; padding-left:12px;";
 		saveButton.appendChild(document.createTextNode("Create"));
 		this.controller.guiBuilder.renderDisabledButton(saveButton, true);
@@ -789,23 +788,23 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		if(this.onChangeHandler!=undefined){
 			this.fields.setOnChangeHandler(this.onChangeHandler);
 		}
+		
+		
 		var hook = this;
 		var f = function(formElement){
 			var p = $("modalSaveButtonHolder");
 			if(p){
-				var modalSaveButton = $("modalSaveButton");
 				if(hook.fields.formPanel.validate()){
-					p.removeChild(modalSaveButton);
-					p.appendChild(hook.createSaveButton());
+					$("modalSaveButton").show();
+					$("modalDisabledSaveButton").hide();
 				} else {
-					p.removeChild(modalSaveButton);
-					p.appendChild(hook.createDisabledSaveButton());
+					$("modalSaveButton").hide();
+					$("modalDisabledSaveButton").show();
 				}
 			}
 		}
 		
-		this.fields.setOnChangeHandler(
-		f);
+		this.fields.setOnChangeHandler(f);
 		
 		if(optionalCallBackObject == undefined){
 			optionalCallBackObject = {};
@@ -821,8 +820,12 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		var hook = this;
 		
 		var saveButton = this.createSaveButton();
+		var saveButtonDisabled = this.createDisabledSaveButton();
 			
 		modalSaveButtonHolder.appendChild(saveButton);
+		modalSaveButtonHolder.appendChild(saveButtonDisabled);
+		saveButtonDisabled.hide();
+		
 		f();
 			
 		var d = cancelButton;
