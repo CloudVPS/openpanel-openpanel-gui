@@ -223,7 +223,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 					var className = this.currentInstance["class"];
 					if (this.openCoreObject.name != className) {
 						// get encapsulated object
-						console.log("className " + className, this.openCoreObject, this.controller.dataManager);
+						//console.log("className " + className, this.openCoreObject, this.controller.dataManager);
 						actualOpenCoreObject = this.controller.dataManager.getOpenCoreObjectByName(className);
 						// all good, now we have to find its instance
 						var record = this.controller.dataManager.getRecord(actualOpenCoreObject.name, this.currentInstance.id);
@@ -279,7 +279,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 							if (count>1) break;
 						}
 						
-						if ((count!=1) || (! this.openCoreObject.classInfo["class"].hidegrid)) {
+						if ((! this.openCoreObject.classInfo["class"].hidegrid)) {
 							this.createGrid(this.openCoreObject, this.instances, "callBackCommand", this.gridDiv, {}, this.currentInstance);
 						}
 						
@@ -959,9 +959,9 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 	},
 	
 	onChange : function(forms){
-		console.log('--------', forms);
+		//console.log('--------', forms);
 		for(var key in forms){
-			console.log(forms[key].hasChanged());
+			//console.log(forms[key].hasChanged());
 		}
 	},
 	
