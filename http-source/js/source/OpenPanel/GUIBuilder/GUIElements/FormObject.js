@@ -273,13 +273,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 						//console.log("create Grid for " + this.openCoreObject.name);
 						//console.log(this.instances);
 							
-						var count = 0;
-						for (var key in this.instances) {
-							count++;
-							if (count>1) break;
-						}
-						
-						if ((! this.openCoreObject.classInfo["class"].hidegrid)) {
+						if (! this.openCoreObject.classInfo["class"].hidegrid) {
 							this.createGrid(this.openCoreObject, this.instances, "callBackCommand", this.gridDiv, {}, this.currentInstance);
 						}
 						
