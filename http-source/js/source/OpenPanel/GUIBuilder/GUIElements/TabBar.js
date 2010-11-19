@@ -41,7 +41,7 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 			this.tabStart.innerHTML = "&nbsp;";
 			tabHolder.appendChild(this.tabStart);
 			
-			this.tabWidth += $("tabStart").getDimensions().width;
+			this.tabWidth += $("tabStart").getDimensions().width+1;
 			
 			this.openCoreObjects = [];
 			
