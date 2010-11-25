@@ -13,7 +13,6 @@ new Ajax.Request("/dynamic/imagelist.json", {
 		assetList.each(function(assetSource){
 			a[assetSource] = new Image(32, 32);
 			a[assetSource].src = assetSource;
-			console.log(assetSource);
 		});
 	  }
 });
