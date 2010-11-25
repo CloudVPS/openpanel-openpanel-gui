@@ -27,7 +27,7 @@ minimize:
 	
 down_crow: http-source/images/icons/crow.png
 	# only try to create the down icon when imagemagick is available, so we can
-	# still make on without it.
+	# still make one without it.
 	# imagemagick is listed as a build dependency in packaging, so packages will
 	# always have the down icon.
 	which convert > /dev/null && \
