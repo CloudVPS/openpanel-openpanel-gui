@@ -16,7 +16,7 @@ copy:
 	cp http-source/css/openpanel.ie7.css http/css
 	cp http-source/css/browsers.css http/css
 	cp -R http-source/images http/images
-	mkdir http/images/down
+	mkdir http/images/icons/down
 	cp -R http-source/dynamic http/dynamic
 	cp -R http-source/templates http/templates
 	cp http-source/index.html.minified http/index.html
