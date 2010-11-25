@@ -43,7 +43,7 @@
 			{
 				command: "PreloadAssets",
 				nextAction : {
-					command: "Init" 
+					command: "Init" , userName: "openadmin", password: "foobar" 
 				}
 			});
 		});
