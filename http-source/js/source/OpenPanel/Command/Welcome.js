@@ -6,17 +6,16 @@ OpenPanel.Command.Welcome = {
 		if(tabBarDiv != undefined){
 			tabBarDiv.innerHTML = "";
 		}
-		var fullWindowAreaDiv = document.getElementById("fullWindowArea");
+		var fullWindowAreaDiv = document.getElementById("fullWindowArea").setStyle({backgroundColor: "#E8E8E8", height: (document.viewport.getHeight() - 170) + "px", marginTop: "2px"});
 		fullWindowAreaDiv.innerHTML = "";
-		
-		
+		$("mainBottom").hide();
 		var welcomeDivHolder = document.createElement("div");
 		welcomeDivHolder.setAttribute("id", "welcomeDivHolder");
 		
 		fullWindowAreaDiv.appendChild(welcomeDivHolder);
 		fullWindowAreaDiv.style.visibility = "visible";
 		this.controller.guiBuilder.loadTemplate("dynamic/welcome.html", "welcomeDivHolder");
-		
+		$("mainBottom").show();
 		this.controller.guiBuilder.GUIElements.FormBuilder.setSaveButtonVisibility(false);
 		Element.observe(window, "resize", this.resize.bind(this));
 		this.resize();
@@ -35,6 +34,7 @@ OpenPanel.Command.Welcome = {
 		$("modal").setStyle({ height: (h - 20)+ "px", width: (viewportWidth - 2)+ "px", border: "1px solid #f0f"});
 		var hh = (h-166) + "px";
 		$("mainArea").setStyle({ height: hh});
+		$("fullWindowArea").setStyle({ height: hh});
 		//$("fullWindowArea").setStyle({ height: (h+180)+"px"});
 		$("shadowLeft").setStyle({ height: (h-139) + "px"});
 		$("shadowRight").setStyle({ height: (h-139) + "px"});
