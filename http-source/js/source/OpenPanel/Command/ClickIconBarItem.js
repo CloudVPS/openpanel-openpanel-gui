@@ -27,6 +27,7 @@ OpenPanel.Command.ClickIconBarItem  = {
 		this.controller.currentRootClassInstance 	= openCoreObject.getFirstInstance();
 		
 		this.controller.iconBarClick(openCoreObject);
+		OpenPanel.Command.Welcome.resize();
 	}
 }
 
