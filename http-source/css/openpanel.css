@@ -136,11 +136,9 @@ html > body #saveButtonHolder {
 	margin-left: 50%;
 	left: -450px;
 	top: 97px;
-	position: fixed;
+	position: absolute;
 	width: 900px;
-	bottom: 41px;
 	overflow: hidden;
-	visibility: hidden;
 }
 
 #welcomeDivHolder {
@@ -150,10 +148,9 @@ html > body #saveButtonHolder {
 	position: fixed;
 	font-size:11px;
 	width: 900px;
-	bottom: 69px;
 	border-bottom: 1px solid #444444;
 	background-color: #e8e8e8;
-	overflow-y: auto;
+	overflow: hidden;
 }
 
 
@@ -1684,15 +1681,16 @@ dd a {
 	margin-right: 30px;
 }
 
-#welcomeArea {
-	position: fixed;
+#welcomeArea, #welcomeLogoHolder {
+	position: absolute;
 	width: 900px;
-	top: 299px;
+	top: 0px;
 	bottom: 70px;
 	left: 50%;
 	margin-left: -450px;
 	overflow: auto;
 }
+
 
 #welcomeArea td {
 	vertical-align: top;
