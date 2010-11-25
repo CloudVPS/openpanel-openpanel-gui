@@ -16,6 +16,7 @@ copy:
 	cp http-source/css/openpanel.ie7.css http/css
 	cp http-source/css/browsers.css http/css
 	cp -R http-source/images http/images
+	mkdir http/images/down
 	cp -R http-source/dynamic http/dynamic
 	cp -R http-source/templates http/templates
 	cp http-source/index.html.minified http/index.html
@@ -31,7 +32,7 @@ down_crow: http-source/images/icons/crow.png
 	# imagemagick is listed as a build dependency in packaging, so packages will
 	# always have the down icon.
 	which convert > /dev/null && \
-		convert -modulate 50,100,100 http-source/images/icons/crow.png http-source/images/icons/down_crow.png || \
+		convert -modulate 50,100,100 http-source/images/icons/crow.png http/images/icons/down/crow.png || \
 		true
 
 install:

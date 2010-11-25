@@ -3,13 +3,19 @@ OpenPanel.Command.BuildIconBar  = {
 	execute : function(actionObject) {
 		var iconBar = new OpenPanel.GUI.MenuIconBar("iconBar", $("iconBar"));
 		OpenPanel.GUIBuilder.GUIElements.iconBar = iconBar;
+		var crow1 = new Image(64, 64);
+		crow1.src = "/images/icons/crow.png";
+		var crow2 = new Image(32, 32);
+		crow2.src = "/images/icons/down/crow.png";
+		
 		
 		var crow = new OpenPanel.GUI.MenuIconBar.IconBarItem("Welcome").observe("mouseup", function(event){
 			that.controller.action({
 				command: "Welcome"
 			});
 		}).configure({
-			icon: "/images/icons/crow.png"
+			icon: "/images/icons/crow.png",
+			iconDown: "/images/icons/down/crow.png"
 		});
 		
 		iconBar.addItem(crow);
