@@ -24,6 +24,8 @@ q:before,q:after{content:'';}
 
 }
 body {
+	height: 100%;
+	width: 100%;
 	background-image: url(/images/gui/loadingbackground.png);
 	background-repeat: repeat;
 	font: 13px Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
