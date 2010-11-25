@@ -9,6 +9,7 @@
 	<link rel="stylesheet" type="text/css"	href="css/openpanel.ie7.css">
 	<![endif]-->
 	<script type="text/javascript" src="js/lib/prototype-1.6.1.js"></script>
+	<script type="text/javascript" src="js/lib/preload.js"></script>
 	<script type="text/javascript" src="js/lib/event.simulate.js"></script>
 	<script type="text/javascript" src="js/lib/scriptaculous-1.8.3.js"></script>
 	<script type="text/javascript" src="js/lib/effects.js"></script>
@@ -17,12 +18,7 @@
 	<script type="text/javascript" src="js/lib/BrowserDetect.js"></script>
 	<script type="text/javascript" src="js/openpanel-compressed.js"></script>
 	<script type="text/javascript">
-		var bgimage = new Image(32,32);
-		bgimage.src = "/images/gui/loadingbackground.png";
-		var crowimage = new Image(32,32);
-		crowimage.src = "/images/gui/crow.png";
-		var spinner = new Image(32,32);
-		spinner.src = "/images/gui/prespinner.gif";
+		
 		
 		if(typeof(console) != "object") {
 			console = { log: function(){} }
@@ -41,16 +37,13 @@
 
 			OpenPanel.Controller.action( 
 			{
-				command: "PreloadAssets",
-				nextAction : {
-					command: "Init" , userName: "openadmin", password: "foobar" 
-				}
+				command: "Init" , userName: "openadmin", password: "foobar" 
 			});
 		});
 		
 	</script>
 	</head>
 	<body id="application">
-		<div id="crow" style="text-align: center;margin-top: 150px;"><img src="/images/gui/crow.png"/></div>
+		<div id="crow" style="text-align: center;margin-top: 150px;"><img src="/images/gui/crow.png"/><br/><br/><br/><img src="/images/gui/prespinner.gif"/></div>
 	</body>
 </html>

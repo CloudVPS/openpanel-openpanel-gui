@@ -40,7 +40,7 @@ OpenPanel.Command.BuildIconBar  = {
 		childObjects.keys().sort(function(a,b){return a-b;}).each(function(sortIndex){
 			var sameSortIndexChildren = childObjects.get(sortIndex);
 			sameSortIndexChildren.each(function(childObject){
-				var image = new Image(64, 64);
+				var image = new Image(32, 32);
 				image.src = "/dynamic/icons/" + childObject.uuid + ".png";
 				var otherImage = new Image(32, 32);
 				otherImage.src = "/dynamic/icons/down/" + childObject.uuid + ".png";
