@@ -1,4 +1,4 @@
-all: clean copy minimize
+all: clean copy minimize down_crow
 	
 	
 clean: 
@@ -25,6 +25,15 @@ minimize:
 	# Minimizing javascripts
 	tools/compressJSDirectory http-source/js/source http/js/openpanel-compressed.js
 	
+down_crow: http-source/images/icons/crow.png
+	# only try to create the down icon when imagemagick is available, so we can
+	# still make on without it.
+	# imagemagick is listed as a build dependency in packaging, so packages will
+	# always have the down icon.
+	which convert > /dev/null && \
+		convert -modulate 50,100,100 http-source/images/icons/crow.png http-source/images/icons/down_crow.png || \
+		true
+
 install:
 	mkdir -p ${DESTDIR}/var/openpanel/
 	# perhaps fiddle with ownership?
