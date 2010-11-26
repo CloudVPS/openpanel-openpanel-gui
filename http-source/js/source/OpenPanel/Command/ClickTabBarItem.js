@@ -12,8 +12,6 @@ OpenPanel.Command.ClickTabBarItem  = {
 			this.controller.guiBuilder.GUIElements.FormBuilder.setOpenCoreParentUUID(this.controller.currentRootClassInstance.uuid);
 			this.controller.guiBuilder.GUIElements.FormBuilder.build();
 		}
-		
-		console.log("ClickTabBarItem openCoreObject", openCoreObject);
 	}
 }
 
