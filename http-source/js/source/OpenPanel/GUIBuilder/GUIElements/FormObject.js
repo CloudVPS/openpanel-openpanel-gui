@@ -685,7 +685,6 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 	},
 	
 	createFields : function(openCoreObject, instance, callBackCommand, targetDiv, optionalCallBackObject){
-		
 		this.fields = new OpenPanel.GUIBuilder.GUIElements.FormFields();	
 		this.fields.setTargetDiv(targetDiv);
 		this.fields.setOpenCoreObject(openCoreObject);
@@ -701,7 +700,6 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 			this.fields.setOnChangeHandler(this.onChangeHandler);
 		}
 		this.fields.build();
-		
 	},
 	
 	createMethods : function(openCoreObject){

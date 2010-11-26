@@ -67,10 +67,8 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 	},
 	
 	onChangeHandler : function(formElement){
-		//console.log("this.rootFormObject", this.rootFormObject.isLoading);
 		if(this.v == undefined) this.v = new Array();
 		if(formElement.initialValue != formElement.value){
-			//console.log(formElement.name + "-" + formElement.initialValue + "-" + formElement.value + ".");
 			var c = false;
 			for (var i = 0; i < this.v.length; i++) {
 				if (this.v[i] == formElement.name) {
@@ -84,11 +82,12 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 		} else {
 			for(var i = 0;i<this.v.length;i++){
 				if(this.v[i] == formElement.name){
-					this.v.splice(i,1);
+					var f = i;
+					this.v.splice(f,1);
 				}
 			}
 		}
-		this.setSaveButtonActive(this.v.length!=0);
+		this.setSaveButtonActive(this.v.length!=0 && this.rootFormObject.fields.formPanel.validate() === true);
 	},
 	
 	setSaveButtonActive : function(isActive){

@@ -89,19 +89,21 @@ OpenPanel.GUIBuilder.FormElement.Integer.prototype = {
 	},
 	
 	resetValue : function(){
-		this.value = "";
+		this.value = null;
 		this.hasValue = false;
 		this.setHint();
 		this.setValidity(true);
 	},
 	
 	setValue : function(value, setInitialValue){
-		if (value != undefined && value!=="") {
+		var valueString = value + "";
+		if (valueString!=="" && valueString.match(this.regExp)) {
+			
+			
 			this.value = value;
 			if (this.readOnly == false) {
 				this.hasValue = true;
 				this.setStyle();
-				var valueString = "" + value;
 				if (this.inputElement.value != valueString) {
 					this.inputElement.value = valueString;
 				}
@@ -110,7 +112,7 @@ OpenPanel.GUIBuilder.FormElement.Integer.prototype = {
 				this.inputElement.innerHTML = value;
 			}
 		} else {
-			this.value = "";
+			this.value = null;
 			this.hasValue = false;
 			this.validate();
 		}
@@ -123,23 +125,20 @@ OpenPanel.GUIBuilder.FormElement.Integer.prototype = {
 	},
 	
 	getValue : function(){
-		return this.hasValue == true?this.value:"";
+		return this.hasValue == true?this.value:null;
 	},
 	
 	validate : function(){
 		var isValid = true;
-		if (this.readOnly == false) {
-			var integerString = this.value + "";
-			if (integerString != "") {
-				if (isNaN(parseInt(integerString,10))) {
-					isValid = false;
-				}
+		var integerString = this.value + "";
+		if (integerString != "" || !integerString.match(this.regExp)) {
+			if (isNaN(parseInt(integerString,10))) {
+				isValid = false;
 			}
-			
-			if (this.required == true) {
-				if (this.value == "" || this.value == undefined) {
-					isValid = false;
-				}
+		}
+		if (this.required == true) {
+			if (this.value === null) {
+				isValid = false;
 			}
 		}
 		
