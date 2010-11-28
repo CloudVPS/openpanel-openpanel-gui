@@ -1,5 +1,6 @@
 OpenPanel.Command.Welcome = {
 	controller : {},
+	resizeFunction : null,
 	execute : function(actionObject){
 		document.getElementById("itemListArea").innerHTML = "";
 		var tabBarDiv = document.getElementById("tabBar");
@@ -17,10 +18,14 @@ OpenPanel.Command.Welcome = {
 		this.controller.guiBuilder.loadTemplate("dynamic/welcome.html", "welcomeDivHolder");
 		$("mainBottom").show();
 		this.controller.guiBuilder.GUIElements.FormBuilder.setSaveButtonVisibility(false);
-		Element.observe(window, "resize", this.resize.bind(this));
+		this.resizeFunction = this.resize.bind(this);
+		Element.observe(window, "resize", this.resizeFunction);
 		this.resize();
 	},
 	
+	stopResizing : function(){
+		Element.stopObserving(window, "resize", this.resizeFunction);
+	},
 	resize : function (event){
 		var viewportHeight = document.viewport.getHeight();
 		var viewportWidth = document.viewport.getWidth();

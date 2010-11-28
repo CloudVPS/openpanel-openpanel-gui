@@ -11,9 +11,11 @@ OpenPanel.Command.PreloadAssets  = {
 	
 	loadDone : function(transport){
 		var assetList = transport.responseText.evalJSON();
+		var a = {};
 		assetList.each(function(src){
-			var i = new Image(32,32);
-			i.src = src;
+			a[src] = new Image(32, 32);
+			a[src].src = src;
+			console.log(src);
 		});
 		
 		this.finish();
@@ -21,7 +23,10 @@ OpenPanel.Command.PreloadAssets  = {
 	
 	finish : function(){
 		if(this.nextAction){
-			this.controller.action(this.nextAction);
+			var that = this;
+			Event.observe(window, 'load', function() {
+				that.controller.action(that.nextAction);
+			});
 		}
 	}
 }
