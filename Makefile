@@ -1,4 +1,4 @@
-all: clean copy minimize down_crow
+all: clean copy minimize
 	
 	
 clean: 
@@ -16,7 +16,6 @@ copy:
 	cp http-source/css/openpanel.ie7.css http/css
 	cp http-source/css/browsers.css http/css
 	cp -R http-source/images http/images
-	mkdir http/images/icons/down
 	cp -R http-source/dynamic http/dynamic
 	cp -R http-source/templates http/templates
 	cp http-source/index.html.minified http/index.html
@@ -25,15 +24,6 @@ copy:
 minimize:
 	# Minimizing javascripts
 	tools/compressJSDirectory http-source/js/source http/js/openpanel-compressed.js
-	
-down_crow: http-source/images/icons/crow.png
-	# only try to create the down icon when imagemagick is available, so we can
-	# still make one without it.
-	# imagemagick is listed as a build dependency in packaging, so packages will
-	# always have the down icon.
-	which convert > /dev/null && \
-		convert -modulate 50,100,100 http-source/images/icons/crow.png http/images/icons/down/crow.png || \
-		true
 
 install:
 	mkdir -p ${DESTDIR}/var/openpanel/
