@@ -44,12 +44,12 @@ OpenPanel.GUI.MenuIconBar.IconBarItem = Class.create(OpenPanel.GUI.Menu.Item, {
 		
 		var centerIcon = new Element("div").addClassName("icon");
 		center.appendChild(centerIcon);
-		var image = new Element("img").writeAttribute("src", this.icon).writeAttribute("width", "32").writeAttribute("height", "32");
+		var image = new Element("img").writeAttribute("src", this.icon).setStyle({ width: "32px", height: "32px"});
 		centerIcon.appendChild(image);
 		
 		var centerIconDown = new Element("div").addClassName("icon");
 		center.appendChild(centerIconDown);
-		var imageDown = new Element("img").writeAttribute("src", this.iconDown).writeAttribute("width", "32").writeAttribute("height", "32");
+		var imageDown = new Element("img").writeAttribute("src", this.iconDown).setStyle({ width: "32px", height: "32px"});
 		centerIconDown.appendChild(imageDown);
 
 		if(down){
