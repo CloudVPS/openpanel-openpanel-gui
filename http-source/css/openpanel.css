@@ -874,7 +874,7 @@ li.tabEndPushed {
 .windowLeft {
 	background: url(/images/gui/windowLeft.png) repeat-y 0 0;
 	width: 62px;
-	height: 252px;
+	height: 262px;
 	position: fixed;
 	left: 50%;
 	margin-left: -212px;
@@ -883,7 +883,7 @@ li.tabEndPushed {
 
 .windowCenter {
 	width: 300px;
-	height: 252px;
+	height: 262px;
 	position: fixed;
 	left: 50%;
 	margin-left: -150px;
@@ -894,7 +894,7 @@ li.tabEndPushed {
 .windowRight {
 	background: url(/images/gui/windowRight.png) repeat-y 0 0;
 	width: 62px;
-	height: 252px;
+	height: 262px;
 	position: fixed;
 	left: 50%;
 	margin-left: 150px;
@@ -908,7 +908,7 @@ li.tabEndPushed {
 	position: fixed;
 	left: 50%;
 	margin-left: -212px;
-	margin-top: 300px;
+	margin-top: 310px;
 }
 
 .windowBottom {
@@ -918,7 +918,7 @@ li.tabEndPushed {
 	position: fixed;
 	left: 50%;
 	margin-left: -150px;
-	margin-top: 300px;
+	margin-top: 310px;
 }
 
 .windowBottomRight {
@@ -928,17 +928,17 @@ li.tabEndPushed {
 	position: fixed;
 	left: 50%;
 	margin-left: 150px;
-	margin-top: 300px;
+	margin-top: 310px;
 }
 
 .windowLogo {
-	background: url(/images/gui/loginOpenPanelLogo.png) no-repeat 0 0;
-	width: 167px;
-	height: 195px;
+	background: url(/images/OpenPanelLogo.png) no-repeat 0 0;
+	width: 220px;
+	height: 200px;
 	position: fixed;
 	left: 50%;
-	margin-left: -83px;
-	margin-top: 14px;
+	margin-left: -95px;
+	margin-top: 54px;
 }
 
 .windowButtonHolder {
