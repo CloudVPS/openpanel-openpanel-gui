@@ -30,5 +30,5 @@ install:
 	# perhaps fiddle with ownership?
 	cp -r http ${DESTDIR}/var/openpanel/
 	cp -r http-templates ${DESTDIR}/var/openpanel/
-        cp -r wallpaper ${DESTDIR}/var/openpanel/
+	cp -r wallpaper ${DESTDIR}/var/openpanel/
 
