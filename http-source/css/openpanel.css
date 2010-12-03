@@ -934,7 +934,7 @@ li.tabEndPushed {
 .windowLogo {
 	background: url(/images/OpenPanelLogo.png) no-repeat 0 0;
 	width: 220px;
-	height: 200px;
+	height: 140px;
 	position: fixed;
 	left: 50%;
 	margin-left: -95px;
