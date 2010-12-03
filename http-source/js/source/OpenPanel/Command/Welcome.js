@@ -7,7 +7,7 @@ OpenPanel.Command.Welcome = {
 		if(tabBarDiv != undefined){
 			tabBarDiv.innerHTML = "";
 		}
-		var fullWindowAreaDiv = document.getElementById("fullWindowArea").setStyle({backgroundColor: "#E8E8E8", height: (document.viewport.getHeight() - 170) + "px", marginTop: "2px"});
+		var fullWindowAreaDiv = document.getElementById("fullWindowArea").setStyle({backgroundColor: "#E8E8E8", height: (document.viewport.getHeight() - 180) + "px", marginTop: "2px"});
 		fullWindowAreaDiv.innerHTML = "";
 		$("mainBottom").hide();
 		var welcomeDivHolder = document.createElement("div");
