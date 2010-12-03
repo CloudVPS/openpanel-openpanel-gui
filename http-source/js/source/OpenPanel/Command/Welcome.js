@@ -7,7 +7,7 @@ OpenPanel.Command.Welcome = {
 		if(tabBarDiv != undefined){
 			tabBarDiv.innerHTML = "";
 		}
-		var fullWindowAreaDiv = document.getElementById("fullWindowArea").setStyle({backgroundColor: "#E8E8E8", height: (document.viewport.getHeight() - 180) + "px", marginTop: "2px"});
+		var fullWindowAreaDiv = document.getElementById("fullWindowArea").setStyle({height: (document.viewport.getHeight() - 190) + "px", marginTop: "2px"});
 		fullWindowAreaDiv.innerHTML = "";
 		$("mainBottom").hide();
 		var welcomeDivHolder = document.createElement("div");
@@ -64,11 +64,11 @@ OpenPanel.Command.Welcome = {
 			$("welcomeLogoHolder").setStyle({ height: 0 + "px"});
 			$("welcomeLogoHolder").hide();
 			$("welcomeArea").setStyle({ top: 0 + "px", height: "131px"});
-		} else if(h > 300 && h < 400){
+		} else if(h > 300 && h <= 400){
 			$("welcomeLogoHolder").setStyle({ height: 0 + "px"});
 			$("welcomeLogoHolder").hide();
 			$("welcomeArea").setStyle({ top: 0 + "px", height: (h-170) + "px"});
-		} else if(h > 400 && h < 500){
+		} else if(h > 400 && h <= 500){
 			$("welcomeLogoHolder").show();
 			$("welcomeLogoHolder").setStyle({ height: (h - 300) + "px"});
 			$("welcomeArea").setStyle({ top: (h - 300) + "px", height: 131 + "px"});
