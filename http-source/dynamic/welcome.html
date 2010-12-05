@@ -64,7 +64,11 @@
 					  <dd>&nbsp;</dd>
 					  <dd>Install your updates through the Software tab.</dd>
 				    @else
-				      <dd>This system is up-to-date.</dd>
+				      @if "$updates_count$" == "unavailable"
+				        <dd>The Software Update module for OpenPanel is not currently installed.</dd>
+				      @else
+				        <dd>This system is up-to-date.</dd>
+				      @endif
 				    @endif
 					
 				</dl>
