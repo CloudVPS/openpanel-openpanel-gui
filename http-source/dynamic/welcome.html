@@ -54,13 +54,18 @@
 			</td>
 			<td width="300">
 				<dl>
-					<dt>Development blog</dt>
-					@loop devrss
-
-					  <dd><a href="$url$">$title$</a></dd>
-
-					@endloop
-
+					<dt>Software Updates</dt>
+					@if $#updates_count$ != 0
+					  @if $#updates_count == 1
+					    <dd>There is <b>1</b> update available for this sytem: $updates_description$.</dd>
+					  @else
+					    <dd>There are <b>$#updates_count$ updates available for this sytem: $updates_description$.</dd>
+					  @endif
+					  
+					  <dd>Install your updates through the Software tab.</dd>
+				    @else
+				      <dd>This system is up-to-date.</dd>
+				    @endif
 					
 				</dl>
 			</td>
@@ -79,7 +84,12 @@
 						</div>
 						<div style="clear: both;"></div>
 					</dd>
-					
+					<dt>Development blog</dt>
+					@loop devrss
+
+					  <dd><a href="$url$">$title$</a></dd>
+
+					@endloop
 				</dl>
 			</td>
 		</tr>
