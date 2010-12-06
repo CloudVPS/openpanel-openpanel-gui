@@ -23,8 +23,9 @@
 					<dd><b>LoadAverage</b>: $load_1$ $load_5$ $load_15$</dd>
 					<dt>Disk usage</dt>
 					<dd>
-					<table style="margin-top: 4px;" border="0" cellspacing="0" cellpadding="3">
-						<tr style="border-color:#120e04; background-color:black; color:#e8e8e8;">
+					<div style="border:1px solid black; margin-top: 4px; padding-bottom: 2px; width: 250px">
+					<table style="" border="0" cellspacing="0" cellpadding="3" width="250">
+						<tr style="border-color:#120e04; background-color:#444444; color:#e8e8e8;">
 							<td style="padding-right:4px;">Mountpoint</td>
 							<td style="padding-left: 4px; padding-right:4px;" align="right">Size</td>
 							<td> </td>
@@ -49,6 +50,7 @@
 						  </tr>
 						@endloop
 					</table>
+					</div>
 				</dd>
 				</dl>
 			</td>
@@ -62,10 +64,10 @@
 					    <dd>There are <b>$#updates_count$</b> updates available for this sytem through online updates: <div style="display:block; margin-top: 12px; padding-left: 20px;">$updates_description$.</div></dd>
 					  @endif
 					  <dd>&nbsp;</dd>
-					  <dd>Install your updates through the Software tab.</dd>
+					  <dd>Install your updates from the <b>Software</b> tab.</dd>
 				    @else
 				      @if "$updates_count$" == "unavailable"
-				        <dd>The Software Update module for OpenPanel is not currently installed.</dd>
+				        <dd>The Software Update module for OpenPanel is not currently installed, or is still initializing.</dd>
 				      @else
 				        <dd>This system is up-to-date.</dd>
 				      @endif
