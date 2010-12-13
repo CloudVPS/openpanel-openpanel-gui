@@ -28,7 +28,7 @@ body {
 	width: 100%;
 	background-image: url(/images/gui/loadingbackground.png);
 	background-repeat: repeat;
-	font-size: 13px
+	font-size: 13px;
 	font-family: Lucida Grande,Lucida Sans,sans-serif;
 	overflow: hidden;
 	background-color: #545A56;
