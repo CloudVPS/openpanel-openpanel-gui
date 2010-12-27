@@ -3,13 +3,14 @@ all: clean copy minimize
 	
 clean: 
 	# Cleaning /http directory
-	rm -rf http/*
+	rm -rf http
 	
 copy:
 	# Copying files
-	mkdir http/js
+	mkdir -p http/js
+	mkdir -p http/css
+
 	cp -R http-source/js/lib http/js
-	mkdir http/css
 	cp http-source/css/openpanel.css http/css
 	cp http-source/css/iconbar.css http/css
 	cp http-source/css/openpanel.ie7.css http/css
