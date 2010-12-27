@@ -7,7 +7,6 @@ clean:
 	
 copy:
 	# Copying files
-	cp -R http-source/iepngfix http
 	mkdir http/js
 	cp -R http-source/js/lib http/js
 	mkdir http/css
@@ -15,6 +14,8 @@ copy:
 	cp http-source/css/iconbar.css http/css
 	cp http-source/css/openpanel.ie7.css http/css
 	cp http-source/css/browsers.css http/css
+
+	cp -R http-source/iepngfix http/iepngfix
 	cp -R http-source/images http/images
 	cp -R http-source/dynamic http/dynamic
 	cp -R http-source/templates http/templates
