@@ -7,7 +7,8 @@ clean:
 	
 copy:
 	# Copying files
-	cp -R http-source/iepngfix http
+	mkdir http/iepngfix
+	cp -R http-source/iepngfix http/iepngfix
 	mkdir http/js
 	cp -R http-source/js/lib http/js
 	mkdir http/css

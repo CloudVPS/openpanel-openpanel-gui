@@ -408,13 +408,19 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 	},
 	
 	createMultiCreateOption : function(textOnly){
+		console.log(this.openCoreObject.name);
 		if ((textOnly==undefined)||(textOnly==false)){
 			this.createMultiCreateOptionOld();
 			return;
 		}
 		
+		console.log("fall");
+		
 		
 		var metaObjects = this.controller.dataManager.getOpenCoreObjectsByMetaName(this.openCoreObject.name);
+
+		console.log(metaObjects);
+		
 		var available = {};
 		var canAdd = false;
 		var canAdds = {};
@@ -450,9 +456,10 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 			
 			for(var i = 0;i<availableKeys.length;i++){
 				var key = availableKeys[i];
-				
+
 				var metaObject = available[key];
 				var tD = document.createElement ("td");
+
 				tD.style.paddingRight = "10px";
 				var bdiv = document.createElement("div");
 				bdiv.innerHTML = "Set Up " + metaObject.title;
@@ -526,6 +533,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 				
 				for (var key in available) {
 					availableKeys.push(key);
+
 				}
 				
 				availableKeys.alphanumSort(true);
@@ -535,6 +543,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 					var metaObject = available[key];
 					var menukey = "Create " + metaObject.title;
 					mdef[menukey] = mkcallback(this, metaObject);
+					console.log("<", key, menukey, mdef);
 				}
 				
 				this.setGridMenu(mdef);

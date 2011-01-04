@@ -47,7 +47,9 @@
 
 .OPIconBarItem .center {
 	padding-left: 5px;
-	padding-right: 5px;	
+	padding-right: 5px;
+	height: 78px;
+	display: block;	
 }
 
 .OPIconBarItem.active .left {

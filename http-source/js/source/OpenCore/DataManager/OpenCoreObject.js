@@ -48,7 +48,6 @@ OpenCore.DataManager.OpenCoreObject.prototype = {
 				this.singleton = true;
 				this.singletonValue = this.classInfo["class"].singleton;
 			}
-			
 			this.indexing = this.classInfo["class"].indexing;
 			this.metaType = this.classInfo["class"].metatype;
 			

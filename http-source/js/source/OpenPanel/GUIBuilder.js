@@ -342,7 +342,7 @@ OpenPanel.GUIBuilder = {
 	displayError : function(error, targetDiv, extraText){
 		
 		var extraDiv = document.createElement("div");
-		
+		extraDiv.setStyle({ height: "200px"});
 		targetDiv.appendChild(extraDiv);
 		if(extraText == undefined){
 			extraText = "";

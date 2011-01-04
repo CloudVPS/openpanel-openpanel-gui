@@ -157,7 +157,7 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 			tabHolder.appendChild(this.tabEnd);
 			this.tabWidth += $(this.tabEnd).getDimensions().width;
 			var tabDivElement = document.getElementById("tabBarDiv");
-			tabDivElement.style.cssText = "width: " + (this.tabWidth) + "px; margin-left:" + (-this.tabWidth/2 + 90) + "px;left: 50%; position: fixed;";
+			tabDivElement.style.cssText = "width: " + (this.tabWidth) + "px; margin-left:auto; margin-right:auto; padding-left: 240px;";
 		}
 	},
 	
