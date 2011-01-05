@@ -216,7 +216,7 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 		
 		var icon = "/dynamic/itemicons/" + this.openCoreObject.uuid + ".png";
       	
-		this.grid.create (this.gridDiv,createObject, 198, 0, 98, 69, -450, "itemlist", icon);
+		this.grid.create (this.gridDiv,createObject, 240, 0, 77, 40, -450, "itemlist", icon);
       	this.grid.setGrid (instances);
 		var hook = this;
 		this.grid.onclick = function(metaid, fields){

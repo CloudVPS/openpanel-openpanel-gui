@@ -1,19 +1,35 @@
 @section main
 <!-- this is a template file -->
-<div id="welcomeLogoHolder" style="position: fixed; width: 900px; left: 50%; margin-left: -450px; top: 99px; height: 200px; overflow: hidden; background-color: #000; text-align: center;">
-  <a href="http://www.openpanel.org" target="new"><img id="welcomeLogo" src="/images/OpenPanelLogoBig.png" border="0"></a>
-</div>
+<style>
+	.third {
+		float: left;
+		width: 320px;
+		display: block;
+	}	
+	
+	#welcomeArea {
+		left: 0px;
+		right: 0px;
+		width: 100%;
+	}
+	
+	dt {
+		text-shadow: 0px 1px 1px #fff;
+	}
+</style>
 <div id="welcomeArea">
-	<table border="0" cellpadding="0" cellspacing="0">
-		<tr>
-			<td width="300">
+	
+			<div class="third">
 				<dl>
 					<dt>Server</dt>
 					<dd><b>Kernel</b>: $os_name$ $os_release$</dd>
 					<dd><b>CPU</b>: $os_cpu$</dd>
 					<dd><b>OS</b>: $os_distro$</dd>
 					<dd><b>OpenPanel</b>: $openpanel_release$</dd>
-
+				</dl>
+			</div>
+			<div class="third">
+				<dl>
                     <dt>Performance</dt>
                     @if $#uptime_days$ == 1
                       <dd><b>Uptime</b>: 1 day, $uptime_hms$</dd>
@@ -21,6 +37,10 @@
                       <dd><b>Uptime</b>: $#uptime_days$ days, $uptime_hms$</dd>
                     @endif
 					<dd><b>LoadAverage</b>: $load_1$ $load_5$ $load_15$</dd>
+				</dl>
+			</div>
+			<div class="third">
+				<dl>
 					<dt>Disk usage</dt>
 					<dd>
 					<div style="border:1px solid black; margin-top: 4px; padding-bottom: 2px; width: 250px">
@@ -53,8 +73,8 @@
 					</div>
 				</dd>
 				</dl>
-			</td>
-			<td width="300">
+			</div>
+			<div class="third">
 				<dl>
 					<dt>Software Updates</dt>
 					@if $#updates_count$ != 0
@@ -72,16 +92,22 @@
 				        <dd>This system is up-to-date.</dd>
 				      @endif
 				    @endif
-					
 				</dl>
-			</td>
-
-			<td width="300">
+			</div>
+			<div class="third">
 				<dl>
 					<dt>About OpenPanel</dt>
 					<dd><a href="#" onclick="OpenPanel.Controller.action({command: 'LoadTemplateIntoPopup', content: 'templates/license.html'});">License</a></dd>
+				</dl>
+			</div>
+			<div class="third">
+				<dl>	
 					<dt>IRC</dt>
 					<dd>Feel free to join #openpanel on <a href="irc://irc.oftc.net/openpanel" target="_new">OFTC</a> (irc.oftc.net). You can also connect with Mibbit by clicking <a href="http://widget.mibbit.com/?settings=4adbc5842d897ab9fc6fdc5aea595767&server=irc.oftc.net&channel=%23openpanel&autoConnect=true" target="_new">here</a></dd>
+				</dl>
+			</div>
+			<div class="third">
+				<dl>	
 					<dt>Twitter</dt>
 					<dd>
 						<div style="display: block; float:left"><a href="http://www.twitter.com/openpanel" target="_new"><img src="/images/twitterbird.png" border="0"/></a></div>
@@ -97,16 +123,5 @@
 
 					@endloop
 				</dl>
-			</td>
-		</tr>
-	</table>
-</div>
-<div style="position: fixed; bottom: 43px; left: 50%; margin-left: 352px;" id="bugs">
-<table border="0">
-<tr>
-  <td>
-	<a href="http://bugtracker.openpanel.com/" target="_new"><img src="/images/gui/welcome_reportbug.png" border="0"></a>
-  </td>
-  <td width="4"> </td>
-</table>
+			</div>
 </div>

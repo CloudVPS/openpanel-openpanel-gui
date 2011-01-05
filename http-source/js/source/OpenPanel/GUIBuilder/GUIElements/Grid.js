@@ -136,8 +136,8 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			} else {
 				gridViewNode.style.top = "" + top + "px";
 				gridViewNode.style.position = "fixed";
-				gridViewNode.style.left = "50%";
-				gridViewNode.style.marginLeft = marginleft + "px";
+				//gridViewNode.style.left = "50%";
+				//gridViewNode.style.marginLeft = marginleft + "px";
 				gridViewNode.style.bottom = "" + bottom + "px";
 			}
 			
@@ -207,8 +207,8 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			} else {
 				gridViewContents.style.top = "" + (top + 16) + "px";
 				gridViewContents.style.position = "fixed";
-				gridViewContents.style.left = "50%";
-				gridViewContents.style.marginLeft = marginleft + "px";
+				gridViewContents.style.left = "0px";
+				//gridViewContents.style.marginLeft = marginleft + "px";
 				gridViewContents.style.bottom = "" + bottom + "px";
 			}
 			

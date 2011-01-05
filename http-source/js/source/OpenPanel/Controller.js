@@ -233,7 +233,7 @@ OpenPanel.Controller = {
 				for(var errorKey in e){
 					this.error.push([errorKey, e[errorKey]]);
 				}
-				OpenPanel.GUIBuilder.displayError(this.error, targetDiv, extraText);
+				OpenPanel.GUIBuilder.displayError([["", ""]], targetDiv, "The OpenPanel Core service isn't reachable. Is the openpaneld daemon running?");
 			break;
 			
 			case "InitError":

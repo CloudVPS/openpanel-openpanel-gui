@@ -2,6 +2,8 @@ OpenPanel.Command.Login  = {
 	controller : {},
 	execute : function(actionObject){
 		if(actionObject.userName != undefined && actionObject.password!=undefined){
+			$("loginForm").hide();
+			$("loaderDiv").show();
 			this.controller.dataManager.loginAsync(actionObject.userName, actionObject.password, this, "loginDone", actionObject);
 			/*if(this.controller.dataManager.login(actionObject.userName, actionObject.password)){
 				// get user info
@@ -13,6 +15,8 @@ OpenPanel.Command.Login  = {
 	
 	loginDone : function(data, callBackArguments){
 		var actionObject = callBackArguments;
+		$("loginForm").show();
+		$("loaderDiv").hide();
 		if(callBackArguments.header.errorid == 0){
 			OpenPanel.KeyboardHandler.init();
 			var rootObject = new OpenCore.DataManager.OpenCoreObject({}, "ROOT");

@@ -28,8 +28,7 @@ body {
 	width: 100%;
 	background-image: url(/images/gui/loadingbackground.png);
 	background-repeat: repeat;
-	font-size: 13px;
-	font-family: Lucida Grande,Lucida Sans,sans-serif;
+	font: 13px Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
 	overflow: hidden;
 	background-color: #545A56;
 	width: 100%;
@@ -77,7 +76,6 @@ td {
 	width: 290px;
 	margin-left: 5px;
 	height: 73px;
-	background: url("/images/gui/loginBackground.png") no-repeat 0 3px;	
 }
 
 #loginMessageDiv {
@@ -87,6 +85,10 @@ td {
 	width: 240px;
 	height: 30px;
 	top: 282px;
+}
+
+#loginForm {
+	background: url("/images/gui/loginBackground.png") no-repeat 0 3px;	
 }
 
 #loginDiv .labelElement {
@@ -117,8 +119,7 @@ label { font: 11px Arial, Helvetica, sans-serif; }
 	height: 29px;
 	padding-right:20px;
 	width: 900px;
-	margin-left: 50%;
-	left: -450px;
+	left: 0px;
 	border-top: 1px solid #444444;
 	border-bottom: 1px solid #222222;
 }
@@ -139,21 +140,21 @@ html > body #saveButtonHolder {
 }
 
 #fullWindowArea {
-	margin-left: 50%;
-	left: -450px;
-	top: 97px;
+	left: 0px;
+	right: 0px;
+	top: 78px;
 	position: absolute;
-	width: 900px;
+	width: 100%;
 	overflow: hidden;
 }
 
 #welcomeDivHolder {
-	margin-left: 50%;
-	left: -450px;
-	top: 99px;
+	left: 0px;
+	right: 0px;
+	top: 78px;
 	position: fixed;
 	font-size:11px;
-	width: 900px;
+	width: 100%;
 	border-bottom: 1px solid #444444;
 	background-color: #e8e8e8;
 	overflow: hidden;
@@ -227,7 +228,7 @@ html > body #saveButtonHolder {
 }
 
 #modalMessageDiv {
-	top: 68px;
+	top: 47px;
 	position: fixed;
 	z-index: 10001;
 	width: 700px;
@@ -238,18 +239,15 @@ html > body #saveButtonHolder {
 }
 
 .modalLoadingDiv {
-	z-index: 1000000;
 	position: fixed;
-	left: 50%;
-	margin-left: 405px;
-	top: 54px;
+	right: 24px;
+	top: 26px;
 }
 
 .modalLoadingDivLogin {
 	position: fixed;
 	left: 50%;
-	margin-left: -140px;
-	top: 278px;
+	top: 198px;
 }
 
 #modalMessageDivTop {
@@ -267,6 +265,13 @@ html > body #saveButtonHolder {
 	padding-right: 42px;
 	
 }
+
+.fields {
+	margin-left: auto;
+	margin-right: auto;	
+	width: 600px;
+}
+
 #modalMessageDivBottom {
 	background-image: url(/images/gui/modalBottom.png);
 	height: 30px;
@@ -346,18 +351,6 @@ html > body #saveButtonHolder {
 	visibility: hidden;
 }
 
-#mainBottom {
-	height: 21px;
-	width: 900px;
-	background-image: url(/images/gui/groupFrameBottom.png);
-	background-repeat: no-repeat;
-	text-align: right;
-	margin-left: 50%;
-	left: -450px;
-	bottom: 70px;
-	position: fixed;
-}
-
 .FormObject {
 	padding: 4px;
 	background-color: #e1e1e1;
@@ -386,50 +379,134 @@ html > body #saveButtonHolder {
 }
 
 #mainArea {
-	width: 900px;
-	margin-left: 50%;
-	left: -450px;
-	top: 97px;
-	bottom: 50px;
-	background-image: url(/images/gui/groupFrameMiddle.png);
-	overflow-y: hidden;
-	position: fixed;
 	z-index: -10;
+	background-color: #e1e1e1;
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+}
+#mainAreaBackgroundTopRight {
+	width: 27px;
+	position: fixed;
+	right: 0px;
+	top: 70px;	
+	bottom: 0px;
+	background-image: url(/images/gui/groupFrameTop.png);
+	background-repeat: no-repeat;
+	background-position: -873px 0px;
+}
+#mainArea .center {
+	bottom: 0px;
+	background-color: #E1E1E1;
+	position: fixed;
+	
+}
+#mainArea .topLeft, #mainArea .topRight, #mainArea .bottomLeft, #mainArea .bottomRight {
+	width: 25px;
+	height: 25px;
+	background-image: url(/images/gui/mainAreaCorners.png);
+	background-repeat: no-repeat;
+	position: fixed;
+	z-index: -100000;
+}
+	
+#mainArea .topLeft {
+	left: 240px;
+	top: 78px;	
+	background-position: -5px -7px;
 }
 
-#mainAreaLeft {
-	margin-right: 0px;
-	top: 145px;
-	bottom: 42px;
-	width: 220px;
-	margin-left: 50%;
-	left: -420px;
-	overflow-y: visible;
-	position: fixed;
+#mainArea .bottomLeft {
+	left: 240px;
+	bottom: 29px;
+	background-position: -5px -32px;
 }
+
+#mainArea .topRight {
+	width: 25px;
+	right: 0px;
+	top: 78px;	
+	background-position: -42px -7px;
+}
+
+#mainArea .bottomRight {
+	width: 25px;
+	right: 0px;
+	bottom: 29px;
+	background-position: -42px -32px;
+}
+
+#mainArea .top, #mainArea .bottom {
+	background-image: url(/images/gui/mainAreaHorizontal.png);
+	background-repeat: horizontal;
+	right: 25px;
+	left: 265px;
+	height: 25px;
+	position: fixed;
+	z-index: -1000000;	
+}
+
+#mainArea .top {
+	top: 78px;
+	background-position: 0px -7px;
+}
+
+#mainArea .bottom {
+	background-position: 0px -32px;
+}
+	
+#mainArea .left, #mainArea .right {
+	position: fixed;
+	background-repeat: vertical;	
+	background-image: url(/images/gui/mainAreaVertical.png);
+	z-index: -1000000;	
+}
+
+#mainArea .left {
+	width: 25px;
+	left: 240px;
+	top: 101px;
+	bottom: 50px;
+	background-position: -5px 0px;
+	
+}
+
+#mainArea .right {
+	width: 25px;
+	right: 0px;
+	top: 101px;
+	bottom: 50px;
+	background-position: -42px 0px;
+}	
 
 #itemListArea {
-	top: 122px;
+	top: 102px;
 	bottom: 80px;
-	width: 181px;
-	margin-left: -432px;
-	left: 50%;
+	width: 250px;
+	left: 0px;
 	overflow: hidden;
 	position: fixed;
 	z-index: 10;
 	-webkit-user-select:none;
 	-moz-user-select:none;
 }
-
+#mainAreaLeft {
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	width: 240px;
+	bottom: 0px;
+	background-color: #e8e8e8;	
+}
 #mainAreaRight {
-	top: 140px;
-	bottom: 94px;
-	width: 630px;
-	margin-left: 50%;
-	left: -209px;
+	top: 104px;
+	bottom: 44px;
+	right: 18px;
+	left: 264px;
 	overflow-y: auto;
 	position: fixed;
-	z-index: -100;
 }
 
 #mainAreaRight p {
@@ -448,15 +525,30 @@ html > body #saveButtonHolder {
 }
 
 #iconBar {
-	top: 21px;
+	top: 0px;
 	height: 78px;
 	width: 900px;
-	margin-left: 50%;
-	left: -450px;
+	left: 0px;
 	font-size: 10px;
 	position: fixed;
 	-webkit-user-select:none;
 	-moz-user-select:none;
+}
+
+#shadowTop {
+    display: block;
+    background-image: url(/images/gui/iconBarBackground.png);
+    background-repeat: horizontal;
+    background-position-y: -21px 0px;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    position: fixed;
+    height: 78px;
+}
+
+.inactiveBrowserWindow #shadowTop {
+    background-image: url(/images/gui/iconBarBackgroundInactive.png);
 }
 
 #iconBar table { 
@@ -563,19 +655,14 @@ html > body, #iconbarText{
 }
 
 #tabBar {
-	top: 99px;
-	margin-left: 50%;
-	left: -450px;
-	height: 37px;
-	width: 900px;
-	background-image: url(/images/gui/groupFrameTop.png);
-	background-repeat: no-repeat;
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+	top: 82px;
 	position: fixed;
 	-webkit-user-select:none;
 	-moz-user-select:none;
 }
-
-
 
 #tabBar ul
 {
@@ -585,12 +672,6 @@ html > body, #iconbarText{
 	font-size:11px;	
 }
 
-#tabBarDiv {
-	width: 400px; 
-	padding-top: 13px;
-	/*height: 30px;*/
-	position: fixed;
-}
 
 .tabHolder {
 	list-style-type: none;
@@ -778,21 +859,6 @@ li.tabEndPushed {
 	height: 40px;
 }
 
-#shadowTop {
-	display: block;
-	background-image: url(/images/gui/shadowIconBar.png);
-	background-repeat: no-repeat;
-	top: 0px;
-	margin-left: 50%;
-	left: -485px;
-	position: fixed;
-	width: 970px;
-	height: 99px;
-}
-
-.inactiveBrowserWindow #shadowTop {
-	background-image: url(/images/gui/shadowIconBarInactive.png);
-}
 
 #shadowLeft {
 	display: block;
@@ -819,9 +885,8 @@ li.tabEndPushed {
 #close {
 	position: fixed;
 	display: block;
-	margin-left: 50%;
-	left: -443px;
-	top: 25px;
+	left: 5px;
+	top: 5px;
 	width: 14px;
 	height: 15px;
 	background: url(/images/gui/closeButton.gif) no-repeat 0 0;
@@ -935,7 +1000,7 @@ li.tabEndPushed {
 .windowLogo {
 	background: url(/images/OpenPanelLogo.png) no-repeat 0 0;
 	width: 220px;
-	height: 140px;
+	height: 150px;
 	position: fixed;
 	left: 50%;
 	margin-left: -95px;
@@ -975,7 +1040,7 @@ li.tabEndPushed {
 	padding-left: 8px;
 	padding-right: 8px;
 	padding-bottom: 2px;
-	font-family: Lucida Grande,Lucida Sans,sans-serif;
+	font-family: Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
 	cursor: default;
 }
 
@@ -987,7 +1052,7 @@ li.tabEndPushed {
 	padding-left: 8px;
 	padding-right: 8px;
 	padding-bottom: 2px;
-	font-family: Lucida Grande,Lucida Sans,sans-serif;
+	font-family: Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
 	cursor: default;
 }
 
@@ -999,7 +1064,7 @@ li.tabEndPushed {
 	padding-left: 8px;
 	padding-right: 8px;
 	padding-bottom: 2px;
-	font-family: Lucida Grande,Lucida Sans,sans-serif;
+	font-family: Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
 	cursor: default;
 }
 
@@ -1045,7 +1110,7 @@ li.tabEndPushed {
 .buttonCenterOver {
 	background: url(/images/gui/buttonCenter.png) repeat-x 0 0px;
 	height: 23px;
-	font-family: Lucida Grande,Lucida Sans,sans-serif;
+	font-family: Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
 	font-size: 12px;
 	padding-left: 8px;
 	padding-right: 8px;
@@ -1055,7 +1120,7 @@ li.tabEndPushed {
 .formButtonCenterOver {
 	background: url(/images/gui/formButtonCenter.png) repeat-x 0 0px;
 	height: 23px;
-	font-family: Lucida Grande,Lucida Sans,sans-serif;
+	font-family: Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
 	font-size: 11px;
 	padding-left: 8px;
 	padding-right: 8px;
@@ -1101,7 +1166,7 @@ li.tabEndPushed {
 #saveButton .buttonCenterOver {
 	background: url(/images/gui/toolButtonCenter.png) repeat-x 0 0px;
 	height: 23px;
-	font-family: Lucida Grande,Lucida Sans,sans-serif;
+	font-family: Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
 	font-size: 11px;
 	padding-left: 8px;
 	padding-right: 8px;
@@ -1154,11 +1219,9 @@ li.tabEndPushed {
 
 #itemListButtons {
 	position: fixed;
-	left: 50%;
-	margin-left: -450px;
 	padding-top: 3px;
 	padding-left: 6px;
-	bottom: 40px;
+	bottom: 0px;
 	height: 27px;
 	width: 192px;
 }
@@ -1388,7 +1451,7 @@ td.label {
 	margin: 0px;
 	border-left: 1px solid #959595;
 	border-right: 1px solid #959595;
-	font-family: Lucida Grande,Lucida Sans,sans-serif;
+	font-family: 'Lucida Grande';
 	font-size: 13px;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -1420,6 +1483,8 @@ td.label {
 	background-color: #f8f8f8;
 	-webkit-user-select:none;
 	-moz-user-select:none;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .gridViewTitle {
@@ -1438,7 +1503,7 @@ td.label {
 	border-right: 1px solid #aaaaaa;
 	margin: 0px;
 	font-size: 12px;
-	font-family: Lucida Grande,Lucida Sans,sans-serif;
+	font-family: Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
 	font-weight: bold;
 }
 
@@ -1569,7 +1634,7 @@ td.label {
 	border-right: 1px solid #aaaaaa;
 	margin: 0px;
 	font-size: 12px;
-	font-family: Lucida Grande,Lucida Sans,sans-serif;
+	font-family: Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
 	font-weight: bold;
 }
 
@@ -1633,7 +1698,7 @@ td.label {
 	float: left;
 	padding-left: 4px;
 	padding-right: 1px;
-	font-family: Lucida Grande,Lucida Sans,sans-serif;
+	font-family: Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
 	overflow: hidden;
 	cursor: default;
 }
@@ -1656,8 +1721,7 @@ dl {
 dt {
 	margin-top: 10px;
 	font-weight: bold;
-	font-size: 15px;
-	font-family: Lucida Grande,Lucida Sans,sans-serif;
+	font: 15px Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
 }
 
 dd a {
@@ -1693,13 +1757,17 @@ dd a {
 	width: 900px;
 	top: 0px;
 	bottom: 70px;
-	left: 50%;
-	margin-left: -450px;
+	left: 0px;
 	overflow: auto;
 }
-
 
 #welcomeArea td {
 	vertical-align: top;
 	width: 33%;
+}
+
+#bugs {
+	 bottom: 3px; 
+	 right: 0px; 
+	 position: fixed;
 }
