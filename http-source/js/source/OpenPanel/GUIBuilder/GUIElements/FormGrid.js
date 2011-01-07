@@ -64,9 +64,9 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 		var classInfo = this.openCoreObject.getClassInfo();
 		var wantedWidth = 0;
 		
-		if (document.documentElement && document.documentElement.clientHeight)
+		if (document.documentElement && document.documentElement.clientWidth)
 		{
-			wantedWidth = document.documentElement.clientHeight - 320;
+			wantedWidth = document.documentElement.clientWidth - 320;
 		}
 		else if (document.body)
 		{
