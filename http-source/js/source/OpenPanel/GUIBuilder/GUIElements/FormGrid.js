@@ -100,8 +100,6 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 		}
 		this.grid = new OpenPanel.GUIBuilder.GUIElements.Grid();
 		
-		wantedWid
-		
 		if (this.openCoreObject.meta == false && this.openCoreObject.canDelete == false && this.openCoreObject.canCreate == false)
 		{
 			this.grid.createInline(this.gridDiv,createObject,wantedWidth, classInfo["class"].gridheight);
