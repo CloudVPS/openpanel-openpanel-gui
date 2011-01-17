@@ -23,7 +23,7 @@ OpenPanel.GUIBuilder.FormElement.Textarea.prototype = {
 			this.inputElement.setAttribute("tabIndex", OpenPanel.GUIBuilder.FormElement.Base.getNextTabIndex());
 			this.setStyle();
 			var hook = this;
-			this.inputElement.onkeyup = this.inputElement.onkeydown = function() {
+			this.inputElement.onkeyup = this.inputElement.onkeydown = this.inputElement.onpaste = function() {
 				hook.setValue(this.value);
 			}
 			
@@ -34,7 +34,6 @@ OpenPanel.GUIBuilder.FormElement.Textarea.prototype = {
 			this.inputElement.onfocus = function() {
 				hook.onFocus();
 			}
-			
 			this.setHint();
 		} else {
 			this.inputElement = document.createElement("textarea");
