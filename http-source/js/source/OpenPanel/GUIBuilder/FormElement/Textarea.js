@@ -1,4 +1,5 @@
 OpenPanel.GUIBuilder.FormElement.Textarea = function(name, form, initObject){
+	console.log ("protoconstruct");
 	OpenPanel.GUIBuilder.FormElement.Base.inherit(this, name, form, initObject);
 	this.textwidth = initObject.textwidth || 30;
 	this.rows = initObject.rows || 3;

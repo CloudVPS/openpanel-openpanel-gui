@@ -62,6 +62,20 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 		var parameters = this.openCoreObject.getClassInfo().structure.parameters;
 		var createObject = {};
 		var classInfo = this.openCoreObject.getClassInfo();
+		var wantedWidth = 0;
+		
+		if (document.documentElement && document.documentElement.clientWidth)
+		{
+			wantedWidth = document.documentElement.clientWidth - 320;
+		}
+		else if (document.body)
+		{
+			wantedWidth = document.body.clientWidth - 320;
+		}
+		else
+		{
+			wantedWidth = self.innerWidth - 320;
+		}
 
 		for(var key in parameters){
 			var parameter = parameters[key];
@@ -88,11 +102,11 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 		
 		if (this.openCoreObject.meta == false && this.openCoreObject.canDelete == false && this.openCoreObject.canCreate == false)
 		{
-			this.grid.createInline(this.gridDiv,createObject,600, classInfo["class"].gridheight);
+			this.grid.createInline(this.gridDiv,createObject,wantedWidth, classInfo["class"].gridheight);
 		}
 		else
 		{
-			this.grid.createInlineWithButtons(this.gridDiv, createObject, 600, classInfo["class"].gridheight);
+			this.grid.createInlineWithButtons(this.gridDiv, createObject, wantedWidth, classInfo["class"].gridheight);
 			if (this.openCoreObject.meta == false) {
 				if (this.openCoreObject.canDelete == false) {
 					this.grid.disableDeleteButton();

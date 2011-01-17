@@ -240,18 +240,15 @@ html > body #saveButtonHolder {
 }
 
 .modalLoadingDiv {
-	z-index: 1000000;
 	position: fixed;
-	left: 50%;
-	margin-left: 405px;
-	top: 54px;
+	right: 24px;
+	top: 26px;
 }
 
 .modalLoadingDivLogin {
 	position: fixed;
 	left: 50%;
-	margin-left: -140px;
-	top: 278px;
+	top: 198px;
 }
 
 #modalMessageDivTop {

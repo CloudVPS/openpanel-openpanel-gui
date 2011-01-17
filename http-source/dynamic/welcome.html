@@ -43,19 +43,20 @@
 				<dl>
 					<dt>Disk usage</dt>
 					<dd>
-					<table border="0">
-						<tr>
-							<td>Mountpoint</td>
-							<td align="right">Size</td>
+					<div style="border:1px solid black; margin-top: 4px; padding-bottom: 2px; width: 250px">
+					<table style="" border="0" cellspacing="0" cellpadding="3" width="250">
+						<tr style="border-color:#120e04; background-color:#444444; color:#e8e8e8;">
+							<td style="padding-right:4px;">Mountpoint</td>
+							<td style="padding-left: 4px; padding-right:4px;" align="right">Size</td>
 							<td> </td>
-							<td align="right">Capacity</td>
+							<td style="padding-left:4px; align="right">Capacity</td>
 						</tr>
 						@loop mounts
 						  <tr>
-						    <td>$mountpoint$</td>
-						    <td align="right">$size$G</td>
-						    <td align="right">$usage$%</td>
-						    <td>
+						    <td style="padding-top: 2px; padding-left:2px; padding-right:2px;">$mountpoint$</td>
+						    <td style="padding-top: 2px; padding-left:2px; padding-right:2px;" align="right">$size$G</td>
+						    <td style="padding-top: 2px; padding-left:2px; padding-right:2px;" align="right">$usage$%</td>
+						    <td style="padding-top: 2px; padding-left:2px; padding-right:2px;">
 								<div style="margin: 0px; border: 1px solid #444444;">
 								  <table border="0" cellspacing="0" cellpadding="0" width="106" bgcolor="#a8a8a8">
 									<tr height="11">
@@ -69,17 +70,28 @@
 						  </tr>
 						@endloop
 					</table>
+					</div>
 				</dd>
 				</dl>
 			</div>
 			<div class="third">
 				<dl>
-					<dt>Development blog</dt>
-					@loop devrss
-
-					  <dd><a href="$url$">$title$</a></dd>
-
-					@endloop
+					<dt>Software Updates</dt>
+					@if $#updates_count$ != 0
+					  @if $#updates_count == 1
+					    <dd>There is <b>1</b> update available for this system through online updates: <div style="display:block; margin-top: 12px; padding-left: 20px;">$updates_description$.</div></dd>
+					  @else
+					    <dd>There are <b>$#updates_count$</b> updates available for this sytem through online updates: <div style="display:block; margin-top: 12px; padding-left: 20px;">$updates_description$.</div></dd>
+					  @endif
+					  <dd>&nbsp;</dd>
+					  <dd>Install your updates from the <b>Software</b> tab.</dd>
+				    @else
+				      @if "$updates_count$" == "unavailable"
+				        <dd>The Software Update module for OpenPanel is not currently installed, or is still initializing.</dd>
+				      @else
+				        <dd>This system is up-to-date.</dd>
+				      @endif
+				    @endif
 				</dl>
 			</div>
 			<div class="third">
@@ -104,7 +116,12 @@
 						</div>
 						<div style="clear: both;"></div>
 					</dd>
-					
+					<dt>Development blog</dt>
+					@loop devrss
+
+					  <dd><a href="$url$">$title$</a></dd>
+
+					@endloop
 				</dl>
 			</div>
 </div>

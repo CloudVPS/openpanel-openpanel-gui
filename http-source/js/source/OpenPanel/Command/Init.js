@@ -5,7 +5,7 @@ OpenPanel.Command.Init  = {
 		OpenPanel.Command.Welcome.stopResizing();
 		this.controller.guiBuilder.loadTemplate('templates/application.html', 'application');
 		$$('body').first().setStyle({
-			backgroundImage: 'url(/images/gui/sky.jpg)'
+			backgroundImage: 'url(/dynamic/wallpaper.jpg)'
 		});
 
 		$('loaderDiv').setStyle({ visibility: 'hidden'});

@@ -3,19 +3,20 @@ all: clean copy minimize
 	
 clean: 
 	# Cleaning /http directory
-	rm -rf http/*
+	rm -rf http
 	
 copy:
 	# Copying files
-	mkdir http/iepngfix
-	cp -R http-source/iepngfix http/iepngfix
-	mkdir http/js
+	mkdir -p http/js
+	mkdir -p http/css
+
 	cp -R http-source/js/lib http/js
-	mkdir http/css
 	cp http-source/css/openpanel.css http/css
 	cp http-source/css/iconbar.css http/css
 	cp http-source/css/openpanel.ie7.css http/css
 	cp http-source/css/browsers.css http/css
+
+	cp -R http-source/iepngfix http/iepngfix
 	cp -R http-source/images http/images
 	cp -R http-source/dynamic http/dynamic
 	cp -R http-source/templates http/templates
@@ -31,4 +32,5 @@ install:
 	# perhaps fiddle with ownership?
 	cp -r http ${DESTDIR}/var/openpanel/
 	cp -r http-templates ${DESTDIR}/var/openpanel/
+	cp -r wallpaper ${DESTDIR}/var/openpanel/
 
