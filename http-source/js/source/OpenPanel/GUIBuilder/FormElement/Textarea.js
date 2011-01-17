@@ -23,17 +23,19 @@ OpenPanel.GUIBuilder.FormElement.Textarea.prototype = {
 			this.inputElement.setAttribute("tabIndex", OpenPanel.GUIBuilder.FormElement.Base.getNextTabIndex());
 			this.setStyle();
 			var hook = this;
-			this.inputElement.onkeyup = this.inputElement.onkeydown = this.inputElement.onpaste = function() {
+			this.inputElement.onkeyup = this.inputElement.onkeydown = function() {
 				hook.setValue(this.value);
 			}
 			
 			this.inputElement.onblur = function() {
+				hook.setValue(this.value);
 				hook.onBlur();
 			}
 			
 			this.inputElement.onfocus = function() {
 				hook.onFocus();
 			}
+			
 			this.setHint();
 		} else {
 			this.inputElement = document.createElement("textarea");

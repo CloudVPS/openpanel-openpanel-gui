@@ -29,17 +29,22 @@ OpenPanel.GUIBuilder.FormElement.String.prototype = {
 			this.inputElement.setAttribute("tabIndex", OpenPanel.GUIBuilder.FormElement.Base.getNextTabIndex());
 			this.setStyle();
 			var hook = this;
-			this.inputElement.onchange = this.inputElement.onkeyup = this.inputElement.onkeydown = this.inputElement.onpaste = function() {
+			this.inputElement.onchange = this.inputElement.onkeyup = this.inputElement.onkeydown = function() {
 				hook.setValue(this.value);
 				hook.virgin = false;
 			}
 			
 			this.inputElement.onblur = function() {
+				hook.setValue(this.value);
 				hook.onBlur();
 			}
 			
 			this.inputElement.onfocus = function() {
 				hook.onFocus();
+			}
+			
+			this.inputElement.onpaste = function(){
+				console.log(this, this.value);
 			}
 			
 			this.setHint();
