@@ -11,8 +11,12 @@ copy:
 	mkdir -p http/css
 
 	cp -R http-source/js/lib http/js
-	tools/cssmin.py < http-source/css/openpanel.css > http/css/openpanel.css
-	tools/cssmin.py < http-source/css/iconbar.css >  http/css/iconbar.css
+	tools/cssmin.py --embed "http-source" < http-source/css/openpanel.css > http/css/openpanel.css
+	tools/cssmin.py --embed "http-source" < http-source/css/iconbar.css   > http/css/iconbar.css
+
+	tools/cssmin.py < http-source/css/openpanel.css > http/css/openpanel.noembed.css
+	tools/cssmin.py < http-source/css/iconbar.css   > http/css/iconbar.noembed.css
+
 	tools/cssmin.py < http-source/css/openpanel.ie7.css > http/css/openpanel.ie7.css
 	tools/cssmin.py < http-source/css/browsers.css > http/css/browsers.css
 
@@ -21,7 +25,7 @@ copy:
 	cp -R http-source/dynamic http/dynamic
 	cp -R http-source/templates http/templates
 	cp http-source/index.html.minified http/index.html
-	cp http-source/favicon.ico http/
+	cp http-source/favicon.ico http/favicon.ico
 	
 minimize:
 	# Minimizing javascripts

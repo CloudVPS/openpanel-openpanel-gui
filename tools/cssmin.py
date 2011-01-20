@@ -5,7 +5,7 @@
 
 
 from StringIO import StringIO # The pure-Python StringIO supports unicode.
-import re
+import re,os,base64
 
 
 __version__ = '0.1.1'
@@ -43,6 +43,43 @@ def remove_comments(css):
         comment_start = css.find("/*", comment_start)
     
     return css
+
+def embed_images(css, embed_base_path):
+    regex = re.compile(r"url\(([^\)]*)\)")
+    n = 0
+    result = ""
+    for match in regex.finditer(css):
+        
+        filename = match.group(1).strip("\"'")
+        fsfilename = embed_base_path + filename
+        (__dummy,ext) = os.path.splitext(filename)
+        ext = ext.lstrip(".")
+
+        
+        if False and (os.path.exists(fsfilename) and 
+           (os.stat(fsfilename).st_size < 12*1024 ) and
+           ext in ["gif","png","jpg"]):
+
+            result += css[ n : match.start(0) ]
+            result += "url("
+       
+            result += "'data:image/" + ext + ";base64,"
+            
+            with open(fsfilename,'r') as f:
+                result += base64.b64encode( f.read() ).replace("\n", "")
+            
+            result += "')"
+        else:
+            result += css[ n : match.end(0) ]
+            
+        
+#        print match.group(2)
+        n=match.end(0)
+#        colors = match.group(1).split(",")
+#        hexcolor = '#%.2x%.2x%.2x' % map(int, colors)
+#        css = css.replace(match.group(), "url  match.group(1)")
+    result += css[ n : len(css)]
+    return re.sub(r"}", "}\n", result)
 
 
 def remove_unnecessary_whitespace(css):
@@ -182,7 +219,7 @@ def wrap_css_lines(css, line_length):
     return '\n'.join(lines)
 
 
-def cssmin(css, wrap=None):
+def cssmin(css, wrap=None, embed_base_path=None):
     css = remove_comments(css)
     css = condense_whitespace(css)
     # A pseudo class for the Box Model Hack
@@ -197,6 +234,8 @@ def cssmin(css, wrap=None):
     css = condense_hex_colors(css)
     if wrap is not None:
         css = wrap_css_lines(css, wrap)
+    if embed_base_path is not None:
+        css = embed_images(css, embed_base_path)
     css = css.replace("___PSEUDOCLASSBMH___", '"\\"}\\""')
     css = condense_semicolons(css)
     return css.strip()
@@ -208,15 +247,19 @@ def main():
     
     p = optparse.OptionParser(
         prog="cssmin", version=__version__,
-        usage="%prog [--wrap N]",
+        usage="%prog [--wrap N] [--embed P]",
         description="""Reads raw CSS from stdin, and writes compressed CSS to stdout.""")
     
     p.add_option(
         '-w', '--wrap', type='int', default=None, metavar='N',
         help="Wrap output to approximately N chars per line.")
+        
+    p.add_option(
+        '-e', '--embed', type='string', default=None, metavar='P',
+        help="embed files using P as the webroot.")
     
     options, args = p.parse_args()
-    sys.stdout.write(cssmin(sys.stdin.read(), wrap=options.wrap))
+    sys.stdout.write(cssmin(sys.stdin.read(), wrap=options.wrap, embed_base_path=options.embed))
 
 
 if __name__ == '__main__':
