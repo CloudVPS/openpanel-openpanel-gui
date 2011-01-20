@@ -29,7 +29,7 @@ body {
 	width: 100%;
 	background-image: url(/images/gui/loadingbackground.png);
 	background-repeat: repeat;
-	font: 13px Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
+	font: 13px Lucida Grande,Lucida Sans, sans-serif;
 	overflow: hidden;
 	background-color: #545A56;
 	width: 100%;

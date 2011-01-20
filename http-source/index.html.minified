@@ -3,13 +3,27 @@
   <head>
   	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>OpenPanel</title>
+
+	<!--[if lte IE 7]>
+	<link rel="stylesheet" type="text/css"	href="css/openpanel.noembed.css">
+	<link rel="stylesheet" type="text/css"	href="css/iconbar.noembed.css">
+	<![endif]-->
+	<!--[if gt IE 7]> -->
 	<link rel="stylesheet" type="text/css"	href="css/openpanel.css">
 	<link rel="stylesheet" type="text/css"	href="css/iconbar.css">
+	<!--[endif]-->
+	
 	<!--[if gte IE 7]>
 	<link rel="stylesheet" type="text/css"	href="css/openpanel.ie7.css">
 	<![endif]-->
+
+ 
 	<script type="text/javascript" src="js/lib/prototype-1.6.1-compressed.js"></script>
+	
+ 	<!--[if lte IE 7]>
 	<script type="text/javascript" src="js/lib/preload.js"></script>
+	<![endif]-->
+
 	<script type="text/javascript" src="js/lib/event.simulate.js"></script>
 	<script type="text/javascript" src="js/lib/scriptaculous-1.8.3.js"></script>
 	<script type="text/javascript" src="js/lib/effects.js"></script>
