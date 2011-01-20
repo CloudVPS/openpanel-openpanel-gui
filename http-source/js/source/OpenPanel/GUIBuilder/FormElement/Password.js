@@ -156,9 +156,9 @@ OpenPanel.GUIBuilder.FormElement.Password.prototype = {
 		this.isValid = validity;
 		if (this.labelElement != undefined) {
 			if (this.isValid == true || this.virgin == true) {
-				this.labelElement.className = "labelElement";
+				this.inputElement.removeClassName("fieldElementError");
 			} else {
-				this.labelElement.className = "labelElementError";
+				this.inputElement.addClassName("fieldElementError");
 			}
 		}
 	},

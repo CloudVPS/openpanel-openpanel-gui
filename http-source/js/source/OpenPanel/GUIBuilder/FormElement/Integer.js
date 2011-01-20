@@ -98,8 +98,6 @@ OpenPanel.GUIBuilder.FormElement.Integer.prototype = {
 	setValue : function(value, setInitialValue){
 		var valueString = value + "";
 		if (valueString!=="" && valueString.match(this.regExp)) {
-			
-			
 			this.value = value;
 			if (this.readOnly == false) {
 				this.hasValue = true;
@@ -145,7 +143,16 @@ OpenPanel.GUIBuilder.FormElement.Integer.prototype = {
 		this.setValidity(isValid);
 		return this.isValid;
 	},
-	
+	setValidity : function(validity){
+		this.isValid = validity;
+		if (this.labelElement != undefined) {
+			if (this.isValid == true || this.virgin == true) {
+				this.inputElement.removeClassName("fieldElementError");
+			} else {
+				this.inputElement.addClassName("fieldElementError");
+			}
+		}
+	},
 	enable : function(){
 		if (this.inputElement != undefined) {
 			this.inputElement.removeAttribute("disabled");
@@ -155,5 +162,4 @@ OpenPanel.GUIBuilder.FormElement.Integer.prototype = {
 	disable : function(){ 
 		this.inputElement.setAttribute("disabled", true); 
 	}
-	
 }

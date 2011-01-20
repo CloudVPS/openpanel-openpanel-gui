@@ -18,6 +18,7 @@ OpenPanel.GUIBuilder.FormElement.String.prototype = {
 			this.inputElement.setAttribute("type", "text");
 			this.inputElement.setAttribute("name", this.name);
 			this.inputElement.setAttribute("id", this.name);
+			
 			if (this.value != undefined)
 			{
 				this.inputElement.setAttribute("value", this.value);
@@ -60,15 +61,21 @@ OpenPanel.GUIBuilder.FormElement.String.prototype = {
 	
 	setStyle : function(){
 		if (this.readOnly == false) {
-			this.inputElement.className = "stringElement";
+			this.inputElement.addClassName("stringElement");
+			this.inputElement.removeClassName("stringElementDisabled");
+			this.inputElement.removeClassName("stringElementHint");
 			this.setStyleWidth();
 		} else {
-			this.inputElement.className = "stringElementDisabled";
+			this.inputElement.addClassName("stringElementDisabled");
+			this.inputElement.removeClassName("stringElement");
+			this.inputElement.removeClassName("stringElementHint");
 		}
 	},
 	
 	setHintStyle : function(){
-		this.inputElement.className = "stringElementHint";
+		this.inputElement.addClassName("stringElementHint");
+		this.inputElement.removeClassName("stringElement");
+		this.inputElement.removeClassName("stringElementDisabled");
 		this.setStyleWidth();
 	},
 	
@@ -166,9 +173,9 @@ OpenPanel.GUIBuilder.FormElement.String.prototype = {
 		this.isValid = validity;
 		if (this.labelElement != undefined) {
 			if (this.isValid == true || this.virgin == true) {
-				this.labelElement.className = "labelElement";
+				this.inputElement.removeClassName("fieldElementError");
 			} else {
-				this.labelElement.className = "labelElementError";
+				this.inputElement.addClassName("fieldElementError");
 			}
 		}
 	},

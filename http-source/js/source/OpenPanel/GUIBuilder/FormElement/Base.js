@@ -29,6 +29,7 @@ OpenPanel.GUIBuilder.FormElement.Base = function(name, form, initObject){
 	this.DOMElement;
 	this.labelElement;
 	this.fieldElement;
+	this.inputElement;
 	this.clickDivElement;
 	this.onFocusTarget;
 	this.onFocusFunction;
@@ -237,12 +238,5 @@ OpenPanel.GUIBuilder.FormElement.Base.prototype = {
 	
 	setValidity : function(validity){
 		this.isValid = validity;
-		if (this.labelElement != undefined) {
-			if (this.isValid == true) {
-				this.labelElement.className = "labelElement";
-			} else {
-				this.labelElement.className = "labelElementError";
-			}
-		}
 	}
 }

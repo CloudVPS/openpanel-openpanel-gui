@@ -150,6 +150,16 @@ OpenPanel.GUIBuilder.FormElement.Textarea.prototype = {
 		this.setValidity(isValid);
 		return this.isValid;
 	},
+	setValidity : function(validity){
+		this.isValid = validity;
+		if (this.labelElement != undefined) {
+			if (this.isValid == true || this.virgin == true) {
+				this.inputElement.removeClassName("fieldElementError");
+			} else {
+				this.inputElement.addClassName("fieldElementError");
+			}
+		}
+	},
 	
 	enable : function(){
 		if (this.inputElement != undefined) {
