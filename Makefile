@@ -11,10 +11,10 @@ copy:
 	mkdir -p http/css
 
 	cp -R http-source/js/lib http/js
-	cp http-source/css/openpanel.css http/css
-	cp http-source/css/iconbar.css http/css
-	cp http-source/css/openpanel.ie7.css http/css
-	cp http-source/css/browsers.css http/css
+	tools/cssmin.py < http-source/css/openpanel.css > http/css/openpanel.css
+	tools/cssmin.py < http-source/css/iconbar.css >  http/css/iconbar.css
+	tools/cssmin.py < http-source/css/openpanel.ie7.css > http/css/openpanel.ie7.css
+	tools/cssmin.py < http-source/css/browsers.css > http/css/browsers.css
 
 	cp -R http-source/iepngfix http/iepngfix
 	cp -R http-source/images http/images
