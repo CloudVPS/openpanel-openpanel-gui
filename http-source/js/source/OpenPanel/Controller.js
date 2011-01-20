@@ -208,7 +208,6 @@ OpenPanel.Controller = {
 						break;
 							
 						case 8193:
-							
 							alert("error: " + e.message);
 							document.location.href = "/";
 						break;
@@ -221,10 +220,6 @@ OpenPanel.Controller = {
 			
 			case "RPCError":
 				var targetDiv = OpenPanel.GUIBuilder.createPopUp();
-				this.error = new Array();
-				for(var errorKey in e){
-					this.error.push([errorKey, e[errorKey]]);
-				}
 				OpenPanel.GUIBuilder.displayError([["", ""]], targetDiv, "The OpenPanel Core service isn't reachable. Is the openpaneld daemon running?");
 			break;
 			
@@ -243,11 +238,17 @@ OpenPanel.Controller = {
 			default:
 				var extraText = "please try logging in again.";
 				var targetDiv = OpenPanel.GUIBuilder.createPopUp();
+				var stack;
 				this.error = new Array();
 				for(var errorKey in e){
-					this.error.push([errorKey, e[errorKey]]);
+					if(errorKey=="stack") {
+						stack = e[errorKey];
+					} else {
+						this.error.push([errorKey, e[errorKey]]);
+					}
 				}
-				OpenPanel.GUIBuilder.displayError(this.error, targetDiv, extraText);
+				
+				OpenPanel.GUIBuilder.displayError(this.error, targetDiv, extraText, stack);
 			break;
 		}
 	},

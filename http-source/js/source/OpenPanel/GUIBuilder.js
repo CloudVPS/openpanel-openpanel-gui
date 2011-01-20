@@ -339,7 +339,7 @@ OpenPanel.GUIBuilder = {
 		*/
 	},
 	
-	displayError : function(error, targetDiv, extraText){
+	displayError : function(error, targetDiv, extraText, stack){
 		
 		var extraDiv = document.createElement("div");
 		extraDiv.setStyle({ height: "200px"});
@@ -362,6 +362,8 @@ OpenPanel.GUIBuilder = {
 		extraDiv.appendChild(tableElement);
 		var tbodyElement = document.createElement("tbody");
 		tableElement.appendChild(tbodyElement);
+		var mailErrors = {};
+		mailErrors["host"] = top.location.host;
 		for (var i=0;i<error.length;i++) {
 			var errorCouple = error[i];
 			
@@ -391,7 +393,27 @@ OpenPanel.GUIBuilder = {
 			tdValueElement.setAttribute("valign", "top");
 			tdValueElement.appendChild(document.createTextNode(errorCouple[1]));
 			trElement.appendChild(tdValueElement);
+			mailErrors[errorCouple[0]] = errorCouple[1];
 		}
+		
+		if(stack){
+			mailErrors["stack"] = stack.replace("\n", "%0A").replace("\t", "%09%09");
+		}
+		
+		var mailErrorString = "";
+		for(key in mailErrors){
+			var mailError = mailErrors[key];
+			mailErrorString+= key + " : " + mailError + "%0A";
+		}
+		
+		var trElement = document.createElement("tr");
+		tbodyElement.appendChild(trElement);
+		var tdElement = document.createElement("td");
+		trElement.appendChild(tdElement);
+		var tdElement2 = document.createElement("td");
+		trElement.appendChild(tdElement2);
+		
+		tdElement2.innerHTML = '<a href="mailto:?subject=[OpenPanel Error] - from ' + top.location.host + ' at ' + new Date() + '&body=' + mailErrorString +'">Mail this error</a>';
 	},
 	
 	growl : function(title, message){
