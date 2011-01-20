@@ -204,21 +204,13 @@ OpenPanel.Controller = {
 					
 						case 12288:
 							alert("You have been logged out due to inactivity");
-							this.action({
-								command: "Init",
-								msg: e.message
-							})
-							OpenPanel.Controller.proceedAfterError();
+							document.location.href = "/";
 						break;
 							
 						case 8193:
 							
 							alert("error: " + e.message);
-							this.action({
-								command: "Init",
-								msg: e.message
-							})
-							OpenPanel.Controller.proceedAfterError();
+							document.location.href = "/";
 						break;
 						default:
 							alert(e);
