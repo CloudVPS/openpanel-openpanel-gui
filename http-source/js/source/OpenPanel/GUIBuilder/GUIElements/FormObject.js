@@ -408,18 +408,18 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 	},
 	
 	createMultiCreateOption : function(textOnly){
-		console.log(this.openCoreObject.name);
+		//console.log(this.openCoreObject.name);
 		if ((textOnly==undefined)||(textOnly==false)){
 			this.createMultiCreateOptionOld();
 			return;
 		}
 		
-		console.log("fall");
+		//console.log("fall");
 		
 		
 		var metaObjects = this.controller.dataManager.getOpenCoreObjectsByMetaName(this.openCoreObject.name);
 
-		console.log(metaObjects);
+		//console.log(metaObjects);
 		
 		var available = {};
 		var canAdd = false;
