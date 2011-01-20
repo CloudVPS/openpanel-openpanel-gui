@@ -56,7 +56,7 @@ def embed_images(css, embed_base_path):
         ext = ext.lstrip(".")
 
         
-        if False and (os.path.exists(fsfilename) and 
+        if (os.path.exists(fsfilename) and 
            (os.stat(fsfilename).st_size < 12*1024 ) and
            ext in ["gif","png","jpg"]):
 
@@ -79,7 +79,7 @@ def embed_images(css, embed_base_path):
 #        hexcolor = '#%.2x%.2x%.2x' % map(int, colors)
 #        css = css.replace(match.group(), "url  match.group(1)")
     result += css[ n : len(css)]
-    return re.sub(r"}", "}\n", result)
+    return result
 
 
 def remove_unnecessary_whitespace(css):
