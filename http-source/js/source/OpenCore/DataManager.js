@@ -118,15 +118,17 @@ OpenCore.DataManager = {
 	},
 	
 	logOut : function(){
-		var r = new this.rpc.SendVars();
-		r.addHeader("command", "logout");
-		r.addHeader("session_id", this.sessionId);
-		
-		var requestResult = this.getRequestResult(r);
-		if (requestResult.body != undefined 
-		&& requestResult.body.data != undefined 
-		&& requestResult.body.data[className] != undefined) {
-			return requestResult.body.data;
+		if(this.sessionId!=""){
+			var r = new this.rpc.SendVars();
+			r.addHeader("command", "logout");
+			r.addHeader("session_id", this.sessionId);
+			
+			var requestResult = this.getRequestResult(r);
+			if (requestResult.body != undefined 
+			&& requestResult.body.data != undefined 
+			&& requestResult.body.data[className] != undefined) {
+				return requestResult.body.data;
+			}
 		}
 	},
 	

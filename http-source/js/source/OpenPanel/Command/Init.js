@@ -7,7 +7,16 @@ OpenPanel.Command.Init  = {
 		$$('body').first().setStyle({
 			backgroundImage: 'url(/dynamic/wallpaper.jpg)'
 		});
-
+		console.log("da");
+		var that = this;
+		Event.observe(window, 'beforeunload', function(){
+			that.controller.destroyPingTimeoutHandler();
+			OpenPanel.Controller.action({
+				command: "Logout"
+			});
+			
+		});
+		
 		$('loaderDiv').setStyle({ visibility: 'hidden'});
 		$('app').setStyle({ visibility: 'visible'});
 		

@@ -883,20 +883,6 @@ li.tabEndPushed {
 	width: 36px;
 }
 
-#close {
-	position: fixed;
-	display: block;
-	left: 5px;
-	top: 5px;
-	width: 14px;
-	height: 15px;
-	background: url(/images/gui/closeButton.gif) no-repeat 0 0;
-	z-index: 999;
-	text-decoration: none;
-	-webkit-user-select:none;
-	-moz-user-select:none;
-}
-
 #bugButton, #bugButton a {
 	position: fixed;
 	bottom: 43px;
@@ -905,11 +891,6 @@ li.tabEndPushed {
 	-webkit-user-select:none;
 	-moz-user-select:none;
 }
-
-#close:hover{
-	background-position: 0 -15px;
-}
-
 
 .windowTopLeft {
 	background: url(/images/gui/windowTopLeft.png) no-repeat 0 0;

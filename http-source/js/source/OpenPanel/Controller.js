@@ -115,13 +115,26 @@ OpenPanel.Controller = {
 				this.guiBuilder.GUIElements.FormBuilder.setOpenCoreObject(openCoreObject);
 			}
 		} else {
+			
+			this.guiBuilder.GUIElements.TabBar.clean();
+			this.guiBuilder.GUIElements.FormBuilder.clean();
+			this.guiBuilder.GUIElements.FormBuilder.setOpenCoreObject(openCoreObject);
+			this.guiBuilder.GUIElements.FormBuilder.build();
+			//this.guiBuilder.GUIElements.FormBuilder.targetDiv.update("new!<a href=\"\">" + openCoreObject.classInfo["class"].explanation +"</a>");
+			/*
 			this.guiBuilder.GUIElements.TabBar.setOpenCoreObject(openCoreObject);
 			this.guiBuilder.GUIElements.TabBar.build();
 			this.guiBuilder.GUIElements.TabBar.disable();
-			this.guiBuilder.GUIElements.FormBuilder.clean();
-			//this.guiBuilder.GUIElements.FormBuilder.setOpenCoreObject(openCoreObject);
-			//this.guiBuilder.GUIElements.FormBuilder.build();
-			//this.guiBuilder.GUIElements.FormBuilder.targetDiv.update("new!");
+			var firstTabOpenCoreObject = this.guiBuilder.GUIElements.TabBar.getFirstTabItem();
+			
+			if(firstTabOpenCoreObject){
+				this.guiBuilder.GUIElements.TabBar.highliteItem(firstTabOpenCoreObject.name);
+			}
+			
+			this.guiBuilder.GUIElements.FormBuilder.setOpenCoreObject(openCoreObject);
+			this.guiBuilder.GUIElements.FormBuilder.build();
+			this.guiBuilder.GUIElements.FormBuilder.targetDiv.update("new!");
+			*/
 		}
 	},
 	
@@ -140,7 +153,6 @@ OpenPanel.Controller = {
 	
 	ping : function(){
 		this.dataManager.getRecordsAsync("ping", undefined, OpenPanel.Controller, "pingDone", {}, true);
-		this.pingTimeoutHandler = setTimeout("OpenPanel.Controller.ping()", 60000);
 	},
 	
 	pingDone : function(callBackArguments){
@@ -152,7 +164,6 @@ OpenPanel.Controller = {
 				}
 				throw new Error("Unexpected server reply (opencore gone?): " + d);
 			} else {
-				
 				if(OpenCore.DataManager.getErrorId() == 0){
 					OpenPanel.Controller.destroyPingTimeoutHandler();
 					OpenPanel.Controller.initializePing();
