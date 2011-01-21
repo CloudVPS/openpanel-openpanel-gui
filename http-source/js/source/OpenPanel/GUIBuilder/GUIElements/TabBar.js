@@ -161,6 +161,9 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 		}
 	},
 	
+	clean : function () {
+		this.targetDiv.innerHTML = "";
+	},
 	createDelimiter : function(){
 		var delimiter = document.createElement("li");
 		delimiter.setAttribute("class", "tabDelimiter");
