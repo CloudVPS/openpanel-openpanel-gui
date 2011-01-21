@@ -29,7 +29,8 @@ body {
 	width: 100%;
 	background-image: url(/images/gui/loadingbackground.png);
 	background-repeat: repeat;
-	font: 13px Lucida Grande,Lucida Sans, sans-serif;
+	font-size: 13px;
+	font-family: Lucida Grande,Lucida Sans, sans-serif;
 	overflow: hidden;
 	background-color: #545A56;
 	width: 100%;
@@ -116,13 +117,10 @@ label { font: 11px Arial, Helvetica, sans-serif; }
 #saveButtonHolder {
 	bottom: 39px;
 	position: fixed;
-	background-image: url(/images/gui/itemlistbottom.png);
 	height: 29px;
 	padding-right:20px;
-	width: 900px;
-	left: 0px;
-	border-top: 1px solid #444444;
-	border-bottom: 1px solid #222222;
+	width: 100px;
+	right: 10px;
 }
 
 .inactiveBrowserWindow #saveButtonHolder {
@@ -1022,7 +1020,8 @@ li.tabEndPushed {
 	padding-left: 8px;
 	padding-right: 8px;
 	padding-bottom: 2px;
-	font-family: Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
+	font-family: Lucida Grande,Lucida Sans,sans-serif;
+
 	cursor: default;
 }
 
@@ -1034,7 +1033,8 @@ li.tabEndPushed {
 	padding-left: 8px;
 	padding-right: 8px;
 	padding-bottom: 2px;
-	font-family: Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
+	font-family: Lucida Grande,Lucida Sans,sans-serif;
+
 	cursor: default;
 }
 
@@ -1046,7 +1046,8 @@ li.tabEndPushed {
 	padding-left: 8px;
 	padding-right: 8px;
 	padding-bottom: 2px;
-	font-family: Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
+	font-family: Lucida Grande,Lucida Sans,sans-serif;
+
 	cursor: default;
 }
 
@@ -1092,7 +1093,8 @@ li.tabEndPushed {
 .buttonCenterOver {
 	background: url(/images/gui/buttonCenter.png) repeat-x 0 0px;
 	height: 23px;
-	font-family: Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
+	font-family: Lucida Grande,Lucida Sans,sans-serif;
+
 	font-size: 12px;
 	padding-left: 8px;
 	padding-right: 8px;
@@ -1102,7 +1104,8 @@ li.tabEndPushed {
 .formButtonCenterOver {
 	background: url(/images/gui/formButtonCenter.png) repeat-x 0 0px;
 	height: 23px;
-	font-family: Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
+	font-family: Lucida Grande,Lucida Sans,sans-serif;
+
 	font-size: 11px;
 	padding-left: 8px;
 	padding-right: 8px;
@@ -1148,7 +1151,8 @@ li.tabEndPushed {
 #saveButton .buttonCenterOver {
 	background: url(/images/gui/toolButtonCenter.png) repeat-x 0 0px;
 	height: 23px;
-	font-family: Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
+	font-family: Lucida Grande,Lucida Sans,sans-serif;
+
 	font-size: 11px;
 	padding-left: 8px;
 	padding-right: 8px;
@@ -1375,7 +1379,9 @@ li.tabEndPushed {
 }
 
 td.label {
-	font-family: 'Lucida Grande'; font-size: 13px;
+	font-family: 'Lucida Grande';
+	font-family: Lucida Grande,Lucida Sans,sans-serif;
+	font-size: 13px;
 	padding-right: 8px;
 }
 
@@ -1485,7 +1491,8 @@ td.label {
 	border-right: 1px solid #aaaaaa;
 	margin: 0px;
 	font-size: 12px;
-	font-family: Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
+	font-family: Lucida Grande,Lucida Sans,sans-serif;
+
 	font-weight: bold;
 }
 
@@ -1616,7 +1623,8 @@ td.label {
 	border-right: 1px solid #aaaaaa;
 	margin: 0px;
 	font-size: 12px;
-	font-family: Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
+	font-family: Lucida Grande,Lucida Sans,sans-serif;
+
 	font-weight: bold;
 }
 
@@ -1680,7 +1688,8 @@ td.label {
 	float: left;
 	padding-left: 4px;
 	padding-right: 1px;
-	font-family: Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
+	font-family: Lucida Grande,Lucida Sans,sans-serif;
+
 	overflow: hidden;
 	cursor: default;
 }
@@ -1703,7 +1712,8 @@ dl {
 dt {
 	margin-top: 10px;
 	font-weight: bold;
-	font: 15px Lucida Grande,Lucida Sans Unicode,Lucida Sans Regular;
+	font-size: 15px;
+	font-family: Lucida Grande,Lucida Sans,sans-serif;
 }
 
 dd a {
