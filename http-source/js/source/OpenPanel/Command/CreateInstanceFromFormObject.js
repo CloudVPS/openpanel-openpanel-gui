@@ -14,6 +14,7 @@ OpenPanel.Command.CreateInstanceFromFormObject  = {
 				this.controller.guiBuilder.deletePopUp();
 				OpenPanel.GUIBuilder.growl(" ", "Successfully created a new " + actionObject.openCoreObject.description + " object");
 				console.log(actionObject.openCoreObject);
+				OpenPanel.Command.Welcome.resize();
 			} else {
 				throw new Error(this.controller.dataManager.errorMessage);
 			}

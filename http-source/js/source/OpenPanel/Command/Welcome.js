@@ -28,53 +28,51 @@ OpenPanel.Command.Welcome = {
 	resize : function (event){
 		var viewportHeight = document.viewport.getHeight();
 		var viewportWidth = document.viewport.getWidth();
+		var h;
 		if(viewportHeight < 300){
-			//$("mainAreaRight").setStyle({ height: 65 + "px"});
-			var h = 300;
+			h = 300;
 		} else {
-			//$("mainAreaRight").setStyle({ height: ""});
-			var h = viewportHeight;
+			h = viewportHeight;
 		}
 		$("modal").setStyle({ height: (h - 20)+ "px", width: (viewportWidth - 2)+ "px", border: "1px solid #f0f"});
 		var hh = (h-129) + "px";
-		$("mainArea").setStyle({ height: (h + 40) + "px"});
+		$("mainArea").setStyle({ height: (h + 20) + "px"});
 		$("fullWindowArea").setStyle({ height: hh});
-		//$("fullWindowArea").setStyle({ height: (h+180)+"px"});
 		$("saveButtonHolder").setStyle({ top: (h-30) + "px", width : viewportWidth + "px"});
-		$("itemListArea").setStyle({ height: (h-139) + "px"});
-		$("welcomeDivHolder").setStyle({ height: (h-108) + "px"});
-		$$("#mainArea .left").first().setStyle({ height: (h-155) + "px"});
-		$$("#mainArea .right").first().setStyle({ height: (h-155) + "px"});
-		$$("#mainArea .bottom").first().setStyle({ top: (h-54) + "px"});
-		$$("#mainArea .bottomLeft").first().setStyle({ top: (h-54) + "px"});
-		$$("#mainArea .bottomRight").first().setStyle({ top: (h-54) + "px"});
+		$("itemListArea").setStyle({ height: (h-199) + "px"});
+		$("welcomeDivHolder").setStyle({ height: (h-47) + "px"});
+		$$("#mainArea .left").first().setStyle({ height: (h-145) + "px"});
+		$$("#mainArea .right").first().setStyle({ height: (h-145) + "px"});
+		$$("#mainArea .bottom").first().setStyle({ top: (h-44) + "px"});
+		$$("#mainArea .bottomLeft").first().setStyle({ top: (h-44) + "px"});
+		$$("#mainArea .bottomRight").first().setStyle({ top: (h-44) + "px"});
 		$("mainAreaRight").setStyle({ height: (h-150) + "px"});
 		var itemListButtons = $("itemListButtons");
 		if(itemListButtons){
-			itemListButtons.setStyle({ top: (h-30) + "px"});
+			itemListButtons.setStyle({ top: (h-20) + "px"});
 		}
 		var itemGridView = $$(".itemGridView").first();
-		if(itemGridView != null){
-			itemGridView.setStyle({ height: (h-108) + "px"});
-			$$(".itemGridViewContents").first().setStyle({ height: (h-124) + "px"});
+		if(itemGridView != null) {
+			itemGridView.setStyle({ height: (h-78) + "px"});
+			$$(".itemGridViewContents").first().setStyle({ height: (h-114) + "px"});
 		}
 		
 		if(h <= 300){
 			$("welcomeLogoHolder").setStyle({ height: 0 + "px"});
 			$("welcomeLogoHolder").hide();
-			$("welcomeArea").setStyle({ top: 0 + "px", height: "191px"});
+			$("welcomeArea").setStyle({ top: 0 + "px", height: "222px"});
 		} else if(h > 300 && h < 400){
 			$("welcomeLogoHolder").setStyle({ height: 0 + "px"});
 			$("welcomeLogoHolder").hide();
-			$("welcomeArea").setStyle({ top: 0 + "px", height: (h-110) + "px"});
+			$("welcomeArea").setStyle({ top: 0 + "px", height: (h-79) + "px"});
 		} else if(h > 400 && h < 500){
 			$("welcomeLogoHolder").show();
 			$("welcomeLogoHolder").setStyle({ height: (h - 300) + "px"});
-			$("welcomeArea").setStyle({ top: (h - 300) + "px", height: 191 + "px"});
+			$("welcomeArea").setStyle({ top: (h - 300) + "px", height: 220 + "px"});
 		} else if(h > 500){
 			$("welcomeLogoHolder").show();
 			$("welcomeLogoHolder").setStyle({ height: 200 + "px"});
-			$("welcomeArea").setStyle({ top: 200 + "px", height: (h-309) + "px"});
+			$("welcomeArea").setStyle({ top: 200 + "px", height: (h-278) + "px"});
 		}
 	}
 }

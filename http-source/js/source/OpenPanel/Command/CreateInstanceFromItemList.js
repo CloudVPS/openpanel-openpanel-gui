@@ -20,7 +20,8 @@ OpenPanel.Command.CreateInstanceFromItemList  = {
 				this.controller.guiBuilder.GUIElements.ItemList.currentInstance = this.controller.currentRootClassInstance;
 				this.controller.guiBuilder.GUIElements.ItemList.highliteItem(this.controller.currentRootClassInstance.uuid);
 				OpenPanel.GUIBuilder.growl(" ", "Successfully created a new " + actionObject.openCoreObject.description + " object");
-
+				
+				OpenPanel.Command.Welcome.resize();
 			
 			} else {
 				throw new Error(this.controller.dataManager.errorMessage);

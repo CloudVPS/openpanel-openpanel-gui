@@ -231,7 +231,7 @@ OpenPanel.Controller = {
 			
 			case "RPCError":
 				var targetDiv = OpenPanel.GUIBuilder.createPopUp();
-				OpenPanel.GUIBuilder.displayError([["", ""]], targetDiv, "The OpenPanel Core service isn't reachable. Is the openpaneld daemon running?");
+				OpenPanel.GUIBuilder.displayError([["", ""]], targetDiv, "The OpenPanel Core service isn't reachable. Is the openpaneld daemon running?", null, true);
 			break;
 			
 			case "InitError":

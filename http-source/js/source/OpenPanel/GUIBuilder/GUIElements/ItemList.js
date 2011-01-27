@@ -80,7 +80,7 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 			targetDiv.innerHTML = "";
 			
 			var addDeleteButtonHolder = document.createElement("div");
-			addDeleteButtonHolder.setAttribute("class", "addDeleteButtonHolder");
+			addDeleteButtonHolder.setAttribute("class", "addDeleteButtonHolder gridViewButtonArea");
 			targetDiv.appendChild(addDeleteButtonHolder);
 			
 			if (this.openCoreObject.meta == true) {
@@ -91,14 +91,22 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 				if (this.controller.dataManager.checkQuotum(this.openCoreObject.name) == true && this.openCoreObject.canCreate == true) {
 					
 					// create create button
-					createButton.setAttribute("class", "addButton");
+					createButton.setAttribute("class", "gridViewCreateButton");
 					createButton.setAttribute("id", "itemListAddButton");
 					var hook = this;
+					createButton.onmouseup = createButton.onmouseout = function(){
+						this.className = "gridViewCreateButton";
+					}
+					
+					createButton.onmousedown = function(){
+						this.className = "gridViewCreateButtonPushed";
+					}
+					
 					createButton.onclick = function(){
 						hook.createInstance();
 					}
 				} else {
-					createButton.setAttribute("class", "addButtonDisabled");
+					createButton.setAttribute("class", "gridViewCreateButtonDisabled");
 				}
 				
 				var deleteButton = document.createElement("div");
@@ -111,13 +119,22 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 				if (this.controller.dataManager.checkQuotum(this.openCoreObject.name) == true && this.openCoreObject.canDelete == true && l==1) {
 					
 					// create delete button
-					deleteButton.setAttribute("class", "deleteButton");
+					deleteButton.setAttribute("class", "gridViewDeleteButton");
 					var hook = this;
 					deleteButton.onclick = function(){
 						hook.deleteInstance();
 					}
+					
+					deleteButton.onmouseup = deleteButton.onmouseout = function(){
+						this.className = "gridViewDeleteButton";
+					}
+					
+					deleteButton.onmousedown = function(){
+						this.className = "gridViewDeleteButtonPushed";
+					}
+					
 				} else {
-					deleteButton.setAttribute("class", "deleteButtonDisabled");
+					deleteButton.setAttribute("class", "gridViewDeleteButtonDisabled");
 				}
 				
 				/* 
