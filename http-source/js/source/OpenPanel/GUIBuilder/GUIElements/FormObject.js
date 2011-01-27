@@ -162,6 +162,9 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 			}
 		} else {
 			if (this.openCoreObject.canCreate == true) {
+				var msg = this.openCoreObject.classInfo["class"].emptytext;
+				if (msg==undefined) msg = "No objects found";
+				this.gridDiv.appendChild(document.createTextNode(msg));
 				this.createCreateOption(true);
 			}
 		}
@@ -408,19 +411,13 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 	},
 	
 	createMultiCreateOption : function(textOnly){
-		//console.log(this.openCoreObject.name);
 		if ((textOnly==undefined)||(textOnly==false)){
 			this.createMultiCreateOptionOld();
 			return;
 		}
 		
-		//console.log("fall");
-		
-		
 		var metaObjects = this.controller.dataManager.getOpenCoreObjectsByMetaName(this.openCoreObject.name);
 
-		//console.log(metaObjects);
-		
 		var available = {};
 		var canAdd = false;
 		var canAdds = {};
@@ -480,18 +477,6 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 				tR.appendChild(tD);
 			}
 			this.gridDiv.appendChild(tB);
-
-			
-			/*
-			for(var key in available){
-				var metaObject = available[key];
-				var optionElement = document.createElement("option");
-				optionElement.value = key;
-				optionElement.appendChild(document.createTextNode(key));
-				optionElement.openCoreObject = metaObject;
-				s.appendChild(optionElement);
-			}
-			*/
 		}
 	},
 	
@@ -511,7 +496,6 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 					canAdd = true;
 				}
 			}
-			
 			
 			if (canAdd == true) {
 				function mkcallback(hook, openCoreObject){
@@ -533,7 +517,6 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 				
 				for (var key in available) {
 					availableKeys.push(key);
-
 				}
 				
 				availableKeys.alphanumSort(true);
@@ -543,7 +526,6 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 					var metaObject = available[key];
 					var menukey = "Create " + metaObject.title;
 					mdef[menukey] = mkcallback(this, metaObject);
-					console.log("<", key, menukey, mdef);
 				}
 				
 				this.setGridMenu(mdef);
@@ -553,6 +535,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 	
 	createCreateOption : function (textOnly, displayOnly, targetDiv){
 		// does not support meta stuff
+			
 		if (this.openCoreObject.meta == true) {
 		
 		} else {
