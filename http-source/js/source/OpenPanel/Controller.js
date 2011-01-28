@@ -85,7 +85,9 @@ OpenPanel.Controller = {
 	iconBarClick : function(openCoreObject) {
 		// update item list
 		
+		// current instance is first instance!
 		this.guiBuilder.GUIElements.ItemList.setOpenCoreObject(openCoreObject);
+		
 		this.guiBuilder.GUIElements.ItemList.build();
 		this.guiBuilder.GUIElements.ItemList.takeFocus();
 		
@@ -106,7 +108,7 @@ OpenPanel.Controller = {
 				this.guiBuilder.GUIElements.FormBuilder.setOpenCoreParentUUID(this.currentRootClassInstance.uuid);
 
 				this.guiBuilder.GUIElements.FormBuilder.build();
-
+				
 				if (this.currentRootClassInstance != undefined) {
 					this.guiBuilder.GUIElements.ItemList.highliteItem(this.currentRootClassInstance.uuid);
 				}
@@ -114,6 +116,7 @@ OpenPanel.Controller = {
 			} else {
 				this.guiBuilder.GUIElements.FormBuilder.setOpenCoreObject(openCoreObject);
 			}
+			
 		} else {
 			
 			this.guiBuilder.GUIElements.TabBar.clean();
@@ -152,10 +155,12 @@ OpenPanel.Controller = {
 	},
 	
 	ping : function(){
+		OpenPanel.Controller.destroyPingTimeoutHandler();
 		this.dataManager.getRecordsAsync("ping", undefined, OpenPanel.Controller, "pingDone", {}, true);
 	},
 	
 	pingDone : function(callBackArguments){
+		
 		try {
 			if(callBackArguments.data == undefined){
 				var d = "";
@@ -165,13 +170,11 @@ OpenPanel.Controller = {
 				throw new Error("Unexpected server reply (opencore gone?): " + d);
 			} else {
 				if(OpenCore.DataManager.getErrorId() == 0){
-					OpenPanel.Controller.destroyPingTimeoutHandler();
 					OpenPanel.Controller.initializePing();
 				} else if(OpenCore.DataManager.errorId == 12288){
 					OpenPanel.Controller.action("Init");
 				} else {
 					errorMsg = OpenCore.DataManager.getErrorMessage();
-					OpenPanel.Controller.destroyPingTimeoutHandler();
 					throw new Error(errorMsg);
 				}
 			}
