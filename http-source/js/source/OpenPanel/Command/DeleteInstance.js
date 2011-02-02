@@ -20,7 +20,7 @@ OpenPanel.Command.DeleteInstance  = {
 				this.controller.iconBarClick(actionObject.openCoreObject);
 				
 				OpenPanel.GUIBuilder.growl(" ", "Successfully deleted " + actionObject.openCoreObject.description + " object" + objectIDString);
-				
+				OpenPanel.Command.Welcome.resize();
 			} else {
 				throw new Error(this.dataManager.errorMessage);
 			}

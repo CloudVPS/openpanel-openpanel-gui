@@ -24,7 +24,7 @@ OpenPanel.Command.DeleteInstanceFromFormObject  = {
 			openCoreObject.getInstances();
 			formObject.build();
 			OpenPanel.GUIBuilder.growl(" ", "Successfully deleted " + actionObject.openCoreObject.description + " object" + objectIDString);
-
+			OpenPanel.Command.Welcome.resize();
 		}
 	}
 }
