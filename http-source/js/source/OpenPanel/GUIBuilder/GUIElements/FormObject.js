@@ -541,7 +541,20 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		} else {
 			if (this.controller.dataManager.checkQuotum(this.openCoreObject.name) == true) {
 				var hook = this;
-				var createfunc = function() {
+				var createfunc;
+				
+				if(this.openCoreObject.parent.name == "ROOT"){
+					createfunc = function() {
+						hook.controller.action({
+							command : "ShowCreateInstanceFromItemList", 
+							
+							openCoreObject: hook.openCoreObject,
+							
+							formObjectHolder: hook.formBuilder.formObjectHolder
+						});
+					}
+				} else {
+					createfunc = function() {
 						hook.controller.action({
 							command: "ShowCreateInstanceFromFormObject",
 							formObject: hook,
@@ -550,6 +563,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 							formObjectHolder: hook.formBuilder.formObjectHolder
 						});
 					}
+				}
 				
 				var createOne;
 				if (textOnly == true) {
