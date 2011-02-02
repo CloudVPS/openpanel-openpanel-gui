@@ -1,7 +1,6 @@
 OpenPanel.Command.DeleteInstance  = {
 	controller : {},
 	execute : function(actionObject){
-		console.log("deleeeteeeee");
 		if(actionObject.openCoreObject != undefined && actionObject.instance != undefined) {
 			
 			var actionObjectId = actionObject.instance.uuid;
