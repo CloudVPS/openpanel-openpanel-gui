@@ -57,7 +57,62 @@
 		
 	</script>
 	</head>
-	<body id="application">
-		<div id="crow" style="text-align: center;margin-top: 150px;"><img src="/images/gui/crow.png"/><br/><br/><br/><img src="/images/gui/prespinner.gif"/></div>
+	<body>
+		<div id="hiddenLogin" style="display: none">
+			<div class="windowTopLeft"></div>
+			<div class="windowTop"></div>
+			<div class="windowTopRight"></div>
+			<div class="windowLeft"></div>
+			<div class="windowRight"></div>
+			<div class="windowBottomLeft"></div>
+			<div class="windowBottom"></div>
+			<div class="windowBottomRight"></div>
+			<div class="windowCenter">
+				<form method="POST" id="loginForm" action="">
+					<div id="loginDiv">&nbsp;
+						<table border="0" width="100%" id="firstForm_SingleColumnFormRenderer" class="formTable">
+							<tbody>
+								<tr>
+									<td class="labelTd" valign="top">
+										<div class="labelElement" style="cursor: default; ">Username:</div>
+									</td>
+									<td>
+										<span>
+											<div class="elementContainer">
+												<div class="fieldElement">
+													<input type="text" name="userName" id="userName" tabindex="1" style="width: 154px; ">
+												</div>
+											</div>
+										</span>
+									</td>
+								</tr>
+								<tr>
+									<td class="labelTd" valign="top">
+										<div class="labelElement" style="cursor: default; ">Password:</div>
+									</td>
+									<td>
+										<span>
+											<div class="elementContainer">
+												<div class="fieldElement">
+													<input type="password" name="password" id="password" tabindex="2" style="width: 154px; ">
+												</div>
+											</div>
+										</span>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="windowButtonHolder">
+						<button id="loginButton" type="submit"><img src="/images/gui/loginHouse.png"></button>
+					</div>
+				</form>
+			</div>
+			<div id="loginMessageDiv"></div>
+			<div class="windowLogo"></div>
+		</div>
+		<div id="application">
+			<div id="crow" style="text-align: center;margin-top: 150px;"><img src="/images/gui/crow.png"/><br/><br/><br/><img src="/images/gui/prespinner.gif"/></div>
+		</div>
 	</body>
 </html>

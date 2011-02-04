@@ -1,53 +1,19 @@
 OpenPanel.GUIBuilder.GUIElements.LoginWindow = {
-	renderLogin : function(el, params){
-		var data = {
-			structure : {
-				parameters : {
-					userName : {	
-						type : "String",
-						description : "Username",
-						textwidth: 20,
-						example : "",
-						required : true
-					},
-					password : {	
-						type : "Password",
-						description : "Password",
-						textwidth: 20,
-						example : "",
-						required : true
-					}
-				}
-			},
-			isCreate : true
-		}
-		
-		var values = {};
-		if(params.userName!=undefined){
-			values.userName = params.userName;
-		}
-		if(params.password!=undefined){
-			values.password = params.password;
-		}
-		
-		var formPanel = new OpenPanel.GUIBuilder.Form("firstForm", data);
-		
-		formPanel.setHideAsterisks(true);
-		formPanel.addRenderer(
-			new OpenPanel.GUIBuilder.SingleColumnFormRenderer({
-				name: "SingleColumnFormRenderer"
-			})
-		);
-		
-		el.appendChild(formPanel.render("SingleColumnFormRenderer"));
-		formPanel.setValues(values);
+	patchElements : function (el, parameters){
+		$("loginMessageDiv").update(parameters.msg != undefined?parameters.msg:"");
 		
 		var form = document.getElementById("loginForm");
-		
-		formPanel.getElement("userName").focus();
-		
-		var hook = this;
-		var onsubmit = function(){
+		var onsubmit = function (){
+			if($("userName").value!="" && $("password").value!=""){
+				OpenPanel.Controller.action({ 
+					command : "Login", 
+					userName : $("userName").value,	
+					password : $("password").value,	
+				});
+			}
+			console.log("validate");
+			
+			/*
 			if(formPanel.validate() === true){
 				
 				var obj = { command : "Login" };
@@ -59,6 +25,8 @@ OpenPanel.GUIBuilder.GUIElements.LoginWindow = {
 			} else {
 				
 			}
+			
+			*/
 			return false;
 		}
 		try {

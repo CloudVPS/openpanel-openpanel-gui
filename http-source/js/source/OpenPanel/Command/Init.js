@@ -8,13 +8,14 @@ OpenPanel.Command.Init  = {
 			backgroundImage: 'url(/dynamic/wallpaper.jpg)'
 		});
 		var that = this;
-		Event.observe(window, 'beforeunload', function(){
+		var beforeUnload = function (){
 			that.controller.destroyPingTimeoutHandler();
+			Event.stopObserving(window, "beforeunload", beforeUnload);
 			OpenPanel.Controller.action({
 				command: "Logout"
 			});
-			
-		});
+		}
+		Event.observe(window, "beforeunload", beforeUnload);
 		
 		$('loaderDiv').setStyle({ visibility: 'hidden'});
 		$('app').setStyle({ visibility: 'visible'});
@@ -36,16 +37,8 @@ OpenPanel.Command.Init  = {
 		
 		var detected = this.detect();
 		if (detected.fail == false) {
-			$("modalLoadingDiv").className = "modalLoadingDivLogin";
-			this.controller.guiBuilder.hideModalMessageDiv();
-			this.controller.guiBuilder.loadTemplate("templates/login.html", "app");
-			
-			this.controller.guiBuilder.GUIElements.LoginWindow.renderLogin($("loginDiv"), actionObject);
-			if(actionObject.msg != undefined){
-				document.getElementById("loginMessageDiv").innerHTML = actionObject.msg;
-			} else {
-				document.getElementById("loginMessageDiv").innerHTML = "";
-			}
+			$("hiddenLogin").show();
+			this.controller.guiBuilder.GUIElements.LoginWindow.patchElements($("loginDiv"), actionObject);
 		} else {
 			var e = new OpenPanel.Command.Init.InitError();
 			e.message = "Unsupported browser. ";

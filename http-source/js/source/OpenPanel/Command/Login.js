@@ -15,6 +15,7 @@ OpenPanel.Command.Login  = {
 	
 	loginDone : function(data, callBackArguments){
 		var actionObject = callBackArguments;
+		$("hiddenLogin").hide();
 		$("loginForm").show();
 		$("loaderDiv").hide();
 		if(callBackArguments.header.errorid == 0){
@@ -25,6 +26,7 @@ OpenPanel.Command.Login  = {
 			OpenPanel.Controller.initializePing();
 			this.controller.action({command: "Welcome"});
 		} else {
+			$("hiddenLogin").show();
 			//throw new OpenCore.OpenCoreError(callBackArguments.header.error, callBackArguments.header.errorid);
 			this.controller.action({ command : "Init", msg: "login failed"})
 		}
