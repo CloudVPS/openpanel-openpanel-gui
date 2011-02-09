@@ -24,6 +24,12 @@
 					<dt>Server</dt>
 					<dd><b>Kernel</b>: $os_name$ $os_release$</dd>
 					<dd><b>CPU</b>: $os_cpu$</dd>
+					@if $os_hw$
+					<dd><b>Hardware</b>: $os_hw$</dd>
+					@endif
+					@if $mem_total$
+					<dd><b>Memory</b>: used $mem_active$ of $mem_total$</dd>
+					@endif
 					<dd><b>OS</b>: $os_distro$</dd>
 					<dd><b>OpenPanel</b>: $openpanel_release$</dd>
 				</dl>
