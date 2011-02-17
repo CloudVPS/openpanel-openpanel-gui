@@ -214,8 +214,7 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 					throw new Error("Could not find admin instance, something's real wrong.");
 				}
 				var displayInstance = foundInstance!=null?foundInstance:adminInstance;
-				
-				$("objectOwner").update("owned by: " + displayInstance.name_customer);
+				$("objectOwner").update("owned by: " + displayInstance.id);
 			}
 			this.grid.setSelection(this.currentInstance.id);
 		}
