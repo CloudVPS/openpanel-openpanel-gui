@@ -11,22 +11,6 @@ OpenPanel.GUIBuilder.GUIElements.LoginWindow = {
 					password : $("password").value,	
 				});
 			}
-			console.log("validate");
-			
-			/*
-			if(formPanel.validate() === true){
-				
-				var obj = { command : "Login" };
-				var values = formPanel.getValues();
-				for(var key in values){
-					obj[key] = values[key];
-				}
-				OpenPanel.Controller.action(obj);
-			} else {
-				
-			}
-			
-			*/
 			return false;
 		}
 		try {

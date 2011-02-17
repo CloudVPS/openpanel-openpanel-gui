@@ -52,8 +52,6 @@ OpenPanel.GUIBuilder.OpenCoreObjectForm = function(name, className, isCreate){
 	OpenPanel.GUIBuilder.OpenCoreObjectForm.prototype = {
 		forms : new Array(),
 		submit : function(){
-			console.log("validate" + this.validate());
-			console.log("callbackcommand", this.callbackCommand);
 			// validate
 			// getvalues
 			// call callback command
@@ -168,7 +166,6 @@ OpenPanel.GUIBuilder.OpenCoreObjectForm = function(name, className, isCreate){
 			for(var key in this.formElementMap){
 				var formElement = this.formElementMap[key];
 				var validFormElement = formElement.validate();
-				console.log("validation; " + formElement.name + " " + validFormElement, formElement);
 				if(!validFormElement){
 					isValid = false;
 				}

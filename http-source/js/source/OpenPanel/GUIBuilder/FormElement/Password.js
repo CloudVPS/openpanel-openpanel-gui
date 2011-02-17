@@ -106,7 +106,6 @@ OpenPanel.GUIBuilder.FormElement.Password.prototype = {
 	},
 	
 	setValue : function(value, setInitialValue){
-		console.log("setValue", this);
 		if (value != undefined && value!="" && value.length>0) {
 			this.value = value;
 			if (this.readOnly == false) {

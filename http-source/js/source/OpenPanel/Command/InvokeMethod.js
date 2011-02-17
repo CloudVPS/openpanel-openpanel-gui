@@ -11,7 +11,5 @@ OpenPanel.Command.InvokeMethod  = {
 	
 	done : function(args){
 		OpenPanel.GUIBuilder.growl(" ", "Successfully invoked " + this.actionObject.methodName);
-
-		console.log(args);	
 	}
 }

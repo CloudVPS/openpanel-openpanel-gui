@@ -45,7 +45,7 @@ OpenPanel.GUIBuilder.FormElement.String.prototype = {
 			}
 			
 			this.inputElement.onpaste = function(){
-				console.log(this, this.value);
+				
 			}
 			
 			this.setHint();

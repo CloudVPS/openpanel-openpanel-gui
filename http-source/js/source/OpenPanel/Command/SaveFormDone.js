@@ -34,7 +34,6 @@ OpenPanel.Command.SaveFormDone  = {
 				}
 				OpenPanel.GUIBuilder.growl(" ", "Successfully updated " + actionObject.openCoreObject.description + " object" + objectIDString);
 				
-				console.log(actionObject);
 			} catch (e){
 				this.controller.handleErrors(e);
 			}

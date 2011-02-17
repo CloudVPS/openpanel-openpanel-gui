@@ -15,7 +15,6 @@ OpenPanel.Command.PreloadAssets  = {
 		assetList.each(function(src){
 			a[src] = new Image(32, 32);
 			a[src].src = src;
-			console.log(src);
 		});
 		
 		this.finish();
