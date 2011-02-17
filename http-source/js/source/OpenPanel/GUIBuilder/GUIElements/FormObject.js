@@ -82,6 +82,12 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		
 		this.targetDiv.appendChild(this.fieldsDiv);
 		
+		this.optionsDiv = document.createElement("div");
+		this.optionsDiv.setAttribute("id", this.openCoreObject.name + ":options");
+		this.optionsDiv.setAttribute("class", "formOptions");
+		this.targetDiv.appendChild(this.optionsDiv);
+		
+		
 		var anchorDiv = document.createElement("a");
 		anchorDiv.setAttribute("name", this.openCoreObject.name);
 		this.targetDiv.appendChild(anchorDiv);
@@ -270,14 +276,24 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 							}
 						}
 					} else {
-						//console.log("not singleton");
+						// console.log("not singleton", this.openCoreObject.name);
 						// not a singleton
 						// the grid should always be displayed with non meta values
-						//console.log("create Grid for " + this.openCoreObject.name);
-						//console.log(this.instances);
+						// console.log("create Grid for " + this.openCoreObject.name);
+						// console.log(this.instances);
 							
 						if (! this.openCoreObject.classInfo["class"].hidegrid) {
 							this.createGrid(this.openCoreObject, this.instances, "callBackCommand", this.gridDiv, {}, this.currentInstance);
+						} else {
+							var c = this.createDeleteOption();
+							var button = document.createElement("div");
+							button.update("Delete this " + this.openCoreObject.classInfo["class"].description + " instance");
+							button.setAttribute("style", "margin-left: 180px;");
+							this.controller.guiBuilder.GUIElements.Button.renderButton(button, undefined, true);
+							
+							this.optionsDiv.appendChild(button);
+							
+							button.onclick = c;
 						}
 						
 						this.childFormObjects = {};
@@ -338,6 +354,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 					//console.log("no instances");
 					var msg = this.openCoreObject.classInfo["class"].emptytext;
 					if (msg==undefined) msg = "No objects found";
+					
 					if(this.openCoreObject.meta == true){
 						// list objects
 						this.gridDiv.appendChild(document.createTextNode(msg));
@@ -347,7 +364,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 						this.gridDiv.appendChild(document.createTextNode(msg));
 						
 						var floater = document.createElement("div");
-						floater.style["float"] = "right";
+						floater.style.paddingTop = "8px";
 						floater.style.paddingRight = "30px";
 						this.gridDiv.appendChild (floater);
 
@@ -626,6 +643,8 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		}
 			
 		if (this.grid != undefined) this.grid.setDeleteCallback (callbackfunc);
+		
+		return callbackfunc;
 	},
 	
 	getPreviousInstance: function(){
