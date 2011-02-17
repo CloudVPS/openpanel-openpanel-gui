@@ -1762,3 +1762,12 @@ dd a {
 .fieldElementError {
 	background-color: #FFCFDB;
 }
+
+#objectOwner {
+	margin-top: 0.4em;
+	padding-left: 0.4em;
+	width: 180px;
+	height: 2em;
+	overflow: hidden;
+	font-size: 0.8em;
+}

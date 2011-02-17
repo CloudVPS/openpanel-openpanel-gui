@@ -137,6 +137,10 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 					deleteButton.setAttribute("class", "gridViewDeleteButtonDisabled");
 				}
 				
+				
+				var ownerElement = document.createElement("div");
+				ownerElement.setAttribute("id", "objectOwner");
+				addDeleteButtonHolder.appendChild(ownerElement);
 				/* 
 				var quotum = this.controller.dataManager.getQuotumByClassName(this.openCoreObject.name);
 				if (quotum != undefined) {
@@ -192,6 +196,27 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 	highliteItem: function(uuid){
 		this.renderButtons(this.buttonsDiv);
 		if(this.currentInstance != undefined){
+			var openCoreObject = OpenCore.DataManager.openCoreObjects["User"];
+			if(openCoreObject){
+				var foundInstance;
+				var adminInstance;
+				for(var key in openCoreObject.instances){
+					var instance = openCoreObject.instances[key];
+					if(typeof instance.ownerid == "undefined"){
+						adminInstance = instance;
+					}
+					if(instance.uuid == this.currentInstance.ownerid){
+						foundInstance = instance;
+					}
+				}
+				
+				if(adminInstance == null){
+					throw new Error("Could not find admin instance, something's real wrong.");
+				}
+				var displayInstance = foundInstance!=null?foundInstance:adminInstance;
+				
+				$("objectOwner").update("owned by: " + displayInstance.name_customer);
+			}
 			this.grid.setSelection(this.currentInstance.id);
 		}
 	},
