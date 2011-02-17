@@ -59,7 +59,11 @@ OpenPanel.GUIBuilder.FormElement.Password.prototype = {
 	},
 	
 	setHintStyle : function(){
-		this.inputElement.className = "stringElementHint";
+		if(this.isCreate == true){
+			this.inputElement.className = "stringElementHint";
+		} else {
+			this.inputElement.className = "stringElementHintExistingPassword";
+		}
 		this.setStyleWidth();
 	},
 	
@@ -102,6 +106,7 @@ OpenPanel.GUIBuilder.FormElement.Password.prototype = {
 	},
 	
 	setValue : function(value, setInitialValue){
+		console.log("setValue", this);
 		if (value != undefined && value!="" && value.length>0) {
 			this.value = value;
 			if (this.readOnly == false) {

@@ -1244,6 +1244,11 @@ li.tabEndPushed {
 	font-size: 12px;
 }
 
+.stringElementHintExistingPassword {
+	color: #000;
+	font-size: 12px;
+}
+
 .stringElementDisabled {
 	padding-top: 3px;
 	font-size: 12px;
