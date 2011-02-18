@@ -142,15 +142,15 @@ OpenPanel.Controller = {
 	},
 	
 	initializePing : function(){
-		if (this.pingTimeoutHandler == undefined) {
-			this.pingTimeoutHandler = setTimeout("OpenPanel.Controller.ping()", 60000);
+		if (OpenPanel.Controller.pingTimeoutHandler == undefined) {
+			OpenPanel.Controller.pingTimeoutHandler = setTimeout("OpenPanel.Controller.ping()", 60000);
 		}
 	},
 	
 	destroyPingTimeoutHandler : function(){
-		if (this.pingTimeoutHandler != undefined) {
-			clearTimeout(this.pingTimeoutHandler);
-			this.pingTimeoutHandler = undefined;
+		if (OpenPanel.Controller.pingTimeoutHandler != undefined) {
+			clearTimeout(OpenPanel.Controller.pingTimeoutHandler);
+			OpenPanel.Controller.pingTimeoutHandler = undefined;
 		}
 	},
 	
@@ -185,7 +185,7 @@ OpenPanel.Controller = {
 	
 	handleErrors : function(e){	
 		OpenPanel.GUIBuilder.hideLoadingDiv();
-		clearTimeout(this.pingTimeoutHandler);
+		clearTimeout(OpenPanel.Controller.pingTimeoutHandler);
 		switch(e.name){
 			case "OpenCoreError":
 			
@@ -206,17 +206,13 @@ OpenPanel.Controller = {
 					
 					alert("OpenCore said: " + errorString);
 					if(goToInit == true){
-						this.action({
-							command: "Init",
-							msg: e.message
-						})
-						OpenPanel.Controller.proceedAfterError();
+						document.location.href = "/";
 					}
 					
 				} else {
 					switch (e.errorCode) {
-					
 						case 12288:
+							
 							alert("You have been logged out due to inactivity");
 							document.location.href = "/";
 						break;
@@ -233,6 +229,7 @@ OpenPanel.Controller = {
 			break;
 			
 			case "RPCError":
+				console.log("RPC error");
 				var targetDiv = OpenPanel.GUIBuilder.createPopUp();
 				OpenPanel.Controller.destroyPingTimeoutHandler();
 				OpenPanel.GUIBuilder.displayError([["", ""]], targetDiv, "The OpenPanel Core service isn't reachable. Is the openpaneld daemon running?", null, true);
