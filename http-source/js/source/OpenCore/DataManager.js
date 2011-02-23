@@ -390,19 +390,19 @@ OpenCore.DataManager = {
 	
 	getRequestResult: function(sendVars){
 		
-			var r =this.rpc.RequestHandler.synchronizedRequest(sendVars).evalJSON();
-			if(r.header != undefined && r.header.errorid != undefined && r.header.error !=undefined){
-				this.errorId = r.header.errorid;
-				this.errorMessage = r.header.error;
-				
-				if(this.errorId!=0){
-					throw new OpenCore.OpenCoreError(r.header.error, r.header.errorid);
-					return;
-				}
-				return r;
-			} else {
-				throw new OpenCore.RPC.RPCError("No response");
+		var r = this.rpc.RequestHandler.synchronizedRequest(sendVars).evalJSON();
+		if(r.header != undefined && r.header.errorid != undefined && r.header.error !=undefined){
+			this.errorId = r.header.errorid;
+			this.errorMessage = r.header.error;
+			
+			if(this.errorId!=0){
+				throw new OpenCore.OpenCoreError(r.header.error, r.header.errorid);
+				return;
 			}
+			return r;
+		} else {
+			throw new OpenCore.RPC.RPCError("No response");
+		}
 		
 	},
 	
@@ -470,7 +470,7 @@ OpenCore.DataManager = {
 	
 	
 	getRecordsAsyncDone : function(callBackWrapper){
-		var callBackObject;
+	    var callBackObject;
 		var callBackFunction;
 		var callBackArguments;
 		var data;
@@ -491,6 +491,7 @@ OpenCore.DataManager = {
 			data = callBackWrapper.data;
 		}
 		
+		callBackArguments.header = callBackWrapper.header;
 		callBackArguments.data = data;
 		
 		if(callBackObject!= undefined){

@@ -141,26 +141,26 @@ OpenPanel.Controller = {
 		}
 	},
 	
-	initializePing : function(){
-	    if (OpenPanel.Controller.pingTimeoutHandler == undefined) {
-			OpenPanel.Controller.pingTimeoutHandler = setTimeout("OpenPanel.Controller.ping()", 60000);
-		}
+	initializePing : function() {
+	    OpenPanel.Controller.destroyPingTimeoutHandler();
+	    
+	    OpenPanel.Controller.periodicalExecuter = new PeriodicalExecuter( function (pe) {
+	        pe.stop();
+	        OpenPanel.Controller.ping();
+	    }, 2);
 	},
 	
 	destroyPingTimeoutHandler : function(){
-		if (OpenPanel.Controller.pingTimeoutHandler != undefined) {
-			clearTimeout(OpenPanel.Controller.pingTimeoutHandler);
-			OpenPanel.Controller.pingTimeoutHandler = undefined;
-		}
+	    if(OpenPanel.Controller.periodicalExecuter != undefined){
+            OpenPanel.Controller.periodicalExecuter.stop();
+        }
 	},
 	
 	ping : function(){
-		OpenPanel.Controller.destroyPingTimeoutHandler();
-		this.dataManager.getRecordsAsync("ping", undefined, OpenPanel.Controller, "pingDone", {}, true);
+	    this.dataManager.getRecordsAsync("ping", undefined, OpenPanel.Controller, "pingDone", {}, true);
 	},
 	
 	pingDone : function(callBackArguments){
-		
 		try {
 			if(callBackArguments.data == undefined){
 				var d = "";
@@ -168,10 +168,11 @@ OpenPanel.Controller = {
 					d+=key + " " + callBackArguments[key] + "\n";
 				}
 				throw new Error("Unexpected server reply (opencore gone?): " + d);
+				
 			} else {
-				if(OpenCore.DataManager.getErrorId() == 0){
+				if(callBackArguments.header.errorid == 0){
 					OpenPanel.Controller.initializePing();
-				} else if(OpenCore.DataManager.errorId == 12288){
+				} else if (callBackArguments.header.errorid == 12288) {
 					OpenPanel.Controller.action("Init");
 				} else {
 					errorMsg = OpenCore.DataManager.getErrorMessage();
@@ -185,7 +186,7 @@ OpenPanel.Controller = {
 	
 	handleErrors : function(e){	
 		OpenPanel.GUIBuilder.hideLoadingDiv();
-		clearTimeout(OpenPanel.Controller.pingTimeoutHandler);
+		OpenPanel.Controller.destroyPingTimeoutHandler();
 		switch(e.name){
 			case "OpenCoreError":
 			
@@ -230,7 +231,7 @@ OpenPanel.Controller = {
 			case "RPCError":
 				console.log("RPC error");
 				var targetDiv = OpenPanel.GUIBuilder.createPopUp();
-				OpenPanel.Controller.destroyPingTimeoutHandler();
+				
 				OpenPanel.GUIBuilder.displayError([["", ""]], targetDiv, "The OpenPanel Core service isn't reachable. Is the openpaneld daemon running?", null, true);
 			break;
 			
