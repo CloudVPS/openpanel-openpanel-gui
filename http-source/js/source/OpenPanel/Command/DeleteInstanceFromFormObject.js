@@ -2,6 +2,8 @@ OpenPanel.Command.DeleteInstanceFromFormObject  = {
 	controller : {},
 	execute : function(actionObject){
 		if (actionObject.openCoreObject != undefined && actionObject.formObject != undefined) {
+		    this.controller.dataManager.buildQuota();
+		    
 			var openCoreObject = actionObject.openCoreObject;
 			var objectIDString = "";
 			if(actionObject.openCoreObject.currentInstance.id){
@@ -27,5 +29,5 @@ OpenPanel.Command.DeleteInstanceFromFormObject  = {
 			OpenPanel.Command.Welcome.resize();
 		}
 	}
-}
+};
 

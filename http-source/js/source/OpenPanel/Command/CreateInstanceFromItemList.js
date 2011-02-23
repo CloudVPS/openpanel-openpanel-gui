@@ -10,6 +10,8 @@ OpenPanel.Command.CreateInstanceFromItemList  = {
 			var parentId = actionObject.openCoreObject.parent.uuid;
 			var r = this.controller.dataManager.createInstance(className, actionObjectId, parentId, actionObject.formValues);
 			if (this.controller.dataManager.errorId == 0) {
+			    this.controller.dataManager.buildQuota();
+			    
 				openCoreObject.fetchedInstances = false;
 				var instances = openCoreObject.getInstances();
 				this.controller.currentRootClassInstance = openCoreObject.instances[actionObjectId];

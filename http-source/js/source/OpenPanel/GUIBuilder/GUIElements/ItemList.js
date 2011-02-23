@@ -86,10 +86,10 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 			if (this.openCoreObject.meta == true) {
 			
 			} else {
+			    var audit = OpenCore.DataManager.getQuotumByClassName(this.openCoreObject.name);
 				var createButton = document.createElement("div");
 				addDeleteButtonHolder.appendChild(createButton);
-				if (this.controller.dataManager.checkQuotum(this.openCoreObject.name) == true && this.openCoreObject.canCreate == true) {
-					
+				if (this.openCoreObject.canCreate == true && (audit.quota ===-1 || (audit.quota > 0 && audit.quota > audit.usage))) {
 					// create create button
 					createButton.setAttribute("class", "gridViewCreateButton");
 					createButton.setAttribute("id", "itemListAddButton");
@@ -116,7 +116,7 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 					l = 1;
 					break;
 				}
-				if (this.controller.dataManager.checkQuotum(this.openCoreObject.name) == true && this.openCoreObject.canDelete == true && l==1) {
+				if (this.openCoreObject.canDelete == true && l==1 && (audit.quota === -1 || (audit.quota > 0 && audit.usage <= audit.quota))) {
 					
 					// create delete button
 					deleteButton.setAttribute("class", "gridViewDeleteButton");

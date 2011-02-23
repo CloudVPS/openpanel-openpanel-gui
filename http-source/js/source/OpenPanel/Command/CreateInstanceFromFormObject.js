@@ -8,11 +8,13 @@ OpenPanel.Command.CreateInstanceFromFormObject  = {
 			
 			var r = this.controller.dataManager.createInstance(className, actionObjectId, parentId, actionObject.formValues);
 			if (this.controller.dataManager.errorId == 0) {
+			    this.controller.dataManager.buildQuota();
 				actionObject.optionalCallBackObject.openCoreObject.fetchedInstances = false;
 				actionObject.optionalCallBackObject.openCoreObject.getInstances();
 				actionObject.optionalCallBackObject.build();
 				this.controller.guiBuilder.deletePopUp();
 				OpenPanel.GUIBuilder.growl(" ", "Successfully created a new " + actionObject.openCoreObject.description + " object");
+				
 				OpenPanel.Command.Welcome.resize();
 			} else {
 				throw new Error(this.controller.dataManager.errorMessage);

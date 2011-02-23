@@ -11,6 +11,8 @@ OpenPanel.Command.DeleteInstance  = {
 			var className = actionObject.openCoreObject.name;
 			var r = this.controller.dataManager.deleteInstance(className, actionObjectId);
 			if (this.controller.dataManager.errorId == 0) {
+			    this.controller.dataManager.buildQuota();
+			    
 				actionObject.openCoreObject.fetchedInstances = false;
 				actionObject.openCoreObject.getInstances();
 				

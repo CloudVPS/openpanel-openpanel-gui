@@ -133,20 +133,39 @@ OpenCore.DataManager = {
 		}
 	},
 	
+   createWorld : function () {
+        if(this.classInfos == undefined){
+            
+            var g = this.getWorld();
+            try {
+                if(g.body != undefined && g.body.data != undefined && g.body.data.body!=undefined && g.body.data.body.classes != undefined){
+                    this.classInfos = g.body.data.body.classes;
+                } else {
+                    throw new Exception("ClassInfo was not found");
+                }
+            } catch (e) {
+                alert(e);
+            }
+            
+            this.buildQuota();
+        }
+    },
+    
+    buildQuota : function () {
+        this.quotaObject =  new OpenCore.DataManager.OpenCoreObject("User", "OpenCORE:Quota")
+        var instances = this.quotaObject.getInstances();
+        this.quotaByClassName = {};
+        for(var metaid in this.quotaObject.instances){
+            var instance = this.quotaObject.instances[metaid];
+            if (instance.quota === 0 && instance.usage === 0) {
+                delete this.classInfos[instance.metaid];
+            }
+            this.quotaByClassName[this.quotaObject.instances[metaid].metaid] = this.quotaObject.instances[metaid];      
+        }  
+    },
 	getClassInfo: function(className){
 		
-	    if(this.classInfos == undefined || className == "ROOT"){
-	        var g = this.getWorld();
-	        try {
-	            if(g.body != undefined && g.body.data != undefined && g.body.data.body!=undefined && g.body.data.body.classes != undefined){
-	                this.classInfos = g.body.data.body.classes;
-	            } else{
-	                throw new Exception("ClassInfo was not found");
-	            }
-	        } catch (e) {
-	            alert(e);
-	        }
-	    }
+	    this.createWorld();
 		
 		if(className == "ROOT"){
 			var rootClassInfo = {
