@@ -142,9 +142,8 @@ OpenPanel.Controller = {
 	},
 	
 	initializePing : function(){
-	    console.log("initializePing");
-		if (OpenPanel.Controller.pingTimeoutHandler == undefined) {
-			OpenPanel.Controller.pingTimeoutHandler = function(){ setTimeout("OpenPanel.Controller.ping()", 60000); }
+	    if (OpenPanel.Controller.pingTimeoutHandler == undefined) {
+			OpenPanel.Controller.pingTimeoutHandler = setTimeout("OpenPanel.Controller.ping()", 60000);
 		}
 	},
 	

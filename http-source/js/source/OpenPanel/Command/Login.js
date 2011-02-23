@@ -20,9 +20,6 @@ OpenPanel.Command.Login  = {
 		$("loaderDiv").hide();
 		if(callBackArguments.header.errorid == 0){
 			OpenPanel.KeyboardHandler.init();
-			
-			OpenCore.DataManager.createWorld();
-			
 			var rootObject = new OpenCore.DataManager.OpenCoreObject({}, "ROOT");
 			this.controller.currentUser = actionObject.callBackArguments.userName; // que? this is wrong
 			this.buildMainArea();
