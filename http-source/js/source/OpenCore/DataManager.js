@@ -90,18 +90,15 @@ OpenCore.DataManager = {
 		}
 		
 	},
+	
 	initializeQuotaObject : function(){
 		new OpenCore.DataManager.OpenCoreObject("ROOT", "User");
-		this.quotaObject =  new OpenCore.DataManager.OpenCoreObject("User", "OpenCORE:Quota")
-		this.quotaObject.getInstances();
-		for(var metaid in this.quotaObject.instances){
-			this.quotaByClassName[this.quotaObject.instances[metaid].metaid] = this.quotaObject.instances[metaid];		
-		}
 	},
 	
 	checkQuotum : function(className){
 		var quotum = this.quotaByClassName[className];
-		if(quotum==undefined){
+		console.log("checkQuotum", quotum);
+		if(quotum === undefined){
 			return true;
 		} else {
 			if(quotum.usage < quotum.quota || quotum.quota == -1){
@@ -132,20 +129,37 @@ OpenCore.DataManager = {
 		}
 	},
 	
+	createWorld : function () {
+	    if(this.classInfos == undefined){
+	        console.log("create world");
+	        
+	        var g = this.getWorld();
+            try {
+                if(g.body != undefined && g.body.data != undefined && g.body.data.body!=undefined && g.body.data.body.classes != undefined){
+                    this.classInfos = g.body.data.body.classes;
+                } else {
+                    throw new Exception("ClassInfo was not found");
+                }
+            } catch (e) {
+                alert(e);
+            }
+            
+            this.quotaObject =  new OpenCore.DataManager.OpenCoreObject("User", "OpenCORE:Quota")
+            var instances = this.quotaObject.getInstances();
+            for(var metaid in this.quotaObject.instances){
+                var instance = this.quotaObject.instances[metaid];
+                if (instance.quota === 0 && instance.usage === 0) {
+                    console.log("n", instance.id, instance.quota, instance.usage);
+                    delete this.classInfos[instance.metaid];  
+                    console.log("this.classInfos[instance.metaid]", this.classInfos[instance.metaid]);
+                }
+                this.quotaByClassName[this.quotaObject.instances[metaid].metaid] = this.quotaObject.instances[metaid];      
+            }
+        }
+    },
 	getClassInfo: function(className){
 		
-		if(this.classInfos == undefined || className == "ROOT"){
-			var g = this.getWorld();
-			try {
-				if(g.body != undefined && g.body.data != undefined && g.body.data.body!=undefined && g.body.data.body.classes != undefined){
-					this.classInfos = g.body.data.body.classes;
-				} else {
-					throw new Exception("ClassInfo was not found");
-				}
-			} catch (e) {
-				alert(e);
-			}
-		}
+		this.createWorld();
 		
 		if(className == "ROOT"){
 			var rootClassInfo = {

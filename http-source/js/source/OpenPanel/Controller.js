@@ -142,8 +142,9 @@ OpenPanel.Controller = {
 	},
 	
 	initializePing : function(){
+	    console.log("initializePing");
 		if (OpenPanel.Controller.pingTimeoutHandler == undefined) {
-			OpenPanel.Controller.pingTimeoutHandler = setTimeout("OpenPanel.Controller.ping()", 60000);
+			OpenPanel.Controller.pingTimeoutHandler = function(){ setTimeout("OpenPanel.Controller.ping()", 60000); }
 		}
 	},
 	
@@ -212,7 +213,6 @@ OpenPanel.Controller = {
 				} else {
 					switch (e.errorCode) {
 						case 12288:
-							
 							alert("You have been logged out due to inactivity");
 							document.location.href = "/";
 						break;

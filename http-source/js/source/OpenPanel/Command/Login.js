@@ -20,6 +20,9 @@ OpenPanel.Command.Login  = {
 		$("loaderDiv").hide();
 		if(callBackArguments.header.errorid == 0){
 			OpenPanel.KeyboardHandler.init();
+			
+			OpenCore.DataManager.createWorld();
+			
 			var rootObject = new OpenCore.DataManager.OpenCoreObject({}, "ROOT");
 			this.controller.currentUser = actionObject.callBackArguments.userName; // que? this is wrong
 			this.buildMainArea();
@@ -43,7 +46,7 @@ OpenPanel.Command.Login  = {
 		OpenPanel.GUIBuilder.GUIElements.FormBuilder.setTargetDivName("mainAreaForm");
 		OpenPanel.GUIBuilder.GUIElements.FormBuilder.setFullWindowOverlayDivName("fullWindowArea");
 		
-		//this.controller.dataManager.initializeQuotaObject();	
+		this.controller.dataManager.initializeQuotaObject();	
 		this.controller.action({command: "BuildIconBar"});
 	}
 }
