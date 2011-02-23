@@ -96,42 +96,47 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 					var hook = this;
 					createButton.onmouseup = createButton.onmouseout = function(){
 						this.className = "gridViewCreateButton";
-					}
+					};
 					
 					createButton.onmousedown = function(){
 						this.className = "gridViewCreateButtonPushed";
-					}
+					};
 					
 					createButton.onclick = function(){
 						hook.createInstance();
-					}
+					};
 				} else {
 					createButton.setAttribute("class", "gridViewCreateButtonDisabled");
 				}
 				
 				var deleteButton = document.createElement("div");
 				addDeleteButtonHolder.appendChild(deleteButton);
-				var l = 0;
+				var hasFirstInstance = false;
 				for (var key in this.instances) {
-					l = 1;
+				    hasFirstInstance = true;
 					break;
 				}
-				if (this.openCoreObject.canDelete == true && l==1 && (audit.quota === -1 || (audit.quota > 0 && audit.usage <= audit.quota))) {
+				
+				var isNotSelf = true;
+				if(this.openCoreObject.name == "User" && this.currentInstance.metaid == OpenPanel.Controller.currentUser){
+				    isNotSelf = false;
+				}
+				if (this.openCoreObject.canDelete == true && hasFirstInstance === true && isNotSelf === true && (audit.quota === -1 || (audit.quota > 0 && audit.usage <= audit.quota))) {
 					
 					// create delete button
 					deleteButton.setAttribute("class", "gridViewDeleteButton");
 					var hook = this;
 					deleteButton.onclick = function(){
 						hook.deleteInstance();
-					}
+					};
 					
 					deleteButton.onmouseup = deleteButton.onmouseout = function(){
 						this.className = "gridViewDeleteButton";
-					}
+					};
 					
 					deleteButton.onmousedown = function(){
 						this.className = "gridViewDeleteButtonPushed";
-					}
+					};
 					
 				} else {
 					deleteButton.setAttribute("class", "gridViewDeleteButtonDisabled");
@@ -141,16 +146,6 @@ OpenPanel.GUIBuilder.GUIElements.ItemList = {
 				var ownerElement = document.createElement("div");
 				ownerElement.setAttribute("id", "objectOwner");
 				addDeleteButtonHolder.appendChild(ownerElement);
-				/* 
-				var quotum = this.controller.dataManager.getQuotumByClassName(this.openCoreObject.name);
-				if (quotum != undefined) {
-					var q = document.createElement("ul");
-					targetDiv.appendChild(q);
-					var li = document.createElement("li");
-					li.appendChild(document.createTextNode(">>quotum : " + this.openCoreObject.name + " " + quotum.quota));
-					q.appendChild(li);
-				}
-				*/
 			}
 		}
 	},
