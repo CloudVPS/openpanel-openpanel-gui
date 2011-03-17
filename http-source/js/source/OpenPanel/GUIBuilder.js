@@ -22,7 +22,13 @@ OpenPanel.GUIBuilder = {
 	
 	loadTemplateIntoDiv : function(templateName, targetDiv){
 		var randomNumber = new String(Math.random()).substr(2);
-		var f = new Ajax.Request(templateName + "?" + randomNumber, {
+		var queryParameters = "";
+		
+		if(this.controller.dataManager.sessionId){
+		   queryParameters = "sid=" + this.controller.dataManager.sessionId + "&";
+		}
+		queryParameters+= randomNumber; 
+		var f = new Ajax.Request(templateName + "?" + queryParameters , {
 		  method: 'get',
 		  asynchronous: false
 		}).transport.responseText;
