@@ -14,7 +14,7 @@ OpenPanel.GUIBuilder = {
 	loadTemplate : function(templateName, targetDivName){
 		var targetDiv = document.getElementById(targetDivName);
 		if (targetDiv != undefined) {
-			OpenPanel.GUIBuilder.loadTemplateIntoDiv(templateName, targetDiv);	
+			return OpenPanel.GUIBuilder.loadTemplateIntoDiv(templateName, targetDiv);	
 		} else {
 			alert("OpenPanel.GUIBuilder : targetDiv not found");
 		}		
@@ -35,6 +35,8 @@ OpenPanel.GUIBuilder = {
 		
 		this.targetDiv = targetDiv;
 		this.targetDiv.innerHTML = f;
+		
+		return f;
 	},
 	
 	createPopUp : function(){
