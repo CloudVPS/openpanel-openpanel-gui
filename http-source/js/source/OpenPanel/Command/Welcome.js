@@ -31,7 +31,7 @@ OpenPanel.Command.Welcome = {
 		Element.stopObserving(window, "resize", this.resizeFunction);
 	},
 	resize : function (event){
-	    if (this.hasLoaded == true) {
+	    
     		var viewportHeight = document.viewport.getHeight();
     		var viewportWidth = document.viewport.getWidth();
     		var h;
@@ -46,7 +46,9 @@ OpenPanel.Command.Welcome = {
     		$("fullWindowArea").setStyle({ height: hh});
     		$("saveButtonHolder").setStyle({ top: (h-30) + "px", width : viewportWidth + "px"});
     		$("itemListArea").setStyle({ height: (h-199) + "px"});
-    		$("welcomeDivHolder").setStyle({ height: (h-47) + "px"});
+    		if (this.hasLoaded == true) {
+    		  $("welcomeDivHolder").setStyle({ height: (h-47) + "px"});
+    		}
     		$$("#mainArea .left").first().setStyle({ height: (h-145) + "px"});
     		$$("#mainArea .right").first().setStyle({ height: (h-145) + "px"});
     		$$("#mainArea .bottom").first().setStyle({ top: (h-44) + "px"});
