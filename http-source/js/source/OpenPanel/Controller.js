@@ -147,7 +147,7 @@ OpenPanel.Controller = {
 	    OpenPanel.Controller.periodicalExecuter = new PeriodicalExecuter( function (pe) {
 	        pe.stop();
 	        OpenPanel.Controller.ping();
-	    }, 2);
+	    }, 30);
 	},
 	
 	destroyPingTimeoutHandler : function(){
