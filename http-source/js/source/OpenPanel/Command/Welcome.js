@@ -68,19 +68,27 @@ OpenPanel.Command.Welcome = {
     		if(h <= 300){
     			$("welcomeLogoHolder").setStyle({ height: 0 + "px"});
     			$("welcomeLogoHolder").hide();
-    			$("welcomeArea").setStyle({ top: 0 + "px", height: "222px"});
+    			if (this.hasLoaded == true) {
+        			$("welcomeArea").setStyle({ top: 0 + "px", height: "222px"});
+    			}
     		} else if(h > 300 && h < 400){
     			$("welcomeLogoHolder").setStyle({ height: 0 + "px"});
     			$("welcomeLogoHolder").hide();
-    			$("welcomeArea").setStyle({ top: 0 + "px", height: (h-79) + "px"});
+    			if (this.hasLoaded == true) {
+    			     $("welcomeArea").setStyle({ top: 0 + "px", height: (h-79) + "px"});
+    			}
     		} else if(h > 400 && h < 500){
     			$("welcomeLogoHolder").show();
     			$("welcomeLogoHolder").setStyle({ height: (h - 300) + "px"});
-    			$("welcomeArea").setStyle({ top: (h - 300) + "px", height: 220 + "px"});
+    			if (this.hasLoaded == true) {
+        			$("welcomeArea").setStyle({ top: (h - 300) + "px", height: 220 + "px"});
+    			}
     		} else if(h > 500){
     			$("welcomeLogoHolder").show();
     			$("welcomeLogoHolder").setStyle({ height: 200 + "px"});
-    			$("welcomeArea").setStyle({ top: 200 + "px", height: (h-278) + "px"});
+    			if (this.hasLoaded == true) {
+        			$("welcomeArea").setStyle({ top: 200 + "px", height: (h-278) + "px"});
+    			}
     		}
 	    }
 	}
