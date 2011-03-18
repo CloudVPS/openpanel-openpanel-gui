@@ -91,5 +91,5 @@ OpenPanel.Command.Welcome = {
     			}
     		}
 	    }
-	}
-}
+	};
+
