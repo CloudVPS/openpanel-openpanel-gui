@@ -21,10 +21,10 @@ OpenPanel.Command.Welcome = {
         		this.controller.guiBuilder.GUIElements.FormBuilder.setSaveButtonVisibility(false);
         		this.resizeFunction = this.resize.bind(this);
         		Element.observe(window, "resize", this.resizeFunction);
-        		this.resize();
     		    this.hasLoaded = true;
     		}
 		}
+		this.resize();
 	},
 	
 	stopResizing : function(){
