@@ -273,6 +273,7 @@ html > body #saveButtonHolder {
 	margin-right: auto;
 	align: right;
 	width: 600px;
+	padding-left: 25%;
 }
 #modalMessageDivBottom {
 	background-image: url(/images/gui/modalBottom.png);

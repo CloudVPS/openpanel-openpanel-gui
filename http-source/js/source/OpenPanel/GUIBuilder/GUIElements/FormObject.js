@@ -169,7 +169,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 		} else {
 			if (this.openCoreObject.canCreate == true) {
 				var msg = this.openCoreObject.classInfo["class"].emptytext;
-				if (msg==undefined) msg = "No objects found";
+				if (msg==undefined) msg = "No " + this.openCoreObject.title + " instances found";
 				this.gridDiv.appendChild(document.createTextNode(msg));
 				this.createCreateOption(true);
 			}
@@ -256,8 +256,14 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 						//console.log("singleton, create create and delete");
 						if (actualOpenCoreObject.canDelete == true) {
 							this.createCreateOption(false, true, this.fieldsDiv);
-							this.createDeleteOption(this.fieldsDiv);
-						}
+							
+							var c = this.createDeleteOption();
+                            var button = document.createElement("div");
+                            button.update("Delete this " + this.openCoreObject.classInfo["class"].description + " instance");
+                            this.controller.guiBuilder.GUIElements.Button.renderButton(button, undefined, true);
+                            this.optionsDiv.appendChild(button);
+                            button.onclick = c;
+                        }
 						
 						this.childFormObjects = {};
 						for(var childOpenCoreObjectName in actualOpenCoreObject.children){
@@ -288,7 +294,6 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 							var c = this.createDeleteOption();
 							var button = document.createElement("div");
 							button.update("Delete this " + this.openCoreObject.classInfo["class"].description + " instance");
-							button.setAttribute("style", "margin-left: 180px;");
 							this.controller.guiBuilder.GUIElements.Button.renderButton(button, undefined, true);
 							
 							this.optionsDiv.appendChild(button);
@@ -361,12 +366,15 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 						this.createMultiCreateOption(true);
 					} else {
 
-						this.gridDiv.appendChild(document.createTextNode(msg));
+						
 						
 						var floater = document.createElement("div");
 						floater.style.paddingTop = "8px";
-						floater.style.paddingRight = "30px";
-						this.gridDiv.appendChild (floater);
+						var textElement = document.createElement("div");
+						textElement.style.marginBottom = "8px";
+						textElement.appendChild(document.createTextNode(msg));
+						floater.appendChild(textElement);
+						this.optionsDiv.appendChild (floater);
 
 						if (this.openCoreObject.canCreate == true) {
 							this.createCreateOption(true, false, floater);
