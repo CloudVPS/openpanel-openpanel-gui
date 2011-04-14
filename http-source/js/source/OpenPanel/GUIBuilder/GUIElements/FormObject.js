@@ -170,7 +170,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 			if (this.openCoreObject.canCreate == true) {
 				var msg = this.openCoreObject.classInfo["class"].emptytext;
 				if (msg==undefined) msg = "No " + this.openCoreObject.title + " instances found";
-				this.gridDiv.appendChild(document.createTextNode(msg));
+				this.optionsDiv.appendChild(document.createTextNode(msg));
 				this.createCreateOption(true);
 			}
 		}
@@ -362,7 +362,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 					
 					if(this.openCoreObject.meta == true){
 						// list objects
-						this.gridDiv.appendChild(document.createTextNode(msg));
+						this.optionsDiv.appendChild(document.createTextNode(msg));
 						this.createMultiCreateOption(true);
 					} else {
 
@@ -501,7 +501,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 				tD.appendChild(bdiv);
 				tR.appendChild(tD);
 			}
-			this.gridDiv.appendChild(tB);
+			this.optionsDiv.appendChild(tB);
 		}
 	},
 	
@@ -594,14 +594,11 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 				if (textOnly == true) {
 					var expln = this.openCoreObject.classInfo["class"].explanation;
 					if((expln != undefined)&&(expln != "")){
-						var explanationElement = document.createElement("div");
+					   
+					    var explanationElement = document.createElement("div");
 						explanationElement.className = "explanation";
 						explanationElement.innerHTML = "<br>"+expln;
-						if (targetDiv == undefined) {
-							this.gridDiv.appendChild(explanationElement);
-						} else {
-							//targetDiv.appendChild(explanationElement);
-						}
+						this.optionsDiv.appendChild(explanationElement);
 					}	
 
 					createOne = document.createElement("div");
@@ -746,7 +743,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 			this.methodsDiv = document.createElement("div");
 			this.methodsDiv.setAttribute("id", this.openCoreObject.name + ":methods");
 			this.methodsDiv.setAttribute("id", "methods");
-			this.targetDiv.appendChild(this.methodsDiv);
+			this.optionsDiv.appendChild(this.methodsDiv);
 			var fieldContainerGroup = window.OpenPanel.GUIBuilder.drawGroup();
 			
 			var groupHolder = fieldContainerGroup.groupHolder;
