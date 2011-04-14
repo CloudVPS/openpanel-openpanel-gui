@@ -119,6 +119,14 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 			contentDiv.appendChild(this.formPanel.render("SingleColumnFormRenderer"));
 			
 			var values = {};
+			if (this.isCreate == true) {
+			    for(var key in this.openCoreObject.classInfo.structure.parameters){
+			        var parameter = this.openCoreObject.classInfo.structure.parameters[key];
+			        if(parameter["default"]!=""){
+			            values[key] = parameter["default"];
+			        }
+			    }
+			}
 			for(var key in instance){
 				values[key] = instance[key];
 			}
