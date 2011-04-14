@@ -457,15 +457,10 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 			}
 		}
 		
-		var tB = document.createElement("table");
-		tB.border = 0;
-		tB.cellPadding = 0;
-		tB.cellSpacing = 0;
+		var tB = document.createElement("div");
+		
 		tB.style.paddingTop = "10px";
-		var tBD = document.createElement ("tbody");
-		tB.appendChild(tBD);
-		var tR = document.createElement ("tr");
-		tBD.appendChild(tR);
+		
 		
 		if (canAdd == true) {
 			var availableKeys = [];
@@ -477,12 +472,12 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 			availableKeys.alphanumSort(true);
 			
 			for(var i = 0;i<availableKeys.length;i++){
-				var key = availableKeys[i];
-
-				var metaObject = available[key];
-				var tD = document.createElement ("td");
-
+			    var key = availableKeys[i];
+			    var metaObject = available[key];
+				var tD = document.createElement ("div");
+				   
 				tD.style.paddingRight = "10px";
+				tD.style.float = "left";
 				var bdiv = document.createElement("div");
 				bdiv.innerHTML = "Set Up " + metaObject.title;
 				this.controller.guiBuilder.GUIElements.Button.renderButton(bdiv,false,true);
@@ -499,8 +494,12 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 						});
 					}
 				tD.appendChild(bdiv);
-				tR.appendChild(tD);
+				tB.appendChild(tD);
 			}
+			var tD = document.createElement ("div");
+            
+            tD.style.clear = "both";
+            tB.appendChild(tD);
 			this.optionsDiv.appendChild(tB);
 		}
 	},
