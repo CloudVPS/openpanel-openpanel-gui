@@ -8,6 +8,6 @@ Standards-Version: 3.7.2
 Package: openpanel-gui
 Architecture: all
 Depends: ${misc:Depends}
-Recommends: openpanel-core (>= 0.8.3)
-Conflicts: openpanel-core (<< 0.8.3)
+Recommends: openpanel-core (>= 1.1)
+Conflicts: openpanel-core (<< 1.0)
 Description: OpenPanel HTML based gui
