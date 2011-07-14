@@ -8,11 +8,10 @@ OpenPanel.Controller = {
 	guiBuilder: {},
 	selectedRootInstance: "",
 	selectedTabObject: "",
-	
 	currentRootClass: {},
 	currentRootClassInstance: {},
 	currentUser : {},
-	
+	isLoggedIn : false,
 	action: function(actionObject){
 		try {
 			this.lastCommand = actionObject.command;
@@ -157,7 +156,9 @@ OpenPanel.Controller = {
 	},
 	
 	ping : function(){
-	    this.dataManager.getRecordsAsync("ping", undefined, OpenPanel.Controller, "pingDone", {}, true);
+	    if(OpenPanel.Controller.isLoggedIn == true){
+	         this.dataManager.getRecordsAsync("ping", undefined, OpenPanel.Controller, "pingDone", {}, true);
+	    }
 	},
 	
 	pingDone : function(callBackArguments){
@@ -213,7 +214,9 @@ OpenPanel.Controller = {
 				} else {
 					switch (e.errorCode) {
 						case 12288:
-							alert("You have been logged out due to inactivity");
+						    if(OpenPanel.Controller.isLoggedIn == true){
+						        alert("You have been logged out due to inactivity");
+						    }
 							document.location.href = "/";
 						break;
 							

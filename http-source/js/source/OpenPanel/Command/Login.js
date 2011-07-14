@@ -19,6 +19,7 @@ OpenPanel.Command.Login  = {
 		$("loginForm").show();
 		$("loaderDiv").hide();
 		if(callBackArguments.header.errorid == 0){
+		    this.controller.isLoggedIn = true;
 			OpenPanel.KeyboardHandler.init();
 			
 			OpenCore.DataManager.createWorld();
