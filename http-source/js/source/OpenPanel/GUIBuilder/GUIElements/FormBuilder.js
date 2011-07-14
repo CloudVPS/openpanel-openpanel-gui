@@ -16,6 +16,7 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 	FOCUS_FORM: 1,
 	FOCUS_ITEMLIST: 2,
 	setFocusOnReady: 0,
+	wasActive : null,
 	
 	build: function() {
 		if (this.fullWindowOverlayDiv != undefined)
@@ -32,7 +33,7 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 		this.setSaveButtonVisibility(false);
 		
 		var saveButton = document.getElementById("saveButton");
-		saveButton.innerHTML = "Save";
+		saveButton.innerHTML = "Save!";
 		var hook = this;
 		this.controller.guiBuilder.GUIElements.Button.renderButton(saveButton, undefined, undefined, false);
 
@@ -50,7 +51,7 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 	},
 	
 	createSaveButtonAction : function(saveButton){
-		var hook = this;
+	    var hook = this;
 		saveButton.onclick = function() {
 			var transport = hook.getData();
 			var actionObject = {
@@ -91,18 +92,21 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 	},
 	
 	setSaveButtonActive : function(isActive){
-		if(isActive == true){
-			var saveButton = document.getElementById("saveButton");
-			saveButton.innerHTML = "Save";
-			this.controller.guiBuilder.GUIElements.Button.renderButton(saveButton);
-
-			this.createSaveButtonAction(saveButton);
-		} else {
-			var saveButton = document.getElementById("saveButton");
-			saveButton.innerHTML = "Save";
-			saveButton.onclick = function(){}
-			this.controller.guiBuilder.renderDisabledButton(saveButton);
-		}
+	    if(this.wasActive != isActive){
+	        this.wasActive = isActive;
+    	    if(isActive == true){
+    			var saveButton = document.getElementById("saveButton");
+    			saveButton.innerHTML = "Save[active]";
+    			this.controller.guiBuilder.GUIElements.Button.renderButton(saveButton);
+    
+    			this.createSaveButtonAction(saveButton);
+    		} else {
+    			var saveButton = document.getElementById("saveButton");
+    			saveButton.innerHTML = "Save[inactive]";
+    			saveButton.onclick = function(){}
+    			this.controller.guiBuilder.renderDisabledButton(saveButton);
+    		}
+	    }
 	},
 	
 	setSaveButtonVisibility : function(isVisible){
