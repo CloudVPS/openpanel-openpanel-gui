@@ -33,7 +33,7 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 		this.setSaveButtonVisibility(false);
 		
 		var saveButton = document.getElementById("saveButton");
-		saveButton.innerHTML = "Save!";
+		saveButton.innerHTML = "Save";
 		var hook = this;
 		this.controller.guiBuilder.GUIElements.Button.renderButton(saveButton, undefined, undefined, false);
 
@@ -96,13 +96,13 @@ OpenPanel.GUIBuilder.GUIElements.FormBuilder = {
 	        this.wasActive = isActive;
     	    if(isActive == true){
     			var saveButton = document.getElementById("saveButton");
-    			saveButton.innerHTML = "Save[active]";
+    			saveButton.innerHTML = "Save";
     			this.controller.guiBuilder.GUIElements.Button.renderButton(saveButton);
     
     			this.createSaveButtonAction(saveButton);
     		} else {
     			var saveButton = document.getElementById("saveButton");
-    			saveButton.innerHTML = "Save[inactive]";
+    			saveButton.innerHTML = "Save";
     			saveButton.onclick = function(){}
     			this.controller.guiBuilder.renderDisabledButton(saveButton);
     		}
