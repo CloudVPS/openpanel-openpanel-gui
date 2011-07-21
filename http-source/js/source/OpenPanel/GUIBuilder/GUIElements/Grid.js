@@ -274,7 +274,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 					}
 				}
 				
-				if (value == undefined || value == "") { 
+				if (value === undefined || value === "") { 
 					value = useInnerHTML ? "&nbsp;" : " ";
 				}
 				
@@ -320,7 +320,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 					}
 					else
 					{
-						col.innerHTML = value!=undefined?value:"&nbsp;";
+						col.innerHTML = value!==undefined?value:"&nbsp;";
 					}
 				}
 				row.appendChild(col);
