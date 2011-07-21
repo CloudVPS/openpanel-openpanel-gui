@@ -152,14 +152,10 @@ OpenCore.DataManager = {
     },
     
     buildQuota : function () {
-        this.quotaObject =  new OpenCore.DataManager.OpenCoreObject("User", "OpenCORE:Quota")
+        this.quotaObject =  new OpenCore.DataManager.OpenCoreObject("User", "OpenCORE:Quota");
         var instances = this.quotaObject.getInstances();
         this.quotaByClassName = {};
         for(var metaid in this.quotaObject.instances){
-            var instance = this.quotaObject.instances[metaid];
-            if (instance.quota === 0 && instance.usage === 0) {
-                delete this.classInfos[instance.metaid];
-            }
             this.quotaByClassName[this.quotaObject.instances[metaid].metaid] = this.quotaObject.instances[metaid];      
         }  
     },
