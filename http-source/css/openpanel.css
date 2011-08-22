@@ -37,7 +37,9 @@ body {
 	width: 100%;
 	height: 100%;
 }
-
+input, textarea {
+	background-color: #fff;
+}
 img, input {
 	behavior: url(/iepngfix/iepngfix.htc);
 }
