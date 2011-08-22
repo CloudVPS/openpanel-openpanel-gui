@@ -34,6 +34,14 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 			this.fieldsDiv = document.createElement("div");
 			this.fieldsDiv.setAttribute("class", "fields");
 			this.targetDiv.appendChild(this.fieldsDiv);
+			
+			if(this.openCoreObject != undefined && this.openCoreObject.classInfo && this.openCoreObject.classInfo["class"] && this.openCoreObject.classInfo["class"].explanation !== undefined){
+			    var explanationElement = document.createElement("div");
+                explanationElement.className = "explanation";
+                explanationElement.innerHTML = "<br>"+this.openCoreObject.classInfo["class"].explanation;
+                this.fieldsDiv.appendChild(explanationElement);
+            }
+			
 			if (this.instance != undefined) {
 				this.createFields(this.instance);
 			}

@@ -591,6 +591,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 				
 				var createOne;
 				if (textOnly == true) {
+				    /*
 					var expln = this.openCoreObject.classInfo["class"].explanation;
 					if((expln != undefined)&&(expln != "")){
 					   
@@ -599,7 +600,7 @@ OpenPanel.GUIBuilder.GUIElements.FormObject.prototype = {
 						explanationElement.innerHTML = "<br>"+expln;
 						this.optionsDiv.appendChild(explanationElement);
 					}	
-
+                    */
 					createOne = document.createElement("div");
 					if (targetDiv == undefined) createOne.style.paddingTop = "10px";
 					createOne.innerHTML = "Set Up " + this.openCoreObject.title;
