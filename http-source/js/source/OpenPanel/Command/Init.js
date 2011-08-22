@@ -39,6 +39,7 @@ OpenPanel.Command.Init  = {
 		if (detected.fail == false) {
 			$("hiddenLogin").show();
 			this.controller.guiBuilder.GUIElements.LoginWindow.patchElements($("loginDiv"), actionObject);
+			document.getElementById('userName').focus();
 		} else {
 			var e = new OpenPanel.Command.Init.InitError();
 			e.message = "Unsupported browser. ";
@@ -46,6 +47,8 @@ OpenPanel.Command.Init  = {
 			e.status = -1;
 			throw e;
 		}
+		
+		
 	},
 	
 	InitError : function(message, errorCode){
