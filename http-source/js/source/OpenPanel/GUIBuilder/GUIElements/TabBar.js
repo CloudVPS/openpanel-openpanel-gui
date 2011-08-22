@@ -16,7 +16,6 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 	tabWidth : 0,
 	
 	build : function(){
-		
 		this.tabWidth = 0;
 		this.targetDiv.innerHTML = "";
 		this.tabIds = {};
@@ -55,8 +54,14 @@ OpenPanel.GUIBuilder.GUIElements.TabBar = {
 			var sortIndexesToSort = [];
 			
 			for (var key in this.openCoreObject.children) {
-				this.openCoreObjects.push(this.openCoreObject.children[key]);
+			    if(this.openCoreObject.children[key].classInfo){
+			        var guihide = this.openCoreObject.children[key].classInfo["class"].guihide;
+			        if(guihide === undefined || guihide === false){
+			            this.openCoreObjects.push(this.openCoreObject.children[key]);
+			        }
+			    }
 			}
+			
 			for (var key in this.openCoreObjects) {
 				var childObject = this.openCoreObjects[key];
 				if (typeof(childObject) == "object") {
