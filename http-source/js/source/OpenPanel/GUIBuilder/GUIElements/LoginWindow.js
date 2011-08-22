@@ -8,7 +8,7 @@ OpenPanel.GUIBuilder.GUIElements.LoginWindow = {
 				OpenPanel.Controller.action({ 
 					command : "Login", 
 					userName : $("userName").value,	
-					password : $("password").value,	
+					password : $("password").value
 				});
 			}
 			return false;
