@@ -27,6 +27,8 @@ compress:
 	gzip -9 < http/css/iconbar.noembed.css > http/css/iconbar.noembed.css.gz
 	gzip -9 < http/js/openpanel-compressed.js > http/js/openpanel-compressed.js.gz
 	gzip -9 < http/js/lib/prototype-1.6.1-compressed.js > http/js/lib/prototype-1.6.1-compressed.js.gz
+	gzip -9 < http/js/lib/jquery-1.6.2.min.js > http/js/lib/jquery-1.6.2.min.js.gz
+	gzip -9 < http/js/lib/jquery.tmpl.min.js > http/js/lib/jquery.tmpl.min.js.gz
 	gzip -9 < http/js/lib/effects.js > http/js/lib/effects.js.gz
 	
 copy: 
