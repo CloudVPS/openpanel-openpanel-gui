@@ -68,11 +68,12 @@ OpenPanel.Command.Init  = {
 		"Safari" : 4,
 		"Explorer" : 8,
 		"iCab" : 0,
-		"Chrome" : 4
+		"Chrome" : 4,
+		"Camino" : 2
 	},
 	
 	detect : function(){
-		var version = this.browsers[BrowserDetect.browser];
+	    var version = this.browsers[BrowserDetect.browser];
 		var fail = false;
 		var failText = "";
 		if(version!=undefined){
