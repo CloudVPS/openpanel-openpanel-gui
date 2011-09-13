@@ -38,9 +38,15 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 			if(this.openCoreObject != undefined && this.openCoreObject.classInfo && this.openCoreObject.classInfo["class"] && this.openCoreObject.classInfo["class"].explanation !== undefined){
 			    var explanationElement = document.createElement("div");
                 explanationElement.className = "explanation";
-                var e = jQuery(this.openCoreObject.classInfo["class"].explanation).tmpl({
+                /*
+		 var e = jQuery(this.openCoreObject.classInfo["class"].explanation).tmpl({
                     "location": location
                 });
+		*/
+
+		var e = jQuery.tmpl(this.openCoreObject.classInfo["class"].explanation, {
+		    "location" : location
+		});
                 jQuery(this.fieldsDiv).append(e);
             }
 			
