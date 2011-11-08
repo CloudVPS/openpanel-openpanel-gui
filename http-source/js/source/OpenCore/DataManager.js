@@ -173,7 +173,7 @@ OpenCore.DataManager = {
 			for(var c in this.classInfos){
 				
 				var classInfo = this.classInfos[c];
-				if (classInfo.info == undefined || (classInfo.info && classInfo.info.parent == undefined)) {
+				if (classInfo.info == undefined || (classInfo.info && classInfo.info.parent == undefined) {
 					rootClassInfo.info.children[classInfo["class"].uuid] = {
 						description		: classInfo["class"].description,
 						id				: classInfo["class"].id,

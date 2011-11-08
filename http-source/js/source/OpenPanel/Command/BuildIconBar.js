@@ -27,6 +27,7 @@ OpenPanel.Command.BuildIconBar  = {
 		var childObjects = new Hash();
 		
 		openCoreObject.children.each(function(childObject){
+			if (childObject.classInfo["class"].metatype == "derived") return;
 			var sortIndex = childObject.classInfo["class"].sortindex;
 			var sameSortIndexChildren = childObjects.get(sortIndex);
 			if(!sameSortIndexChildren){
