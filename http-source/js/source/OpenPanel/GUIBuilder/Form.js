@@ -25,7 +25,8 @@ OpenPanel.GUIBuilder.Form = function(name, data, onChangeHandler){
 		for (var parameterName in parameters) {
 			var parameter = parameters[parameterName];
 			if (parameter.hide == true) continue;
-			
+			if (parameter.type == undefined) continue;
+			if (parameter.type == null) continue;
 			parameter.type = parameter.type.substr(0, 1).toUpperCase() + parameter.type.substr(1);
 			parameter.isCreate = this.isCreate;
 			parameter.onChangeHandler = this.onChangeHandler;
