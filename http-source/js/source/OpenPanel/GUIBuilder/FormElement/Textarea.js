@@ -162,12 +162,12 @@ OpenPanel.GUIBuilder.FormElement.Textarea.prototype = {
 	
 	enable : function(){
 		if (this.inputElement != undefined) {
-			this.inputElement.removeAttribute("disabled");
+			this.inputElement.removeAttribute("readonly");
 		}
 	},
 	
 	disable : function(){ 
-		this.inputElement.setAttribute("disabled", true); 
+		this.inputElement.setAttribute("readonly", "readonly"); 
 	}
 	
 }
