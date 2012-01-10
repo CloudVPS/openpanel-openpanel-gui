@@ -41,7 +41,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
   		createFixed: function(pid, def, width, top, bottom, marginleft, iconimg) {
   			this.create(pid, def, width, 0, top, bottom, marginleft, "itemlist", iconimg);
   		},
-		create: function(parentidorobj, def, width, height, top, bottom, marginleft,liststyle, iconimg) {
+		create: function(parentidorobj, def, width, height, top, bottom, marginleft, liststyle, iconimg) {
 			this.sizes = new Array();
 			this.headers = new Array();
 			this.keys = new Array();
@@ -49,12 +49,14 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			this.rowKeys = new Array();
 			this.rowKeysBySelectionText = new Array();
 			
+			this.gridHolderClass = "gridHolder";
 			this.gridClass = "gridView";
 			this.contentsClass = "gridViewContents";
 			this.rowClass = "gridViewRow";
 			this.rowClassSelected = "gridViewRowSelected";
 			this.rowClassSelectedUnfocused = "gridViewRowSelectedUnfocused";
 			this.columnClass = "gridViewColumn";
+			this.gridTitleClass = "gridTitle";
 			this.titleClass = "gridViewTitle";
 			this.titleItemClass = "gridViewTitleItem";
 			
@@ -128,9 +130,23 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 				i++;
 			}
 			
+			var gridHolderNode = document.createElement("div");
+			gridHolderNode.className = this.gridHolderClass;
+			gridHolderNode.style.width = "" + this.totalWidth + "px";
+			
+			var gridTitleNode = document.createElement("div");
+			gridTitleNode.innerHTML = "";
+			gridTitleNode.className = this.gridTitleClass;
+			gridTitleNode.style.width = "" + this.totalWidth + "px";
+			gridHolderNode.appendChild(gridTitleNode);
+			this.gridTitleNode = gridTitleNode;
+			
 			var gridViewNode = document.createElement("div");
 			gridViewNode.className = this.gridClass;
 			gridViewNode.style.width = "" + this.totalWidth + "px";
+			gridHolderNode.appendChild(gridViewNode);
+			
+			
 			if (height) {
 				gridViewNode.style.height = "" + height + "px";
 			} else {
@@ -227,7 +243,7 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			}
 			
 			parent.appendChild (this.focusCatcher);
-			parent.appendChild(gridViewNode);
+			parent.appendChild(gridHolderNode);
 			if (liststyle == "buttonlist") {
 				this.renderButtons(gridViewNode);
 			}
@@ -527,6 +543,10 @@ OpenPanel.GUIBuilder.GUIElements.Grid = function()
 			this.rowsByID[id].onclick();
 			this.onclick = oldonclick;
 			this.focusOnClick = true;
+		},
+		
+		setTitle : function (title) {
+			this.gridTitleNode.innerHTML = title;	
 		}
 	}
   

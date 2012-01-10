@@ -31,13 +31,7 @@ OpenPanel.GUIBuilder.GUIElements.FormFields.prototype = {
 		if(this.targetDiv!=undefined){
 			this.targetDiv.innerHTML = "";
 			
-			if(this.openCoreObject != undefined && this.openCoreObject.classInfo && this.openCoreObject.classInfo["class"] && this.openCoreObject.classInfo["class"].preface !== undefined){
-				var e = jQuery.tmpl(this.openCoreObject.classInfo["class"].preface, {
-					"location" : location
-				});
-                jQuery(this.targetDiv).append(e);
-            }
-
+			
 			this.fieldsDiv = document.createElement("div");
 			this.fieldsDiv.setAttribute("class", "fields");
 			this.targetDiv.appendChild(this.fieldsDiv);

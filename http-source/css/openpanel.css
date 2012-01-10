@@ -1484,6 +1484,19 @@ td.label {
 	margin-right: auto;
 }
 
+.gridHolder {
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.gridTitle {
+	margin-bottom: 3px;
+	margin-left: 2px;
+	font-weight: bold;
+}
+
 .gridViewTitle {
 	height: 15px;
 	padding: 0px;

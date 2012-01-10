@@ -17,6 +17,9 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 		if(this.targetDiv!=undefined){
 			this.targetDiv.innerHTML = "";
 			
+
+
+
 			this.gridDiv = document.createElement("div");
 			this.gridDiv.setAttribute("class", "grid");
 			this.targetDiv.appendChild(this.gridDiv);
@@ -55,6 +58,11 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 		      		hook.clickGridItem(id);
 		      	}
 			}
+			
+			if(this.openCoreObject != undefined && this.openCoreObject.classInfo && this.openCoreObject.classInfo["class"] && this.openCoreObject.classInfo["class"].title !== undefined && this.openCoreObject.parent != undefined && this.openCoreObject.parent != undefined && this.openCoreObject.parent.isRootObject == false){
+				this.grid.setTitle(this.openCoreObject.classInfo["class"].title);
+            }
+
 		}
 	},
 	
@@ -125,6 +133,9 @@ OpenPanel.GUIBuilder.GUIElements.FormGrid.prototype = {
 		this.createG(instances);
 	},
 	
+	setTitle : function (title) {
+		this.grid.setTitle(title);
+	},
 	setMenu: function (mdef) {
 		this.grid.setMenu (mdef);
 	},
